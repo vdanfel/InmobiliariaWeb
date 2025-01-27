@@ -1,0 +1,21 @@
+﻿@model InmobiliariaWeb.Models.Contratos.Ventas
+@{
+
+}
+<div class="container">
+    <div class="row">
+        <textarea rows="1" asp-for="@Model.Titulo" style="font:bold"></textarea>
+    </div>
+    <div class="row">
+        <textarea rows="10" id="editorParrafo" asp-for="@Model.ParrafoInicial"></textarea>
+    </div>
+</div>
+<script src="~/lib/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#editorParrafo',
+        menubar: false,
+        toolbar: 'bold italic underline', // Configura los botones que necesitas
+        plugins: 'link'
+    });
+</script>

@@ -19,6 +19,11 @@ E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\Microsoft.Ident
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\Microsoft.SqlServer.Server.dll
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\PdfSharpCore.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\ICSharpCode.SharpZipLib.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\SixLabors.Fonts.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\SixLabors.ImageSharp.dll
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\System.Drawing.Common.dll
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
@@ -27,6 +32,7 @@ E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\System.Runtime.
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\System.Security.Permissions.dll
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\System.Windows.Extensions.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\de\PdfSharpCore.resources.dll
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
 E:\InmobiliariaWeb\InmobiliariaWeb\obj\Release\net6.0\PubTmp\Out\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll

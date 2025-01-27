@@ -12,7 +12,7 @@
                      class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form asp-action="ValidarSesion">
+                <form asp-action="Index" asp-controller="Login" method="post">
                     <div class="card text-dark">
                         <div class="card-header" style="text-align:center">
                             <!-- Icono del Login -->
@@ -42,7 +42,7 @@
                                         <input asp-for="Clave" type="password" class="form-control" placeholder="Clave" aria-label="Clave" aria-describedby="Clave" id="UserPassword">
                                         <label for="UserPassword">Clave</label>
                                     </div>
-                                    <button class="btn btn-outline-secondary shadow">
+                                    <button type="button" class="btn btn-outline-secondary shadow" id="mos-ocu">
                                         <i class="bi bi-eye"></i>
                                     </button>
                                 </div>
@@ -91,4 +91,19 @@
             $('#myModal').modal('show');
         });
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var passwordInput = document.getElementById('UserPassword');
+        var toggleButton = document.getElementById('mos-ocu');
+
+        toggleButton.addEventListener('click', function () {
+            // Cambia el tipo de input entre 'password' y 'text'
+            passwordInput.type = (passwordInput.type === 'password') ? 'text' : 'password';
+
+            // Cambia el ícono del botón
+            var eyeIcon = toggleButton.querySelector('.bi');
+            eyeIcon.classList.toggle('bi-eye');
+            eyeIcon.classList.toggle('bi-eye-slash');
+        });
+    });
 </script>

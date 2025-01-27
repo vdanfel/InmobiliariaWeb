@@ -5,95 +5,107 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA0wZtTOfG2U+AwJ9Q15yk9gAAAAACAAAAAAAQZgAAAAEAACAAAACkG/fCZ5j4cgxER9p9y0HquCe1ACR7Pv4gPQLqm/iqqgAAAAAOgAAAAAIAACAAAAA1U/7d9ciyspbTYK4pUNBk8UJ1pUPgOIFN5FiTKlgOjyAAAAD368XVb/4Fvxx+rnZzjLgMqICvZsv1RPmcCukT576reUAAAAAscNOnkir1BwW4r/vzAc27VtKkOTt15Zi+CywjdxVYBq6KLRlYchlNZK4SGSA/X3oh2luXXJaHloXMeAKHK7ef</EncryptedPassword>
-    <_PublishTargetUrl>ftp://107.180.45.202/httpdocs</_PublishTargetUrl>
-    <History>True|2023-11-11T22:05:52.3276223Z;</History>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAALz2j21+9rk28HYH8Dw72MAAAAAACAAAAAAAQZgAAAAEAACAAAABeA+gRm/X778qyHMQgSpoU1kNDwY/2YNxKRd+nUc9BfQAAAAAOgAAAAAIAACAAAADTku/AM1LCFgjtVDCcfKLzM4Dmuvm+9Qa6rVocOeq0MBAAAABA4Deceg8agsO+9mc+Ycz2QAAAADj7LfAkI0SuIy3cOR3IAjoxoOqHAsIf1GfERHlkPo/VycH5koeLYMG3Z3jWG/mhAYsJVbI2EFrEtCD2tO7shlU=</EncryptedPassword>
+    <_PublishTargetUrl>ftp://155.254.244.30/www.inmobiliaria.somee.com/</_PublishTargetUrl>
+    <History>False|2024-08-22T04:32:04.6881650Z;False|2024-08-21T23:30:13.1775717-05:00;False|2024-08-21T23:28:54.7572084-05:00;True|2024-08-21T23:24:48.0677699-05:00;False|2024-08-21T23:15:34.6282374-05:00;False|2024-08-21T22:56:04.8499568-05:00;True|2023-11-11T17:05:52.3276223-05:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>10/16/2023 19:29:56</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>10/17/2023 20:21:02</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Azure.Core.dll">
-      <publishTime>06/30/2022 14:28:36</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Azure.Identity.dll">
-      <publishTime>09/19/2022 15:31:34</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="de/PdfSharpCore.resources.dll">
+      <publishTime>01/16/2024 19:32:26</publishTime>
+    </File>
+    <File Include="ICSharpCode.SharpZipLib.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="InmobiliariaWeb.deps.json">
-      <publishTime>11/11/2023 17:01:14</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="InmobiliariaWeb.dll">
-      <publishTime>11/11/2023 17:01:13</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="InmobiliariaWeb.exe">
-      <publishTime>11/11/2023 17:01:13</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="InmobiliariaWeb.pdb">
-      <publishTime>11/11/2023 17:01:13</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="InmobiliariaWeb.runtimeconfig.json">
-      <publishTime>11/11/2023 17:01:15</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.Bcl.AsyncInterfaces.dll">
-      <publishTime>04/14/2020 17:39:12</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.Data.SqlClient.dll">
-      <publishTime>03/28/2023 00:28:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.Identity.Client.dll">
-      <publishTime>10/03/2022 12:40:38</publishTime>
+      <publishTime>03/10/2022 12:40:38</publishTime>
     </File>
     <File Include="Microsoft.Identity.Client.Extensions.Msal.dll">
-      <publishTime>11/19/2021 17:02:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.IdentityModel.Abstractions.dll">
-      <publishTime>10/13/2022 14:42:54</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.IdentityModel.JsonWebTokens.dll">
-      <publishTime>10/13/2022 14:20:20</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.IdentityModel.Logging.dll">
-      <publishTime>10/13/2022 14:22:04</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.IdentityModel.Protocols.dll">
-      <publishTime>10/13/2022 14:24:18</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.IdentityModel.Protocols.OpenIdConnect.dll">
-      <publishTime>10/13/2022 14:34:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.IdentityModel.Tokens.dll">
-      <publishTime>10/13/2022 14:29:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.SqlServer.Server.dll">
-      <publishTime>01/27/2022 12:19:08</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.Win32.SystemEvents.dll">
-      <publishTime>10/22/2021 18:40:24</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.dll">
+      <publishTime>08/03/2023 02:09:54</publishTime>
+    </File>
+    <File Include="PdfSharpCore.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="runtimes/unix/lib/net6.0/Microsoft.Data.SqlClient.dll">
-      <publishTime>03/28/2023 00:28:24</publishTime>
+      <publishTime>10/17/2023 17:33:42</publishTime>
     </File>
     <File Include="runtimes/unix/lib/net6.0/System.Drawing.Common.dll">
       <publishTime>10/22/2021 18:51:42</publishTime>
     </File>
     <File Include="runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll">
-      <publishTime>01/12/2023 17:19:36</publishTime>
+      <publishTime>08/11/2023 13:56:28</publishTime>
     </File>
     <File Include="runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll">
-      <publishTime>01/12/2023 17:19:36</publishTime>
+      <publishTime>08/11/2023 13:56:28</publishTime>
     </File>
     <File Include="runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll">
-      <publishTime>01/12/2023 17:19:36</publishTime>
+      <publishTime>08/11/2023 13:56:18</publishTime>
     </File>
     <File Include="runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll">
-      <publishTime>01/12/2023 17:19:36</publishTime>
+      <publishTime>08/11/2023 13:56:18</publishTime>
     </File>
     <File Include="runtimes/win/lib/net6.0/Microsoft.Data.SqlClient.dll">
-      <publishTime>03/28/2023 00:27:58</publishTime>
+      <publishTime>10/17/2023 17:33:42</publishTime>
     </File>
     <File Include="runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll">
       <publishTime>10/22/2021 18:40:18</publishTime>
@@ -110,38 +122,56 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="runtimes/win/lib/net6.0/System.Windows.Extensions.dll">
       <publishTime>10/22/2021 18:49:58</publishTime>
     </File>
+    <File Include="SixLabors.Fonts.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="SixLabors.ImageSharp.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
     <File Include="System.Configuration.ConfigurationManager.dll">
-      <publishTime>08/19/2022 14:58:02</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="System.Drawing.Common.dll">
-      <publishTime>10/22/2021 18:49:12</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="System.IdentityModel.Tokens.Jwt.dll">
-      <publishTime>10/13/2022 14:18:58</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="System.Memory.Data.dll">
-      <publishTime>04/08/2021 11:45:54</publishTime>
+      <publishTime>08/04/2021 11:45:54</publishTime>
     </File>
     <File Include="System.Runtime.Caching.dll">
-      <publishTime>10/22/2021 18:52:02</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="System.Security.Cryptography.ProtectedData.dll">
-      <publishTime>10/22/2021 18:51:04</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="System.Security.Permissions.dll">
-      <publishTime>10/22/2021 18:49:50</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="System.Windows.Extensions.dll">
-      <publishTime>10/22/2021 18:49:44</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>11/11/2023 17:01:18</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="wwwroot/css/site.css">
-      <publishTime>08/30/2023 19:37:15</publishTime>
+      <publishTime>08/21/2024 19:23:53</publishTime>
     </File>
     <File Include="wwwroot/favicon.ico">
       <publishTime>08/30/2023 19:37:15</publishTime>
+    </File>
+    <File Include="wwwroot/icon/house-door.ico">
+      <publishTime>11/14/2023 09:38:19</publishTime>
+    </File>
+    <File Include="wwwroot/images/dash1.png">
+      <publishTime>12/08/2023 20:00:30</publishTime>
+    </File>
+    <File Include="wwwroot/images/dash2.png">
+      <publishTime>12/08/2023 20:00:44</publishTime>
+    </File>
+    <File Include="wwwroot/images/dash3.png">
+      <publishTime>12/08/2023 20:01:09</publishTime>
     </File>
     <File Include="wwwroot/InmobiliariaWeb.styles.css">
       <publishTime>11/11/2023 17:01:14</publishTime>

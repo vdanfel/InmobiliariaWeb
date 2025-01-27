@@ -132,3 +132,9 @@ D:\Desarrollos\InmobiliariaWeb\InmobiliariaWeb\obj\Debug\net6.0\refint\Inmobilia
 D:\Desarrollos\InmobiliariaWeb\InmobiliariaWeb\obj\Debug\net6.0\InmobiliariaWeb.pdb
 D:\Desarrollos\InmobiliariaWeb\InmobiliariaWeb\obj\Debug\net6.0\InmobiliariaWeb.genruntimeconfig.cache
 D:\Desarrollos\InmobiliariaWeb\InmobiliariaWeb\obj\Debug\net6.0\ref\InmobiliariaWeb.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\bin\Debug\net6.0\PdfSharpCore.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\bin\Debug\net6.0\ICSharpCode.SharpZipLib.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\bin\Debug\net6.0\SixLabors.Fonts.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\bin\Debug\net6.0\SixLabors.ImageSharp.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\bin\Debug\net6.0\de\PdfSharpCore.resources.dll
+E:\InmobiliariaWeb\InmobiliariaWeb\bin\Debug\net6.0\Newtonsoft.Json.dll

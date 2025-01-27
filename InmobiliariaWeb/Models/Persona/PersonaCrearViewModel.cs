@@ -41,5 +41,13 @@ namespace InmobiliariaWeb.Models.Persona
         public string Direccion { get; set; }
         public string Referencia { get; set; }
         public string Mensaje { get; set; }
+        public List<TipoSexo> TipoSexos { get; set; }
+        public List<Paises> Paises { get; set; }
+        [Required(ErrorMessage = "debe seleccionar el Sexo")]
+        public int Ident_016_TipoSexo { get; set; }
+        [Required(ErrorMessage = "Debe seleccionar un Pais")]
+        public int Ident_Pais { get; set; }
+        [Required(ErrorMessage = "El campo {0} no puede estar en blanco")]
+        public string UbicacionGoogleMaps { get; set; }
     }
 }

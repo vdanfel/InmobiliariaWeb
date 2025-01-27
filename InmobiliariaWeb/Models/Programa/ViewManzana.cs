@@ -1,11 +1,12 @@
-﻿namespace InmobiliariaWeb.Models.Programa
+﻿using InmobiliariaWeb.Result.Programa;
+
+namespace InmobiliariaWeb.Models.Programa
 {
     public class ViewManzana
     {
-        public int Indice {  get; set; }
-        public int Ident_Manzana { get; set; }
-        public int Correlativo { get; set; }
-        public string Letra { get; set; }
-        public int CantidadLotes { get; set; }
+        public int IdentPrograma { get; set; }
+        public string NombrePrograma { get; set; }
+        public string Mensaje { get; set; }
+        public List<ManzanaList> ManzanaList { get; set;}
     }
 }

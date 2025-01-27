@@ -1,0 +1,220 @@
+﻿@model InmobiliariaWeb.Result.Usuario.UsuarioList
+@{
+}
+<form asp-controller="Usuario" asp-action="Crear" method="post">
+    <input id="IdentPersona" asp-for="@Model.IdentPersona" hidden />
+    <div class="card mt-3">
+        <div class="card-header fw-bold">
+            Usuarios
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Nombre o Documento" aria-label="Recipient's username" aria-describedby="BuscarPersona" id="inputBusqueda">
+                    <button class="btn btn-outline-secondary" type="button" id="BuscarPersona">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row g-1 mb-1">
+                <div class="col-lg-8 col-sm-12">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="Nombre" placeholder="Apellidos y Nombres" readonly>
+                        <label for="Nombre">Apellidos y Nombres</label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-12 ">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="Documento" placeholder="Nro Documento" readonly>
+                        <label for="Documento">Nro Documento</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-1 mb-1">
+                <div class="col-lg-6 col-sm-12">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="Cuenta" placeholder="Cuenta" asp-for="Usuario">
+                        <label for="Nombre">Cuenta</label>
+                    </div>
+                    <span asp-validation-for="@Model.Usuario" class="text-danger"></span>
+                </div>
+                <div class="col-lg-6 col-sm-12 ">
+                    <div class="form-floating">
+                        <select class="form-select" asp-for="@Model.Ident_005_TipoUsuario">
+                            <option></option>
+                            @foreach (var roles in Model.TipoRols)
+                            {
+                                <option value="@roles.Ident_005_TipoUsuario">@roles.Descripcion</option>
+                            }
+                        </select>
+                        <label for="Documento">Tipo Usuario</label>
+                        <span asp-validation-for="@Model.Ident_005_TipoUsuario" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-1 mb-1">
+                <div class="col-lg-6 col-sm-12">
+                    <div class="input-group col-12">
+                        <div class="form-floating" style="width:90%">
+                            <input type="password" class="form-control" id="Clave1" placeholder="Clave" asp-for="Clave1">
+                            <label for="Nombre">Clave</label>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary shadow" id="mos-ocu1" style="width:10%">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                     <span asp-validation-for="@Model.Clave1" class="text-danger"></span>
+                </div>
+                <div class="col-lg-6 col-sm-12 ">
+                    <div class="input-group">
+                        <div class="form-floating" style="width:90%">
+                            <input type="password" class="form-control" id="Clave2" placeholder="Clave" asp-for="Clave2">
+                            <label for="Nombre">Repetir Clave</label>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary shadow" id="mos-ocu2" style="width:10%">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                    <span asp-validation-for="@Model.Clave2" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <button type="submit" class="btn btn-outline-success">
+                    Registrar<i class="bi bi-person"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Llama a la función establecerVisibilidad para ambos campos de contraseña
+        establecerVisibilidad('mos-ocu1', 'Clave1');
+        establecerVisibilidad('mos-ocu2', 'Clave2');
+    });
+
+    function establecerVisibilidad(btnId, inputId) {
+        var boton = document.getElementById(btnId);
+        var inputClave = document.getElementById(inputId);
+
+        boton.addEventListener('click', function () {
+            // Alterna entre 'password' y 'text' al hacer clic en el botón
+            inputClave.type = inputClave.type === 'password' ? 'text' : 'password';
+        });
+    }
+
+    $("#BuscarPersona").click(function () {
+        var valorBusqueda = $("#inputBusqueda").val();
+        console.log(valorBusqueda);
+        $.ajax({
+            url: '/Usuario/BuscarPersonas',
+            type: 'GET',
+            data: { buscar: valorBusqueda },
+            success: function (data) {
+                console.log(data);
+                $("#inputBusqueda").val("");
+                if (data.length === 1) {
+                    $("#Nombre").val(data[0].nombreCompleto);
+                    $("#Documento").val(data[0].documento);
+                    $("#IdentPersona").val(data[0].ident_Persona);
+                } else if (data.length > 1) {
+                    mostrarResultados(data);
+                } else {
+                    $("#Nombre").val("");
+                    $("#Documento").val("");
+                    $("#IdentPersona").val("0");
+                }
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    });
+    function mostrarResultados(resultados) {
+        // Remover el modal existente, si hay uno
+        $("#resultadosModal").remove();
+        // Crea el modal
+        var modalHTML = "<div class='modal fade' id='resultadosModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>";
+        modalHTML += "<div class='modal-dialog' role='document'>";
+        modalHTML += "<div class='modal-content'>";
+        modalHTML += "<div class='modal-header'>";
+        modalHTML += "<h5 class='modal-title' id='exampleModalLabel'>Resultados de la Búsqueda</h5>";
+        modalHTML += "<button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        modalHTML += "</div>";
+        modalHTML += "<div class='modal-body'>";
+
+        var tablaResultados = "<table class='table table-hover'>";
+        tablaResultados += "<thead><tr><th>N°</th><th hidden>IDENT_PERSONA</th><th hidden>TIPO_DOCUMENTO</th><th hidden>DOCUMENTO</th><th>Apellidos y Nombres</th></tr></thead><tbody>";
+
+        for (var i = 0; i < resultados.length; i++) {
+            tablaResultados += "<tr>";
+            tablaResultados += "<td>" + (i + 1) + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].ident_Persona + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].tipoDocumento + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].documento + "</td>";
+            tablaResultados += "<td>" + resultados[i].nombreCompleto + "</td>";
+            tablaResultados += "</tr>";
+        }
+
+        tablaResultados += "</tbody></table>";
+
+        modalHTML += tablaResultados;
+        modalHTML += "</div>";
+        modalHTML += "<div class='modal-footer'>";
+        modalHTML += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
+        modalHTML += "</div></div></div></div>";
+
+        // Agrega el modal al final del cuerpo del documento
+        $("body").append(modalHTML);
+
+        // Muestra el modal
+        $("#resultadosModal").modal("show");
+
+        // Agrega un evento clic a las filas de la tabla en el modal
+        $("#resultadosModal").on("dblclick", "table tbody tr", function () {
+            var identPersona = $(this).find('td:eq(1)').text();
+            var documento = $(this).find('td:eq(3)').text();
+            var nombreCompleto = $(this).find('td:eq(4)').text();
+
+            $("#IdentPersona").val(identPersona);
+            $("#Documento").val(documento);
+            $("#Nombre").val(nombreCompleto);
+
+            cerrarModal();
+        });
+    }
+
+    function cerrarModal() {
+        // Oculta y elimina el modal del DOM
+        $("#resultadosModal").modal("hide");
+        $("#resultadosModal").on("hidden.bs.modal", function () {
+            $(this).remove();
+        });
+    }
+</script>

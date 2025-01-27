@@ -35,12 +35,14 @@ namespace InmobiliariaWeb.Servicios
                     command.Parameters.AddWithValue("@ISTelefono", personaCrearViewModel.Telefono ?? "");
                     command.Parameters.AddWithValue("@ISCorreo", personaCrearViewModel.Correo ?? "");
                     command.Parameters.AddWithValue("@ISContacto", personaCrearViewModel.Contacto ?? "");
+                    command.Parameters.AddWithValue("@ISCelularContacto", personaCrearViewModel.CelularContacto ?? "");
                     command.Parameters.AddWithValue("@ISTelefonoContacto", personaCrearViewModel.TelefonoContacto ?? "");
                     command.Parameters.AddWithValue("@ISCorreoContacto", personaCrearViewModel.CorreoContacto ?? "");
                     command.Parameters.AddWithValue("@ISDepartamento", personaCrearViewModel.Departamento);
                     command.Parameters.AddWithValue("@ISProvincia", personaCrearViewModel.Provincia);
                     command.Parameters.AddWithValue("@ISDistrito", personaCrearViewModel.Distrito);
                     command.Parameters.AddWithValue("@ISDireccion", personaCrearViewModel.Direccion ?? "");
+                    command.Parameters.AddWithValue("@ISUbicacionGoogleMaps", personaCrearViewModel.UbicacionGoogleMaps ?? "");
                     command.Parameters.AddWithValue("@ISReferencia", personaCrearViewModel.Referencia ?? "");
                     command.Parameters.AddWithValue("@ISUsuarioCreacion", loginResult.IdentUsuario);
                     await _connection.OpenAsync();
@@ -136,6 +138,7 @@ namespace InmobiliariaWeb.Servicios
                         personaList.Telefono = reader["TELEFONO"].ToString();
                         personaList.Correo = reader["CORREO"].ToString();
                         personaList.Contacto = reader["CONTACTO"].ToString();
+                        personaList.CelularContacto = reader["CELULAR_CONTACTO"].ToString();
                         personaList.TelefonoContacto = reader["TELEFONO_CONTACTO"].ToString();
                         personaList.CorreoContacto = reader["CORREO_CONTACTO"].ToString(); 
                         personaList.Ident_Ubigeo = Int32.Parse(reader["IDENT_UBIGEO"].ToString());
@@ -187,12 +190,15 @@ namespace InmobiliariaWeb.Servicios
                             personaList.FechaNacimiento = (DateTime)reader["FECHA_NACIMIENTO"];
                         }
                         personaList.EstadoCivil = reader["ESTADO_CIVIL"].ToString();
+                        personaList.Ident_016_TipoSexo = Int32.Parse(reader["Ident_016_TipoSexo"].ToString());
+                        personaList.Ident_Pais = Int32.Parse(reader["Ident_Pais"].ToString());
                         personaList.RazonSocial = reader["RAZON_SOCIAL"].ToString();
                         personaList.NombreCompleto = reader["NOMBRE_COMPLETO"].ToString();
                         personaList.Celular = reader["CELULAR"].ToString();
                         personaList.Telefono = reader["TELEFONO"].ToString();
                         personaList.Correo = reader["CORREO"].ToString();
                         personaList.Contacto = reader["CONTACTO"].ToString();
+                        personaList.CelularContacto = reader["CELULAR_CONTACTO"].ToString();
                         personaList.TelefonoContacto = reader["TELEFONO_CONTACTO"].ToString();
                         personaList.CorreoContacto = reader["CORREO_CONTACTO"].ToString();
                         personaList.Ident_Ubigeo = Int32.Parse(reader["IDENT_UBIGEO"].ToString());
@@ -200,6 +206,7 @@ namespace InmobiliariaWeb.Servicios
                         personaList.CodigoProvincia = reader["PROVINCIA"].ToString();
                         personaList.CodigoDistrito = reader["DISTRITO"].ToString();
                         personaList.Direccion = reader["DIRECCION"].ToString();
+                        personaList.UbicacionGoogleMaps = reader["UBICACIONGOOGLEMAPS"].ToString();
                         personaList.Referencia = reader["REFERENCIA"].ToString();
                         personaList.Ident004Estado = Int32.Parse(reader["IDENT_004_ESTADO"].ToString());
                         personaList.Estado = reader["ESTADO"].ToString();
@@ -229,17 +236,21 @@ namespace InmobiliariaWeb.Servicios
                     command.Parameters.AddWithValue("@ISNombre", personaList.Nombre ?? "");
                     command.Parameters.AddWithValue("@ISIdent_006_EstadoCivil", personaList.Ident006TipoEstadoCivil);
                     command.Parameters.AddWithValue("@ISFechaNacimiento", personaList.FechaNacimiento);
+                    command.Parameters.AddWithValue("@ISIdent_016_TipoSexo", personaList.Ident_016_TipoSexo);
+                    command.Parameters.AddWithValue("@ISIdent_Pais", personaList.Ident_Pais);
                     command.Parameters.AddWithValue("@ISRazonSocial", personaList.RazonSocial ?? "");
                     command.Parameters.AddWithValue("@ISCelular", personaList.Celular ?? "");
                     command.Parameters.AddWithValue("@ISTelefono", personaList.Telefono ?? "");
                     command.Parameters.AddWithValue("@ISCorreo", personaList.Correo ?? "");
                     command.Parameters.AddWithValue("@ISContacto", personaList.Contacto ?? "");
+                    command.Parameters.AddWithValue("@ISCelularContacto", personaList.CelularContacto ?? "");
                     command.Parameters.AddWithValue("@ISTelefonoContacto", personaList.TelefonoContacto ?? "");
                     command.Parameters.AddWithValue("@ISCorreoContacto", personaList.CorreoContacto ?? "");
                     command.Parameters.AddWithValue("@ISDepartamento", personaList.CodigoDepartamento);
                     command.Parameters.AddWithValue("@ISProvincia", personaList.CodigoProvincia);
                     command.Parameters.AddWithValue("@ISDistrito", personaList.CodigoDistrito);
                     command.Parameters.AddWithValue("@ISDireccion", personaList.Direccion ?? "");
+                    command.Parameters.AddWithValue("@ISUbicacionGoogleMaps", personaList.UbicacionGoogleMaps ?? "");
                     command.Parameters.AddWithValue("@ISReferencia", personaList.Referencia ?? "");
                     command.Parameters.AddWithValue("@ISUsuarioModificacion", loginResult.IdentUsuario);
                     command.Parameters.AddWithValue("@ISAnular", 0);

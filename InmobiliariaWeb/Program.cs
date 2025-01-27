@@ -7,10 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<ILoginService,LoginService>();
-builder.Services.AddScoped<ITablasService,TablasService>();
-builder.Services.AddScoped<IPersonaService,PersonaService>();
-builder.Services.AddScoped<IProgramaService,ProgramaService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IRolesService, RolesService>();
+builder.Services.AddScoped<ITablasService, TablasService>();
+builder.Services.AddScoped<IPersonaService, PersonaService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IProgramaService, ProgramaService>();
+builder.Services.AddScoped<IContratosService, ContratosService>();  
+builder.Services.AddScoped<ISeparacionesService, SeparacionesService>();
+
 
 builder.Services.AddScoped<SqlConnection>(c =>
 {
@@ -21,7 +26,7 @@ builder.Services.AddScoped<SqlConnection>(c =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {
-                options.LoginPath = "/Login/Ingresar";
+                options.LoginPath = "/Login/Index";
                 options.LogoutPath = "/Login/Logout";
                 options.AccessDeniedPath = "/Home/Index";
             });

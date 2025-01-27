@@ -1,0 +1,52 @@
+﻿@model InmobiliariaWeb.Models.Contratos.KardexViewModel
+@{
+    Layout = "_ContratosLayout";
+}
+<div class="container">
+    <div class="table-responsive-md">
+        <table class="table table-hover table-bordered border-light">
+            <thead class="table-dark ">
+                <tr style="text-align:center">
+                    <th>N°</th>
+                    <th>Fecha Pago</th>
+                    <th>Cuota Mes</th>
+                    <th>Pago Realizado</th>
+                    <th>Importe Pagado</th>
+                    <th>Dias Mora</th>
+                    <th>Importe Mora</th>
+                    <th>Fecha Mora</th>
+                    <th>Mora Pagada</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cuotas in Model.CuotasListas)
+                {
+                    <tr>
+                        <td style="text-align:right">@cuotas.Correlativo</td>
+                        <td style="text-align:center">@cuotas.FechaPago.ToString("dd/MM/yyyy")</td>
+                        <td style="text-align:right">@cuotas.ImporteCuota</td>
+                        <td style="text-align:center">@(cuotas.FechaPagoRealizado.HasValue ? cuotas.FechaPagoRealizado.Value.ToString("dd/MM/yyyy") : "")</td>
+                        <td style="text-align:right">@cuotas.ImporteCuotaPagado</td>
+                        <td style="text-align:right">@cuotas.DiasMoras</td>
+                        <td style="text-align:right">@cuotas.ImporteMoras</td>
+                        <td style="text-align:center">@(cuotas.FechaMorasPagadas.HasValue ? cuotas.FechaMorasPagadas.Value.ToString("dd/MM/yyyy") : "")</td>
+                        <td style="text-align:right">@cuotas.ImporteMorasPagadas</td>
+                        <td>
+                            <a class="btn btn-outline-primary" asp-action="Cuotas" asp-controller="Contratos" asp-route-Ident_Cuota="@cuotas.Ident_Cuotas">
+                                <i class="bi bi-cash"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-danger" asp-action="Moras" asp-controller="Contratos" asp-route-Ident_Cuota="@cuotas.Ident_Cuotas">
+                                <i class="bi bi-cash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            
+        </table>
+    </div>
+    
+</div>

@@ -1,0 +1,198 @@
+﻿@model InmobiliariaWeb.Models.Separaciones.ClienteViewModel
+@{
+    Layout = "_ActualizarLayout";
+}
+<form method="post" asp-action="Cliente" asp-controller="Separaciones">
+    <div class="container">
+        <input hidden asp-for="@Model.Ident_Separaciones" />
+        <input id="IdentPersona" hidden asp-for="@Model.Ident_Persona" />
+        <div class="card mt-3">
+            <div class="card-header fw-bold">
+                <h2>@Model.Numero_Separacion - Cliente</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Nombre o Documento" aria-label="Recipient's username" aria-describedby="BuscarPersona" id="inputBusqueda">
+                        <button class="btn btn-outline-secondary" type="button" id="BuscarPersona">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row g-1 mb-3">
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="Nombre" placeholder="Apellidos y Nombres" readonly>
+                            <label for="Nombre">Apellidos y Nombres</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12 ">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="Documento" placeholder="Nro Documento" readonly>
+                            <label for="Documento">Nro Documento</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12">
+                        <button class="btn btn-outline-success col-form-label" style="width:100px; height:100%" id="RegistrarPropietario">
+                            <i class="bi bi-person" style="font-size:1.5em"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive-md">
+                        <table class="table table-hover" id="clientes">
+                            <thead class="table-dark">
+                                <tr class="text-center">
+                                    <th>N°</th>
+                                    <th>T. Doc</th>
+                                    <th>N° Doc</th>
+                                    <th>Apellidos y Nombres</th>
+                                    <th>🔍︎</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var clientes in Model.Clientes)
+                                {
+                                    <tr>
+                                        <td class="text-center">@clientes.Indice</td>
+                                        <td>@clientes.TipoDocumento</td>
+                                        <td class="text-center">@clientes.NumeroDocumento</td>
+                                        <td class="text-center">@clientes.Nombre_Completo</td>
+                                        <td class="text-center">
+                                            <a class="btn btn-outline-danger" asp-controller="Separaciones" asp-action="EliminarCliente" asp-route-Ident_Separacion="@Model.Ident_Separaciones" asp-route-Ident_SeparacionesCliente="@clientes.Ident_SeparacionesPersonas">
+                                                <i class="bi bi-person"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a class="btn btn-outline-primary mt-2" asp-controller="Separaciones" asp-action="Imprimir" asp-route-ident_Separacion="@Model.Ident_Separaciones" asp-route-ident_010_TipoLote="@ViewBag.ident_010_TipoLote" target="_blank">
+                    Imprimir
+                </a>
+            </div>
+        </div>
+        <a class="btn btn-outline-info mt-2" asp-action="Index" asp-controller="Separaciones">
+            Regresar
+        </a>
+    </div>
+    
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+    $("#BuscarPersona").click(function () {
+        var valorBusqueda = $("#inputBusqueda").val();
+        console.log(valorBusqueda);
+        $.ajax({
+            url: '/Programa/BuscarPersonas',
+            type: 'GET',
+            data: { buscar: valorBusqueda },
+            success: function (data) {
+                console.log(data);
+                $("#inputBusqueda").val("");
+                if (data.length === 1) {
+                    $("#Nombre").val(data[0].nombreCompleto);
+                    $("#Documento").val(data[0].documento);
+                    $("#IdentPersona").val(data[0].ident_Persona);
+                } else if (data.length > 1) {
+                    mostrarResultados(data);
+                } else {
+                    $("#Nombre").val("");
+                    $("#Documento").val("");
+                    $("#IdentPersona").val("0");
+                }
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    });
+    function mostrarResultados(resultados) {
+        // Remover el modal existente, si hay uno
+        $("#resultadosModal").remove();
+        // Crea el modal
+        var modalHTML = "<div class='modal fade' id='resultadosModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>";
+        modalHTML += "<div class='modal-dialog' role='document'>";
+        modalHTML += "<div class='modal-content'>";
+        modalHTML += "<div class='modal-header'>";
+        modalHTML += "<h5 class='modal-title' id='exampleModalLabel'>Resultados de la Búsqueda</h5>";
+        modalHTML += "<button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        modalHTML += "</div>";
+        modalHTML += "<div class='modal-body'>";
+
+        var tablaResultados = "<table class='table table-hover'>";
+        tablaResultados += "<thead><tr><th>N°</th><th hidden>IDENT_PERSONA</th><th hidden>TIPO_DOCUMENTO</th><th hidden>DOCUMENTO</th><th>Apellidos y Nombres</th></tr></thead><tbody>";
+
+        for (var i = 0; i < resultados.length; i++) {
+            tablaResultados += "<tr>";
+            tablaResultados += "<td>" + (i + 1) + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].ident_Persona + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].tipoDocumento + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].documento + "</td>";
+            tablaResultados += "<td>" + resultados[i].nombreCompleto + "</td>";
+            tablaResultados += "</tr>";
+        }
+
+        tablaResultados += "</tbody></table>";
+
+        modalHTML += tablaResultados;
+        modalHTML += "</div>";
+        modalHTML += "<div class='modal-footer'>";
+        modalHTML += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
+        modalHTML += "</div></div></div></div>";
+
+        // Agrega el modal al final del cuerpo del documento
+        $("body").append(modalHTML);
+
+        // Muestra el modal
+        $("#resultadosModal").modal("show");
+
+        // Agrega un evento clic a las filas de la tabla en el modal
+        $("#resultadosModal").on("dblclick", "table tbody tr", function () {
+            var identPersona = $(this).find('td:eq(1)').text();
+            var documento = $(this).find('td:eq(3)').text();
+            var nombreCompleto = $(this).find('td:eq(4)').text();
+
+            $("#IdentPersona").val(identPersona);
+            $("#Documento").val(documento);
+            $("#Nombre").val(nombreCompleto);
+
+            cerrarModal();
+        });
+    }
+
+    function cerrarModal() {
+        // Oculta y elimina el modal del DOM
+        $("#resultadosModal").modal("hide");
+        $("#resultadosModal").on("hidden.bs.modal", function () {
+            $(this).remove();
+        });
+    }
+</script>

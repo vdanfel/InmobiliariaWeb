@@ -17,5 +17,7 @@ namespace InmobiliariaWeb.Models.Programa
         public ViewPrograma ViewPrograma { get; set; }
         public List<Manzanas> Manzanas { get; set; }
         public int ManzanaInicial { get; set; }
+        public List<TipoContrato> TipoContratos { get; set; }
+        public int Ident_017_TipoContrato { get; set; }
     }
 }

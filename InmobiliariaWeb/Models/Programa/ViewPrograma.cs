@@ -28,5 +28,8 @@ namespace InmobiliariaWeb.Models.Programa
         public List<Manzanas> manzanas { get; set;}
         public int ManzanaInicial { get; set; }
         public string Confirmacion { get; set; }
+        public bool Ident_012_EstadoLote { get; set; }
+        public int Ident_017_TipoContrato { get; set; }
+        public List<TipoContrato> TipoContratos { get; set; }
     }
 }

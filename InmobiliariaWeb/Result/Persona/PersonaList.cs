@@ -21,6 +21,7 @@ namespace InmobiliariaWeb.Result.Persona
         public string Telefono { get; set; }
         public string Correo { get; set; }
         public string Contacto { get; set; }
+        public string CelularContacto { get; set; }
         public string TelefonoContacto { get; set; }
         public string CorreoContacto { get; set; }
         public int Ident_Ubigeo { get; set; }
@@ -36,5 +37,10 @@ namespace InmobiliariaWeb.Result.Persona
         public List<Provincia> ListProvincia { get; set; }
         public List<Distrito> ListDistrito { get; set; }
         public string Mensaje { get; set; }
+        public List<TipoSexo> TipoSexos { get; set; }
+        public List<Paises> Paises { get; set; }
+        public int Ident_016_TipoSexo { get; set; }
+        public int Ident_Pais { get; set; }
+        public string UbicacionGoogleMaps { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 @{
     ViewData["Tittle"] = "Registrar Persona";
 }
-<form asp-action="PersonaRegistrar" method="post">
+<form asp-action="Crear" method="post">
     <div class="container">
         <div class="row mb-2">
             <div class="col-lg-2 col-md-3 col-sm-12">
@@ -73,6 +73,32 @@
                     </div>
                     <div class="col-lg-4 col-sm-12">
                         <input type="date" class="form-control" asp-for="@Model.FechaNacimiento" />
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-lg-2 col-sm-12">
+                        <label class="col-form-label">Sexo:</label>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <select class="form-select" asp-for="@Model.Ident_016_TipoSexo">
+                            <option value=""></option>
+                            @foreach (var tipoSexo in Model.TipoSexos)
+                            {
+                                <option value="@tipoSexo.Ident_016_TipoSexo">@tipoSexo.Descripcion</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-sm-12">
+                        <label class="col-form-label">Pais:</label>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <select class="form-select" asp-for="@Model.Ident_Pais">
+                            <option value=""></option>
+                            @foreach (var paises in Model.Paises)
+                            {
+                                <option value="@paises.Ident_Pais">@paises.Pais</option>
+                            }
+                        </select>
                     </div>
                 </div>
             </div>
@@ -162,6 +188,15 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-lg-2 col-sm-12">
+                        <label class="col-form-label">Ubicación Google:</label>
+                    </div>
+                    <div class="col-lg-10 col-sm-12">
+                        <input type="text" class="form-control" asp-for="@Model.UbicacionGoogleMaps" />
+                        <span class="text-danger" asp-validation-for="@Model.UbicacionGoogleMaps"></span>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-lg-2 col-sm-12">
                         <label class="col-form-label">Referencia:</label>
                     </div>
                     <div class="col-lg-10 col-sm-12">
@@ -207,6 +242,7 @@
         </div>
         <div class="mt-2">
             <button class="btn btn-lg btn-outline-secondary fw-bold" type="submit">REGISTRAR</button>
+            <a class="btn btn-lg btn-outline-info fw-bold" asp-controller="Persona" asp-action="Index">REGRESAR</a>
         </div>
     </div>
 </form>

@@ -1,0 +1,146 @@
+﻿@model InmobiliariaWeb.Models.Programa.ViewPrograma
+@{
+    Layout = "_ActualizarLayout";
+}
+<form asp-action="ProgramaActualizar" method="post" id="formActualizar">
+    <input hidden asp-for="@Model.IdentPrograma" />
+    <div class="card mt-3">
+        <div class="card-header fw-bold">
+            @Model.NombrePrograma - Datos del Programa
+        </div>
+        <div class="card-body">
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Nombre</label>
+                </div>
+                <div class="col-lg-10 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.NombrePrograma" />
+                    <span asp-validation-for="@Model.NombrePrograma" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">N° Partida</label>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.NumeroPartida" />
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">N° Código</label>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.Codigo" readonly />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Dirección</label>
+                </div>
+                <div class="col-lg-10 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.Direccion" />
+                    <span asp-validation-for="@Model.Direccion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Referencia</label>
+                </div>
+                <div class="col-lg-10 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.Referencia" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Area Total</label>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <input type="number" class="form-control" asp-for="@Model.AreaTotal" />
+                    <span asp-validation-for="@Model.AreaTotal" class="text-danger"></span>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Area Lotizada</label>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <input type="number" class="form-control" asp-for="@Model.AreaLotizada" />
+                    <span asp-validation-for="@Model.AreaLotizada" class="text-danger"></span>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Cantidad Mz</label>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <input type="number" class="form-control" asp-for="@Model.CantidadManzanas" />
+                    <span asp-validation-for="@Model.CantidadManzanas" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Suministro</label>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.Suministro" />
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Manzana Inicial</label>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <select class="form-select" asp-for="@Model.ManzanaInicial">
+                        @foreach (var manzanas in Model.manzanas)
+                        {
+                            <option value="@manzanas.Valor">@manzanas.Descripcion</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">TipoContrato</label>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <select class="form-select" asp-for="@Model.Ident_017_TipoContrato">
+                        <option></option>
+                        @foreach (var tipoContrato in Model.TipoContratos)
+                        {
+                            <option value="@tipoContrato.Ident_017_TipoContrato">@tipoContrato.Descripcion</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="d-grid gap-3 d-flex">
+                    <button class="btn btn-lg btn-outline-info" type="submit">ACTUALIZAR</button>
+                    <a class="btn btn-lg btn-outline-secondary" asp-action="Index" asp-controller="Programa">REGRESAR</a>
+                    <a class="btn btn-lg btn-outline-danger" asp-action="AnularPrograma" asp-controller="Programa" asp-route-IdentPrograma="@Model.IdentPrograma">ELIMINAR</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <input id="confirmacion" type="text" asp-for="@Model.Confirmacion" hidden />
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+</script>

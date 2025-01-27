@@ -28,37 +28,56 @@
 </div>
 <div class="container">
     <div class="row mt-3">
-        <table class="table table-hover">
-            <thead class="table-dark" >
-                <tr class="text-center">
-                    <th hidden></th>
-                    <th>N°</th>
-                    <th>Código</th>
-                    <th>Programa</th>
-                    <th>U/L</th>
-                    <th>🔍︎</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.ProgramaList != null && Model.ProgramaList.Any())
-                {
-                    @foreach (var programasList in Model.ProgramaList)
+        <div class="table-responsive-md">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th hidden></th>
+                        <th>N°</th>
+                        <th>Código</th>
+                        <th>Programa</th>
+                        <th style="text-align:center">U</th>
+                        <th style="text-align:center">L</th>
+                        <th style="text-align:center">T</th>
+                        <th>🔍︎</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ProgramaList != null && Model.ProgramaList.Any())
                     {
-                        <tr>
-                            <td hidden>@programasList.IdentPrograma</td>
-                            <td style="text-align:center">@programasList.Indice</td>
-                            <td style="text-align:center">@programasList.Codigo</td>
-                            <td>@programasList.NombrePrograma</td>
-                            <td style="text-align:center">@programasList.LotesUsados / @programasList.LotesTotales</td>
-                            <td class="text-center">
-                                <a class="btn btn-outline-warning" asp-controller="Programa" asp-action="Actualizar" asp-route-IdentPrograma="@programasList.IdentPrograma">
-                                    <i class="bi bi-eye-fill"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach (var programasList in Model.ProgramaList)
+                        {
+                            <tr>
+                                <td hidden>@programasList.IdentPrograma</td>
+                                <td style="text-align:center">@programasList.Indice</td>
+                                <td style="text-align:center">@programasList.Codigo</td>
+                                <td>@programasList.NombrePrograma</td>
+                                <td style="text-align:center">
+                                    <a class="btn btn-outline-success" asp-controller="Programa" asp-action="ReporteLotes" asp-route-tipoReporte="1" asp-route-Ident_Programa="@programasList.IdentPrograma" style="width:50px">
+                                        @programasList.LotesUsados
+                                    </a>
+                                </td>
+                                <td style="text-align:center">
+                                    <a class="btn btn-outline-success" asp-controller="Programa" asp-action="ReporteLotes" asp-route-tipoReporte="2" asp-route-Ident_Programa="@programasList.IdentPrograma" style="width:50px">
+                                        @programasList.LotesLibres
+                                    </a>
+                                </td>
+                                <td style="text-align:center">
+                                    <a class="btn btn-outline-success" asp-controller="Programa" asp-action="ReporteLotes" asp-route-tipoReporte="3" asp-route-Ident_Programa="@programasList.IdentPrograma" style="width:50px">
+                                        @programasList.LotesTotales
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-outline-warning" asp-controller="Programa" asp-action="ProgramaActualizar" asp-route-IdentPrograma="@programasList.IdentPrograma">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+
+        </div>
     </div>
 </div>

@@ -1,0 +1,65 @@
+﻿@model InmobiliariaWeb.Models.Usuario.UsuarioViewModel
+@{
+    Layout = "_Layout";
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="row row-cols-2">
+                <div class="col col-lg-10 col-md-9 col-sm-9">
+                    <h2>USUARIOS</h2>
+                </div>
+                <div class="col col-lg-2 col-md-3 col-sm-3 text-end m-auto">
+                    <a class="btn btn-outline-success" asp-controller="Usuario" asp-action="Crear">
+                        Nuevo
+                        <i class="bi bi-file-earmark-richtext"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <form asp-action="Index" method="post">
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Ingrese Nombre o Documento" aria-label="Ingrese Nombre o Documento" aria-describedby="btnFiltrar" asp-for="@Model.Buscar">
+                    <button class="btn btn-outline-secondary" type="submit">Filtrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-3">
+        <div class="table-responsive-md">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Apellidos y Nombres</th>
+                        <th>Usuario</th>
+                        <th>Tipo</th>
+                        <th>🔍︎</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.UsuarioList != null && Model.UsuarioList.Any())
+                    {
+                        @foreach (var usuarios in Model.UsuarioList)
+                        {
+                            <tr>
+                                <td>@usuarios.Indice</td>
+                                <td>@usuarios.Nombre</td>
+                                <td>@usuarios.Usuario</td>
+                                <td>@usuarios.TipoUsuario</td>
+                                <td>
+                                    <a class="btn btn-outline-warning" asp-controller="Usuario" asp-action="Actualizar" asp-route-Ident_Usuario="@usuarios.Ident_Usuario">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

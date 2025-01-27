@@ -31,35 +31,38 @@
 </div>
 <div class="container">
     <div class="row mt-3">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>N°</th>
-                    <th>Apellidos y Nombres</th>
-                    <th>Tipo Documento</th>
-                    <th>N° Documento</th>
-                    <th>🔍︎</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.PersonaList != null && Model.PersonaList.Any())
-                {
-                    @foreach (var personas in Model.PersonaList)
+        <div class="table-responsive-md">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Apellidos y Nombres</th>
+                        <th>Tipo Documento</th>
+                        <th>N° Documento</th>
+                        <th>🔍︎</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.PersonaList != null && Model.PersonaList.Any())
                     {
-                        <tr>
-                            <td>@personas.Indice</td>
-                            <td>@personas.NombreCompleto</td>
-                            <td>@personas.TipoDocumento</td>
-                            <td>@personas.Documento</td>
-                            <td>
-                                <a class="btn btn-outline-warning" asp-action="Actualizar" asp-route-IdentPersona="@personas.Ident_Persona">
-                                    <i class="bi bi-eye-fill"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach (var personas in Model.PersonaList)
+                        {
+                            <tr>
+                                <td>@personas.Indice</td>
+                                <td>@personas.NombreCompleto</td>
+                                <td>@personas.TipoDocumento</td>
+                                <td>@personas.Documento</td>
+                                <td>
+                                    <a class="btn btn-outline-warning" asp-action="Actualizar" asp-route-IdentPersona="@personas.Ident_Persona">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+
+        </div>
     </div>
 </div>

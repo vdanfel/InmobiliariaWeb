@@ -1,7 +1,10 @@
 ﻿using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models;
 using InmobiliariaWeb.Result;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace InmobiliariaWeb.Controllers
 {
@@ -12,25 +15,69 @@ namespace InmobiliariaWeb.Controllers
         { 
             _loginService = loginService;
         }
-        public IActionResult Index(string mensaje)
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
+            // La variable de sesión está presente, redirigir a Dashboard/Index
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+            else 
+            {
+                // Borra los claims existentes
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            }
+            // El usuario no está autenticado, mostrar la vista de inicio de sesión
             LoginViewModel loginViewModel = new LoginViewModel();
-            loginViewModel.Mensaje = mensaje;
             return View(loginViewModel);
         }
-        public async Task<IActionResult> ValidarSesion(LoginViewModel loginViewModel)
+        [HttpPost]
+        public async Task<IActionResult> Index(LoginViewModel loginViewModel)
         {
-            LoginResult loginResult = await _loginService.ValidarLogin(loginViewModel.Usuario,loginViewModel.Clave);
-
+            LoginResult loginResult = await _loginService.ValidarLogin(loginViewModel.Usuario, loginViewModel.Clave);
             if (!string.IsNullOrEmpty(loginResult.Mensaje))
             {
                 HttpContext.Session.SetInt32("IdentUsuario", loginResult.IdentUsuario);
                 HttpContext.Session.SetString("Usuario", loginResult.Usuario);
                 HttpContext.Session.SetInt32("Ident005TipoUsuario", loginResult.Ident005TipoUsuario);
-                HttpContext.Session.SetString("NombreCompleto", loginResult.NombreCompleto);
+
+                // Iniciar sesión
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, loginResult.Usuario),
+                    new Claim("IdentUsuario", loginResult.IdentUsuario.ToString()),
+                    // Agrega más claims según tus necesidades
+                };
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = true // Para que la cookie de autenticación persista incluso después de cerrar el navegador
+                };
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity),
+                    authProperties);
+
                 return RedirectToAction("Index", "Dashboard");
             }
-            return RedirectToAction("Index","Login", new { mensaje = "Usuario o Clave Incorrecto" });
+            else
+            {
+                loginViewModel.Mensaje = loginResult.Mensaje;
+                return View(loginViewModel);
+            }
+        }
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Login");
+        }
+        [HttpGet]
+        public IActionResult Alerta(string Mensaje)
+        {
+            ViewBag.Mensaje = Mensaje;
+            return View();
         }
     }
 }

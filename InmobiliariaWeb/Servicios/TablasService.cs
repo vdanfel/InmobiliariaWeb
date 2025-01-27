@@ -14,40 +14,7 @@ namespace InmobiliariaWeb.Servicios
         {
             _connection = connection;
         }
-        public async Task<List<TipoPropietario>> ListarTipoPropietario()
-        {
-            int parametro = 11;
-            var tipoPropietarioList = new List<TipoPropietario>();
-            try
-            {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
-                {
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
-                    await _connection.OpenAsync();
-                    // Ejecuta el procedimiento almacenado y obtén el resultado
-                    SqlDataReader reader = await command.ExecuteReaderAsync();
-                    while (reader.Read())
-                    {
-                        var tipoPropietario = new TipoPropietario();
-                        tipoPropietario.Ident_011_TipoPropietario= Int32.Parse(reader["IDENT_PARAMETRO"].ToString());
-                        tipoPropietario.Descripcion = reader["DESCRIPCION"].ToString();
-                        tipoPropietario.Valor = reader["VALOR"].ToString();
-                        tipoPropietario.Abreviatura = reader["ABREVIATURA"].ToString();
-                        tipoPropietarioList.Add(tipoPropietario);
-                    }
-                    return tipoPropietarioList;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                _connection.Close();
-            }
-        }
+        
         public async Task<List<TipoDocumento>> ListarTipoDocumento()
         {
             int parametro = 1;
@@ -71,6 +38,39 @@ namespace InmobiliariaWeb.Servicios
                         tipoDocumentoList.Add(tipoDocumento);
                     }
                     return tipoDocumentoList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<List<TipoRol>> ListarTipoUsuarios()
+        {
+            int parametro = 5;
+            var tipoRolList = new List<TipoRol>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var tipoRol = new TipoRol();
+                        tipoRol.Ident_005_TipoUsuario = Int32.Parse(reader["IDENT_PARAMETRO"].ToString());
+                        tipoRol.Descripcion = reader["DESCRIPCION"].ToString();
+                        tipoRol.Abreviatura = reader["ABREVIATURA"].ToString();
+                        tipoRolList.Add(tipoRol);
+                    }
+                    return tipoRolList;
                 }
             }
             catch (Exception ex)
@@ -137,6 +137,108 @@ namespace InmobiliariaWeb.Servicios
                         manzanaList.Add(manzana);
                     }
                     return manzanaList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<List<TipoLote>> listarTipoLote()
+        {
+            int parametro = 10;
+            var tipoLoteList = new List<TipoLote>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var tipoLote = new TipoLote();
+                        tipoLote.Ident_010_TipoLote = Int32.Parse(reader["IDENT_PARAMETRO"].ToString());
+                        tipoLote.Descripcion = reader["DESCRIPCION"].ToString();
+                        tipoLote.Valor = reader["VALOR"].ToString();
+                        tipoLote.Abreviatura = reader["ABREVIATURA"].ToString();
+                        tipoLoteList.Add(tipoLote);
+                    }
+                    return tipoLoteList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<List<TipoPropietario>> ListarTipoPropietario()
+        {
+            int parametro = 11;
+            var tipoPropietarioList = new List<TipoPropietario>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var tipoPropietario = new TipoPropietario();
+                        tipoPropietario.Ident_011_TipoPropietario = Int32.Parse(reader["IDENT_PARAMETRO"].ToString());
+                        tipoPropietario.Descripcion = reader["DESCRIPCION"].ToString();
+                        tipoPropietario.Valor = reader["VALOR"].ToString();
+                        tipoPropietario.Abreviatura = reader["ABREVIATURA"].ToString();
+                        tipoPropietarioList.Add(tipoPropietario);
+                    }
+                    return tipoPropietarioList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<List<TipoUbicacionLote>> ListarTipoUbicacionlote()
+        {
+            int parametro = 14;
+            var tipoUbicacionLotesList = new List<TipoUbicacionLote>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var tipoUbicacionLote = new TipoUbicacionLote();
+                        tipoUbicacionLote.Ident_014_TipoUbicacionLote = Int32.Parse(reader["IDENT_PARAMETRO"].ToString());
+                        tipoUbicacionLote.Descripcion = reader["DESCRIPCION"].ToString();
+                        tipoUbicacionLote.Valor = reader["VALOR"].ToString();
+                        tipoUbicacionLote.Abreviatura = reader["ABREVIATURA"].ToString();
+                        tipoUbicacionLotesList.Add(tipoUbicacionLote);
+                    }
+                    return tipoUbicacionLotesList;
                 }
             }
             catch (Exception ex)
@@ -231,6 +333,136 @@ namespace InmobiliariaWeb.Servicios
                         distritoList.Add(distrito);
                     }
                     return distritoList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<List<TipoSexo>> ListarSexo()
+        {
+            int parametro = 16;
+            var tipoSexoList = new List<TipoSexo>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var tipoSexo = new TipoSexo();
+                        tipoSexo.Ident_016_TipoSexo = Int32.Parse(reader["IDENT_PARAMETRO"].ToString());
+                        tipoSexo.Descripcion = reader["DESCRIPCION"].ToString();
+                        tipoSexo.Valor = reader["VALOR"].ToString();
+                        tipoSexo.Abreviatura = reader["ABREVIATURA"].ToString();
+                        tipoSexoList.Add(tipoSexo);
+                    }
+                    return tipoSexoList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<List<TipoContrato>> ListarTipoContrato()
+        {
+            int parametro = 17;
+            var tipoContratos = new List<TipoContrato>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var tipoContrato = new TipoContrato();
+                        tipoContrato.Ident_017_TipoContrato= Int32.Parse(reader["IDENT_PARAMETRO"].ToString());
+                        tipoContrato.Descripcion = reader["DESCRIPCION"].ToString();
+                        tipoContratos.Add(tipoContrato);
+                    }
+                    return tipoContratos;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<List<TipoLado>> ListarLado()
+        {
+            int parametro = 9;
+            var tipoLados = new List<TipoLado>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var tipoLado = new TipoLado();
+                        tipoLado.Ident_009_TipoLado = Int32.Parse(reader["IDENT_PARAMETRO"].ToString());
+                        tipoLado.Descripcion = reader["DESCRIPCION"].ToString();
+                        tipoLados.Add(tipoLado);
+                    }
+                    return tipoLados;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<List<Paises>> ListarPaises()
+        {
+            var PaisesList = new List<Paises>();
+            try 
+            {
+                using (SqlCommand command = new SqlCommand("usp_Pais_Bandeja", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var paises = new Paises();
+                        paises.Ident_Pais = Int32.Parse(reader["Ident_Pais"].ToString());
+                        paises.Pais = reader["Pais"].ToString();
+                        paises.Hombre = reader["Hombre"].ToString();
+                        paises.Mujer = reader["Mujer"].ToString();
+                        PaisesList.Add(paises);
+                    }
+                    return PaisesList;
                 }
             }
             catch (Exception ex)

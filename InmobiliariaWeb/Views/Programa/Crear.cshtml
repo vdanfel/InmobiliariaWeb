@@ -30,6 +30,7 @@
                             </div>
                             <div class="col-lg-2 col-sm-12">
                                 <input type="text" class="form-control" asp-for="@Model.ViewPrograma.NumeroPartida" />
+                                <span asp-validation-for="@Model.ViewPrograma.NumeroPartida"></span>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -87,6 +88,20 @@
                                     @foreach (var manzanas in Model.Manzanas)
                                     {
                                         <option value="@manzanas.Valor">@manzanas.Descripcion</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-lg-2 col-sm-12">
+                                <label class="col-form-label">TipoContrato</label>
+                            </div>
+                            <div class="col-lg-4 col-sm-12">
+                                <select class="form-select" asp-for="@Model.Ident_017_TipoContrato">
+                                    <option></option>
+                                    @foreach(var tipoContrato in Model.TipoContratos)
+                                    {
+                                        <option value="@tipoContrato.Ident_017_TipoContrato">@tipoContrato.Descripcion</option>
                                     }
                                 </select>
                             </div>

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "wOe5SUAQp3J4YaFhWbcuuiIyajpoluYYqsUPzqQI1F+qglA2LBJKXDF541BxuUIXe6GdNNvrTzdA1/WSPJJ9LQ==",
+  "success": true,
+  "projectFilePath": "E:\\InmobiliariaWeb\\Impresiones\\Impresiones.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\AlucarD-LAP\\.nuget\\packages\\questpdf\\2024.3.4\\questpdf.2024.3.4.nupkg.sha512"
+  ],
+  "logs": []
+}
