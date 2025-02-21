@@ -1,0 +1,261 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@media (max-width: 768px) {
+    .columna-tipo {
+        min-width: 130px;
+        white-space: nowrap; /* Evita que el contenido se divida en varias líneas */
+        overflow: hidden; /* Oculta el texto adicional si es más largo */
+        text-overflow: ellipsis; /* Muestra '...' si el texto es demasiado largo */
+    }
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+#desactivados input {
+    
+}
+body {
+  margin-bottom: 60px;
+}
+.botonActualizar:hover {
+    background-color:black;
+    color:white;
+    font-weight:bold;
+}
+.navPrograma {
+    float:left
+}
+    .navPrograma ul {
+        list-style: none;
+        overflow: hidden;
+        display:block;
+    }
+        .navPrograma ul li {
+            float: left;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
+            .navPrograma ul li a {
+                display: block;
+                padding: 20px;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            .navPrograma ul li:hover {
+                background-color: black;
+                color: white;
+            }
+            .navPrograma ul li:active {
+                background-color:black;
+                color:white;
+            }
+            .navPrograma ul li:visited {
+                background-color: black;
+                color: white;
+            }
+            .navPrograma ul li:link{
+                background-color: black;
+                color: white;
+            }
+/* Estilos para el paginador */
+#paginator {
+    text-align: center;
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: .25rem;
+}
+
+    .pagination li {
+        display: inline;
+        margin-right: 5px;
+    }
+
+        .pagination li a,
+        .pagination li span {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #007bff;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+
+    .pagination .active span {
+        z-index: 2;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .pagination .disabled span {
+        color: #777;
+        cursor: not-allowed;
+        background-color: #fff;
+        border-color: #ddd;
+    }
+    .pagination .active a {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+.db-card {
+    border:0.1em black solid;
+    border-radius:0.5em;
+    padding:0.5em;
+}
+.tabla-programa-dash {
+    height:15em;
+    overflow-y:auto;
+}
+.tabla-persona-dash {
+    height: 15em;
+    overflow-y: auto;
+}
+
+/*para los colores de la tabla de notificaciones*/
+.table-dark tbody tr.estado-0 {
+    background-color: white !important;
+    color: black;
+}
+
+.table-dark tbody tr.estado-1 {
+    background-color: #ffffcc !important; /* Amarillo claro */
+    color: black;
+}
+
+.table-dark tbody tr.estado-2 {
+    background-color: #ffedcc !important; /* Mostaza claro */
+    color: black;
+}
+
+.table-dark tbody tr.estado-3 {
+    background-color: #ffd1b3 !important; /* Naranja claro */
+    color: black;
+}
+
+.table-dark tbody tr.estado-4 {
+    background-color: #ff9999 !important; /* Rojo claro */
+    color: black;
+}
+
+.table-hover tr.selected {
+    background-color: #007bff; /* Azul claro */
+    color: white;
+}
+/*colores para las filas de las tablas*/
+.table-SinVerificar {
+    --bs-table-bg: #f5b7b1;
+    --bs-table-hover-bg: #f1948a;
+    --bs-table-hover-color: #343a40;
+    color: #343a40;
+    border-color: #adb5bd;
+}
+.leyenda-SinVerificar {
+    border: 1px solid #f1948a;
+    background-color: #f5b7b1;
+    color: #78281f;
+    padding: 0.2em;
+    border-radius: 0.25em;
+}
+.leyenda-Verificado {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    padding: 0.2em;
+    border-radius: 0.25em;
+}
+.table-Separacion {
+    --bs-table-bg: #f9e79f; /* Fondo general de la tabla */
+    --bs-table-hover-bg: #f7dc6f; /* Fondo de la fila al pasar el mouse */
+    --bs-table-hover-color: #343a40; /* Color de texto al pasar el mouse */
+    color: #343a40; /* Color del texto general */
+    border-color: #adb5bd; /* Color de los bordes */
+}
+.leyenda-Separacion {
+    border: 1px solid #f7dc6f;
+    background-color: #f9e79f;
+    color: #7d6608;
+    padding: 0.2em;
+    border-radius: 0.25em;
+}
+.table-Contrato {
+    --bs-table-bg: #85c1e9; /* Fondo general de la tabla */
+    --bs-table-hover-bg: #5dade2; /* Fondo de la fila al pasar el mouse */
+    --bs-table-hover-color: #343a40; /* Color de texto al pasar el mouse */
+    color: #343a40; /* Color del texto general */
+    border-color: #adb5bd; /* Color de los bordes */
+}
+.leyenda-Contrato {
+    border: 1px solid #5dade2;
+    background-color: #85c1e9;
+    color: #1b4f72;
+    padding: 0.2em;
+    border-radius: 0.25em;
+}
+.table-Vendido {
+    --bs-table-bg: #82e0aa; /* Fondo general de la tabla */
+    --bs-table-hover-bg: #58d68d; /* Fondo de la fila al pasar el mouse */
+    --bs-table-hover-color: #343a40; /* Color de texto al pasar el mouse */
+    color: #343a40; /* Color del texto general */
+    border-color: #adb5bd; /* Color de los bordes */
+}
+.leyenda-Vendido {
+    border: 1px solid #58d68d;
+    background-color: #82e0aa;
+    color: #186a3b;
+    padding: 0.2em;
+    border-radius: 0.25em;
+}
+.table-Propietario {
+    --bs-table-bg: #d2b4de;
+    --bs-table-hover-bg: #bb8fce;
+    --bs-table-hover-color: #343a40;
+    color: #343a40;
+    border-color: #adb5bd;
+}
+.leyenda-Propietario {
+    border: 1px solid #bb8fce;
+    background-color: #d2b4de;
+    color: #4a235a;
+    padding: 0.2em;
+    border-radius: 0.25em;
+}
+.asd {
+    margin-bottom:10px
+}
+
+.navbar-nav .nav-link {
+    position: relative;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+    .navbar-nav .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 3px;
+        background-color: #040e79; /* Rojo del logo */
+        transition: width 0.3s ease-in-out;
+    }
+
+    .navbar-nav .nav-link:hover::after {
+        width: 100%;
+    }

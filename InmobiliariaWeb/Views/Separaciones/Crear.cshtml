@@ -1,0 +1,533 @@
+﻿@model InmobiliariaWeb.Models.Separaciones.CrearViewModel
+@{
+}
+<form asp-controller="Separaciones" asp-action="Crear" method="post">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Nueva Separación</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="date" id="fechaCreacion" asp-for="@Model.FechaSeparacion"/>
+                            <label for="fechaCreacion">Fecha Creación</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-12">
+                        <div class="form-floating">
+                            <select class="form-select" id="programas">
+                                <option></option>
+                                @foreach (var programas in Model.ProgramasCbxLists)
+                                {
+                                    <option value="@programas.Ident_Programa">@programas.Nombre_Programa</option>
+                                }
+                            </select>
+                            <label for="programas">Seleccione Programa</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="manzana">
+                                <option></option>
+                            </select>
+                            <label for="manzana">Mz</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="lote" asp-for="@Model.Ident_Lote">
+                                <option></option>
+                            </select>
+                            <label for="lote">Lt</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="area" readonly />
+                            <label for="area">Area</label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="ubicacion" readonly />
+                            <label for="ubicacion">Ubicación</label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="precioM2" readonly />
+                            <label for="precioM2">$ M<sup>2</sup></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="precioTotal" readonly />
+                            <label for="precioTotal">$ Total</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card mt-1">
+                    <div class="card-body">
+                        <div id="regular">
+                            <div class="row wor-cols-4 g-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="izquierda" readonly />
+                                        <label for="izquierda">Izq.</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="derecha" readonly />
+                                        <label for="derecha">Der.</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="frente" readonly />
+                                        <label for="frente">Fre.</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="fondo" readonly />
+                                        <label for="fondo">Fon.</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="especial">
+                            <div class="row row-cols-5 mt-1 g-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="l1" readonly />
+                                        <label for="l1">L1</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="l2" readonly />
+                                        <label for="l2">L2</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="l3" readonly />
+                                        <label for="l3">L3</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="l4" readonly />
+                                        <label for="l4">L4</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="l5" readonly />
+                                        <label for="l5">L5</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-cols-5 mt-1 g-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="l6" readonly />
+                                        <label for="l6">L6</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="l7" readonly />
+                                        <label for="l7">L7</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="l8" readonly />
+                                        <label for="l8">L8</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="l9" readonly />
+                                        <label for="l9">L9</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" id="l10" readonly />
+                                        <label for="l10">L10</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="tratadoEn" placeholder="0" asp-for="@Model.TratadoEn"/>
+                            <label for="tratadoEn">Tratado En</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="cuotaInicial" placeholder="0" asp-for="@Model.CuotaInicial"/>
+                            <label for="cuotaInicial">Cuota Inicial</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="saldo" placeholder="0" readonly asp-for="@Model.SaldoAPagar"/>
+                            <label for="saldo">Saldo</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="numeroCuotas" placeholder="0" asp-for="@Model.CantidadCuotas" />
+                            <label for="numeroCuotas"># Cuotas</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="cuotasIniciales" placeholder="0" readonly asp-for="@Model.CuotasIniciales" />
+                            <label for="cuotasIniciales"><span id="cuotasInicRestadas">X</span> Cuotas de</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating" id="cuotaFinalDiv">
+                            <input type="text" class="form-control" id="cuotaFinal" placeholder="0" readonly asp-for="@Model.CuotaFinal" />
+                            <label for="cuotaFinal">Cuota Final</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="diasVigencia" placeholder="0" asp-for="@Model.DiasSeparacion"/>
+                            <label for="diasVigencia">Días Vigencia</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="fechaVencimiento" placeholder="0" readonly />
+                            <label for="fechaVencimiento">Vencimiento</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" id="importeSeparacion" class="form-control" placeholder="0" asp-for="@Model.ImporteSeparacion"/>
+                            <label for="importeSeparacion">Importe Separacion</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="observacion" asp-for="@Model.Observacion" />
+                            <label for="observacion">Observacion</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-success">Registrar</button>
+                <a class="btn btn-outline-secondary" asp-action="Index" asp-controller="Separaciones">Regresar</a>
+            </div>
+        </div>
+    </div>
+
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    
+    
+    // Esperar a que el documento esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtener la referencia al elemento de selección del programa
+        var programaSelect = document.getElementById("programas");
+
+        // Agregar un evento de cambio al elemento de selección del programa
+        programaSelect.addEventListener("change", function () {
+            // Obtener el valor seleccionado (identificador del programa)
+            var selectedPrograma = programaSelect.value;
+
+            // Obtener la referencia al elemento de selección de manzana
+            var manzanaSelect = document.getElementById("manzana");
+
+            // Limpiar las opciones existentes en el elemento de selección de manzana
+            manzanaSelect.innerHTML = "<option></option>";
+
+            // Verificar si se ha seleccionado un programa (evitar enviar una solicitud innecesaria)
+            if (selectedPrograma) {
+                fetch(`/Separaciones/GetManzanas?programaId=${selectedPrograma}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Agregar las opciones de manzana al elemento de selección
+                        data.forEach(manzana => {
+                            var option = document.createElement("option");
+                            option.value = manzana.ident_Manzana;
+                            option.text = manzana.letra;
+                            manzanaSelect.add(option);
+                        });
+                    })
+                    .catch(error => console.error("Error al obtener las manzanas:", error));
+            }
+        });
+
+        // Obtener la referencia al elemento de selección de manzana
+        var manzanaSelect = document.getElementById("manzana");
+
+        // Agregar un evento de cambio al elemento de selección de manzana
+        manzanaSelect.addEventListener("change", function () {
+            // Obtener el valor seleccionado (identificador de la manzana)
+            var selectedManzana = manzanaSelect.value;
+
+            // Obtener la referencia al elemento de selección de lote
+            var loteSelect = document.getElementById("lote");
+
+            // Limpiar las opciones existentes en el elemento de selección de lote
+            loteSelect.innerHTML = "<option></option>";
+
+            // Verificar si se ha seleccionado una manzana (evitar enviar una solicitud innecesaria)
+            if (selectedManzana) {
+                fetch(`/Separaciones/GetLotes?manzanaId=${selectedManzana}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Agregar las opciones de lote al elemento de selección
+                        data.forEach(lote => {
+                            var option = document.createElement("option");
+                            option.value = lote.ident_Lote;
+                            option.text = lote.correlativo;
+                            loteSelect.add(option);
+                        });
+                    })
+                    .catch(error => console.error("Error al obtener los lotes:", error));
+            }
+        });
+
+        // Obtener la referencia al elemento de selección de lote
+        var loteSelect = document.getElementById("lote");
+
+        // Agregar un evento de cambio al elemento de selección de lote
+        loteSelect.addEventListener("change", function () {
+            // Obtener el valor seleccionado (identificador del lote)
+            var selectedLote = loteSelect.value;
+
+            // Verificar si se ha seleccionado un lote (evitar enviar una solicitud innecesaria)
+            if (selectedLote) {
+                // Hacer una solicitud AJAX para obtener el detalle del lote
+                $.ajax({
+                    url: `/Separaciones/GetLoteDetalle?ident_Lote=${selectedLote}`,
+                    type: "GET",
+                    success: function (data) {
+                        // Actualizar los campos en la página con los datos obtenidos
+                        $("#area").val(data.area);
+                        $("#ubicacion").val(data.ubicacion);
+                        $("#precioM2").val(data.precioM2);
+                        $("#precioTotal").val(data.precioTotal);
+
+                        // Mostrar u ocultar los divs según el valor de Ident_010_TipoLote
+                        if (data.ident_010_TipoLote === 84) {
+                            $("#regular").show();
+                            $("#especial").hide();
+                        } else if (data.ident_010_TipoLote === 85) {
+                            $("#regular").hide();
+                            $("#especial").show();
+                        }
+                        // Para Lotes regulares
+                        $("#izquierda").val(data.izquierda);
+                        $("#derecha").val(data.derecha);
+                        $("#frente").val(data.frente);
+                        $("#fondo").val(data.fondo);
+
+                        // para lotes especiales
+                        $("#l1").val(data.lado1);
+                        $("#l2").val(data.lado2);
+                        $("#l3").val(data.lado3);
+                        $("#l4").val(data.lado4);
+                        $("#l5").val(data.lado5);
+                        $("#l6").val(data.lado6);
+                        $("#l7").val(data.lado7);
+                        $("#l8").val(data.lado8);
+                        $("#l9").val(data.lado9);
+                        $("#l10").val(data.lado10);
+
+                        $('#tratadoEn').val(data.precioTotal);
+                        $('#saldo').val(data.precioTotal);
+                    },
+                    error: function (error) {
+                        console.error("Error al obtener el detalle del lote:", error);
+                    }
+                });
+            }
+        });
+        // Obtener la referencia al elemento de cuotaInicial
+        var cuotaInicialInput = document.getElementById("cuotaInicial");
+
+        // Obtener la referencia al elemento de tratadoEn
+        var tratadoEnInput = document.getElementById("tratadoEn");
+
+        // Obtener la referencia al elemento de saldo
+        var saldoInput = document.getElementById("saldo");
+
+        // Agregar un evento de cambio al elemento de cuotaInicial
+        cuotaInicialInput.addEventListener("change", function () {
+            // Obtener los valores de cuotaInicial y tratadoEn
+            var cuotaInicial = parseFloat(cuotaInicialInput.value) || 0;
+            var tratadoEn = parseFloat(tratadoEnInput.value) || 0;
+
+            // Calcular el saldo
+            var saldo = tratadoEn - cuotaInicial;
+
+            // Actualizar el valor en el elemento de saldo
+            saldoInput.value = saldo;
+            // Llamar a la función para actualizar cuotas
+            actualizarCuotas();
+        });
+        // Obtener la referencia al elemento de numeroCuotas
+        var numeroCuotasInput = document.getElementById("numeroCuotas");
+
+        // Obtener la referencia al elemento de saldo
+        var saldoInput = document.getElementById("saldo");
+
+        // Obtener la referencia al elemento de cuotasIniciales
+        var cuotasInicialesInput = document.getElementById("cuotasIniciales");
+
+        // Obtener la referencia al elemento de cuotaFinal
+        var cuotaFinalInput = document.getElementById("cuotaFinal");
+
+        // Obtener la referencia al span cuotasInicRestadas
+        var cuotasInicRestadasSpan = document.getElementById("cuotasInicRestadas");
+
+        // Agregar un evento de cambio al elemento de numeroCuotas
+        numeroCuotasInput.addEventListener("change", actualizarCuotas);
+
+        // Agregar un evento de cambio al elemento de saldo
+        saldoInput.addEventListener("change", actualizarCuotas);
+
+        // Función para actualizar cuotas
+        function actualizarCuotas() {
+            // Obtener los valores de saldo y numeroCuotas
+            var saldo = parseFloat(saldoInput.value) || 0;
+            var numeroCuotas = parseInt(numeroCuotasInput.value) || 0;
+
+            // Verificar si ambos saldo y numeroCuotas son mayores que 0
+            if (saldo > 0 && numeroCuotas > 0) {
+                // Calcular las cuotas iniciales
+                var cuotasIniciales = Math.floor(saldo / numeroCuotas);
+
+                // Calcular las cuotas restadas
+                var cuotasInicRestadas = (saldo % numeroCuotas !== 0) ? numeroCuotas - 1 : numeroCuotas;
+
+                // Calcular la cuota final
+                var cuotaFinal = (cuotasInicRestadas > 0) ? saldo - (cuotasInicRestadas * Math.floor(saldo / numeroCuotas)) : 0;
+
+                // Actualizar los valores en los elementos correspondientes
+                cuotasInicialesInput.value = cuotasIniciales;
+                cuotasInicRestadasSpan.textContent = cuotasInicRestadas;
+                cuotaFinalInput.value = cuotaFinal;
+            } else {
+                // Si alguno de los valores es 0, establecer todo a 0
+                cuotasInicialesInput.value = 0;
+                cuotasInicRestadasSpan.textContent = 0;
+                cuotaFinalInput.value = 0;
+            }
+
+            // Mostrar u ocultar el div cuotaFinalDiv según sea necesario
+            if (cuotasInicRestadas > 0) {
+                cuotaFinalDiv.classList.remove("d-none"); // Mostrar el cuotaFinalDiv
+            } else {
+                cuotaFinalDiv.classList.add("d-none"); // Ocultar el cuotaFinalDiv
+            }
+        }
+
+        // Obtener la referencia al elemento de fechaCreacion
+        var fechaCreacionInput = document.getElementById("fechaCreacion");
+
+        // Obtener la fecha actual
+        var fechaActual = new Date();
+
+        // Obtener los componentes de la fecha actual
+        var dia = fechaActual.getDate();
+        var mes = fechaActual.getMonth() + 1; // Los meses en JavaScript van de 0 a 11
+        var anio = fechaActual.getFullYear();
+
+        // Formatear la fecha actual como una cadena en el formato "yyyy-MM-dd"
+        var fechaActualFormatted = `${anio}-${mes.toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}`;
+
+        // Establecer la fecha actual en el elemento de fechaCreacion
+        fechaCreacionInput.value = fechaActualFormatted;
+
+        // Obtener la referencia al elemento de diasVigencia
+        var diasVigenciaInput = document.getElementById("diasVigencia");
+
+        // Obtener la referencia al elemento de fechaVencimiento
+        var fechaVencimientoInput = document.getElementById("fechaVencimiento");
+
+        // Agregar un evento de cambio al elemento de fechaCreacion
+        fechaCreacionInput.addEventListener("change", actualizarFechaVencimiento);
+
+        // Agregar un evento de cambio al elemento de diasVigencia
+        diasVigenciaInput.addEventListener("change", actualizarFechaVencimiento);
+
+        // Función para actualizar la fecha de vencimiento
+        function actualizarFechaVencimiento() {
+            // Obtener los valores de fechaCreacion y diasVigencia
+            var fechaCreacion = fechaCreacionInput.value;
+            var diasVigencia = parseInt(diasVigenciaInput.value) || 0;
+
+            // Verificar si la fechaCreacion no es nula y diasVigencia es mayor o igual a 0
+            if (fechaCreacion && diasVigencia >= 0) {
+                // Convertir la fechaCreacion a un objeto de fecha
+                var fechaCreacionDate = new Date(fechaCreacion);
+
+                // Calcular la nueva fecha sumando diasVigencia a la fechaCreacion
+                var fechaVencimientoDate = new Date(fechaCreacionDate);
+                fechaVencimientoDate.setDate(fechaCreacionDate.getDate() + diasVigencia);
+
+                // Formatear la nueva fecha como una cadena en el formato "YYYY-MM-DD"
+                var fechaVencimientoFormatted = fechaVencimientoDate.toISOString().split('T')[0];
+
+                // Actualizar el valor en el elemento de fechaVencimiento
+                fechaVencimientoInput.value = fechaVencimientoFormatted;
+            } else {
+                // Si alguna de las condiciones no se cumple, establecer fechaVencimiento a null
+                fechaVencimientoInput.value = "";
+            }
+        }
+        document.getElementById("tipoCambio").addEventListener("change", function () {
+            calcularImporteSeparacionDolares();
+        });
+
+        document.getElementById("importeSeparacion").addEventListener("change", function () {
+            calcularImporteSeparacionDolares();
+        });
+
+        function calcularImporteSeparacionDolares() {
+            var importeSeparacion = parseFloat(document.getElementById("importeSeparacion").value);
+            var tipoCambio = parseFloat(document.getElementById("tipoCambio").value);
+
+            if (!isNaN(importeSeparacion) && !isNaN(tipoCambio) && tipoCambio > 1 && importeSeparacion > 0) {
+                var importeSeparacionDolares = importeSeparacion / tipoCambio;
+                document.getElementById("importeSeparacionDolares").value = importeSeparacionDolares.toFixed(2);
+            } else {
+                document.getElementById("importeSeparacionDolares").value = "0";
+            }
+        }
+    });
+</script>

@@ -1,0 +1,217 @@
+﻿@model InmobiliariaWeb.Models.Programa.ViewLadoregular
+@{
+    Layout = "_ActualizarLayout";
+}
+<form asp-action="LadoRegular" asp-controller="Programa" method="post">
+    <input type="text" asp-for="Ident_010_TipoLote" hidden/>
+    <input type="text" asp-for="Ident_012_EstadoLote" hidden/>
+    <input asp-for="Ident_Lote" hidden/>
+    <div class="card mt-3">
+        
+        <div class="card-header fw-bold">
+            @Model.NombrePrograma - @Model.LetraManzana - @Model.NumeroLote - Lados Regulares
+        </div>
+        <div class="card-body">
+            <div class="row mt-1">
+                <div class="col col-6 col-sm-6 col-md-3 col-lg-2">
+                    <label class="col-form-label">Izquierda</label>
+                </div>
+                <div class="col col-6 col-sm-6 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="Izquierda" id="Izquierda" onblur="calcularArea()" />
+                </div>
+                <div class="col col-12 col-sm-12 col-md-7 col-lg-8 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaIzquierda" />
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col col-6 col-sm-6 col-md-3 col-lg-2">
+                    Derecha
+                </div>
+                <div class="col col-6 col-sm-6 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="Derecha" id="Derecha" onblur="calcularArea()" />
+                </div>
+                <div class="col col-12 col-sm-12 col-md-7 col-lg-8 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaDerecha" />
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col col-6 col-sm-6 col-md-3 col-lg-2">
+                    Frente
+                </div>
+                <div class="col col-6 col-sm-6 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="Frente" id="Frente" onblur="calcularArea()" />
+                </div>
+                <div class="col col-12 col-sm-12 col-md-7 col-lg-8 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaFrente"/>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col col-6 col-sm-6 col-md-3 col-lg-2">
+                    Fondo
+                </div>
+                <div class="col col-6 col-sm-6 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="Fondo" id="Fondo" onblur="calcularArea()" />
+                </div>
+                <div class="col col-12 col-sm-12 col-md-7 col-lg-8 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaFondo" />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label class="col-form-label">Area Total</label>
+                </div>
+                <div class="col-4">
+            
+                    <input type="number" class="form-control" asp-for="Area" id="Area" onblur="calcularTotal()" />
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">Precio m<sup>2</sup></label>
+                </div>
+                <div class="col-4"> 
+                    <input type="number" class="form-control" asp-for="PrecioM2" id="PrecioM2" onblur="calcularTotal()" />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label class="col-form-label">$ Total</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" class="form-control" asp-for="PrecioTotal" id="PrecioTotal" readonly />
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">%</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" class="form-control" asp-for="Porcentaje" readonly />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6 my-auto py-2">
+                    <div class="form-check form-switch ">
+                        @if (Model.Ident_012_EstadoLote > 89)
+                        {
+                            <input type="checkbox" asp-for="@Model.FlagCheked" class="form-check-input" id="FlagCheked"  readonly/>
+                        }
+                        else
+                        {
+                            <input type="checkbox" asp-for="@Model.FlagCheked" class="form-check-input" id="FlagCheked" />
+                        }
+                        <label for="Ident_012_EstadoLote">Verificado</label>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">Ubicación:</label>
+                </div>
+                <div class="col-4">
+                    <select class="form-select" id="tipoPropietario" asp-for="@Model.Ident_014_UbicacionLote" aria-label="Ubicación Lote">
+                        <option></option>
+                        @foreach (var tipoUbicacionLote in Model.TipoUbicacionLotes)
+                        {
+                            <option value="@tipoUbicacionLote.Ident_014_TipoUbicacionLote">@tipoUbicacionLote.Descripcion</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="form-check form-switch">
+                        <input type="checkbox" asp-for="@Model.Flag_ReservadoPropietarpio" class="form-check-input" id="FlagReservado"/>
+                        <label for="FlagReservado">Reservado por Propietario</label>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="card-footer">
+            <div class="col-4">
+                <button type="submit" class="btn btn-outline-success">Registrar Lote <i class="bi bi-floppy"></i></button>
+                <a asp-action="Lote" asp-controller="Programa" class="btn btn-outline-secondary">
+                    Regresar <i class="bi bi-skip-backward-fill"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+    //$(document).ready(function () {
+    //    $('#CalcularArea').click(function () {
+    //        // Obtener los valores de Frente y Fondo
+    //        var frente = parseFloat($('#Frente').val()) || 0;
+    //        var fondo = parseFloat($('#Fondo').val()) || 0;
+
+    //        // Obtener los valores de Izquierda y Derecha
+    //        var izquierda = parseFloat($('#Izquierda').val()) || 0;
+    //        var derecha = parseFloat($('#Derecha').val()) || 0;
+
+    //        // Realizar las validaciones
+    //        if (frente === fondo && izquierda === derecha) {
+    //            // Calcular el área si las validaciones son correctas
+    //            var area = frente * izquierda;
+    //            // Mostrar el resultado en el campo de entrada de área
+    //            $('#Area').val(area);
+    //        } else {
+    //            // Si las validaciones no son correctas, colocar 0 en el campo de entrada de área
+    //            $('#Area').val(0);
+    //        }
+    //    });
+    //});
+    function calcularArea()
+    {
+        // Obtener los valores de Frente y Fondo
+        var frente = parseFloat($('#Frente').val()) || 0;
+        var fondo = parseFloat($('#Fondo').val()) || 0;
+
+        // Obtener los valores de Izquierda y Derecha
+        var izquierda = parseFloat($('#Izquierda').val()) || 0;
+        var derecha = parseFloat($('#Derecha').val()) || 0;
+
+        // Realizar las validaciones
+        if (frente === fondo && izquierda === derecha) {
+            // Calcular el área si las validaciones son correctas
+            var area = frente * izquierda;
+            // Mostrar el resultado en el campo de entrada de área
+            $('#Area').val(area);
+        } else {
+            // Si las validaciones no son correctas, colocar 0 en el campo de entrada de área
+            $('#Area').val(0);
+        }
+    };
+    function calcularTotal() {
+        var areaTotal = parseFloat($('#Area').val()) || 0;
+        var precio = parseFloat($('#PrecioM2').val()) || 0;
+
+        if (areaTotal > 0 && precio > 0) {
+            var costo = Math.round(areaTotal * precio); // Redondear el resultado a un entero
+            $('#PrecioTotal').val(costo);
+        }
+        else {
+            $('#PrecioTotal').val(0);
+        }
+    };
+</script>

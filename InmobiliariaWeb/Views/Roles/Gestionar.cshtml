@@ -1,0 +1,85 @@
+﻿@model InmobiliariaWeb.Models.Roles.ViewGestionar
+@{
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>@Model.NombreRol</h2>
+        </div>
+    </div>
+    <div class="table-responsive-md">
+        <table class="table table-hover mt-3">
+            <thead>
+                <tr>
+                    <th>Módulo</th>
+                    <th>Página</th>
+                    <th>Acceso</th>
+                    <th>Leer</th>
+                    <th>Modificar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.PaginasLists != null && Model.PaginasLists.Any())
+                {
+                    @foreach (var paginas in Model.PaginasLists)
+                    {
+                        <tr>
+                            <td>@paginas.Modulo</td>
+                            <td>@paginas.Pagina</td>
+                            <td>
+                                <input type="checkbox" asp-for="@paginas.Flag_Visualizar" class="form-check">
+                            </td>
+                            <td>
+                                <input type="checkbox" asp-for="@paginas.Flag_Lectura" class="form-check">
+                            </td>
+                            <td>
+                                <input type="checkbox" asp-for="@paginas.Flag_Escritura" class="form-check">
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+        <div class="row mt-2">
+            <button class="btn btn-outline-primary">
+                Actualizar
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <a class="btn btn-outline-success" asp-action="Index" asp-controller="Roles">
+            Regresar
+        </a>
+    </div>
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+</script>

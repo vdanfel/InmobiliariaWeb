@@ -1,0 +1,299 @@
+﻿@model InmobiliariaWeb.Models.Separaciones.ActualizarViewModel
+@{
+    Layout = "_ActualizarLayout";
+}
+<form method="post" asp-action="Anular" asp-controller="Separaciones">
+    <input type="text" asp-for="@Model.Ident_Separacion" hidden />
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Separacion N° @Model.Numero_Separacion</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="date" id="fechaCreacion" asp-for="@Model.FechaSeparacion" readonly />
+                            <label for="fechaCreacion">Fecha Creación</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" asp-for="@Model.Nombre_Programa" value="@Model.Nombre_Programa" readonly />
+                            <label for="programas">Nombre Programa</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" asp-for="@Model.Manzana" value="@Model.Manzana" readonly />
+                            <label for="manzana">Mz</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" asp-for="@Model.Lote" value="@Model.Lote" readonly />
+                            <label for="lote">Lt</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="area" asp-for="@Model.Area" readonly />
+                            <label for="area">Area</label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="ubicacion" asp-for="@Model.Ubicacion" readonly />
+                            <label for="ubicacion">Ubicación</label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="precioM2" asp-for="@Model.PrecioM2" readonly />
+                            <label for="precioM2">$ M<sup>2</sup></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="precioTotal" asp-for="@Model.PrecioTotal" readonly />
+                            <label for="precioTotal">$ Total</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-1">
+                    <div class="card-body">
+                        <div id="regular">
+                            <div class="row wor-cols-4 g-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Izquierda" readonly />
+                                        <label for="izquierda">Izq.</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Derecha" readonly />
+                                        <label for="derecha">Der.</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Frente" readonly />
+                                        <label for="frente">Fre.</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Fondo" readonly />
+                                        <label for="fondo">Fon.</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="especial">
+                            <div class="row row-cols-5 mt-1 g-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado1" readonly />
+                                        <label for="l1">L1</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado1" readonly />
+                                        <label for="l2">L2</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado3" readonly />
+                                        <label for="l3">L3</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado4" readonly />
+                                        <label for="l4">L4</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado5" readonly />
+                                        <label for="l5">L5</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-cols-5 mt-1 g-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado6" readonly />
+                                        <label for="l6">L6</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado7" readonly />
+                                        <label for="l7">L7</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado8" readonly />
+                                        <label for="l8">L8</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado9" readonly />
+                                        <label for="l9">L9</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado10" readonly />
+                                        <label for="l10">L10</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="tratadoEn" placeholder="0" asp-for="@Model.TratadoEn" readonly />
+                            <label for="tratadoEn">Tratado En</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="cuotaInicial" placeholder="0" asp-for="@Model.CuotaInicial" readonly/>
+                            <label for="cuotaInicial">Cuota Inicial</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="saldo" placeholder="0" readonly asp-for="@Model.SaldoAPagar" readonly />
+                            <label for="saldo">Saldo</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="numeroCuotas" placeholder="0" asp-for="@Model.CantidadCuotas" readonly />
+                            <label for="numeroCuotas"># Cuotas</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="cuotasIniciales" placeholder="0" readonly asp-for="@Model.CuotasIniciales" readonly />
+                            <label for="cuotasIniciales"><span id="cuotasInicRestadas">X</span> Cuotas de</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating" id="cuotaFinalDiv">
+                            <input type="text" class="form-control" id="cuotaFinal" placeholder="0" readonly asp-for="@Model.CuotaFinal" readonly/>
+                            <label for="cuotaFinal">Cuota Final</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="diasVigencia" placeholder="0" asp-for="@Model.DiasSeparacion" readonly />
+                            <label for="diasVigencia">Días Vigencia</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="fechaVencimiento" placeholder="0" asp-for="@Model.FechaVencimiento" readonly />
+                            <label for="fechaVencimiento">Vencimiento</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" id="importeSeparacion" class="form-control" placeholder="0" asp-for="@Model.ImporteSeparacion" readonly />
+                            <label for="importeSeparacion">Importe Separacion</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" id="tipoCambio" class="form-control" id="tipoCambio" placeholder="0" asp-for="@Model.TipoCambio" readonly />
+                            <label for="tipoCambio">T.C.</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="importeSeparacionDolares" placeholder="0" readonly />
+                            <label for="importeSeparacionDolares">$ Separacion</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="observacion" placeholder="0" asp-for="@Model.Observacion" readonly />
+                            <label for="observacion">Observacion</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="observacion" placeholder="0" asp-for="@Model.MotivoActualizacion" readonly/>
+                            <label for="observacion">Motivo Actualización</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="table-responsive-md">
+                        <table class="table table-hover" id="clientes">
+                            <thead class="table-dark">
+                                <tr class="text-center">
+                                    <th>N°</th>
+                                    <th>T. Doc</th>
+                                    <th>N° Doc</th>
+                                    <th>Apellidos y Nombres</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var clientes in ViewBag.Clientes)
+                                {
+                                    <tr>
+                                        <td class="text-center">@clientes.Indice</td>
+                                        <td>@clientes.TipoDocumento</td>
+                                        <td class="text-center">@clientes.NumeroDocumento</td>
+                                        <td class="text-center">@clientes.Nombre_Completo</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="observacion" placeholder="0" asp-for="@Model.MotivoAnulacion" />
+                            <label for="observacion">Motivo Anulación</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-danger mt-2">
+                    Anular
+                </button>
+            </div>
+        </div>
+        <a class="btn btn-outline-info mt-2" asp-action="Index" asp-controller="Separaciones">
+            Regresar
+        </a>
+    </div>
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

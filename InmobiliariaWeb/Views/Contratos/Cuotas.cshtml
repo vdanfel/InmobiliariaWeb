@@ -1,0 +1,398 @@
+﻿@model InmobiliariaWeb.Models.Contratos.Cuotas
+@{
+    Layout = "_ContratosLayout";
+}
+<form method="post" asp-action="Cuotas" asp-controller="Contratos">
+    <input hidden type="text" asp-for="@Model.Ident_Cuotas"/>
+    <input hidden type="text" asp-for="@Model.Ident_Kardex" />
+    <div class="container">
+        <div class="card">
+            <div class="card-header fw-bold">
+                <h2>@ViewBag.NumeroSerie - Cuota</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="Correlativo" asp-for="@Model.Correlativo" readonly />
+                            <label for="Correlativo">Cuota</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-floating">
+                            <input class="form-control" type="date" id="FechaPago" asp-for="@Model.FechaPago" readonly />
+                            <label for="FechaPago">Fecha Pago</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="ImporteCuota" asp-for="@Model.ImporteCuota" readonly />
+                            <label for="ImporteCuota">Importe a Pagar</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-1 g-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <select id="Ident_018_TipoPago" class="form-select" asp-for="@Model.Ident_018_TipoPago" onchange="ObtenerTipoPago(this.value)">
+                                <option>--SELECCIONE--</option>
+                                @foreach (var tipoPago in Model.TipoPagos)
+                                {
+                                    <option value="@tipoPago.Ident_018_TipoPago">@tipoPago.Descripcion</option>
+                                }
+                            </select>
+                            <label for="Ident_018_TipoPago">Tipo de Pago</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <select id="Ident_002_TipoMoneda" class="form-select" asp-for="@Model.Ident_002_TipoMoneda" onchange="ValidarTipoCambio(this)">
+                                <option>--SELECCIONE--</option>
+                                @foreach (var moneda in Model.TipoMonedas)
+                                {
+                                    <option value="@moneda.Ident_002_TipoMoneda">@moneda.Abreviatura</option>
+                                }
+                            </select>
+                            <label for="Ident_002_TipoMoneda">Moneda</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <select id="Ident_019_Banco" class="form-select" asp-for="@Model.Ident_019_Banco" onchange="ObtenerCuentasBancarias(this.value)">
+                                <option>--SELECCIONE--</option>
+                                @foreach (var banco in Model.Bancos)
+                                {
+                                    <option value="@banco.Ident_019_Banco">@banco.Abreviatura</option>
+                                }
+                            </select>
+                            <label for="Ident_019_Banco">Banco</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <select id="Ident_CuentasBancarias" class="form-select" asp-for="@Model.Ident_CuentasBancarias" onchange="SeleccionarMoneda(this)">
+                                <option>--SELECCIONE--</option>
+
+                            </select>
+                            <label for="Ident_CuentasBancarias">N° Cuenta</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="TipoCambio" asp-for="@Model.TipoCambio" />
+                            <label for="TipoCambio">T.C.</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="NumeroOperacion" asp-for="@Model.NumeroOperacion" />
+                            <label for="NumeroOperacion">Número Operación</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="ImporteCuotasDolares" asp-for="@Model.ImporteCuotasDolares" onblur="ObtenerImporteCuota()" />
+                            <label for="ImporteCuotasDolares">Importe Dolares</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="ImporteCuotaPagado" asp-for="@Model.ImporteCuotaPagado" readonly />
+                            <label for="ImporteCuotaPagado">Importe Pagado</label>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="FechaPagoRealizado" asp-for="@Model.FechaPagoRealizado" required/>
+                            <label for="FechaPagoRealizado">Fecha Pago Realizado</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-outline-success" id="btnAgregar" disabled>
+                            AGREGAR <i class="bi bi-database-fill-add"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive-md mt-2">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Tipo Pago</th>
+                                <th>Importe</th>
+                                <th>Numero Operacion</th>
+                                <th>banco</th>
+                                <th style="min-height:200px;">Numero Cuenta</th>
+                                <th>Moneda</th>
+                                <th>T.C.</th>
+                                <th>Fecha</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var ingresosDetalle in Model.ingresosDetallesLists)
+                            {
+                                <tr>
+                                    <td>@ingresosDetalle.Indice</td>
+                                    <td>@ingresosDetalle.TipoPago</td>
+                                    <td>@ingresosDetalle.Importe</td>
+                                    <td>@ingresosDetalle.NumeroOperacion</td>
+                                    <td>@ingresosDetalle.Banco</td>
+                                    <td>@ingresosDetalle.NumeroCuenta</td>
+                                    <td>@ingresosDetalle.Moneda</td>
+                                    <td>@ingresosDetalle.TipoCambio</td>
+                                    <td>@(ingresosDetalle.Fecha.HasValue ? ingresosDetalle.Fecha.Value.ToString("dd/MM/yyyy") : "")</td>
+                                    <td></td>
+                                    <td>
+                                        <a class="btn btn-outline-danger"
+                                           onclick="mostrarModalEliminar('@Url.Action("Eliminar_IngresosDetalle_Cuota","Contratos", new{Ident_IngresosDetalle = ingresosDetalle.Ident_IngresosDetalle})')">
+                                            <i class="bi-trash3"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row g-2 row-cols-lg-3 row-cols-md-2 row-cols-2 mt-1">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" asp-for="@Model.ImporteTotalPagado" readonly/>
+                            <label>Total Pagado</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="saldo" readonly asp-for="@Model.SaldoAPagar"/>
+                            <label>Saldo</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Observacion" style="height:5em" id="Observacion" asp-for="@Model.Observacion">
+                            </textarea>
+                            <label for="Observacion">Observacion</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-grid gap-2 d-flex mt-1">
+                    <a class="btn btn-outline-secondary" asp-action="Kardex" asp-controller="Contratos">
+                        REGRESAR <i class="bi bi-skip-backward-fill"></i>
+                    </a>
+                    <a class="btn btn-outline-danger">
+                        ANULAR <i class="bi bi-x-octagon-fill"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- Modal de confirmación para eliminar propietario -->
+<div class="modal fade" id="modalEliminarDetalle" tabindex="-1" role="dialog" aria-labelledby="modalEliminarPropietarioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                ¿Estás seguro que deseas eliminar este registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @ViewBag.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var mensajeError = '@ViewBag.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+    let cuentasBancariasData = {}; // Almacenar datos de las cuentas bancarias
+
+    function ObtenerCuentasBancarias(Ident_019_Banco) {
+        $.get(`/Caja/GetCuentasBancarias?Ident_019_Banco=${Ident_019_Banco}`, function (data) {
+            // Limpiar la selección del tipo de moneda
+            $("#Ident_002_TipoMoneda").val(""); // Reinicia a "--SELECCIONE--"
+
+            // Limpiar las cuentas bancarias
+            cuentasBancariasData = {};
+            $("#Ident_CuentasBancarias").empty();
+            $("#Ident_CuentasBancarias").append('<option value="">--SELECCIONE--</option>');
+
+            // Agregar las cuentas bancarias al select
+            $.each(data, function (index, item) {
+                $("#Ident_CuentasBancarias").append(
+                    `<option value="${item.ident_CuentasBancarias}">${item.detalleCuenta}</option>`
+                );
+                cuentasBancariasData[item.ident_CuentasBancarias] = item.ident_002_TipoMoneda;
+            });
+        });
+    }
+
+
+    function SeleccionarMoneda(selectElement) {
+        const cuentaSeleccionada = selectElement.value;
+
+        // Buscar el identificador de la moneda asociada
+        const monedaSeleccionada = cuentasBancariasData[cuentaSeleccionada];
+
+        // Seleccionar la moneda en el select de tipo de moneda
+        if (monedaSeleccionada) {
+            $("#Ident_002_TipoMoneda").val(monedaSeleccionada);
+        } else {
+            $("#Ident_002_TipoMoneda").val(""); // Limpiar selección si no hay moneda asociada
+        }
+
+        // Llamar a la función ValidarTipoCambio para realizar la validación después de cambiar la moneda
+        ValidarTipoCambio(document.getElementById("Ident_002_TipoMoneda"));
+    }
+
+    function mostrarModalEliminar(url) {
+        $('#modalEliminarDetalle').modal('show');
+        $('#btnConfirmarEliminar').off('click').on('click', function () {
+            window.location.href = url;
+        });
+    }
+
+    function ObtenerTipoPago(tipoPagoId) {
+        // Verificamos si el tipo de pago es "EFECTIVO"
+        var efectivoOption = 115; // Asegúrate que este valor es el que corresponde a "EFECTIVO"
+        // Si se selecciona "EFECTIVO"
+        if (tipoPagoId == efectivoOption) {
+            // Deshabilitar los campos de banco y cuenta
+            document.getElementById('Ident_019_Banco').disabled = true;
+            document.getElementById('Ident_CuentasBancarias').disabled = true;
+            document.getElementById('NumeroOperacion').disabled = true;
+
+            // Establecer la opción por defecto "--SELECCIONE--" en los select deshabilitados
+            document.getElementById('Ident_019_Banco').selectedIndex = 0;
+            document.getElementById('Ident_CuentasBancarias').selectedIndex = 0;
+            $("#NumeroOperacion").val("");
+
+        } else {
+            // Si no es "EFECTIVO", habilitar los campos de banco y cuenta
+            document.getElementById('Ident_019_Banco').disabled = false;
+            document.getElementById('Ident_CuentasBancarias').disabled = false;
+            document.getElementById('NumeroOperacion').disabled = false;
+        }
+    }
+    function ValidarTipoCambio(selectElement) {
+        var tipoMonedaSeleccionada = selectElement.value;
+        var tipoCambioInput = document.getElementById("TipoCambio");
+        var importeCuotasDolares = document.getElementById("ImporteCuotasDolares").value;
+
+        // Si el valor seleccionado es vacío (no se seleccionó nada), no hacer nada
+        if (tipoMonedaSeleccionada === "") {
+            return;
+        }
+
+        // Si la opción seleccionada es 23, asigna 1 al Tipo de Cambio
+        if (tipoMonedaSeleccionada === "23") {
+            tipoCambioInput.value = "1";
+        }
+        // Si la opción seleccionada es 24, solo valida el Tipo de Cambio
+        else if (tipoMonedaSeleccionada === "24") {
+            // Si el Tipo de Cambio es menor o igual a 1, muestra una alerta
+            if (parseFloat(tipoCambioInput.value) <= 1) {
+                alert("Debe ingresar un tipo de cambio mayor a 1.");
+                tipoCambioInput.focus();  // Coloca el foco en el campo de tipo de cambio
+            }
+        }
+    }
+    function ObtenerImporteCuota() {
+        var importeDolares = document.getElementById('ImporteCuotasDolares').value;
+        var tipoCambio = document.getElementById('TipoCambio').value;
+        var tipoMoneda = document.getElementById('Ident_002_TipoMoneda').value;
+
+        // Validar que haya una moneda seleccionada
+        if (tipoMoneda === "--SELECCIONE--" || tipoMoneda === "") {
+            alert("Por favor, seleccione un tipo de moneda.");
+            return; // Detener la ejecución si no hay moneda seleccionada
+        }
+
+        // Validar las condiciones del tipo de cambio según la moneda seleccionada
+        if (tipoMoneda === "24") {  // Soles
+            if (parseFloat(tipoCambio) <= 1) {
+                alert("El tipo de cambio para Soles debe ser mayor a 1.");
+                document.getElementById('TipoCambio').focus(); // Coloca el foco en el campo de tipo de cambio
+                return; // Detener la ejecución si el tipo de cambio no es válido
+            }
+        } else if (tipoMoneda === "23") {  // Dólares
+            if (parseFloat(tipoCambio) !== 1) {
+                alert("El tipo de cambio para Dólares debe ser igual a 1.");
+                document.getElementById('TipoCambio').focus(); // Coloca el foco en el campo de tipo de cambio
+                return; // Detener la ejecución si el tipo de cambio no es válido
+            }
+        }
+
+        // Realizar el cálculo solo si las validaciones pasaron
+        var importeCuotaPagado = parseFloat(importeDolares) * parseFloat(tipoCambio);
+
+        // Si el tipo de moneda es Soles (24), redondeamos a 1 decimal
+        if (tipoMoneda === "24") {
+            importeCuotaPagado = Math.round(importeCuotaPagado * 10) / 10;
+        }
+
+        // Asignar el valor redondeado (si es Soles) o el valor normal (si es Dólares) al campo ImporteCuotaPagado
+        $('#ImporteCuotaPagado').val(importeCuotaPagado.toFixed(2)); // Mostrar con 1 decimal
+    }
+
+
+    // Función para verificar el valor de los campos antes de habilitar o deshabilitar el botón
+    function validarImporte() {
+        var importeCuotasDolares = parseFloat(document.getElementById("ImporteCuotasDolares").value);
+        var saldoAPagar = parseFloat(document.getElementById("saldo").value);
+        var botonAgregar = document.getElementById("btnAgregar");
+
+        // Validación: Si el ImporteCuotasDolares es mayor que el SaldoAPagar
+        if (importeCuotasDolares > saldoAPagar) {
+            alert("El importe de las cuotas no puede ser mayor que el saldo a pagar.");
+            botonAgregar.disabled = true; // Deshabilitar el botón
+        } else {
+            botonAgregar.disabled = false; // Habilitar el botón
+        }
+    }
+
+    // Llamar a la validación cada vez que se pierda el foco en el campo de ImporteCuotasDolares
+    document.getElementById("ImporteCuotasDolares").addEventListener("blur", validarImporte);
+
+    // También, se puede llamar a la validación cuando se cambie el valor del saldo para comprobar si ya está dentro del límite
+    document.getElementById("saldo").addEventListener("input", validarImporte);
+</script>

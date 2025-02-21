@@ -1,0 +1,269 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = InmobiliariaWeb
+build_property.RootNamespace = InmobiliariaWeb
+build_property.ProjectDir = E:\WebInmobiliaria2025\InmobiliariaWeb\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = E:\WebInmobiliaria2025\InmobiliariaWeb
+build_property._RazorSourceGeneratorDebug = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Adendas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRlbmRhc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Caja/EgresosIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYVxFZ3Jlc29zSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Caja/IngresosIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FqYVxJbmdyZXNvc0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/CartaNotarial/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydGFOb3RhcmlhbFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/Actualizar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXEFjdHVhbGl6YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/Anular.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXEFudWxhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/Cliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXENsaWVudGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXENyZWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/Cuotas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXEN1b3Rhcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/CuotasMasivo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXEN1b3Rhc01hc2l2by5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/ImpresionFormato.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXEltcHJlc2lvbkZvcm1hdG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/Kardex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXEthcmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/Moras.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXE1vcmFzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/MorasMasivo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXE1vcmFzTWFzaXZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/Transferencias.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXFRyYW5zZmVyZW5jaWFzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/TransferenciasContado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXFRyYW5zZmVyZW5jaWFzQ29udGFkby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/Ventas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXFZlbnRhcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/VentasContado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXFZlbnRhc0NvbnRhZG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Contratos/_ContratosLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXF9Db250cmF0b3NMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/DashBoard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaEJvYXJkXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Impresiones/Contratos/SanMateo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1wcmVzaW9uZXNcQ29udHJhdG9zXFNhbk1hdGVvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Impresiones/Contratos/VillaLasFlores.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1wcmVzaW9uZXNcQ29udHJhdG9zXFZpbGxhTGFzRmxvcmVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Login/Alerta.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cQWxlcnRhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Login/TipoCambio.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cVGlwb0NhbWJpby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Notificaciones/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm90aWZpY2FjaW9uZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Persona/Actualizar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYVxBY3R1YWxpemFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Persona/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYVxDcmVhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Persona/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/Actualizar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcQWN0dWFsaXphci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcQ3JlYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/LadoEspecial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcTGFkb0VzcGVjaWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/LadoRegular.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcTGFkb1JlZ3VsYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/Lote.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcTG90ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/Manzana.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcTWFuemFuYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/ProgramaActualizar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcUHJvZ3JhbWFBY3R1YWxpemFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/Propietario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcUHJvcGlldGFyaW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/ReporteLotes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcUmVwb3J0ZUxvdGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Programa/_ActualizarLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcX0FjdHVhbGl6YXJMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Reportes/ReporteCliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZXNcUmVwb3J0ZUNsaWVudGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Reportes/ReporteNotificaciones.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZXNcUmVwb3J0ZU5vdGlmaWNhY2lvbmVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Roles/Gestionar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZXNcR2VzdGlvbmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Roles/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Separaciones/Actualizar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VwYXJhY2lvbmVzXEFjdHVhbGl6YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Separaciones/Anular.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VwYXJhY2lvbmVzXEFudWxhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Separaciones/Cliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VwYXJhY2lvbmVzXENsaWVudGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Separaciones/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VwYXJhY2lvbmVzXENyZWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Separaciones/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VwYXJhY2lvbmVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Separaciones/_ActualizarLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VwYXJhY2lvbmVzXF9BY3R1YWxpemFyTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Shared/_LinkReferencia.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MaW5rUmVmZXJlbmNpYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Usuario/Actualizar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xBY3R1YWxpemFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Usuario/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Usuario/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-i4r7iqdh97
+
+[E:/WebInmobiliaria2025/InmobiliariaWeb/Views/Shared/_LayoutLimpio.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRMaW1waW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-zro252e94h

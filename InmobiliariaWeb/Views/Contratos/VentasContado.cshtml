@@ -1,0 +1,238 @@
+﻿@model InmobiliariaWeb.Models.Contratos.VentasContado
+@{
+
+}
+<form method="post" asp-controller="Contratos" asp-action="VentasContado">
+    <input hidden asp-for="@Model.Ident_Contrato" id="Ident_Contrato" />
+    <div class="container">
+        <div class="row mt-1">
+            <h3>Título</h3>
+            <input type="text" asp-for="@Model.Titulo" class="form-control" id="Titulo" />
+        </div>
+        <input hidden id="ParrafoInicial_Hidden" asp-for="@Model.ParrafoInicial" />
+        <div id="ParrafoInicial_Content" class="mt-3">
+            <h3>Párrafo Inicial</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('ParrafoInicial_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('ParrafoInicial_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('ParrafoInicial_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="ParrafoInicial" onblur="saveContent('ParrafoInicial')">
+                    @Html.Raw(Model.ParrafoInicial)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula1_Hidden" asp-for="@Model.Clausula1" />
+        <div id="Clausula1_Content" class="mt-3">
+            <h3>Cláusula 1</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula1" onblur="saveContent('Clausula1')">
+                    @Html.Raw(Model.Clausula1)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula2_Hidden" asp-for="@Model.Clausula2" />
+        <div id="Clausula2_Content" class="mt-3">
+            <h3>Cláusula 2</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula2_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula2_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula2_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula2" onblur="saveContent('Clausula2')">
+                    @Html.Raw(Model.Clausula2)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula3I_Hidden" asp-for="@Model.Clausula3I" />
+        <div id="Clausula3I_Content" class="mt-3">
+            <h3>Cláusula 3</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula3I_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula3I_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula3I_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula3I" onblur="saveContent('Clausula3I')">
+                    @Html.Raw(Model.Clausula3I)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <input type="text" class="form-control" asp-for="@Model.TextoFrente" />
+            <input type="text" class="form-control" asp-for="@Model.TextoDerecha" />
+            <input type="text" class="form-control" asp-for="@Model.TextoIzquierda" />
+            <input type="text" class="form-control" asp-for="@Model.TextoFondo" />
+        </div>
+        <input hidden id="Clausula3F_Hidden" asp-for="@Model.Clausula3F" />
+        <div id="Clausula3F_Content" class="mt-3">
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula3F_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula3F_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula3F_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula3F" onblur="saveContent('Clausula3F')">
+                    @Html.Raw(Model.Clausula3F)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula4_Hidden" asp-for="@Model.Clausula4" />
+        <div id="Clausula4_Content" class="mt-3">
+            <h3>Cláusula 4</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula4_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula4_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula4_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula4" onblur="saveContent('Clausula4')">
+                    @Html.Raw(Model.Clausula4)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula5_Hidden" asp-for="@Model.Clausula5" />
+        <div id="Clausula5_Content" class="mt-3">
+            <h3>Cláusula 5</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula5_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula5_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula5_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula5" onblur="saveContent('Clausula5')">
+                    @Html.Raw(Model.Clausula5)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula6_Hidden" asp-for="@Model.Clausula6" />
+        <div id="Clausula6_Content" class="mt-3">
+            <h3>Cláusula 6</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula6_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula6_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula6_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula6" onblur="saveContent('Clausula6')">
+                    @Html.Raw(Model.Clausula6)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula7_Hidden" asp-for="@Model.Clausula7" />
+        <div id="Clausula7_Content" class="mt-3">
+            <h3>Cláusula 7</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula7_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula7_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula7_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula7" onblur="saveContent('Clausula7')">
+                    @Html.Raw(Model.Clausula7)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula8_Hidden" asp-for="@Model.Clausula8" />
+        <div id="Clausula8_Content" class="mt-3">
+            <h3>Cláusula 8</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula8_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula8_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula8_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula8" onblur="saveContent('Clausula8')">
+                    @Html.Raw(Model.Clausula8)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula9_Hidden" asp-for="@Model.Clausula9" />
+        <div id="Clausula9_Content" class="mt-3">
+            <h3>Cláusula 9</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula9_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula9_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula9_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula9" onblur="saveContent('Clausula9')">
+                    @Html.Raw(Model.Clausula9)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula10_Hidden" asp-for="@Model.Clausula10" />
+        <div id="Clausula10_Content" class="mt-3">
+            <h3>Cláusula 10</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula10_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula10_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula10_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula10" onblur="saveContent('Clausula10')">
+                    @Html.Raw(Model.Clausula10)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula11_Hidden" asp-for="@Model.Clausula11" />
+        <div id="Clausula11_Content" class="mt-3">
+            <h3>Cláusula 11</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula11_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula11_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula11_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula11" onblur="saveContent('Clausula11')">
+                    @Html.Raw(Model.Clausula11)
+                </div>
+            </div>
+        </div>
+        <input hidden id="FechaContrato_Hidden" asp-for="@Model.FechaContrato" />
+        <div id="FechaContrato_Content" class="mt-1">
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('FechaContrato_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('FechaContrato_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('FechaContrato_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="FechaContrato" onblur="saveContent('FechaContrato')">
+                    @Html.Raw(Model.FechaContrato)
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-outline-success">Imprimir</button>
+        </div>
+    </div>
+</form>
+<script>
+    function aplicarEstilo(containerId, style) {
+        // Buscar el editor dentro del contenedor especificado
+        var editorId = containerId.split('_')[0];
+        var editor = document.getElementById(editorId);
+        if (editor) {
+            editor.focus();
+            document.execCommand(style, false, null);
+        }
+    }
+
+    function saveContent(containerId) {
+        var editor = document.getElementById(containerId);
+        if (editor) {
+            var editorContent = editor.innerHTML;
+            var hiddenInput = document.getElementById(containerId + "_Hidden");
+            if (hiddenInput) {
+                hiddenInput.value = editorContent;
+            }
+        }
+    }
+</script>

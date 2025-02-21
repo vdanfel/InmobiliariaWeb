@@ -1,0 +1,301 @@
+﻿@model InmobiliariaWeb.Models.Contratos.AnularViewModel
+
+@{
+}
+
+<form asp-controller="Contratos" asp-action="Anular" method="post">
+    <input type="text" asp-for="@Model.Actualizar.ContratosModels.Ident_Contratos" hidden/>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Contrato @Model.Actualizar.NumeroSerie</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="date" id="fechaCreacion" asp-for="@Model.Actualizar.ContratosModels.FechaContrato" readonly />
+                            <label for="fechaCreacion">Fecha Creación</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="numeroSeparacion" asp-for="@Model.Actualizar.NumeroSeparacion" readonly />
+                            <label for="numeroSeparacion">N° Separacion</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="nombrPrograma" asp-for="@Model.Actualizar.ProgramaModels.Nombre" readonly />
+                            <label for="nombrPrograma">Nombre Programa</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="manzana" asp-for="@Model.Actualizar.Manzana" readonly />
+                            <label for="manzana">Mz</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="lote" asp-for="@Model.Actualizar.Lote" readonly />
+                            <label for="lote">Lt</label>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="area" asp-for="@Model.Actualizar.Area" readonly />
+                                <label for="area">Area</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="ubicacion" asp-for="@Model.Actualizar.Ubicacion" readonly />
+                                <label for="ubicacion">Ubicación</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="precioM2" asp-for="@Model.Actualizar.PrecioM2" readonly />
+                                <label for="precioM2">$ M<sup>2</sup></label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="precioTotal" asp-for="@Model.Actualizar.PrecioTotal" readonly />
+                                <label for="precioTotal">$ Total</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <div id="regular">
+                                <div class="row wor-cols-4 g-2">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="izquierda" asp-for="@Model.Actualizar.Izquierda" readonly />
+                                            <label for="izquierda">Izq.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="derecha" asp-for="@Model.Actualizar.Derecha" readonly />
+                                            <label for="derecha">Der.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="frente" asp-for="@Model.Actualizar.Frente" readonly />
+                                            <label for="frente">Fre.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="fondo" asp-for="@Model.Actualizar.Fondo" readonly />
+                                            <label for="fondo">Fon.</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="especial">
+                                <div class="row row-cols-5 mt-1 g-2">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l1" asp-for="@Model.Actualizar.L1" readonly />
+                                            <label for="l1">L1</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l2" asp-for="@Model.Actualizar.L2" readonly />
+                                            <label for="l2">L2</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l3" asp-for="@Model.Actualizar.L3" readonly />
+                                            <label for="l3">L3</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l4" asp-for="@Model.Actualizar.L4" readonly />
+                                            <label for="l4">L4</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l5" asp-for="@Model.Actualizar.L5" readonly />
+                                            <label for="l5">L5</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-cols-5 mt-1 g-2">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l6" asp-for="@Model.Actualizar.L6" readonly />
+                                            <label for="l6">L6</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l7" asp-for="@Model.Actualizar.L7" readonly />
+                                            <label for="l7">L7</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l8" asp-for="@Model.Actualizar.L8" readonly />
+                                            <label for="l8">L8</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l9" asp-for="@Model.Actualizar.L9" readonly />
+                                            <label for="l9">L9</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l10" asp-for="@Model.Actualizar.L10" readonly />
+                                            <label for="l10">L10</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="tratadoEn" placeholder="0" asp-for="@Model.Actualizar.ContratosModels.TratadoEn" readonly />
+                                <label for="tratadoEn">Tratado En</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="cuotaInicial" placeholder="0" asp-for="@Model.Actualizar.ContratosModels.CuotaInicial" readonly />
+                                <label for="cuotaInicial">Cuota Inicial</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="saldo" placeholder="0" asp-for="@Model.Actualizar.ContratosModels.SaldoAPagar" readonly />
+                                <label for="saldo">Saldo</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="numeroCuotas" placeholder="0" asp-for="@Model.Actualizar.ContratosModels.CantidadCuotas" readonly />
+                                <label for="numeroCuotas"># Cuotas</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="cuotasIniciales" placeholder="0" asp-for="@Model.Actualizar.ContratosModels.CuotasIniciales" readonly />
+                                <label for="cuotasIniciales"><span id="cuotasInicRestadas">X</span> Cuotas de</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating" id="cuotaFinalDiv">
+                                <input type="text" class="form-control" id="cuotaFinal" placeholder="0" asp-for="@Model.Actualizar.ContratosModels.CuotaFinal" readonly />
+                                <label for="cuotaFinal">Cuota Final</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" id="fechaCuptaInicial" placeholder="0" asp-for="@Model.Actualizar.ContratosModels.FechaCuotaInicial" readonly />
+                                <label for="fechaCuptaInicial">Fecha 1era Cuota</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="observacion" asp-for="@Model.Actualizar.ContratosModels.Observacion" readonly />
+                                <label for="observacion">Observacion</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="table-responsive-md">
+                            <table class="table table-hover" id="clientes" readonly>
+                                <thead class="table-dark">
+                                    <tr class="text-center">
+                                        <th>N°</th>
+                                        <th>T. Doc</th>
+                                        <th>N° Doc</th>
+                                        <th>Apellidos y Nombres</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var clientes in Model.Clientes)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@clientes.Indice</td>
+                                            <td>@clientes.TipoDocumento</td>
+                                            <td class="text-center">@clientes.NumeroDocumento</td>
+                                            <td class="text-center">@clientes.Nombre_Completo</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="form-floating">
+                            <select class="form-select" asp-for="@Model.MotivoAnulacion" required>
+                                <option value="0"></option>
+                                <option value="1">Error de Usuario</option>
+                                <option value="2">Otros Tramites</option>
+                            </select>
+                            <label>Seleccione Motivo</label>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" asp-for="@Model.DetalleAnulacion" required>
+
+                            </textarea>
+                            <label for="floatingTextarea2">Motivo de Anulación</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-danger">
+                    ANULAR <i class="bi bi-trash"></i>
+                </button>
+                <a class="btn btn-outline-secondary" asp-controller="Contratos" asp-action="Index">
+                    REGRESAR <i class="bi bi-skip-backward-fill"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    var ident_010_TipoLote = @Model.Actualizar.ident_010_TipoLote;
+    var regularDiv = document.getElementById("regular");
+    var especialDiv = document.getElementById("especial");
+
+    if (ident_010_TipoLote == 84) {
+        regularDiv.style.display = "block";
+        especialDiv.style.display = "none";
+    } else if (ident_010_TipoLote == 85) {
+        regularDiv.style.display = "none";
+        especialDiv.style.display = "block";
+    }
+</script>
+
+
+
+                

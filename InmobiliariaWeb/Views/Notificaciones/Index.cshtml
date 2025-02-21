@@ -1,0 +1,195 @@
+﻿@model InmobiliariaWeb.Models.Notificaciones.IndexViewModel
+@{
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <h2>Notificaciones</h2>
+            </div>
+        </div>
+        <div class="card-body">
+            <form asp-controller="Notificaciones" method="post" asp-action="Index">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="NombrePersona" placeholder="Nombre o Documento" asp-for="@Model.NombrePersona" />
+                    <label for="NombrePersona">Nombre o Documento</label>
+                </div>
+
+                <div class="form-floating">
+                    <select class="form-select" id="Ident_Programa" asp-for="@Model.Ident_Programa">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var programas in Model.ProgramasCbxLists)
+                        {
+                            <option value="@programas.Ident_Programa">@programas.Nombre_Programa</option>
+                        }
+                    </select>
+                    <label for="Ident_Programa">Seleccione Programa</label>
+                </div>
+                <div class="form-floating">
+                    <select class="form-select" id="Manzana" asp-for="@Model.Manzana">
+                        <option></option>
+                    </select>
+                    <label for="Manzana">Mz</label>
+                </div>
+                <div class="form-floating">
+                    <select class="form-select" id="Estado" aria-label="Estado" asp-for="@Model.Estado">
+                        <option value="TODOS" selected>Todos</option>
+                        @foreach(var estados in Model.EstadosClienteCbxList)
+                        {
+                            <option value="@estados">@estados</option>
+                        
+                        }
+                    </select>
+                    <label for="Estado">Estado</label>
+                </div>
+                <div class="mt-2">
+                    <button class="btn btn-outline-success" type="submit">
+                        Filtrar <i class="bi bi-search"></i>
+                        </button>
+                    <a class="btn btn-outline-secondary" target="_blank" asp-controller="Notificaciones" asp-action="ExportarNotificaciones" asp-route-NombrePersona="@Model.NombrePersona" asp-route-Ident_Programa="@Model.Ident_Programa" asp-route-Manzana="@Model.Manzana" asp-route-Estado="@Model.Estado">
+                        Exportar <i class="bi bi-file-earmark-spreadsheet"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container mt-2">
+    <div class="table-responsive-md">
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-dark">
+                    <th>N°</th>
+                    <th>Apellidos y Nombres</th>
+                    <th>Programa</th>
+                    <th>Mz</th>
+                    <th>Lt</th>
+                    <th>Fecha</th>
+                    <th>Retraso</th>
+                    <th style="text-align:center" data-bs-toggle="tooltip" title="Notificar">
+                        <i class="bi bi-chat-dots"></i>
+                    </th>
+                    <th hidden>
+                        Estado
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var notificaciones in Model.NotificacionesLists)
+                {
+                    string colorFondo = notificaciones.EstadoCliente switch
+                    {
+                        0 => "white",
+                        1 => "#ffffcc", // Amarillo claro
+                        2 => "#ffedcc", // Mostaza claro
+                        3 => "#ffd1b3", // Naranja claro
+                        4 => "#ff9999", // Rojo claro
+                        _ => "black" // Color por defecto
+                    };
+
+                    string colorTexto = "black"; // Puedes personalizar el color del texto si es necesario
+
+                    <tr style="background-color:@colorFondo; color:@colorTexto;">
+                        <td>@notificaciones.Indice</td>
+                        <td>@notificaciones.NombreCompleto</td>
+                        <td>@notificaciones.NombrePrograma</td>
+                        <td>@notificaciones.Manzana</td>
+                        <td>@notificaciones.Lote</td>
+                        <td>@notificaciones.FechaPago.ToString("dd/MM/yyyy")</td>
+                        <td>@notificaciones.DiasMoras</td>
+                        <td style="text-align:center">
+                            <a class="btn btn-outline-dark btnNotificar"
+                               href="https://@notificaciones.MensajeWhatsApp"
+                               target="_blank"
+                               data-ident-cuotas="@notificaciones.Ident_Cuotas"
+                               data-ident-persona="@notificaciones.Ident_Persona">
+                                <i class="bi bi-chat-left-text"></i>
+                            </a>
+                        </td>
+                        <td hidden>@notificaciones.EstadoCliente</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal" id="modalNotificacion" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Confirmar Notificación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Aquí se actualizará dinámicamente el mensaje -->
+                <p id="mensajeConfirmacion">¿Confirmas que enviaste la notificación correctamente?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="btnConfirmar" class="btn btn-success" onclick="confirmarNotificacion()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    // Variable global para almacenar el Ident_Cuotas seleccionado
+    let identCuotasSeleccionado = null;
+    let identPersonaSeleccionado = null;
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Buscar todos los botones con la clase btnNotificar
+        const botonesNotificar = document.querySelectorAll(".btnNotificar");
+
+        botonesNotificar.forEach(boton => {
+            boton.addEventListener("click", function (e) {
+                // Obtener el valor de data-ident-cuotas
+                identCuotasSeleccionado = this.getAttribute("data-ident-cuotas");
+                identPersonaSeleccionado = this.getAttribute("data-ident-persona");
+
+                // Verificar si el valor es válido
+                if (identCuotasSeleccionado) {
+                    console.log("Ident_Cuotas seleccionado:", identCuotasSeleccionado);
+                    console.log("Ident_Personas seleccionado:", identPersonaSeleccionado);
+
+                    // Actualizar el mensaje del modal
+                    const mensajeConfirmacion = document.getElementById("mensajeConfirmacion");
+                    mensajeConfirmacion.textContent = `¿Confirmas que enviaste la notificación correctamente? Ident_Cuotas = ${identCuotasSeleccionado}`;
+
+                    // Abrir el modal
+                    const modal = new bootstrap.Modal(document.getElementById("modalNotificacion"));
+                    modal.show();
+
+                } else {
+                    console.error("No se pudo obtener el Ident_Cuotas del botón.");
+                }
+            });
+        });
+    });
+
+    function confirmarNotificacion() {
+
+        console.log("Enviando valor:", identCuotasSeleccionado); // Ver en la consola que el valor es el correcto
+
+        // Realizar la solicitud AJAX con el valor fijo
+        $.ajax({
+            url: '/Notificaciones/ConfirmarNotificacion', // URL del controlador
+            type: 'POST', // Método POST para enviar datos
+            data: { Ident_Cuotas: identCuotasSeleccionado, Ident_Persona: identPersonaSeleccionado }, // Pasar el valor como parámetro
+            success: function (data) {
+                location.reload(); // Refresca la página si es necesario
+            },
+            error: function (error) {
+                console.error("Error en la solicitud:", error);
+                alert("Error al procesar la solicitud.");
+            }
+        });
+    }
+
+</script>
+

@@ -1,0 +1,62 @@
+﻿@model InmobiliariaWeb.Result.Contratos.ImpresionContrato
+@{
+    Layout = "_LayoutLimpio";
+}
+<html>
+<head>
+    <style>
+        body {
+            width: 210mm;
+            height: 297mm;
+            margin: 0;
+            padding: 20mm;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        .Titulo {
+            font-size: 20px;
+            width: 100%;
+            border:1px solid red;
+            font-weight: bold;
+            text-align:center;
+        }
+        textarea {
+            font-size:12px;
+            width:100%;
+            text-align:justify;
+        }
+    </style>
+</head>
+<body>
+    <div class="Titulo">
+        CONTRATO DE TRANSFERENCIA DE POSESIÓN  DE TERRENO RUSTICO
+    </div>
+    <p>
+        Conste por el presente documento privado un Contrato de Transferencia de Posesión de Terreno Rustico,
+        que celebra de una parte: 
+    </p>
+    <textarea>
+        @foreach (var propietarios in Model.Propietarios)
+        {
+        <lang>@propietarios.Honorifico_Vendedor @propietarios.Nombre_Vendedor (CON @propietarios.Tipo_Documento_Vendedor @propietarios.Documento_Vendedor)</lang>
+        }
+        LOURDES MARGARITA VIDAL RODRIGUEZ VDA. DE MAURICIO (CON DNI N° 08613762);
+        GENOVEVA VIDAL RODRIGUEZ VDA. DE GUERRERO (CON DNI N° 08590854); ANDERSON ABRAHAM VIDAL RODRIGUEZ (CON DNI N° 08518993);
+        WILFREDO VIDAL RODRIGUEZ  (CON DNI N° 08588708), debidamente  representados  por DOÑA JACQUELINE ROSA LUZ GUERRERO VIDAL
+        identificada con DNI N° 10201238, de nacionalidad Peruana, de ocupación, empleada, según facultades vigentes e inscritas
+        en la partida N° 14949764 del Registro de Personas Naturales de la Oficina Registral de Lima, a quien en adelante se
+        denominara "LOS TRANSFERENTES" y de otra parte Don GUIDO GONZALES RUIZ, identificado con DNI N° 41209970, de estado civil
+        Soltero , con Tel. celular N° 985-442-724  WhatsApp el mismo número telefónico, con Teléfono Referencial de un familiar
+        996-814-602 y con correo electrónico guidogonzalesruiz@gmail.com  , y Doña OLENKA EDOMILIA PANAIFO OCAMPO, identificado
+        con DNI N° 44135892, de estado civil Soltera , con Tel. celular N° 985-421-851 WhatsApp el mismo número telefónico, , y
+        con correo electrónico lygava0210@gmail.com , ambos con domicilio común  en ,  Calle Los Manzanos Mz. B Lt. 36 San Roque
+        con referencia (Km. 21 parte baja de la Av. Universitaria con pacayal cruce-por la huaca) Distrito de Carabayllo Provincia
+        y Departamento de Lima, a quienes en adelante se les denominará "LOS ADQUIRIENTES", asimismo interviene en el presente
+        contrato La INMOBILIARIA CONSTRUCTORA TAIPE S.A.C. con Partida Electrónica N° 11296437. Expedido por la SUNARP, con R u c
+        N ° 20502902637 domiciliado en Av. Tupac Amaru N° 1636 2do. Piso Raúl Porras Barrenechea, distrito Carabayllo, Provincia
+        y Departamento De Lima, debidamente representada por su Gerente General Sr. EULOGIO RAUL VARGAS TAIPE, con DNI N° 09543898,
+        a quien en adelante se Ie denominara, para estos efectos del presente contrato LA PROMOTORA bajo los términos y condiciones
+        siguientes:
+    </textarea>
+</body>
+</html>

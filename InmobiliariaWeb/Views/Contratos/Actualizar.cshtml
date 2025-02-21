@@ -1,0 +1,376 @@
+﻿@model InmobiliariaWeb.ViewModels.Contratos.ActualizarViewModel
+@{
+    Layout = "_ContratosLayout";
+
+    string disabledStyle = Model.ContratosModels.EstadoImpresion ? "pointer-events: none; background-color: #f4f4f4; opcaity: 0.5;" : "";
+    string enableStyle = Model.ContratosModels.EstadoImpresion ? "readonly" : null;
+    string disableButtonActualizar = Model.ContratosModels.EstadoImpresion ? "disabled" : "";  // Deshabilitar si EstadoImpresion es true
+    string disableButtonDownloadPDF = Model.ContratosModels.EstadoImpresion ? "" : "pointer-events: none; background-color: #f4f4f4; opcaity: 0.5;"; // Deshabilitar si EstadoImpresion es false
+}
+<form asp-controller="Contratos" asp-action="Actualizar" method="post">
+    <div class="container">
+        <div class="card">
+            <div class="card-header fw-bold">
+                <h2>@Model.NumeroSerie</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="date" id="fechaCreacion" asp-for="@Model.ContratosModels.FechaContrato" readonly="@enableStyle" />
+
+
+                            <label for="fechaCreacion">Fecha Creación</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="numeroSeparacion" asp-for="@Model.NumeroSeparacion" readonly />
+                            <label for="numeroSeparacion">N° Separacion</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="nombrePrograma" asp-for="@Model.ProgramaModels.Nombre" readonly />
+                            <label for="nombrePrograma">Nombre Programa</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="manzana" asp-for="@Model.Manzana" readonly />
+                            <label for="manzana">Mz</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="lote" asp-for="@Model.Lote" readonly />
+                            <label for="lote">Lt</label>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="area" asp-for="@Model.Area" readonly />
+                                <label for="area">Area</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="ubicacion" asp-for="@Model.Ubicacion" readonly />
+                                <label for="ubicacion">Ubicación</label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="precioM2" asp-for="@Model.PrecioM2" readonly />
+                                <label for="precioM2">$ M<sup>2</sup></label>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="precioTotal" asp-for="@Model.PrecioTotal" readonly />
+                                <label for="precioTotal">$ Total</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <div id="regular">
+                                <div class="row wor-cols-4 g-2">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="izquierda" asp-for="@Model.Izquierda" readonly />
+                                            <label for="izquierda">Izq.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="derecha" asp-for="@Model.Derecha" readonly />
+                                            <label for="derecha">Der.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="frente" asp-for="@Model.Frente" readonly />
+                                            <label for="frente">Fre.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="fondo" asp-for="@Model.Fondo" readonly />
+                                            <label for="fondo">Fon.</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="especial">
+                                <div class="row row-cols-5 mt-1 g-2">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l1" asp-for="@Model.L1" readonly />
+                                            <label for="l1">L1</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l2" asp-for="@Model.L2" readonly />
+                                            <label for="l2">L2</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l3" asp-for="@Model.L3" readonly />
+                                            <label for="l3">L3</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l4" asp-for="@Model.L4" readonly />
+                                            <label for="l4">L4</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l5" asp-for="@Model.L5" readonly />
+                                            <label for="l5">L5</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row row-cols-5 mt-1 g-2">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l6" asp-for="@Model.L6" readonly />
+                                            <label for="l6">L6</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l7" asp-for="@Model.L7" readonly />
+                                            <label for="l7">L7</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l8" asp-for="@Model.L8" readonly />
+                                            <label for="l8">L8</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l9" asp-for="@Model.L9" readonly />
+                                            <label for="l9">L9</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l10" asp-for="@Model.L10" readonly />
+                                            <label for="l10">L10</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="tratadoEn" placeholder="0" asp-for="@Model.ContratosModels.TratadoEn" onblur="fTratadoEn()" readonly="@enableStyle" />
+                                <label for="tratadoEn">Tratado En</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="cuotaInicial" placeholder="0" asp-for="@Model.ContratosModels.CuotaInicial" onblur="fCuotaInicial()" readonly="@enableStyle" />
+                                <label for="cuotaInicial">Cuota Inicial</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="saldoAPagar" placeholder="0" readonly asp-for="@Model.ContratosModels.SaldoAPagar" />
+                                <label for="saldoAPagar">Saldo</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="cantidadCuotas" placeholder="0" asp-for="@Model.ContratosModels.CantidadCuotas" onblur="fCantidadCuotas()" readonly="@enableStyle" />
+                                <label for="cantidadCuotas"># Cuotas</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="cuotasIniciales" placeholder="0" asp-for="@Model.ContratosModels.CuotasIniciales" onblur="fCuotasIniciales()" readonly="@enableStyle" />
+                                <label for="cuotasIniciales"><span id="cuotasInicRestadas">X</span> Cuotas de</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="cuotaFinal" placeholder="0" readonly asp-for="@Model.ContratosModels.CuotaFinal" readonly="@enableStyle" />
+                                <label for="cuotaFinal">Cuota Final</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" id="fechaCuotaInicial" placeholder="0" asp-for="@Model.ContratosModels.FechaCuotaInicial" style="@disabledStyle" />
+                                <label for="fechaCuotaInicial">Fecha 1era Cuota</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating">
+                                <input type="int" class="form-control" id="fechaRestoCuotas" placeholder="0" asp-for="@Model.ContratosModels.DiaCuota" readonly="@enableStyle" />
+                                <label for="fechaRestoCuotas">Días de Pago</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-12">
+                            <div class="form-check form-switch">
+                                <input type="checkbox" asp-for="@Model.ContratosModels.Flag_Legalizado" class="form-check-input" id="Flag_Legalizado" readonly="@enableStyle" />
+                                <label for="Flag_Legalizado">Legalizado</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <textarea class="form-control" id="observacion" asp-for="@Model.ContratosModels.Observacion" style="height:7rem" readonly="@enableStyle"></textarea>
+                                <label for="observacion">Observacion</label>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-success" @disableButtonActualizar>
+                    ACTUALIZAR <i class="bi bi-database-fill-add"></i>
+                </button>
+                <a class="btn btn-outline-secondary" asp-controller="Contratos" asp-action="Index">
+                    REGRESAR <i class="bi bi-skip-backward-fill"></i>
+                </a>
+                <a class="btn btn-outline-warning" id="DescargarPDF" asp-controller="Contratos" asp-action="DescargarPDF" asp-route-Ident_Contratos="@Model.ContratosModels.Ident_Contratos" target="_blank" style="@disableButtonDownloadPDF">
+                    DESCARGAR WORD <i class="bi bi-file-earmark-word-fill"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+    var ident_010_TipoLote = @Model.ident_010_TipoLote;
+    var regularDiv = document.getElementById("regular");
+    var especialDiv = document.getElementById("especial");
+    
+    if (ident_010_TipoLote == 84) {
+        regularDiv.style.display = "block";
+        especialDiv.style.display = "none";
+    } else if (ident_010_TipoLote == 85) {
+        regularDiv.style.display = "none";
+        especialDiv.style.display = "block";
+    }
+    function fTratadoEn() {
+        const tratadoEn = parseFloat(document.getElementById('tratadoEn').value) || 0;
+
+        if (tratadoEn === 0) {
+            // Limpiar el resto de los campos
+            document.getElementById('cuotaInicial').value = '';
+            document.getElementById('saldoAPagar').value = '';
+            document.getElementById('cantidadCuotas').value = '';
+            document.getElementById('cuotasIniciales').value = '';
+            document.getElementById('cuotaFinal').value = '';
+            document.getElementById('cuotasInicRestadas').innerText = 'X';
+        }
+        else {
+            fCuotaInicial();
+        }
+    }
+    function fCuotaInicial() {
+        const tratadoEn = parseFloat(document.getElementById('tratadoEn').value) || 0;
+        const cuotaInicial = parseFloat(document.getElementById('cuotaInicial').value);
+
+        if (isNaN(cuotaInicial)) {
+            // Limpiar el resto de los campos excepto tratadoEn
+            document.getElementById('saldoAPagar').value = '';
+            document.getElementById('cantidadCuotas').value = '';
+            document.getElementById('cuotasIniciales').value = '';
+            document.getElementById('cuotaFinal').value = '';
+            document.getElementById('cuotasInicRestadas').innerText = 'X';
+        } else if (cuotaInicial >= 0) {
+            // Calcular el saldo a pagar
+            const saldoAPagar = tratadoEn - cuotaInicial;
+            document.getElementById('saldoAPagar').value = saldoAPagar >= 0 ? saldoAPagar.toFixed(2) : 0;
+            fCantidadCuotas();
+        }
+    }
+    function fCantidadCuotas() {
+        const saldoAPagar = parseFloat(document.getElementById('saldoAPagar').value) || 0;
+        const cantidadCuotas = parseInt(document.getElementById('cantidadCuotas').value);
+
+        if (isNaN(cantidadCuotas) || cantidadCuotas <= 0) {
+            // Limpiar el resto de los campos excepto tratadoEn, cuotaInicial y saldoAPagar
+            document.getElementById('cuotasIniciales').value = '';
+            document.getElementById('cuotaFinal').value = '';
+            document.getElementById('cuotasInicRestadas').innerText = 'X';
+        } else {
+            // Calcular cuotas iniciales y cuota final
+            const cuotaIniciales = Math.floor(saldoAPagar / cantidadCuotas);
+            const cuotaFinal = (saldoAPagar % cantidadCuotas) > 0 ?
+                saldoAPagar - (cuotaIniciales * (cantidadCuotas - 1)) : 0;
+
+            document.getElementById('cuotasIniciales').value = cuotaIniciales.toFixed(2);
+            document.getElementById('cuotasInicRestadas').innerText = cuotaFinal > 0 ? cantidadCuotas - 1 : cantidadCuotas;
+            document.getElementById('cuotaFinal').value = cuotaFinal.toFixed(2);
+        }
+    }
+    function fCuotasIniciales() {
+        const saldoAPagar = parseFloat(document.getElementById('saldoAPagar').value) || 0;
+        const cantidadCuotas = parseInt(document.getElementById('cantidadCuotas').value);
+        const cuotasIniciales = parseFloat(document.getElementById('cuotasIniciales').value);
+
+        if (isNaN(cuotasIniciales) || cuotasIniciales <= 0) {
+            // Limpiar los valores de cuotaFinal y cuotasInicRestadas
+            document.getElementById('cuotaFinal').value = '';
+            document.getElementById('cuotasInicRestadas').innerText = 'X';
+        } else if (!isNaN(cantidadCuotas) && cantidadCuotas > 0) {
+            const totalIniciales = cuotasIniciales * cantidadCuotas;
+
+            if (saldoAPagar - totalIniciales === 0) {
+                // Caso: saldoAPagar - (cuotasIniciales * cantidadCuotas) = 0
+                document.getElementById('cuotaFinal').value = '0.00';
+                document.getElementById('cuotasInicRestadas').innerText = cantidadCuotas;
+            } else if (saldoAPagar - totalIniciales != 0) {
+                // Caso: saldoAPagar - (cuotasIniciales * cantidadCuotas) > 0
+                const cuotaFinal = saldoAPagar - (cuotasIniciales * (cantidadCuotas - 1));
+                document.getElementById('cuotaFinal').value = cuotaFinal.toFixed(2);
+                document.getElementById('cuotasInicRestadas').innerText = cantidadCuotas - 1;
+            }
+        }
+    }
+
+</script>

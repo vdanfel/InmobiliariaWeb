@@ -1,0 +1,223 @@
+﻿@model InmobiliariaWeb.Result.Usuario.UsuarioList
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Actualizar Usuario";
+}
+<div class="card mt-3">
+    <div class="card-header fw-bold">
+        Usuarios
+    </div>
+    <div class="card-body">
+        
+        <form asp-controller="Usuario" asp-action="ActualizarRol" method="post">
+            <input asp-for="@Model.Ident_Usuario" hidden />
+            <input asp-for="@Model.IdentPersona" hidden />
+            <div class="card">
+                <div class="card-header">
+                    Perfil
+                </div>
+                <div class="card-body">
+                    <div class="row g-1 mb-1">
+                        <div class="col-lg-8 col-sm-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="Nombre" placeholder="Apellidos y Nombres" asp-for="@Model.Nombre" readonly>
+                                <label for="Nombre">Apellidos y Nombres</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 ">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="Documento" placeholder="Nro Documento" readonly>
+                                <label for="Documento">Nro Documento</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-1 mb-1">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="Cuenta" placeholder="Cuenta" asp-for="Usuario" readonly>
+                                <label for="Nombre">Cuenta</label>
+                            </div>
+                            <span asp-validation-for="@Model.Usuario" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 ">
+                            <div class="form-floating">
+                                <select class="form-select" asp-for="@Model.Ident_005_TipoUsuario">
+                                    <option></option>
+                                    @foreach (var roles in Model.TipoRols)
+                                    {
+                                        <option value="@roles.Ident_005_TipoUsuario">@roles.Descripcion</option>
+                                    }
+                                </select>
+                                <label for="Documento">Tipo Usuario</label>
+                                <span asp-validation-for="@Model.Ident_005_TipoUsuario" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer p-0 m-0">
+                    <button type="submit" class="btn btn-secondary p-2" style="width:100%;height:100%">
+                        Actualizar perfil
+                    </button>
+                </div>
+                
+            </div>
+        </form>
+        <form asp-controller="Usuario" asp-action="ActualizarClave">
+            <input asp-for="@Model.IdentPersona" hidden />
+            <input asp-for="@Model.Ident_Usuario" hidden />
+            <div class="card mt-3">
+                <div class="card-header">
+                    Actualizar Clave
+                </div>
+                <div class="card-body">
+                    <div class="row g-1 mb-1">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="input-group col-12">
+                                <div class="form-floating" style="width:90%">
+                                    <input type="password" class="form-control" id="Clave" placeholder="Clave" asp-for="Clave">
+                                    <label for="Nombre">Clave Antigua</label>
+                                </div>
+                                <button type="button" class="btn btn-outline-secondary shadow" id="mos-ocu" style="width:10%">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="@Model.Clave" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row g-1 mb-1">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="input-group col-12">
+                                <div class="form-floating" style="width:90%">
+                                    <input type="password" class="form-control" id="Clave1" placeholder="Clave" asp-for="Clave1">
+                                    <label for="Nombre">Clave Nueva</label>
+                                </div>
+                                <button type="button" class="btn btn-outline-secondary shadow" id="mos-ocu1" style="width:10%">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="@Model.Clave1" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 ">
+                            <div class="input-group">
+                                <div class="form-floating" style="width:90%">
+                                    <input type="password" class="form-control" id="Clave2" placeholder="Clave" asp-for="Clave2">
+                                    <label for="Nombre">Repetir Clave Nueva</label>
+                                </div>
+                                <button type="button" class="btn btn-outline-secondary shadow" id="mos-ocu2" style="width:10%">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="@Model.Clave2" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer p-0 m-0">
+                    <button type="submit" class="btn btn-secondary p-2" style="width:100%;height:100%">
+                        Actualizar Clave
+                    </button>
+                </div>
+
+            </div>
+        </form>
+        <form asp-controller="Usuario" asp-action="RestaurarClave">
+            <input asp-for="@Model.IdentPersona" hidden />
+            <input asp-for="@Model.Ident_Usuario" hidden />
+            <div class="card mt-3">
+                <div class="card-header">
+                    Restaurar Clave
+                </div>
+                <div class="card-body">
+                    <div class="row g-1 mb-1">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="input-group col-12">
+                                <div class="form-floating" style="width:90%">
+                                    <input type="password" class="form-control" id="Clave1" placeholder="Clave" asp-for="Clave1">
+                                    <label for="Nombre">Clave</label>
+                                </div>
+                                <button type="button" class="btn btn-outline-secondary shadow" id="mos-ocu1" style="width:10%">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="@Model.Clave1" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 ">
+                            <div class="input-group">
+                                <div class="form-floating" style="width:90%">
+                                    <input type="password" class="form-control" id="Clave2" placeholder="Clave" asp-for="Clave2">
+                                    <label for="Nombre">Repetir Clave</label>
+                                </div>
+                                <button type="button" class="btn btn-outline-secondary shadow" id="mos-ocu2" style="width:10%">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="@Model.Clave2" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer p-0 m-0">
+                    <button type="submit" class="btn btn-secondary p-2" style="width:100%;height:100%">
+                        Restaurar Clave Olvidada
+                    </button>
+                    
+                </div>
+                
+            </div>
+        </form>
+        <form asp-controller="Usuario" asp-action="AnularUsuario">
+            <input asp-for="@Model.IdentPersona" hidden />
+            <input asp-for="@Model.Ident_Usuario" hidden />
+            <div class="card mt-3">
+                <div class="card-body p-0 m-0">
+                    <button type="submit" class="btn btn-danger p-2" style="width:100%;height:100%">
+                        Anular
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        // Llama a la función establecerVisibilidad para ambos campos de contraseña
+        establecerVisibilidad('mos-ocu1', 'Clave1');
+        establecerVisibilidad('mos-ocu2', 'Clave2');
+        establecerVisibilidad('mos-ocu', 'Clave');
+    });
+
+    function establecerVisibilidad(btnId, inputId) {
+        var boton = document.getElementById(btnId);
+        var inputClave = document.getElementById(inputId);
+
+        boton.addEventListener('click', function () {
+            // Alterna entre 'password' y 'text' al hacer clic en el botón
+            inputClave.type = inputClave.type === 'password' ? 'text' : 'password';
+        });
+    }
+</script>

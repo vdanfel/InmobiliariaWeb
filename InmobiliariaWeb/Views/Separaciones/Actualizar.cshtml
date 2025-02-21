@@ -1,0 +1,443 @@
+﻿@model InmobiliariaWeb.Models.Separaciones.ActualizarViewModel
+@{
+    Layout = "_ActualizarLayout";
+}
+<form method="post" asp-action="Actualizar" asp-controller="Separaciones">
+    <input type="text" asp-for="@Model.Ident_Separacion" hidden/>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Separacion N° @Model.Numero_Separacion</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="date" id="fechaCreacion" asp-for="@Model.FechaSeparacion" readonly />
+                            <label for="fechaCreacion">Fecha Creación</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" asp-for="@Model.Nombre_Programa" value="@Model.Nombre_Programa" readonly />
+                            <label for="programas">Nombre Programa</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" asp-for="@Model.Manzana" value="@Model.Manzana" readonly />
+                            <label for="manzana">Mz</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" asp-for="@Model.Lote" value="@Model.Lote" readonly />
+                            <label for="lote">Lt</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="area" asp-for="@Model.Area" readonly />
+                            <label for="area">Area</label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="ubicacion" asp-for="@Model.Ubicacion" readonly />
+                            <label for="ubicacion">Ubicación</label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="precioM2" asp-for="@Model.PrecioM2" readonly />
+                            <label for="precioM2">$ M<sup>2</sup></label>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="0" id="precioTotal" asp-for="@Model.PrecioTotal" readonly />
+                            <label for="precioTotal">$ Total</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card mt-1">
+                    <div class="card-body">
+                        <div id="regular" @(Model.ident_010_TipoLote == 84 ? "" : "style='display:none;'")>
+                            <div class="row wor-cols-4 g-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Izquierda" readonly />
+                                        <label for="izquierda">Izq.</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Derecha" readonly />
+                                        <label for="derecha">Der.</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Frente" readonly />
+                                        <label for="frente">Fre.</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Fondo" readonly />
+                                        <label for="fondo">Fon.</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="especial" @(Model.ident_010_TipoLote == 85 ? "" : "style='display:none;'")>
+                            <div class="row row-cols-5 mt-1 g-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado1" readonly />
+                                        <label for="l1">L1</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado1" readonly />
+                                        <label for="l2">L2</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado3" readonly />
+                                        <label for="l3">L3</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado4" readonly />
+                                        <label for="l4">L4</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado5" readonly />
+                                        <label for="l5">L5</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-cols-5 mt-1 g-2">
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado6" readonly />
+                                        <label for="l6">L6</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado7" readonly />
+                                        <label for="l7">L7</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado8" readonly />
+                                        <label for="l8">L8</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado9" readonly />
+                                        <label for="l9">L9</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating">
+                                        <input class="form-control" type="text" placeholder="0" asp-for="@Model.Lado10" readonly />
+                                        <label for="l10">L10</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="tratadoEn" placeholder="0" asp-for="@Model.TratadoEn" />
+                            <label for="tratadoEn">Tratado En</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="cuotaInicial" placeholder="0" asp-for="@Model.CuotaInicial" />
+                            <label for="cuotaInicial">Cuota Inicial</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="saldo" placeholder="0" readonly asp-for="@Model.SaldoAPagar" />
+                            <label for="saldo">Saldo</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="numeroCuotas" placeholder="0" asp-for="@Model.CantidadCuotas" />
+                            <label for="numeroCuotas"># Cuotas</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="cuotasIniciales" placeholder="0" readonly asp-for="@Model.CuotasIniciales" />
+                            <label for="cuotasIniciales"><span id="cuotasInicRestadas">X</span> Cuotas de</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating" id="cuotaFinalDiv">
+                            <input type="text" class="form-control" id="cuotaFinal" placeholder="0" readonly asp-for="@Model.CuotaFinal" />
+                            <label for="cuotaFinal">Cuota Final</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="diasVigencia" placeholder="0" asp-for="@Model.DiasSeparacion" />
+                            <label for="diasVigencia">Días Vigencia</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="fechaVencimiento" placeholder="0" asp-for="@Model.FechaVencimiento" readonly />
+                            <label for="fechaVencimiento">Vencimiento</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-lg-3 col-sm-4">
+                        <div class="form-floating">
+                            <input type="text" id="importeSeparacion" class="form-control" placeholder="0" asp-for="@Model.ImporteSeparacion" />
+                            <label for="importeSeparacion">Importe Separacion</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="observacion" placeholder="0" asp-for="@Model.Observacion" readonly />
+                            <label for="observacion">Observacion</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="observacion" placeholder="0" asp-for="@Model.MotivoActualizacion" />
+                            <label for="observacion">Motivo Actualización</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-success mt-2">
+                    Actualizar
+                </button>
+                <a class="btn btn-outline-primary mt-2" asp-controller="Separaciones" asp-action="Imprimir" asp-route-ident_Separacion="@Model.Ident_Separacion" asp-route-ident_010_TipoLote="@Model.ident_010_TipoLote" target="_blank">
+                    Imprimir
+                </a>
+            </div>
+        </div>
+        <a class="btn btn-outline-info mt-2" asp-action="Index" asp-controller="Separaciones">
+            Regresar
+        </a>
+    </div>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+    function ObtenerCuentasBancarias(Ident_019_Banco) {
+        $.get(`/Separaciones/GetCuentasBancarias?Ident_019_Banco=${Ident_019_Banco}`, function (data) {
+            $("#Ident_CuentasBancarias").empty();
+            $("#Ident_CuentasBancarias").append('<option value="">--SELECCIONE--</option>');
+            $.each(data, function (index, item) {
+                $("#Ident_CuentasBancarias").append('<option value="' + item.ident_CuentasBancarias + '">' + item.detalleCuenta + '</option>');
+            });
+
+        })
+
+    }
+    // Esperar a que el documento esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtener la referencia al elemento de cuotaInicial
+        var cuotaInicialInput = document.getElementById("cuotaInicial");
+
+        // Obtener la referencia al elemento de tratadoEn
+        var tratadoEnInput = document.getElementById("tratadoEn");
+
+        // Obtener la referencia al elemento de saldo
+        var saldoInput = document.getElementById("saldo");
+        // Agregar un evento de cambio al elemento de cuotaInicial
+        cuotaInicialInput.addEventListener("change", function () {
+            // Obtener los valores de cuotaInicial y tratadoEn
+            var cuotaInicial = parseFloat(cuotaInicialInput.value) || 0;
+            var tratadoEn = parseFloat(tratadoEnInput.value) || 0;
+
+            // Calcular el saldo
+            var saldo = tratadoEn - cuotaInicial;
+
+            // Actualizar el valor en el elemento de saldo
+            saldoInput.value = saldo;
+            // Llamar a la función para actualizar cuotas
+            actualizarCuotas();
+        });
+        // Obtener la referencia al elemento de numeroCuotas
+        var numeroCuotasInput = document.getElementById("numeroCuotas");
+
+        // Obtener la referencia al elemento de saldo
+        var saldoInput = document.getElementById("saldo");
+
+        // Obtener la referencia al elemento de cuotasIniciales
+        var cuotasInicialesInput = document.getElementById("cuotasIniciales");
+
+        // Obtener la referencia al elemento de cuotaFinal
+        var cuotaFinalInput = document.getElementById("cuotaFinal");
+
+        // Obtener la referencia al span cuotasInicRestadas
+        var cuotasInicRestadasSpan = document.getElementById("cuotasInicRestadas");
+        // Agregar un evento de cambio al elemento de numeroCuotas
+        numeroCuotasInput.addEventListener("change", actualizarCuotas);
+
+        // Agregar un evento de cambio al elemento de saldo
+        saldoInput.addEventListener("change", actualizarCuotas);
+        // Función para actualizar cuotas
+        function actualizarCuotas() {
+            // Obtener los valores de saldo y numeroCuotas
+            var saldo = parseFloat(saldoInput.value) || 0;
+            var numeroCuotas = parseInt(numeroCuotasInput.value) || 0;
+
+            // Verificar si ambos saldo y numeroCuotas son mayores que 0
+            if (saldo > 0 && numeroCuotas > 0) {
+                // Calcular las cuotas iniciales
+                var cuotasIniciales = Math.floor(saldo / numeroCuotas);
+
+                // Calcular las cuotas restadas
+                var cuotasInicRestadas = (saldo % numeroCuotas !== 0) ? numeroCuotas - 1 : numeroCuotas;
+
+                // Calcular la cuota final
+                var cuotaFinal = (cuotasInicRestadas > 0) ? saldo - (cuotasInicRestadas * Math.floor(saldo / numeroCuotas)) : 0;
+
+                // Actualizar los valores en los elementos correspondientes
+                cuotasInicialesInput.value = cuotasIniciales;
+                cuotasInicRestadasSpan.textContent = cuotasInicRestadas;
+                cuotaFinalInput.value = cuotaFinal;
+            } else {
+                // Si alguno de los valores es 0, establecer todo a 0
+                cuotasInicialesInput.value = 0;
+                cuotasInicRestadasSpan.textContent = 0;
+                cuotaFinalInput.value = 0;
+            }
+
+            // Mostrar u ocultar el div cuotaFinalDiv según sea necesario
+            if (cuotasInicRestadas > 0) {
+                cuotaFinalDiv.classList.remove("d-none"); // Mostrar el cuotaFinalDiv
+            } else {
+                cuotaFinalDiv.classList.add("d-none"); // Ocultar el cuotaFinalDiv
+            }
+        }
+
+        // Obtener la referencia al elemento de fechaCreacion
+        var fechaCreacionInput = document.getElementById("fechaCreacion");
+
+        // Obtener la referencia al elemento de diasVigencia
+        var diasVigenciaInput = document.getElementById("diasVigencia");
+
+        // Obtener la referencia al elemento de fechaVencimiento
+        var fechaVencimientoInput = document.getElementById("fechaVencimiento");
+
+        // Agregar un evento de cambio al elemento de fechaCreacion
+        fechaCreacionInput.addEventListener("change", actualizarFechaVencimiento);
+
+        // Agregar un evento de cambio al elemento de diasVigencia
+        diasVigenciaInput.addEventListener("change", actualizarFechaVencimiento);
+
+        // Función para actualizar la fecha de vencimiento
+        function actualizarFechaVencimiento() {
+            // Obtener los valores de fechaCreacion y diasVigencia
+            var fechaCreacion = fechaCreacionInput.value;
+            var diasVigencia = parseInt(diasVigenciaInput.value) || 0;
+
+            // Verificar si la fechaCreacion no es nula y diasVigencia es mayor o igual a 0
+            if (fechaCreacion && diasVigencia >= 0) {
+                // Convertir la fechaCreacion a un objeto de fecha
+                var fechaCreacionDate = new Date(fechaCreacion);
+
+                // Calcular la nueva fecha sumando diasVigencia a la fechaCreacion
+                var fechaVencimientoDate = new Date(fechaCreacionDate);
+                fechaVencimientoDate.setDate(fechaCreacionDate.getDate() + diasVigencia);
+
+                // Formatear la nueva fecha como una cadena en el formato "YYYY-MM-DD"
+                var fechaVencimientoFormatted = fechaVencimientoDate.toISOString().split('T')[0];
+
+                // Actualizar el valor en el elemento de fechaVencimiento
+                fechaVencimientoInput.value = fechaVencimientoFormatted;
+            } else {
+                // Si alguna de las condiciones no se cumple, establecer fechaVencimiento a null
+                fechaVencimientoInput.value = "";
+            }
+        }
+        document.getElementById("tipoCambio").addEventListener("change", function () {
+            calcularImporteSeparacionDolares();
+        });
+
+        document.getElementById("importeSeparacion").addEventListener("change", function () {
+            calcularImporteSeparacionDolares();
+        });
+
+        function calcularImporteSeparacionDolares() {
+            var importeSeparacion = parseFloat(document.getElementById("importeSeparacion").value);
+            var tipoCambio = parseFloat(document.getElementById("tipoCambio").value);
+
+            if (!isNaN(importeSeparacion) && !isNaN(tipoCambio) && tipoCambio > 1 && importeSeparacion > 0) {
+                var importeSeparacionDolares = importeSeparacion / tipoCambio;
+                document.getElementById("importeSeparacionDolares").value = importeSeparacionDolares.toFixed(2);
+            } else {
+                document.getElementById("importeSeparacionDolares").value = "";
+            }
+        }
+        var ident_010_TipoLote = @Model.ident_010_TipoLote;
+        var regularDiv = document.getElementById("regular");
+        var especialDiv = document.getElementById("especial");
+
+        if (ident_010_TipoLote == 84) {
+            regularDiv.style.display = "block";
+            especialDiv.style.display = "none";
+        } else if (ident_010_TipoLote == 85) {
+            regularDiv.style.display = "none";
+            especialDiv.style.display = "block";
+        }
+    })
+</script>

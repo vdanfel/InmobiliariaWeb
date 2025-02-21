@@ -1,0 +1,419 @@
+﻿@model InmobiliariaWeb.Models.Contratos.Transferencias
+@{
+}
+<form method="post" asp-action="Transferencias" asp-controller="Contratos" id="formImpresion">
+    <input hidden asp-for="@Model.Ident_Contrato" id="Ident_Contrato"/>
+    <input hidden asp-for="@Model.Ident_FormatoTransferencia" id="Ident_FormatoTransferencia" />
+
+    <div class="container">
+        <div class="row mt-1">
+            <h3>Título</h3>
+            <input type="text" asp-for="@Model.Titulo" class="form-control" onpaste="handlePaste(event)" />
+        </div>
+        <input hidden id="ParrafoInicial_Hidden" asp-for="@Model.ParrafoInicial" />
+        <div id="ParrafoInicial_Content" class="mt-3">
+            <h3>Párrafo Inicial</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('ParrafoInicial_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('ParrafoInicial_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('ParrafoInicial_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="ParrafoInicial" onblur="saveContent('ParrafoInicial')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.ParrafoInicial)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula1_Hidden" asp-for="@Model.Clausula1" />
+        <div id="Clausula1_Content" class="mt-3">
+            <h3>Cláusula 1</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula1" onblur="saveContent('Clausula1')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula1)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula2_Hidden" asp-for="@Model.Clausula2" />
+        <div id="Clausula2_Content" class="mt-3">
+            <h3>Cláusula 2</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula2_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula2_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula2_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula2" onblur="saveContent('Clausula2')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula2)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula3_Hidden" asp-for="@Model.Clausula3" />
+        <div id="Clausula3_Content" class="mt-3">
+            <h3>Cláusula 3</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula3_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula3_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula3_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula3" onblur="saveContent('Clausula3')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula3)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <input type="text" class="form-control" asp-for="@Model.TextoFrente" onpaste="handlePaste(event)" />
+            <input type="text" class="form-control" asp-for="@Model.TextoDerecha" onpaste="handlePaste(event)" />
+            <input type="text" class="form-control" asp-for="@Model.TextoIzquierda" onpaste="handlePaste(event)" />
+            <input type="text" class="form-control" asp-for="@Model.TextoFondo" onpaste="handlePaste(event)" />
+        </div>
+        <input hidden id="Clausula4_Hidden" asp-for="@Model.Clausula4" />
+        <div id="Clausula4_Content" class="mt-3">
+            <h3>Cláusula 4</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula4_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula4_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula4_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula4" onblur="saveContent('Clausula4')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula4)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula5_Hidden" asp-for="@Model.Clausula5" />
+        <div id="Clausula5_Content" class="mt-3">
+            <h3>Cláusula 5</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula5_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula5_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula5_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula5" onblur="saveContent('Clausula5')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula5)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula6_Hidden" asp-for="@Model.Clausula6" />
+        <div id="Clausula6_Content" class="mt-3">
+            <h3>Cláusula 6</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula6_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula6_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula6_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula6" onblur="saveContent('Clausula6')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula6)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula7_Hidden" asp-for="@Model.Clausula7" />
+        <div id="Clausula7_Content" class="mt-3">
+            <h3>Cláusula 7</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula7_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula7_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula7_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula7" onblur="saveContent('Clausula7')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula7)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula8_Hidden" asp-for="@Model.Clausula8" />
+        <div id="Clausula8_Content" class="mt-3">
+            <h3>Cláusula 8</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula8_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula8_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula8_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula8" onblur="saveContent('Clausula8')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula8)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula9_Hidden" asp-for="@Model.Clausula9" />
+        <div id="Clausula9_Content" class="mt-3">
+            <h3>Cláusula 9</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula9_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula9_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula9_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula9" onblur="saveContent('Clausula9')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula9)
+                </div>
+            </div>
+        </div>
+        <input hidden id="ClausulaAllanamiento_Hidden" asp-for="@Model.ClausulaAllanamiento" />
+        <div id="ClausulaAllanamiento_Content" class="mt-3">
+            <h4>- Allanamiento</h4>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('ClausulaAllanamiento_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('ClausulaAllanamiento_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('ClausulaAllanamiento_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="ClausulaAllanamiento" onblur="saveContent('ClausulaAllanamiento')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.ClausulaAllanamiento)
+                </div>
+            </div>
+        </div>
+        <input hidden id="ClausulaDesalojo_Hidden" asp-for="@Model.ClausulaDesalojo" />
+        <div id="ClausulaDesalojo_Content" class="mt-3">
+            <h4>- Desalojo</h4>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('ClausulaDesalojo_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('ClausulaDesalojo_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('ClausulaDesalojo_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="ClausulaDesalojo" onblur="saveContent('ClausulaDesalojo')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.ClausulaDesalojo)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula10_Hidden" asp-for="@Model.Clausula10" />
+        <div id="Clausula10_Content" class="mt-3">
+            <h3>Cláusula 10</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula10_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula10_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula10_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula10" onblur="saveContent('Clausula10')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula10)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula11_Hidden" asp-for="@Model.Clausula11" />
+        <div id="Clausula11_Content" class="mt-3">
+            <h3>Cláusula 11</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula11_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula11_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula11_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula11" onblur="saveContent('Clausula11')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula11)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula12_Hidden" asp-for="@Model.Clausula12" />
+        <div id="Clausula12_Content" class="mt-3">
+            <h3>Cláusula 12</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula12_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula12_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula12_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula12" onblur="saveContent('Clausula12')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula12)
+                </div>
+            </div>
+        </div>
+        <input hidden id="Clausula13_Hidden" asp-for="@Model.Clausula13" />
+        <div id="Clausula13_Content" class="mt-3">
+            <h3>Cláusula 13</h3>
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('Clausula13_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('Clausula13_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('Clausula13_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="Clausula13" onblur="saveContent('Clausula13')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.Clausula13)
+                </div>
+            </div>
+        </div>
+        <input hidden id="FechaContrato_Hidden" asp-for="@Model.FechaContrato" />
+        <div id="FechaContrato_Content" class="mt-1">
+            <div class="d-grid gap-2 d-flex">
+                <button type="button" onclick="aplicarEstilo('FechaContrato_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                <button type="button" onclick="aplicarEstilo('FechaContrato_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                <button type="button" onclick="aplicarEstilo('FechaContrato_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="GuardarDatos()">
+                    <i class="bi-floppy"></i>
+                </button>
+            </div>
+            <div class="row mt-1">
+                <div contenteditable="true" class="form-control" id="FechaContrato" onblur="saveContent('FechaContrato')" onpaste="handlePaste(event)">
+                    @Html.Raw(Model.FechaContrato)
+                </div>
+            </div>
+        </div>
+        <div class="mt-2">
+            <button type="button" class="btn btn-outline-success" onclick="mostrarModalImpresion()">
+                <i class="bi bi-printer-fill"></i>IMPRIMIR
+            </button>
+        </div>
+    </div>
+</form>
+<!-- Modal de confirmación para imprimir -->
+<div class="modal fade" id="modalConfirmarImpresion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmarImpresionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                ¿Estás seguro que deseas imprimir este contrato?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" id="btnConfirmarImpresion">Imprimir</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Script para aplicar estilos -->
+<script>
+    function handlePaste(event) {
+        // Prevenir la acción de pegado predeterminada
+        event.preventDefault();
+
+        // Obtener el texto sin formato desde el portapapeles
+        var plainText = (event.clipboardData || window.clipboardData).getData('text');
+
+        // Insertar el texto limpio en el cursor actual
+        document.execCommand("insertText", false, plainText);
+    }
+
+    function aplicarEstilo(containerId, style) {
+        var editorId = containerId.split('_')[0];
+        var editor = document.getElementById(editorId);
+        if (editor) {
+            editor.focus();
+            document.execCommand(style, false, null);
+        }
+    }
+
+    function saveContent(containerId) {
+        var editor = document.getElementById(containerId);
+        if (editor) {
+            var editorContent = editor.innerHTML;
+            var hiddenInput = document.getElementById(containerId + "_Hidden");
+            if (hiddenInput) {
+                hiddenInput.value = editorContent;
+            }
+        }
+    }
+
+    function mostrarModalImpresion() {
+        // Mostrar el modal de confirmación
+        $('#modalConfirmarImpresion').modal('show');
+
+        // Asignar el evento click al botón de confirmar impresión
+        $('#btnConfirmarImpresion').off('click').on('click', function () {
+            // Enviar el formulario si el usuario confirma
+            $('#formImpresion').submit();
+        });
+    }
+
+    function GuardarDatos() {
+        var transferencias = {
+            Ident_FormatoTransferencia: document.getElementById('Ident_FormatoTransferencia').value,
+            Ident_Contrato: document.getElementById('Ident_Contrato').value,
+            Titulo: document.getElementById('Titulo').value,
+            ParrafoInicial: document.getElementById('ParrafoInicial_Hidden').value,
+            Clausula1: document.getElementById('Clausula1_Hidden').value,
+            Clausula2: document.getElementById('Clausula2_Hidden').value,
+            Clausula3: document.getElementById('Clausula3_Hidden').value,
+            TextoFrente: document.getElementById('TextoFrente').value,
+            TextoDerecha: document.getElementById('TextoDerecha').value,
+            TextoIzquierda: document.getElementById('TextoIzquierda').value,
+            TextoFondo: document.getElementById('TextoFondo').value,
+            Clausula4: document.getElementById('Clausula4_Hidden').value,
+            Clausula5: document.getElementById('Clausula5_Hidden').value,
+            Clausula6: document.getElementById('Clausula6_Hidden').value,
+            Clausula7: document.getElementById('Clausula7_Hidden').value,
+            Clausula8: document.getElementById('Clausula8_Hidden').value,
+            Clausula9: document.getElementById('Clausula9_Hidden').value,
+            ClausulaAllanamiento: document.getElementById('ClausulaAllanamiento_Hidden').value,
+            ClausulaDesalojo: document.getElementById('ClausulaDesalojo_Hidden').value,
+            Clausula10: document.getElementById('Clausula10_Hidden').value,
+            Clausula11: document.getElementById('Clausula11_Hidden').value,
+            Clausula12: document.getElementById('Clausula12_Hidden').value,
+            Clausula13: document.getElementById('Clausula13_Hidden').value,
+            FechaContrato: document.getElementById('FechaContrato_Hidden').value,
+        };
+
+        $.ajax({
+            url: '/Contratos/FormatoTransferencia_Actualizar',  
+            method: 'POST',  // Método HTTP POST
+            contentType: 'application/json',  // Tipo de contenido
+            data: JSON.stringify(transferencias),  // Convertir el objeto JavaScript a JSON
+            success: function (data) {
+                console.log(data);  // Respuesta del servidor
+                alert(data.mensaje);  // Mostrar mensaje de éxito
+                // Puedes agregar lógica aquí para actualizar tu interfaz de usuario
+            },
+            error: function (error) {
+                console.error('Error:', error);  // En caso de error
+            }
+        });
+    }
+</script>

@@ -1,0 +1,605 @@
+﻿@model InmobiliariaWeb.ViewModels.Contratos.CrearViewModel
+@{
+}
+<form asp-controller="Contratos" asp-action="Crear" method="post">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Nuevo Contrato</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="date" id="fechaCreacion" asp-for="@Model.ContratosModels.FechaContrato" required/>
+                            <label for="fechaCreacion">Fecha Creación</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="numeroSeparacion" asp-for="@Model.NumeroSeparacion" />
+                            <label for="numeroSeparacion">N° Separacion</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 g-2">
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+                        <div class="form-floating">
+                            <select class="form-select" id="programas" required>
+                                <option></option>
+                                @foreach (var programas in Model.ProgramasCbxLists)
+                                {
+                                    <option value="@programas.Ident_Programa">@programas.Nombre_Programa</option>
+                                }
+                            </select>
+                            <label for="programas">Seleccione Programa</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="manzana" required>
+                                <option></option>
+                            </select>
+                            <label for="manzana">Mz</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="lote" asp-for="@Model.ContratosModels.Ident_Lote" required>
+                                <option></option>
+                            </select>
+                            <label for="lote">Lt</label>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 mt-1 g-2">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="area" readonly />
+                                <label for="area">Area</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="ubicacion" readonly />
+                                <label for="ubicacion">Ubicación</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="precioM2" readonly />
+                                <label for="precioM2">$ M<sup>2</sup></label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" placeholder="0" id="precioTotal" readonly />
+                                <label for="precioTotal">$ Total</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-1">
+                        <div class="card-body">
+                            <div id="regular">
+                                <div class="row g-2">
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="izquierda" readonly />
+                                            <label for="izquierda">Izq.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="derecha" readonly />
+                                            <label for="derecha">Der.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="frente" readonly />
+                                            <label for="frente">Fre.</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="fondo" readonly />
+                                            <label for="fondo">Fon.</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="especial">
+                                <div class="row row-cols-2 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 mt-1 g-2">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l1" readonly />
+                                            <label for="l1">L1</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l2" readonly />
+                                            <label for="l2">L2</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l3" readonly />
+                                            <label for="l3">L3</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l4" readonly />
+                                            <label for="l4">L4</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l5" readonly />
+                                            <label for="l5">L5</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l6" readonly />
+                                            <label for="l6">L6</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l7" readonly />
+                                            <label for="l7">L7</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l8" readonly />
+                                            <label for="l8">L8</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l9" readonly />
+                                            <label for="l9">L9</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input class="form-control" type="text" placeholder="0" id="l10" readonly />
+                                            <label for="l10">L10</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="tratadoEn" placeholder="0" asp-for="@Model.ContratosModels.TratadoEn" onblur="fTratadoEn()" required/>
+                                <label for="tratadoEn">Tratado En</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="cuotaInicial" placeholder="0" asp-for="@Model.ContratosModels.CuotaInicial" onblur="fCuotaInicial()" required />
+                                <label for="cuotaInicial">Cuota Inicial</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="saldoAPagar" placeholder="0" readonly asp-for="@Model.ContratosModels.SaldoAPagar" />
+                                <label for="saldoAPagar">Saldo</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="cantidadCuotas" placeholder="0" asp-for="@Model.ContratosModels.CantidadCuotas" onblur="fCantidadCuotas()" required />
+                                <label for="cantidadCuotas"># Cuotas</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="cuotasIniciales" placeholder="0" asp-for="@Model.ContratosModels.CuotasIniciales" onblur="fCuotasIniciales()" required />
+                                <label for="cuotasIniciales"><span id="cuotasInicRestadas">X</span> Cuotas de</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="cuotaFinal" placeholder="0" readonly asp-for="@Model.ContratosModels.CuotaFinal" />
+                                <label for="cuotaFinal">Cuota Final</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" id="fechaCuotaInicial" placeholder="0" asp-for="@Model.ContratosModels.FechaCuotaInicial" required />
+                                <label for="fechaCuotaInicial">Fecha 1era Cuota</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="fechaRestoCuotas"  asp-for="@Model.ContratosModels.DiaCuota" min="1" max="31" required />
+                                <label for="fechaRestoCuotas">Días de Pago</label>
+                            </div>
+                            <span asp-validation-for="@Model.ContratosModels.DiaCuota" class="text-danger" style="font-size:inherit:7em"></span>
+                           @* <div class="form-floating">
+                                <input type="number" class="form-control" id="fechaRestoCuotas"
+                                       name="ContratosModels.DiaCuota"
+                                       value="@(Model.ContratosModels.DiaCuota == 0 ? "" : Model.ContratosModels.DiaCuota.ToString())"
+                                       required />
+                                <label for="fechaRestoCuotas">Días de Pago</label>
+                            </div>*@
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-12">
+                            <div class="form-check form-switch">
+                            <input type="checkbox" asp-for="@Model.ContratosModels.Flag_Legalizado" class="form-check-input" id="Flag_Legalizado" />
+                            <label for="Flag_Legalizado">Legalizado</label>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <textarea class="form-control" id="observacion" asp-for="@Model.ContratosModels.Observacion" style="height:7rem"></textarea>
+                                <label for="observacion">Observacion</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-lg btn-outline-success">REGISTRAR <i class="bi bi-floppy"></i></button>
+                <a class="btn btn-lg btn-outline-primary" asp-controller="Contratos" asp-action="Index">REGRESAR <i class="bi bi-skip-backward-fill"></i></a>
+            </div>
+        </div>
+    </div>
+</form>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+    function validateContent(id) {
+        const contentDiv = document.getElementById(id);
+
+        // Verifica si el contenido está vacío
+        if (contentDiv.textContent.trim() === "") {
+            contentDiv.classList.remove('is-valid');
+            contentDiv.classList.add('is-invalid');
+        } else {
+            contentDiv.classList.remove('is-invalid');
+            contentDiv.classList.add('is-valid');
+            // Llamamos a la función saveContent pasando el id del div
+            saveContent(id); // Pasa el id, no el objeto DOM completo
+        }
+    }
+
+
+    // Función para obtener datos al cargar la página
+    var numeroSeparacion = $("#numeroSeparacion").val();
+    if (numeroSeparacion != null && numeroSeparacion != "") {
+        DatosxSeparacion(numeroSeparacion);
+    } else {
+        limpiarDatosSeparacion();
+    }
+    $(document).ready(function () {
+        const contentDivs = document.querySelectorAll('[contenteditable][required]');
+        contentDivs.forEach((div) => {
+            validateContent(div.id);
+        });
+
+        // Selecciona todos los inputs y selects con atributo `required`
+        const inputs = document.querySelectorAll('input[required], select[required]');
+
+        inputs.forEach((input) => {
+            // Agrega un evento `input` para validar en tiempo real
+            input.addEventListener('input', function () {
+                if (input.checkValidity()) {
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                } else {
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                }
+            });
+
+            // Aplica la validación al salir del campo
+            input.addEventListener('blur', function () {
+                if (input.checkValidity()) {
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                } else {
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                }
+            });
+        });
+
+        // Aplica un borde rojo inicial para campos requeridos vacíos
+        inputs.forEach((input) => {
+            if (!input.value) {
+                input.classList.add('is-invalid');
+            }
+        });
+        
+        
+        
+        $("#programas").on("change", function () {
+            var selectedPrograma = $(this).val();
+            if (selectedPrograma) {
+                LimpiarDatosPrograma();
+                ObtenerManzanas(selectedPrograma, null); 
+            } else {
+                LimpiarDatosPrograma();
+            }
+        });
+
+        $("#manzana").on("change", function () {
+            var selectedManzana = $(this).val();
+            if (selectedManzana) {
+                LimpiarDatosManzana();
+                ObtenerLotes(selectedManzana, null);                 
+            } else {
+                LimpiarDatosManzana();
+                
+            }
+        });
+
+        $("#lote").on("change", function () {
+            var selectedLote = $(this).val();
+            if (selectedLote) {
+                LimpiarDatosLote();
+                DatosLote(selectedLote);
+            } else {
+                LimpiarDatosLote();
+                
+            }
+        });
+
+        $("#numeroSeparacion").on("change", function () {
+            var numeroSeparacion = $(this).val();
+            if (numeroSeparacion != null) {
+                DatosxSeparacion(numeroSeparacion);
+            } else {
+                limpiarDatosSeparacion();
+            }
+        });
+
+    });
+    
+    function DatosxSeparacion(numeroSeparacion)
+    {
+        $.get(`/Contratos/GetDatosxSeparacion?numeroSeparacion=${numeroSeparacion}`, function(data){
+            $("#programas").val(data.ident_Programa);
+            ObtenerManzanas(data.ident_Programa, data.ident_Manzana);
+            ObtenerLotes(data.ident_Manzana,data.ident_Lote);
+            DatosLote(data.ident_Lote);
+            $("#tratadoEn").val(data.tratadoEn);
+            $("#cuotaInicial").val(data.cuotaInicial);
+            $("#numeroCuotas").val(data.cantidadCuotas);
+            $("#cuotaFinal").val(data.cuotaFinal);
+            $("#lote").val(data.ident_Lote);
+            ObtenerSaldo();
+            ObtenerCuotas();
+            
+        });
+    }
+    
+    function ObtenerManzanas(programaId, defaults) {
+        $.get(`/Contratos/GetManzanas?programaId=${programaId}`, function (data) {
+            $("#manzana").empty();
+            $("#manzana").append('<option value=""></option>');
+            $.each(data, function (index, item) {
+                $("#manzana").append('<option value="' + item.ident_Manzana + '">' + item.letra + '</option>');
+            });
+            $("#manzana").val(defaults);
+        });
+    }
+
+    function ObtenerLotes(manzanaId, defaults) {
+        $.get(`/Contratos/GetLotes?manzanaId=${manzanaId}`, function (data) {
+            $("#lote").empty();
+            $("#lote").append('<option value=""></option>');
+            $.each(data, function (index, item) {
+                $("#lote").append('<option value="' + item.ident_Lote + '">' + item.correlativo + '</option>');
+            });
+            $("#lote").val(defaults);
+        });
+    }
+    
+    function DatosLote(ident_lote) {
+        fetch(`/Contratos/GetLoteDetalle?ident_Lote=${ident_lote}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener el detalle del lote');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Actualizar los campos en la página con los datos obtenidos
+                $("#area").val(data.area);
+                $("#ubicacion").val(data.ubicacion);
+                $("#precioM2").val(data.precioM2);
+                $("#precioTotal").val(data.precioTotal);
+
+                // Mostrar u ocultar los divs según el valor de Ident_010_TipoLote
+                if (data.ident_010_TipoLote === 84) {
+                    $("#regular").show();
+                    $("#especial").hide();
+                } else if (data.ident_010_TipoLote === 85) {
+                    $("#regular").hide();
+                    $("#especial").show();
+                }
+                // Para Lotes regulares
+                $("#izquierda").val(data.izquierda);
+                $("#derecha").val(data.derecha);
+                $("#frente").val(data.frente);
+                $("#fondo").val(data.fondo);
+
+                // para lotes especiales
+                $("#l1").val(data.lado1);
+                $("#l2").val(data.lado2);
+                $("#l3").val(data.lado3);
+                $("#l4").val(data.lado4);
+                $("#l5").val(data.lado5);
+                $("#l6").val(data.lado6);
+                $("#l7").val(data.lado7);
+                $("#l8").val(data.lado8);
+                $("#l9").val(data.lado9);
+                $("#l10").val(data.lado10);
+
+                $('#tratadoEn').val(data.precioTotal);
+                $('#saldo').val(data.precioTotal);
+            })
+            .catch(error => console.error("Error al obtener el detalle del lote:", error));
+    }
+    function limpiarDatosSeparacion() {
+        $("#programa").html("<option></option>");
+        LimpiarDatosPrograma();
+    }
+    function LimpiarDatosPrograma() {
+        // Limpiar los datos solo si no se están llenando automáticamente
+        $("#manzana").html("<option></option>");
+        LimpiarDatosManzana();
+    }
+    function LimpiarDatosManzana() {
+        // Limpiar los datos solo si no se están llenando automáticamente
+        $("#lote").html("<option></option>");
+        LimpiarDatosLote();
+    }
+    function LimpiarDatosLote() {
+        $("#area").val("");
+        $("#ubicacion").val("");
+        $("#precioM2").val("");
+        $("#precioTotal").val("");
+        $("#tratadoEn").val("");
+        $("#cuotaInicial").val("");
+        $("#numeroCuotas").val("");
+        $("#saldo").val("");
+        $("#cuotasIniciales").val("");
+        $("#cuotaFinal").val("");
+        $("#numeroSeparacion").val("");
+        // Para Lotes regulares
+        $("#izquierda").val("");
+        $("#derecha").val("");
+        $("#frente").val("");
+        $("#fondo").val("");
+        // para lotes especiales
+        $("#l1").val("");
+        $("#l2").val("");
+        $("#l3").val("");
+        $("#l4").val("");
+        $("#l5").val("");
+        $("#l6").val("");
+        $("#l7").val("");
+        $("#l8").val("");
+        $("#l9").val("");
+        $("#l10").val("");
+    }
+    
+    function fTratadoEn() {
+        const tratadoEn = parseFloat(document.getElementById('tratadoEn').value) || 0;
+
+        if (tratadoEn === 0) {
+            // Limpiar el resto de los campos
+            document.getElementById('cuotaInicial').value = '';
+            document.getElementById('saldoAPagar').value = '';
+            document.getElementById('cantidadCuotas').value = '';
+            document.getElementById('cuotasIniciales').value = '';
+            document.getElementById('cuotaFinal').value = '';
+            document.getElementById('cuotasInicRestadas').innerText = 'X';
+        }
+        else
+        {
+            fCuotaInicial();
+        }
+    }
+    function fCuotaInicial() {
+        const tratadoEn = parseFloat(document.getElementById('tratadoEn').value) || 0;
+        const cuotaInicial = parseFloat(document.getElementById('cuotaInicial').value);
+
+        if (isNaN(cuotaInicial)) {
+            // Limpiar el resto de los campos excepto tratadoEn
+            document.getElementById('saldoAPagar').value = '';
+            document.getElementById('cantidadCuotas').value = '';
+            document.getElementById('cuotasIniciales').value = '';
+            document.getElementById('cuotaFinal').value = '';
+            document.getElementById('cuotasInicRestadas').innerText = 'X';
+        } else if (cuotaInicial >= 0) {
+            // Calcular el saldo a pagar
+            const saldoAPagar = tratadoEn - cuotaInicial;
+            document.getElementById('saldoAPagar').value = saldoAPagar >= 0 ? saldoAPagar.toFixed(2) : 0;
+            fCantidadCuotas();
+        }
+    }
+    function fCantidadCuotas() {
+        const saldoAPagar = parseFloat(document.getElementById('saldoAPagar').value) || 0;
+        const cantidadCuotas = parseInt(document.getElementById('cantidadCuotas').value);
+
+        if (isNaN(cantidadCuotas) || cantidadCuotas <= 0) {
+            // Limpiar el resto de los campos excepto tratadoEn, cuotaInicial y saldoAPagar
+            document.getElementById('cuotasIniciales').value = '';
+            document.getElementById('cuotaFinal').value = '';
+            document.getElementById('cuotasInicRestadas').innerText = 'X';
+        } else {
+            // Calcular cuotas iniciales y cuota final
+            const cuotaIniciales = Math.floor(saldoAPagar / cantidadCuotas);
+            const cuotaFinal = (saldoAPagar % cantidadCuotas) > 0 ?
+                saldoAPagar - (cuotaIniciales * (cantidadCuotas - 1)) : 0;
+
+            document.getElementById('cuotasIniciales').value = cuotaIniciales.toFixed(2);
+            document.getElementById('cuotasInicRestadas').innerText = cuotaFinal > 0 ? cantidadCuotas - 1 : cantidadCuotas;
+            document.getElementById('cuotaFinal').value = cuotaFinal.toFixed(2);
+        }
+    }
+    function fCuotasIniciales() {
+        const saldoAPagar = parseFloat(document.getElementById('saldoAPagar').value) || 0;
+        const cantidadCuotas = parseInt(document.getElementById('cantidadCuotas').value);
+        const cuotasIniciales = parseFloat(document.getElementById('cuotasIniciales').value);
+
+        if (isNaN(cuotasIniciales) || cuotasIniciales <= 0) {
+            // Limpiar los valores de cuotaFinal y cuotasInicRestadas
+            document.getElementById('cuotaFinal').value = '';
+            document.getElementById('cuotasInicRestadas').innerText = 'X';
+        } else if (!isNaN(cantidadCuotas) && cantidadCuotas > 0) {
+            const totalIniciales = cuotasIniciales * cantidadCuotas;
+
+            if (saldoAPagar - totalIniciales === 0) {
+                // Caso: saldoAPagar - (cuotasIniciales * cantidadCuotas) = 0
+                document.getElementById('cuotaFinal').value = '0.00';
+                document.getElementById('cuotasInicRestadas').innerText = cantidadCuotas;
+            } else if (saldoAPagar - totalIniciales != 0) {
+                // Caso: saldoAPagar - (cuotasIniciales * cantidadCuotas) > 0
+                const cuotaFinal = saldoAPagar - (cuotasIniciales * (cantidadCuotas - 1));
+                document.getElementById('cuotaFinal').value = cuotaFinal.toFixed(2);
+                document.getElementById('cuotasInicRestadas').innerText = cantidadCuotas - 1;
+            }
+        }
+    }
+</script>

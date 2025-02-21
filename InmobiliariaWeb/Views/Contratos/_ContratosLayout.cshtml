@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "_Layout";
+    var identKardex = Context.Session.GetString("Ident_Kardex");
+}
+<div class="container">
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item mx-2">
+            <a class="nav-link " asp-controller="Contratos" asp-action="Actualizar" id="tabPrograma">Lotes y Costos</a>
+        </li>
+        <li class="nav-item mx-2">
+            <a class="nav-link" asp-controller="Contratos" asp-action="Cliente" id="tabPropietario">Clientes</a>
+        </li>
+        @if (!string.IsNullOrEmpty(identKardex))
+        {
+            <li class="nav-item mx-2">
+                <a class="nav-link" asp-controller="Contratos" asp-action="Kardex" id="tabkardex">Kardex</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item mx-2">
+                <a class="nav-link disabled" id="tabkardex" aria-disabled="true">Kardex</a> <!-- Pestaña deshabilitada -->
+            </li>
+        }
+    </ul>
+</div>
+
+@RenderBody()
+
+
+@await RenderSectionAsync("Scripts", required: false)

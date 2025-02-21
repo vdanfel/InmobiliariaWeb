@@ -1,0 +1,329 @@
+﻿@model InmobiliariaWeb.Models.Programa.ViewLadoEspecial
+@{
+    Layout = "_ActualizarLayout";
+}
+<form asp-action="LadoEspecial" asp-controller="Programa" method="post">
+    <input type="text" asp-for="Ident_010_TipoLote" hidden/>
+    <input type="text" asp-for="Ident_012_EstadoLote" hidden />
+    <input asp-for="Ident_Lote" hidden/>
+    <div class="card mt-3">
+        <div class="card-header fw-bold">
+            @Model.NombrePrograma - @Model.LetraManzana - @Model.NumeroLote - Lados Especiales
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1">
+                    <label class="col-form-label">L1</label>
+                </div>
+                <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                    <select asp-for="L1_Ident_009_Lado" class="form-select">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var tipoLado in Model.tipoLados)
+                        {
+                            <option value="@tipoLado.Ident_009_TipoLado">@tipoLado.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="L1"/>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaL1"/>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1">
+                    <label class="col-form-label">L2</label>
+                </div>
+                <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                    <select asp-for="L2_Ident_009_Lado" class="form-select">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var tipoLado in Model.tipoLados)
+                        {
+                            <option value="@tipoLado.Ident_009_TipoLado">@tipoLado.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="L2" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaL2" />
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1">
+                    <label class="col-form-label">L3</label>
+                </div>
+                <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                    <select asp-for="L3_Ident_009_Lado" class="form-select">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var tipoLado in Model.tipoLados)
+                        {
+                            <option value="@tipoLado.Ident_009_TipoLado">@tipoLado.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="L3" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaL3" />
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1">
+                    <label class="col-form-label">L4</label>
+                </div>
+                <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                    <select asp-for="L4_Ident_009_Lado" class="form-select">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var tipoLado in Model.tipoLados)
+                        {
+                            <option value="@tipoLado.Ident_009_TipoLado">@tipoLado.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="L4" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaL4" />
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1">
+                    <label class="col-form-label">L5</label>
+                </div>
+                <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                    <select asp-for="L5_Ident_009_Lado" class="form-select">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var tipoLado in Model.tipoLados)
+                        {
+                            <option value="@tipoLado.Ident_009_TipoLado">@tipoLado.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="L5" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaL5" />
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1">
+                    <label class="col-form-label">L6</label>
+                </div>
+                <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                    <select asp-for="L6_Ident_009_Lado" class="form-select">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var tipoLado in Model.tipoLados)
+                        {
+                            <option value="@tipoLado.Ident_009_TipoLado">@tipoLado.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="L6" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaL6" />
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1">
+                    <label class="col-form-label">L7</label>
+                </div>
+                <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                    <select asp-for="L7_Ident_009_Lado" class="form-select">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var tipoLado in Model.tipoLados)
+                        {
+                            <option value="@tipoLado.Ident_009_TipoLado">@tipoLado.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="L7" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaL7" />
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1">
+                    <label class="col-form-label">L8</label>
+                </div>
+                <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                    <select asp-for="L8_Ident_009_Lado" class="form-select">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var tipoLado in Model.tipoLados)
+                        {
+                            <option value="@tipoLado.Ident_009_TipoLado">@tipoLado.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="L8" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaL8" />
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1">
+                    <label class="col-form-label">L9</label>
+                </div>
+                <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                    <select asp-for="L9_Ident_009_Lado" class="form-select">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var tipoLado in Model.tipoLados)
+                        {
+                            <option value="@tipoLado.Ident_009_TipoLado">@tipoLado.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="L9" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaL9" />
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-2 col-sm-2 col-md-1 col-lg-1">
+                    <label class="col-form-label">L10</label>
+                </div>
+                <div class="col-7 col-sm-7 col-md-3 col-lg-3">
+                    <select asp-for="L10_Ident_009_Lado" class="form-select">
+                        <option value="0">--SELECCIONE--</option>
+                        @foreach (var tipoLado in Model.tipoLados)
+                        {
+                            <option value="@tipoLado.Ident_009_TipoLado">@tipoLado.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-3 col-sm-3 col-md-2 col-lg-2">
+                    <input type="number" class="form-control" asp-for="L10" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-1 mt-sm-1 mt-md-0 mt-lg-0">
+                    <input type="text" class="form-control" asp-for="ColindaL10" />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label class="col-form-label">Area Total</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" class="form-control" asp-for="Area" id="Area" onblur="calcularTotal()" />
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">Precio m<sup>2</sup></label>
+                </div>
+                <div class="col-4">
+                    <input type="number" class="form-control" asp-for="PrecioM2" id="PrecioM2" onblur="calcularTotal()" />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-2">
+                    <label class="col-form-label">$ Total</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" class="form-control" asp-for="PrecioTotal" id="PrecioTotal" readonly />
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">%</label>
+                </div>
+                <div class="col-4">
+                    <input type="number" class="form-control" asp-for="Porcentaje" readonly />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6 my-auto py-2">
+                    <div class="form-check form-switch ">
+                        @if (Model.Ident_012_EstadoLote > 89)
+                        {
+                            <input type="checkbox" asp-for="@Model.FlagCheked" class="form-check-input" id="FlagCheked" readonly />
+                        }
+                        else
+                        {
+                            <input type="checkbox" asp-for="@Model.FlagCheked" class="form-check-input" id="FlagCheked" />
+                        }
+                        <label for="Ident_012_EstadoLote">Verificado</label>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label class="col-form-label">Ubicación:</label>
+                </div>
+                <div class="col-4">
+                    <select class="form-select" id="tipoPropietario" asp-for="@Model.Ident_014_UbicacionLote" aria-label="Ubicación Lote">
+                        <option></option>
+                        @foreach (var tipoUbicacionLote in Model.TipoUbicacionLotes)
+                        {
+                            <option value="@tipoUbicacionLote.Ident_014_TipoUbicacionLote">@tipoUbicacionLote.Descripcion</option>
+                        }
+                    </select>
+                </div>
+                
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="form-check form-switch">
+                        <input type="checkbox" asp-for="@Model.Flag_ReservadoPropietarpio" class="form-check-input" id="FlagReservado" />
+                        <label for="FlagReservado">Reservado por Propietario</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-4">
+                    <button type="submit" class="btn btn-outline-success">Registrar Lote</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <a asp-action="Lote" asp-controller="Programa" class="btn btn-outline-secondary">
+            Regresar
+        </a>
+    </div>
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+    function calcularTotal() {
+        var areaTotal = parseFloat($('#Area').val()) || 0;
+        var precio = parseFloat($('#PrecioM2').val()) || 0;
+
+        if (areaTotal > 0 && precio > 0) {
+            var costo = Math.round(areaTotal * precio); 
+            $('#PrecioTotal').val(costo);
+        }
+        else {
+            $('#PrecioTotal').val(0);
+        }
+    };
+</script>

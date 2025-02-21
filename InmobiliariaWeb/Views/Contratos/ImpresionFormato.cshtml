@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body {
+            font-family: Calibri;
+            margin:0;
+            padding:0;
+            line-height:1.5;
+        }
+        p{
+        font-size:16px;
+        }
+        .page{
+        padding:40px;
+        box-sizing: border-box;
+        page-break-after:always;
+        }
+        .Titulo {
+            font-weight: bold;
+            font-size: 21px;
+            text-align: center;
+        }
+
+        .Parrafo {
+            font-size: 16px;
+            padding: 8px 0;
+            text-align: justify;
+        }
+
+        .Firmas-Contenedor{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:space-between;
+        }
+
+        .firma-card{
+            width:40%;
+            padding-top:15px;
+            display:flex;
+            flex-direction:column;
+            page-break-inside:avoid;
+        }
+
+            .firma-card hr {
+                margin: 10px 0; /* Separación antes y después del hr */
+            }
+        .espacio {
+            margin: 20px 0; /* Simular espacio entre líneas */
+        }
+
+        .datos {
+            text-align: center;
+            font-size:12px;
+            font-weight:bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="page">
+        @Html.Raw(ViewBag.ContratosFormato)
+    </div>
+</body>
+</html>

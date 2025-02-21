@@ -1,0 +1,235 @@
+﻿@model InmobiliariaWeb.ViewModels.Programa.ActualizarViewModel
+@{
+    ViewData["Tittle"] = "Actualizar Programa";
+    Layout = "_ActualizarLayout";
+}
+<form asp-action="Actualizar" asp-asp-controller="Programa" method="post">
+    <input hidden asp-for="@Model.ProgramaModel.Ident_Programa" />
+    <input hidden id="Clausula1_Hidden" asp-for="@Model.ProgramaModel.Clausula1" />
+    <div class="card mt-3">
+        <div class="card-header fw-bold">
+            @Model.ProgramaModel.Nombre - Datos del Programa
+        </div>
+        <div class="card-body">
+            <div class="row mb-1">
+                <div class="col col-12 lg-6 col-md-6 col-sm-12">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="Nombre" asp-for="@Model.ProgramaModel.Nombre" required />
+                        <label for="Nombre">Nombre del Programa</label>
+                    </div>
+                </div>
+                <div class="col col-12 lg-3 col-md-3 col-sm-12">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="Numero_Partida" asp-for="@Model.ProgramaModel.Numero_Partida" required />
+                        <label for="Numero_Partida">N° Partida</label>
+                    </div>
+                </div>
+                <div class="col col-12 lg-3 col-md-3 col-sm-12">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="Codigo" asp-for="@Model.ProgramaModel.Codigo" readonly />
+                        <label for="Codigo">Código</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="Direccion" asp-for="@Model.ProgramaModel.Direccion" required />
+                        <label for="Direccion">Dirección</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="Referencia" asp-for="@Model.ProgramaModel.Referencia" />
+                        <label for="Referencia">Referencia</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="number" id="AreaTotal" asp-for="@Model.ProgramaModel.AreaTotal" required />
+                        <label for="AreaTotal">Área Total</label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="number" id="AreaLotizada" asp-for="@Model.ProgramaModel.AreaLotizada" required />
+                        <label for="AreaLotizada">Área Lotizada</label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="number" id="CantidadManzanas" asp-for="@Model.ProgramaModel.CantidadManzanas" required />
+                        <label for="CantidadManzanas"># Manzanas</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" asp-for="@Model.ProgramaModel.ManzanaInicial" required>
+                            <option></option>
+                            @foreach (var manzanas in Model.Manzanas)
+                            {
+                                <option value="@manzanas.Valor">@manzanas.Descripcion</option>
+                            }
+                        </select>
+                        <label for="CantidadManzanas">Manzana Inicial</label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="number" id="PorcentajeLiquidacion" asp-for="@Model.ProgramaModel.PorcentajeLiquidacion" required />
+                        <label for="PorcentajeLiquidacion">% Liquidación</label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="Suministro" asp-for="@Model.ProgramaModel.Suministro" />
+                        <label for="Suministro">N° Suministro</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" asp-for="@Model.ProgramaModel.Ident_017_TipoContrato" required>
+                            <option></option>
+                            @foreach (var tipoContrato in Model.TipoContratos)
+                            {
+                                <option value="@tipoContrato.Ident_017_TipoContrato">@tipoContrato.Descripcion</option>
+                            }
+                        </select>
+                        <label for="CantidadManzanas">Tipo Contrato</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <input hidden id="Clausula1_Hidden" asp-for="@Model.ProgramaModel.Clausula1" />
+                <div id="Clausula1_Content" class="mt-3">
+                    <h5>1era Cláusula</h5>
+                    <div class="d-grid gap-2 d-flex">
+                        <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                        <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'italic')" class="btn btn-outline-dark"><i>C</i></button>
+                        <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'underline')" class="btn btn-outline-dark"><u>S</u></button>
+                    </div>
+                    <div class="row mt-1">
+                        <div contenteditable="true" class="form-control" id="Clausula1" required onblur="validateContent('Clausula1')">
+                            @Html.Raw(Model.ProgramaModel.Clausula1)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="d-grid gap-3 d-flex">
+                <button class="btn btn-lg btn-outline-info" type="submit">ACTUALIZAR <i class="bi bi-floppy2"></i></button>
+                <a class="btn btn-lg btn-outline-secondary" asp-action="Index" asp-controller="Programa">REGRESAR <i class="bi bi-skip-backward-fill"></i></a>
+                <a class="btn btn-lg btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmarAnulacionProgramaModal" id="eliminarProgramaButton">ELIMINAR <i class="bi bi-trash"></i></a>
+            </div>
+
+        </div>
+    </div>
+    @*<input id="confirmacion" type="text" asp-for="@Model.Confirmacion" hidden />*@
+</form>
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- Modal de confirmación para eliminar el programa -->
+<div class="modal fade" id="confirmarAnulacionProgramaModal" tabindex="-1" aria-labelledby="confirmarAnulacionProgramaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmarAnulacionProgramaModalLabel">Confirmación de Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro que deseas eliminar este programa?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmarAnulacionProgramaBtn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+
+    function aplicarEstilo(containerId, style) {
+        // Buscar el editor dentro del contenedor especificado
+        var editorId = containerId.split('_')[0];
+        var editor = document.getElementById(editorId);
+        if (editor) {
+            editor.focus();
+            document.execCommand(style, false, null);
+        }
+    }
+
+    function saveContent(containerId) {
+        var editor = document.getElementById(containerId);  // Obtén el div editable
+        if (editor) {
+            var editorContent = editor.innerHTML;  // Captura el contenido HTML del div
+            var hiddenInput = document.getElementById(containerId + "_Hidden"); // Busca el input oculto correspondiente
+            if (hiddenInput) {
+                hiddenInput.value = editorContent;  // Asigna el contenido al input oculto
+            }
+        }
+    }
+
+
+    function validateContent(id) {
+        const contentDiv = document.getElementById(id);
+
+        // Verifica si el contenido está vacío
+        if (contentDiv.textContent.trim() === "") {
+            contentDiv.classList.remove('is-valid');
+            contentDiv.classList.add('is-invalid');
+        } else {
+            contentDiv.classList.remove('is-invalid');
+            contentDiv.classList.add('is-valid');
+            // Llamamos a la función saveContent pasando el id del div
+            saveContent(id); // Pasa el id, no el objeto DOM completo
+        }
+    }
+
+    var anularProgramaUrl = '';
+
+    // Captura la URL de eliminación del programa cuando se hace clic en el botón "ELIMINAR"
+    document.getElementById('eliminarProgramaButton').addEventListener('click', function () {
+        anularProgramaUrl = '@Url.Action("AnularPrograma", "Programa", new { identPrograma = @Model.ProgramaModel.Ident_Programa })';
+    });
+
+    // Maneja la confirmación cuando se presiona el botón "Eliminar" en el modal
+    document.getElementById('confirmarAnulacionProgramaBtn').addEventListener('click', function () {
+        window.location.href = anularProgramaUrl; // Redirige a la URL de eliminación del programa
+    });
+
+</script>

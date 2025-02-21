@@ -1,0 +1,254 @@
+﻿@model InmobiliariaWeb.Models.Contratos.IndexViewModel
+@{
+}
+<form id="filtrarForm" method="post" asp-controller="Contratos" asp-action="Index">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <div class="row row-cols-2">
+                    <div class="col-9">
+                        <h2>Contratos</h2>
+                    </div>
+                    <div class="col-3 text-end">
+                        <a class="btn btn-outline-success" asp-controller="Contratos" asp-action="Crear">
+                            Nuevo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="correlativo" placeholder="" asp-for="@Model.Correlativo" />
+                            <label for="correlativo">N° Contrato:</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xxl-9 col-lg-9 col-md-9 col-sm-12">
+                        <div class="form-floating">
+                            <select class="form-select" id="programas" asp-for="@Model.Ident_Programa">
+                                <option value="0"></option>
+                                @foreach (var programas in Model.ProgramasCbxLists)
+                                {
+                                    <option value="@programas.Ident_Programa">@programas.Nombre_Programa</option>
+                                }
+                            </select>
+                            <label for="programas">Seleccione Programa</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xxl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="form-floating">
+                            <select class="form-select" id="manzana" asp-for="@Model.Ident_Manzana">
+                                <option value="0"></option>
+                            </select>
+                            <label for="manzana">Mz</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="cliente" placeholder="" asp-for="@Model.Cliente" />
+                            <label for="cliente">Cliente:</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="col-4">
+                    <input type="text" id="paginaActual" asp-for="@Model.PaginaActual" hidden />
+                    <input type="text" id="grupoActual" asp-for="@Model.GrupoActual" hidden />
+                    <input type="text" id="numeroPaginas" asp-for="@Model.NumeroPaginas" hidden />
+                    <input type="text" id="numeroGrupos" asp-for="@Model.NumeroGrupos" hidden />
+                    <button id="filtrarButton" class="btn btn-outline-info" type="button">
+                        Filtrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-2">
+        <div class="table-responsive-lg">
+            <table class="table table-hover table-bordered border-light">
+                <thead class="table-dark ">
+                    <tr>
+                        <th>N°</th>
+                        <th>Correlativo</th>
+                        <th>Cliente</th>
+                        <th>Programa</th>
+                        <th>Mz</th>
+                        <th>Lt</th>
+                        <th style="text-align:center" data-bs-toggle="tooltip" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </th>
+                        <th style="text-align:center" data-bs-toggle="tooltip" title="Anular">
+                            <i class="bi bi-trash"></i>
+                        </th>
+                        <th style="text-align:center" data-bs-toggle="tooltip" title="Carta Notarial">
+                            <i class="bi bi-c-circle"></i>
+                        </th>
+                        <th style="text-align:center" data-bs-toggle="tooltip" title="Adenda">
+                            <i class="bi bi-threads"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ContratosLists != null && Model.ContratosLists.Any())
+                    {
+                        @foreach (var contratos in Model.ContratosLists)
+                        {
+                            <tr>
+                                <td>@contratos.Indice</td>
+                                <td>@contratos.NumeroSerie</td>
+                                <td>@contratos.Cliente</td>
+                                <td>@contratos.Nombreprograma</td>
+                                <td>@contratos.Manzana</td>
+                                <td>@contratos.Lote</td>
+                                <td style="text-align:center">
+                                    <a class="btn btn-outline-secondary" asp-action="Actualizar" asp-controller="Contratos" asp-route-Ident_Contratos=@contratos.Ident_Contratos>
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </td>
+                                <td style="text-align:center">
+                                    <a class="btn btn-outline-danger" asp-action="Anular" asp-controller="Contratos" asp-route-Ident_Contratos=@contratos.Ident_Contratos>
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-outline-secondary">
+                                        <i class="bi bi-file-earmark-ruled"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-outline-primary">
+                                        <i class="bi bi-file-earmark-spreadsheet"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div id="paginator" class="mt-3">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <!-- Aquí se generará el paginador dinámicamente -->
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        generatePagination(@Model.NumeroPaginas, @Model.PaginaActual, @Model.GrupoActual, @Model.NumeroGrupos);
+
+        var programaSelect = document.getElementById("programas");
+
+        // Agregar un evento de cambio al elemento de selección del programa
+        programaSelect.addEventListener("change", function () {
+            // Obtener el valor seleccionado (identificador del programa)
+            var selectedPrograma = programaSelect.value;
+
+            // Obtener la referencia al elemento de selección de manzana
+            var manzanaSelect = document.getElementById("manzana");
+
+            // Limpiar las opciones existentes en el elemento de selección de manzana
+            manzanaSelect.innerHTML = "<option></option>";
+
+            // Verificar si se ha seleccionado un programa (evitar enviar una solicitud innecesaria)
+            if (selectedPrograma) {
+                fetch(`/Contratos/GetManzanas?programaId=${selectedPrograma}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Agregar las opciones de manzana al elemento de selección
+                        data.forEach(manzana => {
+                            var option = document.createElement("option");
+                            option.value = manzana.ident_Manzana;
+                            option.text = manzana.letra;
+                            manzanaSelect.add(option);
+                        });
+                    })
+                    .catch(error => console.error("Error al obtener las manzanas:", error));
+            }
+        });
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+    //para el paginador
+    function generatePagination(numerpPaginas, paginActual, grupoActual, numeroGrupos) {
+        const paginator = document.getElementById("paginator");
+        paginator.innerHTML = "";
+
+        const ul = document.createElement("ul");
+        ul.classList.add("pagination");
+
+        const startPage = (grupoActual - 1) * 10 + 1;
+        const endPage = Math.min(startPage + 9, numerpPaginas);
+
+        const prevLi = document.createElement("li");
+        prevLi.classList.add("page-item");
+        if (grupoActual > 1) {
+            const prevLink = document.createElement("a");
+            prevLink.classList.add("page-link");
+            prevLink.href = "#";
+            prevLink.innerText = "Anterior";
+            prevLink.addEventListener("click", function () {
+                const prevPage = startPage - 10;
+                document.getElementById("paginaActual").value = prevPage;
+                document.getElementById("filtrarForm").submit();
+            });
+            prevLi.appendChild(prevLink);
+        }
+        ul.appendChild(prevLi);
+
+        for (let i = startPage; i <= endPage; i++) {
+            const li = document.createElement("li");
+            li.classList.add("page-item");
+            if (i === paginActual) {
+                li.classList.add("active");
+            }
+            const pageLink = document.createElement("a");
+            pageLink.classList.add("page-link");
+            pageLink.href = "#";
+            pageLink.innerText = i;
+            let pageNumber = i;
+            pageLink.addEventListener("click", function () {
+                document.getElementById("paginaActual").value = pageNumber;
+                document.getElementById("filtrarForm").submit();
+            });
+            li.appendChild(pageLink);
+            ul.appendChild(li);
+        }
+
+        const nextLi = document.createElement("li");
+        nextLi.classList.add("page-item");
+        if (grupoActual < numeroGrupos) {
+            const nextLink = document.createElement("a");
+            nextLink.classList.add("page-link");
+            nextLink.href = "#";
+            nextLink.innerText = "Siguiente";
+            nextLink.addEventListener("click", function () {
+                const nextPage = startPage + 10;
+                document.getElementById("paginaActual").value = nextPage;
+                document.getElementById("filtrarForm").submit();
+            });
+            nextLi.appendChild(nextLink);
+        }
+        ul.appendChild(nextLi);
+
+        paginator.appendChild(ul);
+    }
+
+    document.getElementById('filtrarButton').addEventListener('click', function () {
+        document.getElementById("paginaActual").value = 1;
+        document.getElementById("filtrarForm").submit();
+    });
+</script>

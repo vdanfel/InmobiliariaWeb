@@ -1,0 +1,93 @@
+﻿@model InmobiliariaWeb.Models.Roles.RolesIndexViewModel
+@{
+    
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>ROLES</h2>
+        </div>
+        <form asp-action="Index" asp-controller="Roles" method="post">
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Ingrese Nombre del Rol" aria-label="Ingrese Nombre del Rol" aria-describedby="btnFiltrar" asp-for="@Model.NombreRol">
+                    <button class="btn btn-outline-secondary" type="submit">Crear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-3">
+        <div class="table-responsive-md">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Rol</th>
+                        <th>🔍︎</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.RolesList != null && Model.RolesList.Any())
+                    {
+                        @foreach (var Roles in Model.RolesList)
+                        {
+                            <tr>
+                                <td>@Roles.Indice</td>
+                                <td>@Roles.Descripcion</td>
+                                <td>
+                                    <a class="btn btn-outline-secondary" asp-action="Gestionar" asp-controller="Roles" asp-route-Ident_005_TipoUsuario=@Roles.Ident_005_Rolusuario>
+                                        <i class="bi bi-building-gear"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+</script>
+@*<script>
+    var estadoInicial = @Json.Serialize(Estado); // Asigna el valor del modelo a una variable de JavaScript
+    console.log(estadoInicial);
+    document.addEventListener('DOMContentLoaded', function () {
+        establecerEstado(estadoInicial); // Llama a la función al cargar la página
+    });
+
+    function establecerEstado(estado) {
+        var inputs = document.querySelectorAll('div input[type="text"]');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = estado === 0; // Desactiva los campos si el estado es 0
+        }
+    }
+</script>*@

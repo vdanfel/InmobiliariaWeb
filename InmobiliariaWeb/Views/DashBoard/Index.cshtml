@@ -1,0 +1,530 @@
+﻿@model DashboardViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Tittle"] = "Dashboard";
+}
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col col-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="form-floating">
+                <select class="form-select" id="filtro-Ident_Programa" asp-for="@Model.Ident_Programa">
+                    <option value="0">TODOS</option>
+                    @foreach (var programas in Model.ProgramasCbxLists)
+                    {
+                        <option value="@programas.Ident_Programa">@programas.Nombre_Programa</option>
+                    }
+                </select>
+                <label for="programas">Programa</label>
+            </div>
+        </div>
+        <div class="col col-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="form-floating">
+                <select class="form-select" id="filtro-Anio" asp-for="@Model.Year">
+                     @foreach (var anio in Model.AniosCbxList)
+                    {
+                        <option value="@anio">@anio</option>
+                    }
+                </select>
+                <label for="filtroAnio">Año</label>
+            </div>
+        </div>
+        <div class="col col-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="form-floating">
+                <select class="form-select" id="filtro-Mes" asp-for="@Model.Month">
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+                <label for="filtroMes">Mes</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 ">
+        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+            <div class="row g-1">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 id="AnioAnterior" style="text-align:center; font-weight:bold">2023</h1>
+                        </div>
+                        <div class="card-body">
+                            <label>Total Esperado</label>
+                            <h2 id="TotalCuotaAnterior" style="text-align:end"></h2>
+                            <label>Total Pagado</label>
+                            <h2 id="TotalPagadoAnterior" style="text-align:end"></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 id="AnioActual" style="text-align:center; font-weight:bold">2024</h1>
+                        </div>
+                        <div class="card-body">
+                            <label>Total Esperado</label>
+                            <h2 id="TotalCuotaActual" style="text-align:end"></h2>
+                            <label>Total Pagado</label>
+                            <h2 id="TotalPagadoActual" style="text-align:end"></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 col-lg-8 col-md-6 col-sm-12">
+            <div class="table-responsive-md tabla-programa-dash">
+                <table class="table table-hover table-bordered" id="dg1">
+                    <thead>
+                        <tr>
+                            <th hidden>Ident_Programa</th>
+                            <th>Programa</th>
+                            <th>Lotes</th>
+                            <th>Pagado</th>
+                            <th>Recaudo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <h3>Gráfico de Recaudo Mensual</h3>
+            <div class="mt-4" style="height:20em; width:100%">
+                <canvas id="graficoRecaudoMensual" style="max-height: 20em; width: 100%; height:100%"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 ">
+        <div class="col col-12 col-sm-12 col-md-6 col-lg-4">
+            <h3>Separaciones y Contratos</h3>
+            <div class="mt-4" style="height: 16em; width: 100%;">
+                <canvas id="graficoSeparacionesContratos" style="width: 100%; height: 100%; max-height: 16em;"></canvas>
+            </div>
+        </div>
+        <div class="col col-12 col-sm-12 col-md-6 col-lg-4">
+            grafico torta estado pagos personas
+        </div>
+        <div class="col col-12 col-sm-12 col-md-6 col-lg-4">
+            grafico torta estado pagos personas
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        var mensajeError = '@Model.Mensaje';
+        if (mensajeError && mensajeError.trim() !== '') {
+            $(window).load(function () {
+                $('#myModal').modal('show');
+            });
+        }
+        actualizarDatosTotalesProgramas();
+        actualizarDatosTotalesPeriodos();
+        // Doble clic en la tabla para seleccionar un programa
+        $(document).on('dblclick', '#dg1 tbody tr', function () {
+            // Quitar la clase 'selected' de otras filas
+            $('#dg1 tbody tr').removeClass('selected');
+
+            // Agregar la clase 'selected' a la fila actual
+            $(this).addClass('selected');
+
+            // Obtener el Ident_Programa de la fila seleccionada
+            var identPrograma = $(this).find('td:first').text();
+
+            // Actualizar el valor del select
+            $('#filtro-Ident_Programa').val(identPrograma);
+
+            // Actualizar los datos relacionados
+            actualizarDatosTotalesProgramas();
+            actualizarDatosTotalesPeriodos();
+        });
+
+        // Cambio en el select para actualizar la tabla y los cards de periodos
+        $('#filtro-Ident_Programa, #filtro-Anio, #filtro-Mes').on('change', function () {
+            var selectedPrograma = $('#filtro-Ident_Programa').val();
+
+            // Quitar la clase 'selected' de todas las filas
+            $('#dg1 tbody tr').removeClass('selected');
+
+            if (selectedPrograma === "0") {
+                // Si seleccionas "TODOS", quita la selección
+                $('#dg1 tbody tr').removeClass('selected');
+            } else {
+                // Buscar y resaltar la fila correspondiente
+                $('#dg1 tbody tr').each(function () {
+                    var identPrograma = $(this).find('td:first').text();
+                    if (identPrograma === selectedPrograma) {
+                        $(this).addClass('selected');
+                    }
+                });
+            }
+
+            // Actualizar los datos relacionados
+            actualizarDatosTotalesProgramas();
+            actualizarDatosTotalesPeriodos();
+        });
+
+        /*para llenar la tabla de programas*/
+        // Función para obtener los valores seleccionados y cargar los datos
+        function actualizarDatosTotalesProgramas() {
+            var identPrograma = $('#filtro-Ident_Programa').val(); // Valor del programa
+            var anio = $('#filtro-Anio').val();                   // Valor del año
+            var mes = $('#filtro-Mes').val();                     // Valor del mes
+
+            // Llamar a la función para cargar los datos con los valores seleccionados
+            cargarDatosTotalesProgramas(identPrograma, anio, mes, function () {
+                // Resaltar la fila después de cargar los datos
+                if (identPrograma !== "0") {
+                    $('#dg1 tbody tr').each(function () {
+                        var identFila = $(this).find('td:first').text();
+                        if (identFila === identPrograma) {
+                            $(this).addClass('selected');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Función para cargar los datos en la tabla
+        function cargarDatosTotalesProgramas(identPrograma, anio, mes, callback) {
+            $.ajax({
+                url: '/Dashboard/TotalesProgramas',
+                type: 'GET',
+                data: {
+                    Ident_Programa: identPrograma,
+                    Anio: anio,
+                    Mes: mes
+                },
+                success: function (data) {
+                    // Limpiar el tbody antes de insertar nuevos datos
+                    $('#dg1 tbody').empty();
+
+                    // Iterar sobre los datos recibidos y agregarlos a la tabla
+                    data.forEach(function (item) {
+                        var fila = `
+                            <tr>
+                                <td hidden>${item.ident_Programa}</td>
+                                <td>${item.nombrePrograma}</td>
+                                <td>${item.conteo_Lotes}</td>
+                                <td>${item.pagos_Realizados}</td>
+                                <td>${item.importes_Pagados}</td>
+                            </tr>
+                        `;
+                        $('#dg1 tbody').append(fila);
+                    });
+
+                    // Ejecutar el callback si existe
+                    if (callback && typeof callback === 'function') {
+                        callback();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error al cargar los datos: ", error);
+                    alert("Hubo un error al obtener los datos del servidor.");
+                }
+            });
+        }
+
+        // Función para obtener los valores seleccionados y cargar los datos de los periodos
+        function actualizarDatosTotalesPeriodos() {
+            var identPrograma = $('#filtro-Ident_Programa').val(); // Valor del programa
+            var anio = $('#filtro-Anio').val();                   // Valor del año
+            var mes = $('#filtro-Mes').val();                     // Valor del mes
+
+            // Llamar al controlador con AJAX para obtener los datos
+            $.ajax({
+                url: '/Dashboard/VSPeriodos', // Cambiar "TuControlador" por el nombre real del controlador
+                method: 'GET',
+                data: { Ident_Programa: identPrograma, Anio: anio, Mes: mes },
+                success: function (response) {
+                    // Actualizar los elementos HTML con los datos obtenidos
+                    if (response) {
+                        const formatCurrency = (value) => {
+                            return new Intl.NumberFormat('en-US', {
+                                style: 'currency',
+                                currency: 'USD',
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }).format(value || 0);
+                        };
+                        $('#AnioAnterior').text(response.anioAnterior || '0');
+                        $('#TotalCuotaAnterior').text(formatCurrency(response.totalCuotaAnterior));
+                        $('#TotalPagadoAnterior').text(formatCurrency(response.totalPagadoAnterior));
+
+                        $('#AnioActual').text(response.anioActual || '0');
+                        $('#TotalCuotaActual').text(formatCurrency(response.totalCuotaActual));
+                        $('#TotalPagadoActual').text(formatCurrency(response.totalPagadoActual));
+                    }
+                },
+                error: function () {
+                    alert('Error al cargar los datos de los periodos.');
+                }
+            });
+        }
+    });
+
+
+
+
+
+    /*Grafico para Recaudo Mensual*/
+    // Datos de los meses
+    const datosRecaudoMensual = {
+        1: { esperado: 5000, actual: 5200, moras: 1000 },     // Enero
+        2: { esperado: 6000, actual: 4000, moras: 1500 },     // Febrero
+        3: { esperado: 7000, actual: 5500, moras: 500 },      // Marzo
+        4: { esperado: 6500, actual: 6200, moras: 0 },        // Abril
+        5: { esperado: 5000, actual: 3000, moras: 2000 },     // Mayo
+        6: { esperado: 7500, actual: 7500, moras: 0 },        // Junio
+        7: { esperado: 4800, actual: 5200, moras: 100 },      // Julio
+        8: { esperado: 5600, actual: 5800, moras: 2500 },     // Agosto
+        9: { esperado: 6500, actual: 6900, moras: 900 },      // Septiembre
+        10: { esperado: 9500, actual: 8800, moras: 850 },     // Octubre
+        11: { esperado: 10000, actual: 9600, moras: 1700 },   // Noviembre
+        12: { esperado: 0, actual: 0, moras: 0 }              // Diciembre
+    };
+
+    // Crear el gráfico
+    let graficoRecaudoMensual;
+
+    // Función para crear el gráfico
+    function crearGraficoRecaudoMensual() {
+        // Contexto para el canvas
+        const ctx = document.getElementById('graficoRecaudoMensual').getContext('2d');
+        if (graficoRecaudoMensual) {
+            graficoRecaudoMensual.destroy(); // Elimina el gráfico previo
+        }
+
+        // Meses
+        const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+        // Arrays para los valores
+        const valorEsperado = [];
+        const valorActual = [];
+        const valorMoras = [];
+        const valorEsperadoPorcentaje = [];
+        const valorActualPorcentaje = [];
+        const valorMorasPorcentaje = [];
+
+        // Llenar los datos
+        for (let i = 1; i <= 12; i++) {
+            const data = datosRecaudoMensual[i];
+
+            // Calculamos el porcentaje respecto al valor esperado
+            const esperadoPorcentaje = data.esperado > 0 ? 100 : 0;
+            const actualPorcentaje = data.esperado > 0 ? (data.actual / data.esperado) * 100 : 0;
+            const morasPorcentaje = data.esperado > 0 ? (data.moras / data.esperado) * 100 : 0;
+
+            // Agregar valores a los arrays
+            valorEsperado.push(data.esperado);
+            valorActual.push(data.actual);
+            valorMoras.push(data.moras);
+
+            valorEsperadoPorcentaje.push(esperadoPorcentaje);
+            valorActualPorcentaje.push(actualPorcentaje);
+            valorMorasPorcentaje.push(morasPorcentaje);
+        }
+
+        // Configuración del gráfico
+        graficoRecaudoMensual = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: meses,
+                datasets: [
+                    {
+                        label: 'Recaudo Esperado',
+                        data: valorEsperadoPorcentaje,
+                        backgroundColor: '#00BFFF',
+                        borderColor: '#1E90FF',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Recaudo Real',
+                        data: valorActualPorcentaje,
+                        backgroundColor: '#32CD32',
+                        borderColor: '#228B22',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Recaudo Fuera de Fecha',
+                        data: valorMorasPorcentaje,
+                        backgroundColor: '#FF6347',
+                        borderColor: '#FF4500',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function (value) {
+                                return value + '%'; // Mostrar porcentaje
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                const datasetIndex = tooltipItem.datasetIndex;
+                                const dataIndex = tooltipItem.dataIndex;
+                                let realValue;
+
+                                if (datasetIndex === 0) {
+                                    realValue = valorEsperado[dataIndex];
+                                } else if (datasetIndex === 1) {
+                                    realValue = valorActual[dataIndex];
+                                } else {
+                                    realValue = valorMoras[dataIndex];
+                                }
+
+                                return '$ ' + realValue.toLocaleString(); // Mostrar el monto real
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Inicializar el gráfico
+    crearGraficoRecaudoMensual();
+
+
+    /*Grafico para ver separaciones y contratos*/
+    //Datos de los meses
+    const datosSeparacionesContratos = {
+        1: { separaciones: 40, contratos: 25, separacionesAContratos: 18 },  // Enero
+        2: { separaciones: 35, contratos: 30, separacionesAContratos: 22 },  // Febrero
+        3: { separaciones: 50, contratos: 40, separacionesAContratos: 30 },  // Marzo
+        4: { separaciones: 45, contratos: 38, separacionesAContratos: 25 },  // Abril
+        5: { separaciones: 60, contratos: 50, separacionesAContratos: 40 },  // Mayo
+        6: { separaciones: 55, contratos: 45, separacionesAContratos: 35 },  // Junio
+        7: { separaciones: 70, contratos: 60, separacionesAContratos: 50 },  // Julio
+        8: { separaciones: 65, contratos: 55, separacionesAContratos: 45 },  // Agosto
+        9: { separaciones: 80, contratos: 70, separacionesAContratos: 60 },  // Septiembre
+        10: { separaciones: 50, contratos: 65, separacionesAContratos: 35 }, // Octubre
+        11: { separaciones: 85, contratos: 75, separacionesAContratos: 65 }, // Noviembre
+        12: { separaciones: 0, contratos: 0, separacionesAContratos: 0 }, // Diciembre
+    };
+
+    //Crear el grafico
+    let graficoSeparacionesContratos;
+
+    //Funcion para crear el grafico
+    function crearGraficoSeparacionesContratos(selectedMonth = 1) {
+        const ctx = document.getElementById('graficoSeparacionesContratos').getContext('2d');
+        if (graficoSeparacionesContratos) {
+            graficoSeparacionesContratos.destroy();
+        }
+
+        const data = datosSeparacionesContratos[selectedMonth] || { separaciones: 0, contratos: 0, separacionesAContratos: 0 };
+        const { separaciones, contratos, separacionesAContratos } = data;
+
+        graficoSeparacionesContratos = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Mes Seleccionado'],
+                datasets: [
+                    {
+                        label: 'Separaciones Realizadas',
+                        data: [separaciones],
+                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Contratos Directos',
+                        data: [contratos],
+                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Separaciones a Contratos',
+                        data: [separacionesAContratos],
+                        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: `Mes: ${['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'][selectedMonth - 1]}`
+                        },
+                        ticks: {
+                            display: false // Ocultar los ticks del eje X
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Cantidad'
+                        },
+                        ticks: {
+                            stepSize: 10,
+                            callback: (value) => value // Solo muestra la numeración
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: (tooltipItem) => {
+                                const datasetIndex = tooltipItem.datasetIndex;
+                                const realValue = [separaciones, contratos, separacionesAContratos][datasetIndex];
+                                return `${tooltipItem.dataset.label}: ${realValue} operaciones`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Inicializar el gráfico con el mes actual
+    crearGraficoSeparacionesContratos(new Date().getMonth()+1);
+
+</script>

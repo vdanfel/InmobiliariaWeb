@@ -1,0 +1,216 @@
+﻿@model InmobiliariaWeb.Models.Programa.ViewPrograma
+@{
+    Layout = "_ActualizarLayout";
+}
+<form asp-action="ProgramaActualizar" method="post" id="formActualizar">
+    <input hidden asp-for="@Model.IdentPrograma" />
+    <input hidden id="Clausula1_Hidden" asp-for="@Model.Clausula1" />
+    <div class="card mt-3">
+        <div class="card-header fw-bold">
+            @Model.NombrePrograma - Datos del Programa
+        </div>
+        <div class="card-body">
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Nombre</label>
+                </div>
+                <div class="col-lg-10 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.NombrePrograma" />
+                    <span asp-validation-for="@Model.NombrePrograma" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">N° Partida</label>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.NumeroPartida" />
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">N° Código</label>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.Codigo" readonly />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Dirección</label>
+                </div>
+                <div class="col-lg-10 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.Direccion" />
+                    <span asp-validation-for="@Model.Direccion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Referencia</label>
+                </div>
+                <div class="col-lg-10 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.Referencia" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Area Total</label>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <input type="number" class="form-control" asp-for="@Model.AreaTotal" />
+                    <span asp-validation-for="@Model.AreaTotal" class="text-danger"></span>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Area Lotizada</label>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <input type="number" class="form-control" asp-for="@Model.AreaLotizada" />
+                    <span asp-validation-for="@Model.AreaLotizada" class="text-danger"></span>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Cantidad Mz</label>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <input type="number" class="form-control" asp-for="@Model.CantidadManzanas" />
+                    <span asp-validation-for="@Model.CantidadManzanas" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Suministro</label>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <input type="text" class="form-control" asp-for="@Model.Suministro" />
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">Manzana Inicial</label>
+                </div>
+                <div class="col-lg-2 col-sm-12">
+                    <select class="form-select" asp-for="@Model.ManzanaInicial">
+                        @foreach (var manzanas in Model.manzanas)
+                        {
+                            <option value="@manzanas.Valor">@manzanas.Descripcion</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-2 col-sm-12">
+                    <label class="col-form-label">TipoContrato</label>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <select class="form-select" asp-for="@Model.Ident_017_TipoContrato">
+                        <option></option>
+                        @foreach (var tipoContrato in Model.TipoContratos)
+                        {
+                            <option value="@tipoContrato.Ident_017_TipoContrato">@tipoContrato.Descripcion</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div id="Clausula1_Content" class="mt-3">
+                <h5>1era Cláusula</h5>
+                <div class="d-grid gap-2 d-flex">
+                    <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                    <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'italic')" class="btn btn-outline-dark"><i>K</i></button>
+                    <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'underline')" class="btn btn-outline-dark"><u>U</u></button>
+                </div>
+                <div class="row mt-1">
+                    <div contenteditable="true" class="form-control" id="Clausula1" onblur="saveContent('Clausula1')">
+                        @Html.Raw(Model.Clausula1)
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="card-footer">
+            <div class="d-grid gap-3 d-flex">
+                <button class="btn btn-lg btn-outline-info" type="submit">ACTUALIZAR <i class="bi bi-floppy2"></i></button>
+                <a class="btn btn-lg btn-outline-secondary" asp-action="Index" asp-controller="Programa">REGRESAR <i class="bi bi-skip-backward-fill"></i></a>
+                <a class="btn btn-lg btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmarAnulacionProgramaModal" id="eliminarProgramaButton">ELIMINAR <i class="bi bi-trash"></i></a>
+            </div>
+
+        </div>
+    </div>
+    <input id="confirmacion" type="text" asp-for="@Model.Confirmacion" hidden />
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- Modal de confirmación para eliminar el programa -->
+<div class="modal fade" id="confirmarAnulacionProgramaModal" tabindex="-1" aria-labelledby="confirmarAnulacionProgramaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmarAnulacionProgramaModalLabel">Confirmación de Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro que deseas eliminar este programa?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmarAnulacionProgramaBtn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+
+    function aplicarEstilo(containerId, style) {
+        // Buscar el editor dentro del contenedor especificado
+        var editorId = containerId.split('_')[0];
+        var editor = document.getElementById(editorId);
+        if (editor) {
+            editor.focus();
+            document.execCommand(style, false, null);
+        }
+    }
+
+    function saveContent(containerId) {
+        var editor = document.getElementById(containerId);
+        if (editor) {
+            var editorContent = editor.innerHTML;
+            var hiddenInput = document.getElementById(containerId + "_Hidden");
+            if (hiddenInput) {
+                hiddenInput.value = editorContent;
+            }
+        }
+    }
+
+    var anularProgramaUrl = '';
+
+    // Captura la URL de eliminación del programa cuando se hace clic en el botón "ELIMINAR"
+    document.getElementById('eliminarProgramaButton').addEventListener('click', function () {
+        anularProgramaUrl = '@Url.Action("AnularPrograma", "Programa", new { identPrograma = @Model.IdentPrograma })';
+    });
+
+    // Maneja la confirmación cuando se presiona el botón "Eliminar" en el modal
+    document.getElementById('confirmarAnulacionProgramaBtn').addEventListener('click', function () {
+        window.location.href = anularProgramaUrl; // Redirige a la URL de eliminación del programa
+    });
+    
+</script>
+
+

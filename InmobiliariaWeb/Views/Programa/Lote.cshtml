@@ -1,0 +1,155 @@
+﻿@model InmobiliariaWeb.Models.Programa.ViewLote
+@{
+    Layout = "_ActualizarLayout";
+}
+<input hidden asp-for="@Model.IdentPrograma" />
+<div class="card mt-3">
+    <div class="card-header fw-bold">
+        @Model.NombrePrograma - @Model.LetraManzana - Lotes
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col col-4 col-md-2 col-lg-2 col-sm-4" style="text-align:center">
+                <p class="leyenda-SinVerificar">Sin Verificar</p>
+            </div>
+            <div class="col col-4 col-md-2 col-lg-2 col-sm-4" style="text-align:center">
+                <p class="leyenda-Verificado">Verificado</p>
+            </div>
+            <div class="col col-4 col-md-2 col-lg-2 col-sm-4" style="text-align:center">
+                <p class="leyenda-Separacion">Separación</p>
+            </div>
+            <div class="col col-4 col-md-2 col-lg-2 col-sm-4" style="text-align:center">
+                <p class="leyenda-Contrato">Contrato</p>
+            </div>
+            <div class="col col-4 col-md-2 col-lg-2 col-sm-4" style="text-align:center">
+                <p class="leyenda-Vendido">Cancelado</p>
+            </div>
+            <div class="col col-4 col-md-2 col-lg-2 col-sm-4" style="text-align:center">
+                <p class="leyenda-Propietario">Propietario</p>
+            </div>
+        </div>
+        <div class="table-responsive-md mt-2">
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr class="text-center">
+                        <th>N°</th>
+                        <th hidden>Ident_Lote</th>
+                        <th class="columna-tipo">Tipo</th>
+                        <th hidden>Ident014UbicacionLote</th>
+                        <th>Ubic.</th>
+                        <th># Lados</th>
+                        <th>$ m<sup>2</sup></th>
+                        <th>Area m<sup>2</sup></th>
+                        <th>$ Total</th>
+                        <th style="text-align:center" data-bs-toggle="tooltip" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lotes in Model.LotesList)
+                    {
+                        string rowClass = ""; // Variable para almacenar la clase de estilo
+
+                        if (lotes.Flag_ReservadoPropietarpio == true)
+                        {
+                            rowClass = "table-Propietario";
+                        }
+                        else
+                        {
+                            // Asignar la clase de estilo según el valor de Ident012EstadoLote
+                            switch (lotes.Ident012EstadoLote)
+                            {
+                                case 88:
+                                    rowClass = "table-SinVerificar";
+                                    break;
+                                case 89:
+                                    rowClass = "table-Verificado";// Sin estilo
+                                    break;
+                                case 90:
+                                    rowClass = "table-Separacion";
+                                    break;
+                                case 91:
+                                    rowClass = "table-Contrato";
+                                    break;
+                                case 92:
+                                    rowClass = "table-Vendido";
+                                    break;
+                                default:
+                                    rowClass = ""; // Por si acaso hay otros valores
+                                    break;
+                            }
+                        }
+                        
+
+                        <tr >
+                            <td class="text-center m-auto @rowClass">@lotes.Indice</td>
+                            <td hidden>@lotes.IdentLote</td>
+                            <td class="text-center">
+                                <select asp-for="@lotes.Ident010TipoLote" class="form-select" id="tipoLote_@lotes.Indice">
+                                    <option></option>
+                                    @foreach (var tipoLote in Model.TipoLote)
+                                    {
+                                        <option value="@tipoLote.Ident_010_TipoLote">@tipoLote.Descripcion</option>
+                                    }
+                                </select>
+                            </td>
+                            <td hidden>@lotes.Ident014UbicacionLote</td>
+                            <td class="text-center">@lotes.TipoUbicacion</td>
+                            <td class="text-center">@lotes.CantidadLados</td>
+                            <td class="text-end">@lotes.PrecioM2.ToString("#,##0.00")</td>
+                            <td class="text-end">@lotes.Area.ToString("#,##0.00")</td>
+                            <td class="text-end">@lotes.PrecioTotal.ToString("#,##0.00")</td>
+                            <td class="text-center px-2 mx-2">
+                                <a class="btn btn-outline-secondary" onclick="abrirLado('@lotes.IdentLote', '@lotes.Indice')">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+    function abrirLado(identLote, indice) {
+        console.log(identLote);
+        var tipoLote = $(`#tipoLote_${indice}`).val();
+        console.log(tipoLote);
+        window.location.href = `/Programa/Lado?IdentLote=${identLote}&Ident010TipoLote=${tipoLote}&NumeroLote=${indice}`;
+    }
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>

@@ -1,0 +1,257 @@
+﻿@model InmobiliariaWeb.ViewModels.Programa.CrearViewModel
+@{
+    ViewData["Tittle"] = "Crear Programa";
+}
+<div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="ProgramaTab" data-bs-toggle="tab" data-bs-target="#ProgramaTabPane" type="button" role="tab" aria-controls="ProgramaTabPane" aria-selected="true">Programa</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="ProgramaTabPane" role="tabpanel" aria-labelledby="ProgramaTab" tabindex="0">
+            @*<partial name="_Programa" />*@
+            <form asp-action="Crear" method="post" class="needs-validation" novalidate>
+                <div class="card mt-3">
+                    <div class="card-header fw-bold">
+                        Datos del Programa
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-12 col-lg-8 col-md-8 col-sm-12">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="text" id="Nombre" asp-for="@Model.ProgramaModel.Nombre" required />
+                                    <label for="Nombre">Nombre del Programa</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="text" id="NumeroPartida" asp-for="@Model.ProgramaModel.Numero_Partida" required />
+                                    <label for="NumeroPartida">N° Partida</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="text" id="Direccion" asp-for="@Model.ProgramaModel.Direccion" required />
+                                    <label for="Direccion">Dirección</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="text" id="Referencia" asp-for="@Model.ProgramaModel.Referencia" />
+                                    <label for="Referencia">Referencia</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="number" id="AreaTotal" asp-for="@Model.ProgramaModel.AreaTotal" required />
+                                    <label for="AreaTotal">Área Total</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="number" id="AreaLotizada" asp-for="@Model.ProgramaModel.AreaLotizada" required />
+                                    <label for="AreaLotizada">Área Lotizada</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="number" id="CantidadManzanas" asp-for="@Model.ProgramaModel.CantidadManzanas" required />
+                                    <label for="CantidadManzanas"># Manzanas</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" asp-for="@Model.ProgramaModel.ManzanaInicial" required>
+                                        <option></option>
+                                        @foreach (var manzanas in Model.Manzanas)
+                                        {
+                                            <option value="@manzanas.Valor">@manzanas.Descripcion</option>
+                                        }
+                                    </select>
+                                    <label for="CantidadManzanas">Manzana Inicial</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="number" id="PorcentajeLiquidacion" asp-for="@Model.ProgramaModel.PorcentajeLiquidacion" required />
+                                    <label for="PorcentajeLiquidacion">% Liquidación</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="text" id="Suministro" asp-for="@Model.ProgramaModel.Suministro" />
+                                    <label for="Suministro">N° Suministro</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-12 col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-floating mb-3">
+                                    <select class="form-select" asp-for="@Model.ProgramaModel.Ident_017_TipoContrato" required>
+                                        <option></option>
+                                        @foreach (var tipoContrato in Model.TipoContratos)
+                                        {
+                                            <option value="@tipoContrato.Ident_017_TipoContrato">@tipoContrato.Descripcion</option>
+                                        }
+                                    </select>
+                                    <label for="CantidadManzanas">Tipo Contrato</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <input hidden id="Clausula1_Hidden" asp-for="@Model.ProgramaModel.Clausula1" />
+                            <div id="Clausula1_Content" class="mt-3">
+                                <h5>1era Cláusula</h5>
+                                <div class="d-grid gap-2 d-flex">
+                                    <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'bold')" class="btn btn-outline-dark"><b>N</b></button>
+                                    <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'italic')" class="btn btn-outline-dark"><i>C</i></button>
+                                    <button type="button" onclick="aplicarEstilo('Clausula1_Content', 'underline')" class="btn btn-outline-dark"><u>S</u></button>
+                                </div>
+                                <div class="row mt-1">
+                                    <div contenteditable="true" class="form-control" id="Clausula1" required onblur="validateContent('Clausula1')" onpaste="handlePaste(event)">
+                                        @Html.Raw(Model.ProgramaModel.Clausula1)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-lg btn-outline-success" type="submit">
+                            REGISTRAR <i class="bi bi-floppy"></i>
+                        </button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+        
+    </div>
+</div>
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+
+    function handlePaste(event) {
+        // Prevenir la acción de pegado predeterminada
+        event.preventDefault();
+
+        // Obtener el texto sin formato desde el portapapeles
+        var plainText = (event.clipboardData || window.clipboardData).getData('text');
+
+        // Insertar el texto limpio en el cursor actual
+        document.execCommand("insertText", false, plainText);
+    }
+
+    function aplicarEstilo(containerId, style) {
+        var editorId = containerId.split('_')[0];
+        var editor = document.getElementById(editorId);
+        if (editor) {
+            editor.focus();
+            document.execCommand(style, false, null);
+        }
+    }
+
+    function saveContent(containerId) {
+        var editor = document.getElementById(containerId);
+        if (editor) {
+            var editorContent = editor.innerHTML;
+            var hiddenInput = document.getElementById(containerId + "_Hidden");
+            if (hiddenInput) {
+                hiddenInput.value = editorContent;
+            }
+        }
+    }
+
+
+    function validateContent(id) {
+        const contentDiv = document.getElementById(id);
+
+        // Verifica si el contenido está vacío
+        if (contentDiv.textContent.trim() === "") {
+            contentDiv.classList.remove('is-valid');
+            contentDiv.classList.add('is-invalid');
+        } else {
+            contentDiv.classList.remove('is-invalid');
+            contentDiv.classList.add('is-valid');
+            // Llamamos a la función saveContent pasando el id del div
+            saveContent(id); // Pasa el id, no el objeto DOM completo
+        }
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const contentDivs = document.querySelectorAll('[contenteditable][required]');
+        contentDivs.forEach((div) => {
+            validateContent(div.id);
+        });
+
+        // Selecciona todos los inputs y selects con atributo `required`
+        const inputs = document.querySelectorAll('input[required], select[required]');
+
+        inputs.forEach((input) => {
+            // Agrega un evento `input` para validar en tiempo real
+            input.addEventListener('input', function () {
+                if (input.checkValidity()) {
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                } else {
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                }
+            });
+
+            // Aplica la validación al salir del campo
+            input.addEventListener('blur', function () {
+                if (input.checkValidity()) {
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                } else {
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                }
+            });
+        });
+
+        // Aplica un borde rojo inicial para campos requeridos vacíos
+        inputs.forEach((input) => {
+            if (!input.value) {
+                input.classList.add('is-invalid');
+            }
+        });
+    });
+
+</script>

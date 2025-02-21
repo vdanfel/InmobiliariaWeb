@@ -1,0 +1,158 @@
+﻿@model InmobiliariaWeb.Models.Programa.ViewManzana
+@{
+    Layout = "_ActualizarLayout";
+}
+<form asp-action="Manzana" asp-controller="Programa" method="post">
+    <input hidden asp-for="@Model.IdentPrograma" />
+    <div class="card mt-3">
+        <div class="card-header fw-bold">
+            @Model.NombrePrograma - Manzanas
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>N°</th>
+                        <th hidden>Ident_Manzana</th>
+                        <th hidden>Correlativo</th>
+                        <th>LETRA</th>
+                        <th>#LOTES</th>
+                        <th style="text-align:center" data-bs-toggle="tooltip" title="Cantidad Lotes">
+                            <i class="bi bi-house-gear"></i>
+                        </th>
+                        <th style="text-align:center" data-bs-toggle="tooltip" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var manzanas in Model.ManzanaList)
+                    {
+                        var isCantidadLotesZero = manzanas.CantidadLotes == 0;
+                        <tr>
+                            <td>@manzanas.Indice</td>
+                            <th hidden id="IdentManzana">@manzanas.Ident_Manzana</th>
+                            <th hidden>@manzanas.Correlativo</th>
+                            <th>@manzanas.Letra</th>
+                            <th>@manzanas.CantidadLotes</th>
+                            <th style="text-align:center">
+                                <button type="button" class="btn btn-outline-primary btnActualizarLotes" data-identmanzana="@manzanas.Ident_Manzana" data-cantidad-lotes="@manzanas.CantidadLotes">
+                                    <i class="bi bi-house-gear"></i>
+                                </button>
+                            </th>
+                            <th style="text-align:center">
+                                <a asp-controller="Programa" asp-action="Lote" asp-route-IdentManzana="@manzanas.Ident_Manzana" asp-route-Letra="@manzanas.Letra" class="btn btn-outline-secondary @(isCantidadLotesZero ? "disabled" : "")">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Actualizar #Lotes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="identManzanaInput" hidden />
+                <input type="text" class="form-control m-auto" style="width:70px;text-align:center" id="cantidadLotesInput" />
+                <span class="text-danger" id="validarCantidad"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="validarYActualizar()">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @Model.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var mensajeError = '@Model.Mensaje';
+    if (mensajeError && mensajeError.trim() !== '') {
+        $(window).load(function () {
+            $('#myModal').modal('show');
+        });
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+
+    // Evento que se ejecuta cuando se hace clic en el botón "Actualizar Lotes"
+    $('.btnActualizarLotes').click(function () {
+        // Obtener la cantidad de lotes desde el atributo "data-cantidad-lotes"
+        var cantidadLotes = $(this).data('cantidad-lotes');
+        var identManzana = $(this).data('identmanzana'); // Cambiado a minúsculas
+        console.log(cantidadLotes);
+        console.log(identManzana);
+        // Asignar la cantidad de lotes al input del modal
+
+        $("#cantidadLotesInput").val(cantidadLotes);
+        $("#identManzanaInput").val(identManzana);
+
+        // Mostrar el modal
+        $('#staticBackdrop').modal('show');
+    });
+    function validarYActualizar() {
+        // Obtener el valor del input
+        var cantidadLotes = $("#cantidadLotesInput").val();
+        var identManzana = $("#identManzanaInput").val();
+
+        // Validar que la cantidad sea mayor a 0 y no sea nula o vacía
+        if (cantidadLotes > 0 && cantidadLotes !== null && cantidadLotes.trim() !== "") {
+            // Limpiar el mensaje de validación si la cantidad es válida
+            $("#validarCantidad").text("");
+
+            // Realizar la llamada Ajax al controlador
+            $.ajax({
+                type: 'POST',
+                url: '/Programa/Manzana', // Ajusta la URL según tu configuración
+                data: { identManzana: identManzana, nuevaCantidadLotes: cantidadLotes },
+                success: function (data) {
+                    // Manejar la respuesta del controlador si es necesario
+                    location.reload();
+
+                    // Cerrar el modal después de actualizar
+                    $("#staticBackdrop").modal('hide');
+                },
+                error: function (error) {
+                    // Manejar el error si es necesario
+                    console.error(error);
+                }
+            });
+
+            // Cerrar el modal después de actualizar
+            $("#staticBackdrop").modal('hide');
+        } else {
+            // Mostrar el mensaje de validación
+            $("#validarCantidad").text("El campo no puede ser 0 o vacío.");
+        }
+    }
+</script>
