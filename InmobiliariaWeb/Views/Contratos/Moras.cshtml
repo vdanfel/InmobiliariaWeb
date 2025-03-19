@@ -284,7 +284,10 @@
     </div>
 </div>
 
-
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
     var mensajeError = '@ViewBag.Mensaje';
     if (mensajeError && mensajeError.trim() !== '') {

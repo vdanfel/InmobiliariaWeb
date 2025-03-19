@@ -55,5 +55,6 @@ namespace InmobiliariaWeb.Interfaces
         bool FormatoTransferencia_Existe(int Ident_Contratos);
         Task FormatoTransferencias_Insert(int Ident_Contratos, LoginResult loginResult);
         Task<IngresosModel> IngresosCabecera(int Ident_Contratos);
+        Task<decimal> MorasMasivo_Total(int Ident_Kardex);
     }
 }

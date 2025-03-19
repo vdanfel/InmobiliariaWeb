@@ -1764,5 +1764,33 @@ namespace InmobiliariaWeb.Servicios
                 await _connection.CloseAsync();
             }
         }
+        public async Task<decimal> MorasMasivo_Total(int Ident_Kardex)
+        {
+            decimal totalMoras = 0;
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_MorasMasivo_Total", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Ident_Kardex", Ident_Kardex);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        totalMoras = decimal.Parse(reader["ImporteMorasTotal"].ToString());
+                    }
+                    return totalMoras;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex; // Considera usar un manejo de excepciones más detallado o un logger
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
     }
 }

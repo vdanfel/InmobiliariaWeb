@@ -651,6 +651,50 @@ namespace InmobiliariaWeb.Controllers
             }
 
         }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> MorasMasivo()
+        {
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+                ViewBag.NumeroSerie = HttpContext.Session.GetString("NumeroSerie");
+
+                MorasMasivoViewModel morasMasivoViewModel = new MorasMasivoViewModel();
+                morasMasivoViewModel.Ident_Kardex = (int)HttpContext.Session.GetInt32("Ident_Kardex");
+                morasMasivoViewModel.ImporteMorasTotal = await _contratosService.MorasMasivo_Total(morasMasivoViewModel.Ident_Kardex);
+                //Moras moras = new Moras();
+                //int Ident_Moras = await _contratosService.MoraExiste(Ident_Cuotas);
+                //if (Ident_Moras == 0)
+                //{
+                //    Ident_Moras = await _contratosService.InsertarMoras(Ident_Cuotas, loginResult);
+                //}
+                //moras.Ident_Moras = Ident_Moras;
+                //moras = await _contratosService.ObtenerDatosMora(Ident_Moras);
+                //moras.TipoPagos = await _tablasService.ListarTipoPago();
+                //moras.Bancos = await _tablasService.ListarBancos();
+                //moras.TipoMonedas = await _tablasService.ListarTipoMoneda();
+                //int Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(136, moras.Ident_Moras);
+                //moras.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(Ident_Ingresos);
+                //moras.ImporteTotalPagado = await _cajaService.IngresosDetalle_ImporteTotal(Ident_Ingresos);
+                //moras.SaldoAPagar = (decimal)moras.NuevoMontoMora - moras.ImporteTotalPagado;
+                //if (Mensaje != null)
+                //{
+                //    ViewBag.Mensaje = Mensaje;
+                //}
+                //int desactivarCampos = moras.ingresosDetallesLists.Count();
+                //ViewBag.DesactivarCampos = desactivarCampos;
+                return View(morasMasivoViewModel);
+            }
+            else
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            
+        }
+
+
+
         [Authorize]
         [HttpGet]
         public IActionResult Imprimir(int Ident_Contratos)
@@ -1429,18 +1473,8 @@ namespace InmobiliariaWeb.Controllers
 
             return File(byteArray, "application/msword", fileName);
         }
-        [HttpGet]
-        [Authorize]
-        public IActionResult CuotasMasivo()
-        { 
-            return View();
-        }
-        [HttpGet]
-        [Authorize]
-        public IActionResult MorasMasivo() 
-        { 
-            return View(); 
-        }
+       
+        
         [HttpPost]
         public async Task<IActionResult> FormatoVenta_Actualizar([FromBody] Ventas ventas)
         {

@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model InmobiliariaWeb.Models.Contratos.MorasMasivoViewModel
 @{
     Layout = "_ContratosLayout";
 }
@@ -8,10 +6,87 @@
 <div class="container">
     <div class="card">
         <div class="card-header fw-bold">
-            <h2> - Moras Masivas</h2>
+            <h2>@ViewBag.NumeroSerie - Moras Masivas</h2>
         </div>
         <div class="card-body">
-            aqui se hara el registro masivo de moras
+            <div class="row g-2">
+                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="ImporteMorasTotal" asp-for="ImporteMorasTotal" readonly/>
+                        <label for="ImporteMorasTotal">Total Moras</label>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="DescuentoDirecto" asp-for="DescuentoDirecto" onblur="MoraFinal()" />
+                        <label for="DescuentoDirecto">Descuento $</label>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="DescuentoPorcentaje" asp-for="DescuentoPorcentaje" onblur="MoraFinal()" />
+                        <label for="DescuentoPorcentaje">Descuento %</label>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="NuevoMontoMora" asp-for="NuevoMontoMora" readonly />
+                        <label for="NuevoMontoMora">Nuevo Total</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    function MoraFinal() {
+        // Obtener los valores de los elementos por ID
+        var importeMorasTotal = parseFloat(document.getElementById("ImporteMorasTotal").value) || 0;
+        var descuentoDirecto = parseFloat(document.getElementById("DescuentoDirecto").value) || 0;
+        var descuentoPorcentaje = parseFloat(document.getElementById("DescuentoPorcentaje").value) || 0;
+        //var importeTotalPagado = parseFloat(document.getElementById("ImporteTotalPagado").value) || 0;
+
+        console.log(importeMorasTotal);
+        console.log(descuentoDirecto);
+        console.log(descuentoPorcentaje);
+        //console.log(importeTotalPagado);
+
+        // Variable para almacenar el nuevo monto de moras
+        var nuevoMontoMoras = importeMorasTotal;
+
+        // Caso 1: Ambos descuentos están presentes
+        if (descuentoDirecto > 0 && descuentoPorcentaje > 0) {
+            nuevoMontoMoras = (importeMorasTotal - descuentoDirecto) - (descuentoPorcentaje * (importeMorasTotal - descuentoDirecto) / 100);
+        }
+        // Caso 2: Solo descuento directo
+        else if (descuentoDirecto > 0 && descuentoPorcentaje <= 0) {
+            nuevoMontoMoras = importeMorasTotal - descuentoDirecto;
+        }
+        // Caso 3: Solo descuento por porcentaje
+        else if (descuentoDirecto <= 0 && descuentoPorcentaje > 0) {
+            nuevoMontoMoras = importeMorasTotal - (descuentoPorcentaje * importeMorasTotal / 100);
+        }
+
+        // Verificar si el resultado es negativo
+        if (nuevoMontoMoras < 0) {
+            // Mostrar el modal (asegúrate de tener el modal en tu HTML)
+            $('#modalError').modal('show');
+
+            // Reiniciar los valores a 0
+            document.getElementById("DescuentoDirecto").value = 0;
+            document.getElementById("DescuentoPorcentaje").value = 0;
+
+            return; // Salir de la función
+        }
+        // Asignar el resultado al input con el ID 'NuevoMontoMoras'
+        document.getElementById("NuevoMontoMora").value = nuevoMontoMoras.toFixed(2);
+        console.log(nuevoMontoMoras);
+        //console.log(importeTotalPagado);
+        //document.getElementById("saldo").value = nuevoMontoMoras - importeTotalPagado;
+
+    }
+</script>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VplN3M6kHQhdFgSplLNQv/Pz3z6wCvF35pmCF4SQSdVsrReTYrgsP2W5aZb1fHcLMdn642egscpnesI+KTYJYQ==",
+  "dgSpecHash": "JCR8hEI6FDswDx+gJN2bAs0icXUWR1Y9I/zrxy6smUKjGW3+bO/LO113QOIVSFTXijEvHEIfi5YTmiLOmYpRRQ==",
   "success": true,
-  "projectFilePath": "E:\\WebInmobiliaria2025\\InmobiliariaWeb\\InmobiliariaWeb.csproj",
+  "projectFilePath": "E:\\InmobiliariaWeb\\InmobiliariaWeb\\InmobiliariaWeb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AlucarD-LAP\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\AlucarD-LAP\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
