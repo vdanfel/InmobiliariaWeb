@@ -663,6 +663,13 @@ namespace InmobiliariaWeb.Controllers
                 MorasMasivoViewModel morasMasivoViewModel = new MorasMasivoViewModel();
                 morasMasivoViewModel.Ident_Kardex = (int)HttpContext.Session.GetInt32("Ident_Kardex");
                 morasMasivoViewModel.ImporteMorasTotal = await _contratosService.MorasMasivo_Total(morasMasivoViewModel.Ident_Kardex);
+                morasMasivoViewModel.DescuentoDirecto = 0;
+                morasMasivoViewModel.DescuentoPorcentaje = 0;
+                morasMasivoViewModel.NuevoMontoMora = 0;
+                morasMasivoViewModel.TipoPagos = await _tablasService.ListarTipoPago();
+                morasMasivoViewModel.Bancos = await _tablasService.ListarBancos();
+                morasMasivoViewModel.TipoMonedas = await _tablasService.ListarTipoMoneda();
+                morasMasivoViewModel.FechaPago = DateTime.Now;
                 //Moras moras = new Moras();
                 //int Ident_Moras = await _contratosService.MoraExiste(Ident_Cuotas);
                 //if (Ident_Moras == 0)
