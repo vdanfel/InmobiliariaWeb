@@ -11,6 +11,8 @@ namespace InmobiliariaWeb.Models.Contratos
         public decimal? NuevoMontoMora { get; set; }
         public decimal? TotalMoraPagado { get; set; }
         public decimal? ImporteAPagar { get; set; }
+        public decimal? ImporteMorasDolares { get; set; }
+        public decimal? ImporteMorasPagado { get; set; }
         public DateTime FechaPago { get; set; }
         public int? Ident_018_TipoPago { get; set; }
         public List<TipoPago> TipoPagos { get; set; }

@@ -34,12 +34,7 @@
                         <label for="NuevoMontoMora">Nuevo Total</label>
                     </div>
                 </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input class="form-control" type="date" id="FechaPago" asp-for="@Model.FechaPago" />
-                        <label for="FechaPago">Fecha Pago</label>
-                    </div>
-                </div>
+                
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="form-floating">
                         <select id="Ident_018_TipoPago" class="form-select" asp-for="@Model.Ident_018_TipoPago" onchange="ObtenerTipoPago(this.value)">
@@ -97,6 +92,25 @@
                         <label for="NumeroOperacion">Número Operación</label>
                     </div>
                 </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating">
+                        <input class="form-control" type="number" id="ImporteMorasDolares" asp-for="@Model.ImporteMorasDolares" onblur="ObtenerImporteMora()" />
+                        <label for="ImporteMorasDolares">Importe Dolares</label>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-floating">
+                        <input class="form-control" type="number" id="ImporteMorasPagado" asp-for="@Model.ImporteMorasPagado" readonly />
+                        <label for="ImporteMorasPagado">Importe Pagado</label>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                    <div class="form-floating">
+                        <input class="form-control" type="date" id="FechaPago" asp-for="@Model.FechaPago" />
+                        <label for="FechaPago">Fecha Pago</label>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -228,5 +242,42 @@
 
         // Llamar a la función ValidarTipoCambio para realizar la validación después de cambiar la moneda
         ValidarTipoCambio(document.getElementById("Ident_002_TipoMoneda"));
+    }
+    function ObtenerImporteMora() {
+        var importeDolares = document.getElementById('ImporteMorasDolares').value;
+        var tipoCambio = document.getElementById('TipoCambio').value;
+        var tipoMoneda = document.getElementById('Ident_002_TipoMoneda').value;
+
+        // Validar que haya una moneda seleccionada
+        if (tipoMoneda === "--SELECCIONE--" || tipoMoneda === "") {
+            alert("Por favor, seleccione un tipo de moneda.");
+            return; // Detener la ejecución si no hay moneda seleccionada
+        }
+
+        // Validar las condiciones del tipo de cambio según la moneda seleccionada
+        if (tipoMoneda === "24") {  // Soles
+            if (parseFloat(tipoCambio) <= 1) {
+                alert("El tipo de cambio para Soles debe ser mayor a 1.");
+                document.getElementById('TipoCambio').focus(); // Coloca el foco en el campo de tipo de cambio
+                return; // Detener la ejecución si el tipo de cambio no es válido
+            }
+        } else if (tipoMoneda === "23") {  // Dólares
+            if (parseFloat(tipoCambio) !== 1) {
+                alert("El tipo de cambio para Dólares debe ser igual a 1.");
+                document.getElementById('TipoCambio').focus(); // Coloca el foco en el campo de tipo de cambio
+                return; // Detener la ejecución si el tipo de cambio no es válido
+            }
+        }
+
+        // Realizar el cálculo solo si las validaciones pasaron
+        var importeMoraPagado = parseFloat(importeDolares) * parseFloat(tipoCambio);
+
+        // Si el tipo de moneda es Soles (24), redondeamos a 1 decimal
+        if (tipoMoneda === "24") {
+            importeMoraPagado = Math.round(importeMoraPagado * 10) / 10;
+        }
+
+        // Asignar el valor redondeado (si es Soles) o el valor normal (si es Dólares) al campo ImporteCuotaPagado
+        $('#ImporteMorasPagado').val(importeMoraPagado.toFixed(2)); // Mostrar con 1 decimal
     }
 </script>
