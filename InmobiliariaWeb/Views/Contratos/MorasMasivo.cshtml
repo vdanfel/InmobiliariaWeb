@@ -2,119 +2,190 @@
 @{
     Layout = "_ContratosLayout";
 }
+<form>
+    <input type="hidden" asp-for="Ident_Kardex"/>
+    <div class="container">
+        <div class="card">
+            <div class="card-header fw-bold">
+                <h2>@ViewBag.NumeroSerie - Moras Masivas</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="ImporteMorasTotal" asp-for="ImporteMorasTotal" readonly />
+                            <label for="ImporteMorasTotal">Total Moras</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="DescuentoDirecto" asp-for="DescuentoDirecto" onblur="MoraFinal()" />
+                            <label for="DescuentoDirecto">Descuento $</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="DescuentoPorcentaje" asp-for="DescuentoPorcentaje" onblur="MoraFinal()" />
+                            <label for="DescuentoPorcentaje">Descuento %</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="NuevoMontoMora" asp-for="NuevoMontoMora" readonly />
+                            <label for="NuevoMontoMora">Nuevo Total</label>
+                        </div>
+                    </div>
 
-<div class="container">
-    <div class="card">
-        <div class="card-header fw-bold">
-            <h2>@ViewBag.NumeroSerie - Moras Masivas</h2>
-        </div>
-        <div class="card-body">
-            <div class="row g-2">
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input type="number" class="form-control" id="ImporteMorasTotal" asp-for="ImporteMorasTotal" readonly/>
-                        <label for="ImporteMorasTotal">Total Moras</label>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <select id="Ident_018_TipoPago" class="form-select" asp-for="@Model.Ident_018_TipoPago" onchange="ObtenerTipoPago(this.value)">
+                                <option>--SELECCIONE--</option>
+                                @foreach (var tipoPago in Model.TipoPagos)
+                                {
+                                    <option value="@tipoPago.Ident_018_TipoPago">@tipoPago.Descripcion</option>
+                                }
+                            </select>
+                            <label for="Ident_018_TipoPago">Tipo de Pago</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input type="number" class="form-control" id="DescuentoDirecto" asp-for="DescuentoDirecto" onblur="MoraFinal()" />
-                        <label for="DescuentoDirecto">Descuento $</label>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <select id="Ident_002_TipoMoneda" class="form-select" asp-for="@Model.Ident_002_TipoMoneda" onchange="ValidarTipoCambio(this)">
+                                <option>--SELECCIONE--</option>
+                                @foreach (var moneda in Model.TipoMonedas)
+                                {
+                                    <option value="@moneda.Ident_002_TipoMoneda">@moneda.Abreviatura</option>
+                                }
+                            </select>
+                            <label for="Ident_002_TipoMoneda">Moneda</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input type="number" class="form-control" id="DescuentoPorcentaje" asp-for="DescuentoPorcentaje" onblur="MoraFinal()" />
-                        <label for="DescuentoPorcentaje">Descuento %</label>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <select id="Ident_019_Banco" class="form-select" asp-for="@Model.Ident_019_Banco" onchange="ObtenerCuentasBancarias(this.value)">
+                                <option>--SELECCIONE--</option>
+                                @foreach (var banco in Model.Bancos)
+                                {
+                                    <option value="@banco.Ident_019_Banco">@banco.Abreviatura</option>
+                                }
+                            </select>
+                            <label for="Ident_019_Banco">Banco</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input type="number" class="form-control" id="NuevoMontoMora" asp-for="NuevoMontoMora" readonly />
-                        <label for="NuevoMontoMora">Nuevo Total</label>
-                    </div>
-                </div>
-                
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                    <div class="form-floating">
-                        <select id="Ident_018_TipoPago" class="form-select" asp-for="@Model.Ident_018_TipoPago" onchange="ObtenerTipoPago(this.value)">
-                            <option>--SELECCIONE--</option>
-                            @foreach (var tipoPago in Model.TipoPagos)
-                            {
-                                <option value="@tipoPago.Ident_018_TipoPago">@tipoPago.Descripcion</option>
-                            }
-                        </select>
-                        <label for="Ident_018_TipoPago">Tipo de Pago</label>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                    <div class="form-floating">
-                        <select id="Ident_002_TipoMoneda" class="form-select" asp-for="@Model.Ident_002_TipoMoneda" onchange="ValidarTipoCambio(this)">
-                            <option>--SELECCIONE--</option>
-                            @foreach (var moneda in Model.TipoMonedas)
-                            {
-                                <option value="@moneda.Ident_002_TipoMoneda">@moneda.Abreviatura</option>
-                            }
-                        </select>
-                        <label for="Ident_002_TipoMoneda">Moneda</label>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                    <div class="form-floating">
-                        <select id="Ident_019_Banco" class="form-select" asp-for="@Model.Ident_019_Banco" onchange="ObtenerCuentasBancarias(this.value)">
-                            <option>--SELECCIONE--</option>
-                            @foreach (var banco in Model.Bancos)
-                            {
-                                <option value="@banco.Ident_019_Banco">@banco.Abreviatura</option>
-                            }
-                        </select>
-                        <label for="Ident_019_Banco">Banco</label>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                    <div class="form-floating">
-                        <select id="Ident_CuentasBancarias" class="form-select" asp-for="@Model.Ident_CuentasBancarias" onchange="SeleccionarMoneda(this)">
-                            <option>--SELECCIONE--</option>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <select id="Ident_CuentasBancarias" class="form-select" asp-for="@Model.Ident_CuentasBancarias" onchange="SeleccionarMoneda(this)">
+                                <option>--SELECCIONE--</option>
 
-                        </select>
-                        <label for="Ident_CuentasBancarias">N° Cuenta</label>
+                            </select>
+                            <label for="Ident_CuentasBancarias">N° Cuenta</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="TipoCambio" asp-for="@Model.TipoCambio" />
+                            <label for="TipoCambio">T.C.</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="NumeroOperacion" asp-for="@Model.NumeroOperacion" />
+                            <label for="NumeroOperacion">Número Operación</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="ImporteMorasDolares" asp-for="@Model.ImporteMorasDolares" onblur="ObtenerImporteMora()" />
+                            <label for="ImporteMorasDolares">Importe Dolares</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="ImporteMorasPagado" asp-for="@Model.ImporteMorasPagado" readonly />
+                            <label for="ImporteMorasPagado">Importe Pagado</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="date" id="FechaPago" asp-for="@Model.FechaPago" />
+                            <label for="FechaPago">Fecha Pago</label>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-outline-success" id="btnAgregar" disabled>
+                                AGREGAR <i class="bi bi-database-fill-add"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive-md mt-2">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Tipo Pago</th>
+                                    <th>Importe</th>
+                                    <th>Numero Operacion</th>
+                                    <th>banco</th>
+                                    <th style="min-height:200px;">Numero Cuenta</th>
+                                    <th>Moneda</th>
+                                    <th>T.C.</th>
+                                    <th>Fecha</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var ingresosDetalle in Model.ingresosDetallesLists)
+                                {
+                                    <tr>
+                                        <td>@ingresosDetalle.Indice</td>
+                                        <td>@ingresosDetalle.TipoPago</td>
+                                        <td>@ingresosDetalle.Importe</td>
+                                        <td>@ingresosDetalle.NumeroOperacion</td>
+                                        <td>@ingresosDetalle.Banco</td>
+                                        <td>@ingresosDetalle.NumeroCuenta</td>
+                                        <td>@ingresosDetalle.Moneda</td>
+                                        <td>@ingresosDetalle.TipoCambio</td>
+                                        <td>@(ingresosDetalle.Fecha.HasValue ? ingresosDetalle.Fecha.Value.ToString("dd/MM/yyyy") : "")</td>
+                                        <td></td>
+                                        <td>
+                                            <a class="btn btn-outline-danger"
+                                               onclick="mostrarModalEliminar('@Url.Action("Eliminar_IngresosDetalle_Mora","Contratos", new{Ident_IngresosDetalle = ingresosDetalle.Ident_IngresosDetalle})')">
+                                                <i class="bi-trash3"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row g-2 row-cols-2 row-cols-lg-2 row-cols-md-2 row-cols-2 mt-1">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input class="form-control" id="ImporteTotalPagado" type="number" asp-for="@Model.ImporteTotalPagado" readonly />
+                                <label for="ImporteTotalPagado">Total Pagado</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <input class="form-control" type="number" id="saldo" readonly asp-for="@Model.SaldoAPagar" />
+                                <label for="saldo">Saldo</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1 g-2">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input class="form-control" type="text" id="Observacion" asp-for="@Model.Observacion" />
+                                <label for="Observacion">Observacion</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input type="number" class="form-control" id="TipoCambio" asp-for="@Model.TipoCambio" />
-                        <label for="TipoCambio">T.C.</label>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input class="form-control" type="text" id="NumeroOperacion" asp-for="@Model.NumeroOperacion" />
-                        <label for="NumeroOperacion">Número Operación</label>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="ImporteMorasDolares" asp-for="@Model.ImporteMorasDolares" onblur="ObtenerImporteMora()" />
-                        <label for="ImporteMorasDolares">Importe Dolares</label>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="ImporteMorasPagado" asp-for="@Model.ImporteMorasPagado" readonly />
-                        <label for="ImporteMorasPagado">Importe Pagado</label>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input class="form-control" type="date" id="FechaPago" asp-for="@Model.FechaPago" />
-                        <label for="FechaPago">Fecha Pago</label>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
-</div>
+</form>
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
 }

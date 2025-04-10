@@ -670,6 +670,8 @@ namespace InmobiliariaWeb.Controllers
                 morasMasivoViewModel.Bancos = await _tablasService.ListarBancos();
                 morasMasivoViewModel.TipoMonedas = await _tablasService.ListarTipoMoneda();
                 morasMasivoViewModel.FechaPago = DateTime.Now;
+                int Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(137, morasMasivoViewModel.Ident_Kardex);
+                morasMasivoViewModel.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(Ident_Ingresos);
                 //Moras moras = new Moras();
                 //int Ident_Moras = await _contratosService.MoraExiste(Ident_Cuotas);
                 //if (Ident_Moras == 0)
@@ -1536,5 +1538,22 @@ namespace InmobiliariaWeb.Controllers
             await _cajaService.Ingresos_ValidarImportes(Ident_IngresosDetalle, 136);
             return RedirectToAction("Moras", "Contratos", new { mensaje = "se eliminó el detalle" });
         }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Eliminar_IngresosDetalle_MoraMasivo(int Ident_IngresosDetalle)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            await _cajaService.IngresosDetalle_Delete(Ident_IngresosDetalle, loginResult);
+            await _cajaService.Ingresos_ValidarImportes(Ident_IngresosDetalle, 137);
+            return RedirectToAction("Cuotas", "Contratos", new { mensaje = "se eliminó el detalle" });
+        }
+        //public IActionResult ImprimirReciboCuota(int Ident_Cuotas) 
+        //{
+            
+        //}
     }
 }

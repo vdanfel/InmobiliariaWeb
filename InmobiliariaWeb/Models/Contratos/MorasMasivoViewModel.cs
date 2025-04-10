@@ -1,4 +1,5 @@
 ﻿using InmobiliariaWeb.Models.Tablas;
+using InmobiliariaWeb.Result.Contratos;
 
 namespace InmobiliariaWeb.Models.Contratos
 {
@@ -25,5 +26,9 @@ namespace InmobiliariaWeb.Models.Contratos
         public int Ident_CuentasBancarias { get; set; }
         public decimal TipoCambio { get; set; }
         public string NumeroOperacion { get; set; }
+        public List<IngresosDetallesList> ingresosDetallesLists { get; set; }
+        public decimal ImporteTotalPagado { get; set; }
+        public decimal SaldoAPagar { get; set; }
+        public string Observacion { get; set; }
     }
 }
