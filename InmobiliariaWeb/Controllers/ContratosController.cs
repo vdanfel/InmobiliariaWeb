@@ -4,7 +4,10 @@ using InmobiliariaWeb.Models.Contratos;
 using InmobiliariaWeb.Models.Programa;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Contratos;
+using InmobiliariaWeb.Servicios;
+using InmobiliariaWeb.Utilities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
@@ -15,12 +18,16 @@ namespace InmobiliariaWeb.Controllers
         private readonly IContratosService _contratosService;
         private readonly ITablasService _tablasService;
         private readonly ICajaService _cajaService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ContratosController(IContratosService contratosService,ITablasService tablasService, ICajaService cajaService)
+        //_webHostEnvironment
+
+        public ContratosController(IContratosService contratosService,ITablasService tablasService, ICajaService cajaService, IWebHostEnvironment webHostEnvironment)
         {
             _contratosService = contratosService;
             _tablasService = tablasService;
             _cajaService = cajaService;
+            _webHostEnvironment = webHostEnvironment;
         }
         [HttpGet]
         [Authorize]
@@ -435,6 +442,7 @@ namespace InmobiliariaWeb.Controllers
                 cuotas.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(Ident_Ingresos);
                 cuotas.ImporteTotalPagado = await _cajaService.IngresosDetalle_ImporteTotal(Ident_Ingresos);
                 cuotas.SaldoAPagar = cuotas.ImporteCuota - cuotas.ImporteTotalPagado;
+                cuotas.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
                 return View(cuotas);
             }
             else
@@ -555,6 +563,7 @@ namespace InmobiliariaWeb.Controllers
                 }
                 int desactivarCampos = moras.ingresosDetallesLists.Count();
                 ViewBag.DesactivarCampos = desactivarCampos;
+                moras.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
                 return View(moras);
             }
             else
@@ -1551,9 +1560,34 @@ namespace InmobiliariaWeb.Controllers
             await _cajaService.Ingresos_ValidarImportes(Ident_IngresosDetalle, 137);
             return RedirectToAction("Cuotas", "Contratos", new { mensaje = "se eliminó el detalle" });
         }
-        //public IActionResult ImprimirReciboCuota(int Ident_Cuotas) 
-        //{
-            
-        //}
+        [HttpGet]
+        public async Task<IActionResult> ObtenerPropietarios(int identContrato)
+        {
+            var propietarios = await _contratosService.ClientesxContrato(identContrato);
+            var resultado = propietarios.Select(p => new {
+                p.Ident_ContratosPersonas,
+                p.NumeroDocumento,
+                p.Nombre_Completo
+            });
+            return Json(resultado);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ImprimirRecibo(int Ident_021_TipoIngresos, int Ident_Origen, int Ident_ContratosPersonas)
+        {
+            // 1. Obtener los datos desde el SP
+            var recibo = await _contratosService.ImprimirRecibo(Ident_021_TipoIngresos, Ident_Origen, Ident_ContratosPersonas);
+
+            if (recibo == null)
+                return NotFound("No se encontró el recibo.");
+
+            // 2. Instanciar la clase generadora y generar el archivo
+            var generador = new ReciboGenerador(_webHostEnvironment.WebRootPath);
+            byte[] documento = await generador.GenerarReciboAsync(recibo);
+
+            // 3. Retornar el archivo como descarga
+            return File(documento,
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        $"Recibo_{recibo.NumeroRecibo}.docx");
+        }
     }
 }

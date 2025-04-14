@@ -5,6 +5,7 @@
 <form method="post" asp-action="Cuotas" asp-controller="Contratos">
     <input hidden type="text" asp-for="@Model.Ident_Cuotas"/>
     <input hidden type="text" asp-for="@Model.Ident_Kardex" />
+    <input hidden type="text" asp-for="@Model.Ident_Contratos" />
     <div class="container">
         <div class="card">
             <div class="card-header fw-bold">
@@ -198,8 +199,8 @@
                     <a class="btn btn-outline-danger">
                         ANULAR <i class="bi bi-x-octagon-fill"></i>
                     </a>
-                    <a class="btn btn-outline-success" asp-action="ImprimirRecibo" asp-controller="Contratos" asp-route-Ident_Cuotas="@Model.Ident_Cuotas">
-                        IMPRIMIR<i class="bi bi-print"></i>
+                    <a class="btn btn-outline-success" onclick="abrirModalPropietarios(@Model.Ident_Contratos, @Model.Ident_Cuotas)">
+                        IMPRIMIR <i class="bi bi-print"></i>
                     </a>
                 </div>
             </div>
@@ -216,6 +217,31 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal para seleccionar propietario -->
+<div class="modal fade" id="modalPropietarios" tabindex="-1" aria-labelledby="modalPropietariosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalPropietariosLabel">Seleccionar Propietario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Nombre Completo</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPropietarios">
+                        <!-- Aquí se llenarán los propietarios con JS -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -398,4 +424,41 @@
 
     // También, se puede llamar a la validación cuando se cambie el valor del saldo para comprobar si ya está dentro del límite
     document.getElementById("saldo").addEventListener("input", validarImporte);
+
+
+    function abrirModalPropietarios(identContrato, identCuota) {
+        // Llamada al controlador para obtener la lista
+        $.ajax({
+            url: '/Contratos/ObtenerPropietarios',
+            type: 'GET',
+            data: { identContrato: identContrato },
+            success: function (data) {
+                let tbody = $('#tablaPropietarios');
+                tbody.empty(); // Limpiar contenido anterior
+
+                data.forEach(p => {
+                    tbody.append(`
+                            <tr>
+                                <td>${p.numeroDocumento}</td>
+                                <td>${p.nombre_Completo}</td>
+                                <td>
+                                    <button class="btn btn-success btn-sm" onclick="imprimirRecibo(${identCuota}, ${p.ident_ContratosPersonas})">
+                                        Seleccionar
+                                    </button>
+                                </td>
+                            </tr>
+                        `);
+                });
+
+                // Mostrar el modal
+                $('#modalPropietarios').modal('show');
+            },
+            error: function () {
+                alert('Error al cargar los propietarios');
+            }
+        });
+    }
+    function imprimirRecibo(identCuota, identContratosPersonas) {
+        window.location.href = `/Contratos/ImprimirRecibo?Ident_021_TipoIngresos=135&Ident_Origen=${identCuota}&Ident_ContratosPersonas=${identContratosPersonas}`;
+    }
 </script>

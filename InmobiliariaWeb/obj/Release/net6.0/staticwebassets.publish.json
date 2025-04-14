@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XeoilOBGrtyHYmSt6WDuQIyd4e1PKLv/HffxFc4V2Lo=",
+  "Hash": "X79G4qWsdgYdcwpE7iF89z1VafEMvxM8ssrkfaH6IX4=",
   "Source": "InmobiliariaWeb",
   "BasePath": "_content/InmobiliariaWeb",
   "Mode": "Default",
@@ -4197,6 +4197,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Template\\Contratos.docx"
+    },
+    {
+      "Identity": "E:\\InmobiliariaWeb\\InmobiliariaWeb\\wwwroot\\Template\\FormatoRecibo.docx",
+      "SourceId": "InmobiliariaWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\InmobiliariaWeb\\InmobiliariaWeb\\wwwroot\\",
+      "BasePath": "_content/InmobiliariaWeb",
+      "RelativePath": "Template/FormatoRecibo.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Template\\FormatoRecibo.docx"
     },
     {
       "Identity": "E:\\InmobiliariaWeb\\InmobiliariaWeb\\wwwroot\\Template\\ventas.docx",

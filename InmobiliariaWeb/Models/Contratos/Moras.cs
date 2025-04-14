@@ -5,6 +5,7 @@ namespace InmobiliariaWeb.Models.Contratos
 {
     public class Moras
     {
+        public int Ident_Contratos { get; set; }
         public int Ident_Moras { get; set; }
         public int Ident_Kardex { get; set; }
         public int Ident_Cuotas { get; set; }

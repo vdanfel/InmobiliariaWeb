@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\Template\\Contratos.docx"
     },
     {
+      "Id": "E:\\InmobiliariaWeb\\InmobiliariaWeb\\wwwroot\\Template\\FormatoRecibo.docx",
+      "PackagePath": "staticwebassets\\Template\\FormatoRecibo.docx"
+    },
+    {
       "Id": "E:\\InmobiliariaWeb\\InmobiliariaWeb\\wwwroot\\Template\\ventas.docx",
       "PackagePath": "staticwebassets\\Template\\ventas.docx"
     },

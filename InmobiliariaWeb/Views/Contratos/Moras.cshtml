@@ -1,12 +1,13 @@
 ﻿@model InmobiliariaWeb.Models.Contratos.Moras
 @{
     Layout = "_ContratosLayout";
-    var desactivar = ViewBag.DesactivarCampos == 0 ? null : "readonly";
+    var desactivar = ViewBag.DesactivarCampos == null || ViewBag.DesactivarCampos == 0 ? null : "readonly";
 }
 <form method="post" asp-controller="Contratos" asp-action="Moras">
     <input hidden type="text" asp-for="@Model.Ident_Moras" />
     <input hidden type="text" asp-for="@Model.Ident_Cuotas" />
     <input hidden type="text" asp-for="@Model.Ident_Kardex" />
+    <input hidden type="text" asp-for="@Model.Ident_Contratos" />
     <div class="container">
         <div class="card">
             <div class="card-header fw-bold">
@@ -225,6 +226,9 @@
                         <a class="btn btn-outline-danger">
                             ANULAR <i class="bi bi-x-octagon-fill"></i>
                         </a>
+                        <a class="btn btn-outline-success" onclick="abrirModalPropietarios(@Model.Ident_Contratos, @Model.Ident_Moras)">
+                            IMPRIMIR <i class="bi bi-print"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -279,6 +283,31 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal para seleccionar propietario -->
+<div class="modal fade" id="modalPropietarios" tabindex="-1" aria-labelledby="modalPropietariosLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalPropietariosLabel">Seleccionar Propietario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Nombre Completo</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPropietarios">
+                        <!-- Aquí se llenarán los propietarios con JS -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -483,4 +512,40 @@
 
     // También, se puede llamar a la validación cuando se cambie el valor del saldo para comprobar si ya está dentro del límite
     document.getElementById("saldo").addEventListener("input", validarImporte);
+
+    function abrirModalPropietarios(identContrato, identMora) {
+        // Llamada al controlador para obtener la lista
+        $.ajax({
+            url: '/Contratos/ObtenerPropietarios',
+            type: 'GET',
+            data: { identContrato: identContrato },
+            success: function (data) {
+                let tbody = $('#tablaPropietarios');
+                tbody.empty(); // Limpiar contenido anterior
+
+                data.forEach(p => {
+                    tbody.append(`
+                                <tr>
+                                    <td>${p.numeroDocumento}</td>
+                                    <td>${p.nombre_Completo}</td>
+                                    <td>
+                                            <button class="btn btn-success btn-sm" onclick="imprimirRecibo(${identMora}, ${p.ident_ContratosPersonas})">
+                                            Seleccionar
+                                        </button>
+                                    </td>
+                                </tr>
+                            `);
+                });
+
+                // Mostrar el modal
+                $('#modalPropietarios').modal('show');
+            },
+            error: function () {
+                alert('Error al cargar los propietarios');
+            }
+        });
+    }
+    function imprimirRecibo(identMora, identContratosPersonas) {
+        window.location.href = `/Contratos/ImprimirRecibo?Ident_021_TipoIngresos=136&Ident_Origen=${identMora}&Ident_ContratosPersonas=${identContratosPersonas}`;
+    }
 </script>

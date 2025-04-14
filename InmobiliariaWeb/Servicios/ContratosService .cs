@@ -8,6 +8,7 @@ using InmobiliariaWeb.Result.Contratos;
 using InmobiliariaWeb.Result.Programa;
 using InmobiliariaWeb.Result.Separaciones;
 using InmobiliariaWeb.Result.Usuario;
+using InmobiliariaWeb.Utilities;
 using InmobiliariaWeb.ViewModels.Contratos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Data.SqlClient;
@@ -1792,5 +1793,44 @@ namespace InmobiliariaWeb.Servicios
                 await _connection.CloseAsync();
             }
         }
+        public async Task<ReciboBE> ImprimirRecibo(int Ident_021_TipoIngresos, int Ident_Origen, int Ident_ContratosPersonas)
+        {
+            ReciboBE reciboBE = new ReciboBE();
+            try 
+            {
+                using (SqlCommand command = new SqlCommand("usp_ImprimirRecibo", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Ident_ContratosPersonas", Ident_ContratosPersonas);
+                    command.Parameters.AddWithValue("@Ident_021_TipoIngresos", Ident_021_TipoIngresos);
+                    command.Parameters.AddWithValue("@Ident_Origen", Ident_Origen);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        reciboBE.NombrePrograma = reader["NombrePrograma"].ToString();
+                        reciboBE.NumeroRecibo = reader["NumeroRecibo"].ToString();
+                        reciboBE.FechaPago = DateTime.Parse(reader["FechaPago"].ToString());
+                        reciboBE.NombreCompleto = reader["NombreCompleto"].ToString();
+                        reciboBE.Documento = reader["Documento"].ToString();
+                        reciboBE.Observacion = reader["Observacion"].ToString();
+                        reciboBE.ImporteTotal = decimal.Parse(reader["ImporteTotal"].ToString());
+                        reciboBE.NombreUsuario = reader["NombreUsuario"].ToString();
+                        reciboBE.TipoCambio = decimal.Parse(reader["TipoCambio"].ToString());
+                    }
+                    return reciboBE;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex; // Considera usar un manejo de excepciones más detallado o un logger
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
+
     }
 }

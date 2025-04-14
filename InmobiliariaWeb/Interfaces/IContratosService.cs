@@ -3,6 +3,7 @@ using InmobiliariaWeb.Models.Contratos;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Contratos;
 using InmobiliariaWeb.Result.Separaciones;
+using InmobiliariaWeb.Utilities;
 using InmobiliariaWeb.ViewModels.Contratos;
 
 namespace InmobiliariaWeb.Interfaces
@@ -56,5 +57,6 @@ namespace InmobiliariaWeb.Interfaces
         Task FormatoTransferencias_Insert(int Ident_Contratos, LoginResult loginResult);
         Task<IngresosModel> IngresosCabecera(int Ident_Contratos);
         Task<decimal> MorasMasivo_Total(int Ident_Kardex);
+        Task<ReciboBE> ImprimirRecibo(int Ident_021_TipoIngresos, int Ident_Origen, int Ident_ContratosPersonas);
     }
 }
