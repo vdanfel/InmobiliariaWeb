@@ -662,7 +662,7 @@ namespace InmobiliariaWeb.Controllers
         }
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> MorasMasivo()
+        public async Task<IActionResult> MorasMasivo(string Mensaje)
         {
             if (HttpContext.Session.GetString("Usuario") != null)
             {
@@ -671,6 +671,7 @@ namespace InmobiliariaWeb.Controllers
 
                 MorasMasivoViewModel morasMasivoViewModel = new MorasMasivoViewModel();
                 morasMasivoViewModel.Ident_Kardex = (int)HttpContext.Session.GetInt32("Ident_Kardex");
+                morasMasivoViewModel.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
                 morasMasivoViewModel.ImporteMorasTotal = await _contratosService.MorasMasivo_Total(morasMasivoViewModel.Ident_Kardex);
                 morasMasivoViewModel.DescuentoDirecto = 0;
                 morasMasivoViewModel.DescuentoPorcentaje = 0;
@@ -679,40 +680,85 @@ namespace InmobiliariaWeb.Controllers
                 morasMasivoViewModel.Bancos = await _tablasService.ListarBancos();
                 morasMasivoViewModel.TipoMonedas = await _tablasService.ListarTipoMoneda();
                 morasMasivoViewModel.FechaPago = DateTime.Now;
-                int Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(137, morasMasivoViewModel.Ident_Kardex);
-                morasMasivoViewModel.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(Ident_Ingresos);
-                //Moras moras = new Moras();
-                //int Ident_Moras = await _contratosService.MoraExiste(Ident_Cuotas);
-                //if (Ident_Moras == 0)
-                //{
-                //    Ident_Moras = await _contratosService.InsertarMoras(Ident_Cuotas, loginResult);
-                //}
-                //moras.Ident_Moras = Ident_Moras;
-                //moras = await _contratosService.ObtenerDatosMora(Ident_Moras);
-                //moras.TipoPagos = await _tablasService.ListarTipoPago();
-                //moras.Bancos = await _tablasService.ListarBancos();
-                //moras.TipoMonedas = await _tablasService.ListarTipoMoneda();
-                //int Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(136, moras.Ident_Moras);
-                //moras.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(Ident_Ingresos);
-                //moras.ImporteTotalPagado = await _cajaService.IngresosDetalle_ImporteTotal(Ident_Ingresos);
-                //moras.SaldoAPagar = (decimal)moras.NuevoMontoMora - moras.ImporteTotalPagado;
-                //if (Mensaje != null)
-                //{
-                //    ViewBag.Mensaje = Mensaje;
-                //}
-                //int desactivarCampos = moras.ingresosDetallesLists.Count();
-                //ViewBag.DesactivarCampos = desactivarCampos;
+                //int Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(137, morasMasivoViewModel.Ident_Kardex);
+                //morasMasivoViewModel.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(Ident_Ingresos);
+                morasMasivoViewModel.ingresosDetallesLists = new List<IngresosDetallesList>();
+                if (Mensaje != null)
+                {
+                    ViewBag.Mensaje = Mensaje;
+                }
                 return View(morasMasivoViewModel);
             }
             else
             {
                 return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
             }
-            
         }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> MorasMasivo(MorasMasivoViewModel morasMasivoViewModel)
+        {
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+                string mensaje = "";
+                var ingresosModel = await _contratosService.IngresosCabecera(morasMasivoViewModel.Ident_Contratos);
+                ingresosModel.Ident_Origen = morasMasivoViewModel.Ident_Kardex;
+                ingresosModel.Ident_021_TipoIngresos = 137;
+                ingresosModel.FechaPago = (DateTime)morasMasivoViewModel.FechaPago;
+                ingresosModel.Ident_002_TipoMoneda = 23;
+                ingresosModel.ImporteTotal = morasMasivoViewModel.ImporteTotalPagado + morasMasivoViewModel.ImporteMorasDolares ?? 0;
+                if (morasMasivoViewModel.SaldoAPagar == 0)
+                {
+                    ingresosModel.Ident_015_EstadoPago = 110;
+                    var moraPagoDTO = new MorasMasivoPagoDTO
+                    {
+                        Ident_Kardex = morasMasivoViewModel.Ident_Kardex,
+                        DescuentoPorcentaje = morasMasivoViewModel.DescuentoPorcentaje ?? 0,
+                        DescuentoDirectoTotal = morasMasivoViewModel.DescuentoDirecto ?? 0
+                    };
+                    await _contratosService.MoraMasivoPago(moraPagoDTO, loginResult);
+                }
+                else
+                {
+                    ingresosModel.Ident_015_EstadoPago = 109;
+                }
+                var Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(137, morasMasivoViewModel.Ident_Kardex);
 
-
-
+                if (Ident_Ingresos == 0)
+                {
+                    Ident_Ingresos = await _cajaService.Ingresos_Insert(ingresosModel, loginResult);
+                }
+                else
+                {
+                    ingresosModel.Ident_Ingresos = Ident_Ingresos;
+                    await _cajaService.Ingresos_Update(ingresosModel, loginResult);
+                }
+                if (Ident_Ingresos > 0)
+                {
+                    var ingresosDetalleModel = new IngresosDetalleModel();
+                    ingresosDetalleModel.Ident_Ingresos = Ident_Ingresos;
+                    ingresosDetalleModel.TipoCambio = morasMasivoViewModel.TipoCambio;
+                    ingresosDetalleModel.Ident_018_TipoPago = (int)morasMasivoViewModel.Ident_018_TipoPago;
+                    ingresosDetalleModel.Ident_CuentasBancarias = morasMasivoViewModel.Ident_CuentasBancarias;
+                    ingresosDetalleModel.Ident_002_TipoMoneda = morasMasivoViewModel.Ident_002_TipoMoneda;
+                    ingresosDetalleModel.Importe = (decimal)morasMasivoViewModel.ImporteMorasDolares;
+                    ingresosDetalleModel.NumeroOperacion = morasMasivoViewModel.NumeroOperacion;
+                    ingresosDetalleModel.ImporteConTC = (decimal)morasMasivoViewModel.ImporteMorasPagado;
+                    ingresosDetalleModel.Fecha = (DateTime)morasMasivoViewModel.FechaPago;
+                    int Ident_IngresosDetalle = await _cajaService.IngresosDetalle_Insert(ingresosDetalleModel, loginResult);
+                    if (Ident_IngresosDetalle > 0)
+                    {
+                            mensaje = "Detalle registrado con exito";
+                    }
+                }
+                return RedirectToAction("MorasMasivo", "Contratos", new { Mensaje = mensaje });
+            }
+            else
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+        }
         [Authorize]
         [HttpGet]
         public IActionResult Imprimir(int Ident_Contratos)

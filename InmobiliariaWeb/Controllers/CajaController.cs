@@ -1,5 +1,6 @@
 ﻿using InmobiliariaWeb.Interfaces;
-using InmobiliariaWeb.Servicios;
+using InmobiliariaWeb.Models;
+using InmobiliariaWeb.Models.Ingresos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,43 @@ namespace InmobiliariaWeb.Controllers
         }
         [HttpGet]
         [Authorize]
-        public IActionResult IngresosIndex() 
+        public async Task<IActionResult> IngresosIndex() 
         {
-            return View();
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+                var ingresosIndexFilterDTO = new IngresosIndexFilterDTO {
+                    dFechaDesde = DateTime.Parse("2025/06/01".ToString()),
+                    dFechaHasta = DateTime.Now
+                };
+                var ingresosIndexTablaDTO = await _cajaService.IngresosIndex(ingresosIndexFilterDTO);
+
+                var ingresosIndexViewModel = new IngresosIndexViewModel { 
+                    dFechaDesde = ingresosIndexFilterDTO.dFechaDesde,
+                    dFechaHasta = ingresosIndexFilterDTO.dFechaHasta,
+                    lIngresosTabla = ingresosIndexTablaDTO
+                };
+
+                return View(ingresosIndexViewModel);
+            }
+            else
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+        }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> IngresosIndex(IngresosIndexViewModel ingresosIndexViewModel)
+        {
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+                return View(ingresosIndexViewModel);
+            }
+            else
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
         }
         [HttpGet]
         [Authorize]

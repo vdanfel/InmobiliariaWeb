@@ -241,7 +241,7 @@ namespace InmobiliariaWeb.Servicios
                     command.Parameters.AddWithValue("@ISIdent_006_EstadoCivil", personaList.Ident006TipoEstadoCivil);
                     command.Parameters.AddWithValue("@ISFechaNacimiento", personaList.FechaNacimiento);
                     command.Parameters.AddWithValue("@ISIdent_016_TipoSexo", personaList.Ident_016_TipoSexo);
-                    command.Parameters.AddWithValue("@ISIdent_Pais", personaList.Ident_Pais);
+                    command.Parameters.AddWithValue("@ISIdent_Pais", personaList.Ident_Pais == 0 ? (object)DBNull.Value : personaList.Ident_Pais);
                     command.Parameters.AddWithValue("@ISRazonSocial", personaList.RazonSocial ?? "");
                     command.Parameters.AddWithValue("@ISCelular", personaList.Celular ?? "");
                     command.Parameters.AddWithValue("@ISTelefono", personaList.Telefono ?? "");

@@ -1,6 +1,167 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model InmobiliariaWeb.Models.Ingresos.IngresosIndexViewModel
+
 @{
 }
-ventana para el index de ingresos
+<form method="post" asp-action="IngresosIndex" asp-controller="Caja">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-auto me-auto">
+                        <h1>Ingresos</h1>
+                    </div>
+                    <div class="col-auto">
+                        <a class="btn btn-outline-primary">
+                            Nuevo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row g-lg-3 g-sm-1 g-1">
+                    <div class="col-12 col-sm-12 col-md-9 col-lg-6">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input class="form-control" type="date" asp-for="@Model.dFechaDesde" />
+                                    <label>Desde:</label>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input class="form-control" type="date" asp-for="@Model.dFechaHasta"/>
+                                    <label>Hasta:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <select class="form-select">
+                                <option>--Seleccione--</option>
+                                <option>Separacion</option>
+                                <option>Cuota Inicial</option>
+                                <option>Cuotas</option>
+                                <option>Moras</option>
+                                <option>Moras Masivas</option>
+                                <option>Servicios</option>
+                                <option>Administrativos</option>
+                            </select>
+                            <label>Tipo de Ingreso:</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-8">
+                        <div class="form-floating">
+                            <select class="form-select">
+                                <option>--Seleccione--</option>
+                                <option>Programa 1</option>
+                                <option>Programa 2</option>
+                                <option>Programa 3</option>
+                                <option>Programa 4</option>
+                            </select>
+                            <label>Programa:</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+                        <div class="form-floating">
+                            <select class="form-select">
+                                <option>--Seleccione--</option>
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                            </select>
+                            <label>Manzana</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+                        <div class="form-floating">
+                            <select class="form-select">
+                                <option>--Seleccione--</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                            <label>Lote</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <select class="form-select">
+                                <option>--Seleccione--</option>
+                                <option>Persona 1</option>
+                                <option>Persona 2</option>
+                            </select>
+                            <label>Cliente:</label>
+                        </div>
+                    </div>
+                    <div class="col-auto me-auto">
+                        <a class="btn btn-outline-secondary">
+                            Filtrar
+                        </a>
+                        <a class="btn btn-outline-primary">
+                            Exportar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center mt-1 mt-lg-2 mt-md-2">
+
+            <div class="col-auto">
+                <div class="form-floating">
+                    <input type="text" class="form-control" />
+                    <label>Total S/.</label>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-floating">
+                    <input type="text" class="form-control" />
+                    <label>Total $</label>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive mt-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th hidden>Ident_Ingreso</th>
+                        <th>Programa</th>
+                        <th>Mz</th>
+                        <th>Lt</th>
+                        <th>Cliente</th>
+                        <th>Tipo Ingreso</th>
+                        <th>Moneda</th>
+                        <th>Importe</th>
+                        <th>Tipo Pago</th>
+                        <th>N° Operacion</th>
+                        <th>Fecha</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ingresos in Model.lIngresosTabla)
+                    {
+                        <tr>
+                            <td>@ingresos.nIdent_Ingresos</td>
+                            <td>@ingresos.sPrograma</td>
+                            <td>@ingresos.sManzana</td>
+                            <td>@ingresos.nLote</td>
+                            <td>@ingresos.sNombreCliente</td>
+                            <td>@ingresos.sTipoIngreso</td>
+                            <td>@ingresos.sMoneda</td>
+                            <td>@ingresos.nImporte</td>
+                            <td>@ingresos.sTipoPago</td>
+                            <td>@ingresos.sNumeroOperacion</td>
+                            <td>@ingresos.dFechaPago</td>
+                            <td>Ver</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</form>

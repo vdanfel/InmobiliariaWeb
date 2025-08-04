@@ -1831,6 +1831,30 @@ namespace InmobiliariaWeb.Servicios
                 await _connection.CloseAsync();
             }
         }
-
+        public async Task MoraMasivoPago(MorasMasivoPagoDTO morasMasivoPagoDTO, LoginResult loginResult)
+        {
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_PagoMorasMasivo", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Ident_Kardex", morasMasivoPagoDTO.Ident_Kardex);
+                    command.Parameters.AddWithValue("@DescuentoPorcentaje", morasMasivoPagoDTO.DescuentoPorcentaje);
+                    command.Parameters.AddWithValue("@DescuentoDirectoTotal", morasMasivoPagoDTO.DescuentoDirectoTotal);
+                    command.Parameters.AddWithValue("@UsuarioModificacion", loginResult.IdentUsuario);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex; // Considera usar un manejo de excepciones más detallado o un logger
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
     }
 }

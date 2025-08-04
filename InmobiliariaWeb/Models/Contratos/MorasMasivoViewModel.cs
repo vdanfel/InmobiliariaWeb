@@ -5,6 +5,7 @@ namespace InmobiliariaWeb.Models.Contratos
 {
     public class MorasMasivoViewModel
     {
+        public int Ident_Contratos { get; set; }
         public int Ident_Kardex { get; set; }
         public decimal ImporteMorasTotal { get; set; }
         public decimal? DescuentoDirecto { get; set; }

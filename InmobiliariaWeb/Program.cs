@@ -1,4 +1,5 @@
 using InmobiliariaWeb.Interfaces;
+using InmobiliariaWeb.Models;
 using InmobiliariaWeb.Servicios;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Data.SqlClient;
@@ -7,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<DashboardSettings>(
+    builder.Configuration.GetSection("DashboardSettings")
+);
+
 builder.Services.AddScoped<ICajaService, CajaService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IRolesService, RolesService>();
@@ -39,6 +45,8 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
 });
+
+
 
 var app = builder.Build();
 

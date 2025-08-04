@@ -1,4 +1,5 @@
 ﻿using InmobiliariaWeb.Models.Caja;
+using InmobiliariaWeb.Models.Ingresos;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Contratos;
 
@@ -15,5 +16,6 @@ namespace InmobiliariaWeb.Interfaces
         Task IngresosDetalle_Delete(int Ident_IngresosDetalle, LoginResult loginResult);
         Task<decimal> IngresosDetalle_ImporteTotal(int Ident_Ingresos);
         Task Ingresos_ValidarImportes(int Ident_IngresosDetalle, int Ident_021_TipoIngresos);
+        Task<List<IngresosIndexTablaDTO>> IngresosIndex(IngresosIndexFilterDTO ingresosIndexFilterDTO);
     }
 }

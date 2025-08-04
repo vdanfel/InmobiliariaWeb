@@ -2,8 +2,9 @@
 @{
     Layout = "_ContratosLayout";
 }
-<form>
+<form method="post" asp-action="MorasMasivo" asp-asp-controller="Contratos">
     <input type="hidden" asp-for="Ident_Kardex"/>
+    <input type="hidden" asp-for="Ident_Contratos" />
     <div class="container">
         <div class="card">
             <div class="card-header fw-bold">
@@ -140,14 +141,13 @@
                                     <tr>
                                         <td>@ingresosDetalle.Indice</td>
                                         <td>@ingresosDetalle.TipoPago</td>
-                                        <td>@ingresosDetalle.Importe</td>
+                                        <td class="importe-detalle">@ingresosDetalle.Importe</td>
                                         <td>@ingresosDetalle.NumeroOperacion</td>
                                         <td>@ingresosDetalle.Banco</td>
                                         <td>@ingresosDetalle.NumeroCuenta</td>
                                         <td>@ingresosDetalle.Moneda</td>
                                         <td>@ingresosDetalle.TipoCambio</td>
                                         <td>@(ingresosDetalle.Fecha.HasValue ? ingresosDetalle.Fecha.Value.ToString("dd/MM/yyyy") : "")</td>
-                                        <td></td>
                                         <td>
                                             <a class="btn btn-outline-danger"
                                                onclick="mostrarModalEliminar('@Url.Action("Eliminar_IngresosDetalle_Mora","Contratos", new{Ident_IngresosDetalle = ingresosDetalle.Ident_IngresosDetalle})')">
@@ -173,13 +173,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-1 g-2">
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input class="form-control" type="text" id="Observacion" asp-for="@Model.Observacion" />
-                                <label for="Observacion">Observacion</label>
-                            </div>
-                        </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-grid gap-2 d-flex mt-1">
+                        <a class="btn btn-outline-secondary" asp-action="Kardex" asp-controller="Contratos">
+                            REGRESAR <i class="bi bi-skip-backward-fill"></i>
+                        </a>
+                        <a class="btn btn-outline-success" onclick="abrirModalPropietarios(@Model.Ident_Contratos, @Model.Ident_Kardex)">
+                            IMPRIMIR <i class="bi bi-print"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -190,53 +192,71 @@
     <partial name="_ValidationScriptsPartial" />
 }
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @ViewBag.Mensaje
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         MoraFinal();
+        ActualizarImporteTotalPagado()
+        ActualizarSaldo();
+        var mensajeError = '@ViewBag.Mensaje';
+        if (mensajeError && mensajeError.trim() !== '') {
+            $(window).load(function () {
+                $('#myModal').modal('show');
+            });
+        };
     });
     function MoraFinal() {
-        // Obtener los valores de los elementos por ID
+        // Obtener valores
         var importeMorasTotal = parseFloat(document.getElementById("ImporteMorasTotal").value) || 0;
         var descuentoDirecto = parseFloat(document.getElementById("DescuentoDirecto").value) || 0;
         var descuentoPorcentaje = parseFloat(document.getElementById("DescuentoPorcentaje").value) || 0;
-        //var importeTotalPagado = parseFloat(document.getElementById("ImporteTotalPagado").value) || 0;
 
-        console.log(importeMorasTotal);
-        console.log(descuentoDirecto);
-        console.log(descuentoPorcentaje);
-        //console.log(importeTotalPagado);
-
-        // Variable para almacenar el nuevo monto de moras
-        var nuevoMontoMoras = importeMorasTotal;
-
-        // Caso 1: Ambos descuentos están presentes
-        if (descuentoDirecto > 0 && descuentoPorcentaje > 0) {
-            nuevoMontoMoras = (importeMorasTotal - descuentoDirecto) - (descuentoPorcentaje * (importeMorasTotal - descuentoDirecto) / 100);
-        }
-        // Caso 2: Solo descuento directo
-        else if (descuentoDirecto > 0 && descuentoPorcentaje <= 0) {
-            nuevoMontoMoras = importeMorasTotal - descuentoDirecto;
-        }
-        // Caso 3: Solo descuento por porcentaje
-        else if (descuentoDirecto <= 0 && descuentoPorcentaje > 0) {
-            nuevoMontoMoras = importeMorasTotal - (descuentoPorcentaje * importeMorasTotal / 100);
+        // Paso 1: aplicar el descuento por porcentaje
+        var montoConDescuentoPorcentaje = importeMorasTotal;
+        if (descuentoPorcentaje > 0) {
+            var descuentoCalculado = (descuentoPorcentaje * importeMorasTotal) / 100;
+            montoConDescuentoPorcentaje -= descuentoCalculado;
         }
 
-        // Verificar si el resultado es negativo
+        // Paso 2: aplicar descuento directo
+        var nuevoMontoMoras = montoConDescuentoPorcentaje;
+        if (descuentoDirecto > 0) {
+            nuevoMontoMoras -= descuentoDirecto;
+        }
+
+        // Validación para evitar monto negativo
         if (nuevoMontoMoras < 0) {
-            // Mostrar el modal (asegúrate de tener el modal en tu HTML)
             $('#modalError').modal('show');
-
-            // Reiniciar los valores a 0
             document.getElementById("DescuentoDirecto").value = 0;
             document.getElementById("DescuentoPorcentaje").value = 0;
-
-            return; // Salir de la función
+            return;
         }
-        // Asignar el resultado al input con el ID 'NuevoMontoMoras'
+
+        // Mostrar el nuevo total
         document.getElementById("NuevoMontoMora").value = nuevoMontoMoras.toFixed(2);
-        console.log(nuevoMontoMoras);
+
+        // Validaciones adicionales
+        ValidarImporteMoras();
+        ActualizarSaldo();
     }
+
+
+
     function ObtenerTipoPago(tipoPagoId) {
         // Verificamos si el tipo de pago es "EFECTIVO"
         var efectivoOption = 115; // Asegúrate que este valor es el que corresponde a "EFECTIVO"
@@ -322,36 +342,105 @@
         var tipoCambio = document.getElementById('TipoCambio').value;
         var tipoMoneda = document.getElementById('Ident_002_TipoMoneda').value;
 
-        // Validar que haya una moneda seleccionada
         if (tipoMoneda === "--SELECCIONE--" || tipoMoneda === "") {
             alert("Por favor, seleccione un tipo de moneda.");
-            return; // Detener la ejecución si no hay moneda seleccionada
+            return;
         }
 
-        // Validar las condiciones del tipo de cambio según la moneda seleccionada
-        if (tipoMoneda === "24") {  // Soles
+        if (tipoMoneda === "24") {
             if (parseFloat(tipoCambio) <= 1) {
                 alert("El tipo de cambio para Soles debe ser mayor a 1.");
-                document.getElementById('TipoCambio').focus(); // Coloca el foco en el campo de tipo de cambio
-                return; // Detener la ejecución si el tipo de cambio no es válido
+                document.getElementById('TipoCambio').focus();
+                return;
             }
-        } else if (tipoMoneda === "23") {  // Dólares
+        } else if (tipoMoneda === "23") {
             if (parseFloat(tipoCambio) !== 1) {
                 alert("El tipo de cambio para Dólares debe ser igual a 1.");
-                document.getElementById('TipoCambio').focus(); // Coloca el foco en el campo de tipo de cambio
-                return; // Detener la ejecución si el tipo de cambio no es válido
+                document.getElementById('TipoCambio').focus();
+                return;
             }
         }
 
-        // Realizar el cálculo solo si las validaciones pasaron
+        // ✅ Validar importe antes de continuar
+        if (!ValidarImporteMoras()) {
+            return;
+        }
+
         var importeMoraPagado = parseFloat(importeDolares) * parseFloat(tipoCambio);
 
-        // Si el tipo de moneda es Soles (24), redondeamos a 1 decimal
         if (tipoMoneda === "24") {
             importeMoraPagado = Math.round(importeMoraPagado * 10) / 10;
         }
 
-        // Asignar el valor redondeado (si es Soles) o el valor normal (si es Dólares) al campo ImporteCuotaPagado
-        $('#ImporteMorasPagado').val(importeMoraPagado.toFixed(2)); // Mostrar con 1 decimal
+        $('#ImporteMorasPagado').val(importeMoraPagado.toFixed(2));
+        ActualizarSaldo();
+    }
+
+    function ValidarImporteMoras() {
+        var importeMorasDolares = parseFloat(document.getElementById("ImporteMorasDolares").value) || 0;
+        var nuevoMontoMora = parseFloat(document.getElementById("NuevoMontoMora").value) || 0;
+
+        if (importeMorasDolares > nuevoMontoMora) {
+            alert("El importe ingresado no puede ser mayor al nuevo monto de mora permitido.");
+            document.getElementById("ImporteMorasDolares").value = "0.00"; // Reiniciar a 0
+            document.getElementById("ImporteMorasDolares").focus(); // Colocar el foco para corrección
+            return false;
+        }
+        return true;
+    }
+    function ActualizarSaldo() {
+        var nuevoMontoMora = parseFloat(document.getElementById("NuevoMontoMora").value) || 0;
+        var importeTotalPagado = parseFloat(document.getElementById("ImporteTotalPagado").value) || 0;
+        var importeMorasDolares = parseFloat(document.getElementById("ImporteMorasDolares").value) || 0;
+
+        var saldo = nuevoMontoMora - (importeTotalPagado + importeMorasDolares);
+
+        if (saldo < 0) {
+            alert("El saldo no puede ser negativo. El valor de 'Importe Moras Dólares' ha sido restablecido.");
+            document.getElementById("ImporteMorasDolares").value = 0;
+            importeMorasDolares = 0;
+            saldo = nuevoMontoMora - (importeTotalPagado + importeMorasDolares); // Recalcular
+        }
+
+        document.getElementById("saldo").value = saldo.toFixed(2);
+
+        // Validación para habilitar/deshabilitar el botón
+        var btnAgregar = document.getElementById("btnAgregar");
+
+        var permitirAgregar = false;
+
+        if (saldo >= 0) {
+            if (importeMorasDolares > 0) {
+                permitirAgregar = true;
+            } else if (nuevoMontoMora === 0 && EsDescuento100PorCiento()) {
+                permitirAgregar = true;
+            }
+        }
+
+        btnAgregar.disabled = !permitirAgregar;
+    }
+    function EsDescuento100PorCiento() {
+        var importeMorasTotal = parseFloat(document.getElementById("ImporteMorasTotal").value) || 0;
+        var descuentoDirecto = parseFloat(document.getElementById("DescuentoDirecto").value) || 0;
+        var descuentoPorcentaje = parseFloat(document.getElementById("DescuentoPorcentaje").value) || 0;
+
+        return (
+            (descuentoPorcentaje === 100) ||
+            (descuentoDirecto === importeMorasTotal) ||
+            ((descuentoDirecto > 0 && descuentoPorcentaje > 0) &&
+                ((importeMorasTotal - descuentoDirecto) * (descuentoPorcentaje / 100) === (importeMorasTotal - descuentoDirecto)))
+        );
+    }
+    function ActualizarImporteTotalPagado() {
+        var total = 0;
+        document.querySelectorAll(".importe-detalle").forEach(function (cell) {
+            var valor = parseFloat(cell.textContent) || 0;
+            total += valor;
+        });
+
+        document.getElementById("ImporteTotalPagado").value = total.toFixed(2);
+
+        // Luego de actualizar el total, también actualizamos el saldo
+        ActualizarSaldo();
     }
 </script>

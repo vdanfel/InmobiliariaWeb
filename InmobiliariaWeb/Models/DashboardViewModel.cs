@@ -1,5 +1,4 @@
-﻿using InmobiliariaWeb.Result.Dashboard;
-using InmobiliariaWeb.Result.Separaciones;
+﻿using InmobiliariaWeb.Result.Separaciones;
 
 namespace InmobiliariaWeb.Models
 {

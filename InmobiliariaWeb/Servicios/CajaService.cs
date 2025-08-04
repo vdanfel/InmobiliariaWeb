@@ -1,6 +1,7 @@
 ﻿using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Contratos;
+using InmobiliariaWeb.Models.Ingresos;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Contratos;
 using InmobiliariaWeb.Result.Separaciones;
@@ -370,6 +371,48 @@ namespace InmobiliariaWeb.Servicios
             finally
             {
                 await _connection.CloseAsync();
+            }
+        }
+        public async Task<List<IngresosIndexTablaDTO>> IngresosIndex(IngresosIndexFilterDTO ingresosIndexFilterDTO)
+        {
+            List<IngresosIndexTablaDTO> ingresosIndexTablaDTO = new List<IngresosIndexTablaDTO>();
+            try 
+            {
+                using (SqlCommand command = new SqlCommand("usp_IngresosIndex", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@dFechaDesde", ingresosIndexFilterDTO.dFechaDesde);
+                    command.Parameters.AddWithValue("@dFechaHasta", ingresosIndexFilterDTO.dFechaHasta);
+                    command.Parameters.AddWithValue("@nTipoIngreso", ingresosIndexFilterDTO.nTipoIngreso);
+                    command.Parameters.AddWithValue("@nIdent_Programa", ingresosIndexFilterDTO.nIdent_Programa);
+                    command.Parameters.AddWithValue("@nIdent_Manzana", ingresosIndexFilterDTO.nIdent_Manzana);
+                    command.Parameters.AddWithValue("@nIdent_Lote", ingresosIndexFilterDTO.nIdent_Lote);
+                    command.Parameters.AddWithValue("@nIdent_Persona", ingresosIndexFilterDTO.nIdent_Persona);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        IngresosIndexTablaDTO ingresos = new IngresosIndexTablaDTO();
+                        ingresos.nIdent_Ingresos = Int32.Parse(reader["nIdent_Ingresos"].ToString());
+                        ingresos.sPrograma = reader["sPrograma"].ToString();
+                        ingresos.sManzana = reader["sManzana"].ToString();
+                        ingresos.nLote = Int32.Parse(reader["nLote"].ToString());
+                        ingresos.sNombreCliente = reader["sNombreCliente"].ToString();
+                        ingresos.sTipoIngreso = reader["sTipoIngreso"].ToString();
+                        ingresos.sMoneda = reader["sMoneda"].ToString();
+                        ingresos.nImporte = Decimal.Parse(reader["nImporte"].ToString());
+                        ingresos.sTipoPago = reader["sTipoPago"].ToString();
+                        ingresos.sNumeroOperacion = reader["sNumeroOperacion"].ToString();
+                        ingresos.dFechaPago = DateTime.Parse(reader["dFechaPago"].ToString());
+                        ingresosIndexTablaDTO.Add(ingresos);
+                    }
+                    return ingresosIndexTablaDTO;
+                }
+            }
+            catch (Exception ex) 
+            {
+                throw ex;
             }
         }
     }

@@ -58,5 +58,6 @@ namespace InmobiliariaWeb.Interfaces
         Task<IngresosModel> IngresosCabecera(int Ident_Contratos);
         Task<decimal> MorasMasivo_Total(int Ident_Kardex);
         Task<ReciboBE> ImprimirRecibo(int Ident_021_TipoIngresos, int Ident_Origen, int Ident_ContratosPersonas);
+        Task MoraMasivoPago(MorasMasivoPagoDTO morasMasivoPagoDTO, LoginResult loginResult);
     }
 }
