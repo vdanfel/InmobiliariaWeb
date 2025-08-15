@@ -4,6 +4,7 @@ using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Contratos;
 using InmobiliariaWeb.Models.Programa;
 using InmobiliariaWeb.Result;
+using InmobiliariaWeb.Result.Caja;
 using InmobiliariaWeb.Result.Contratos;
 using InmobiliariaWeb.Result.Programa;
 using InmobiliariaWeb.Result.Separaciones;
@@ -81,7 +82,7 @@ namespace InmobiliariaWeb.Servicios
             var manzanaCbxLists = new List<ManzanaCbxList>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Manzana_CbxListar", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Manzana_CbxListarContrato", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@ISIdent_Programa", ident_Programa);
@@ -112,7 +113,7 @@ namespace InmobiliariaWeb.Servicios
             var lotesCbxList = new List<LoteCbxList>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Lotes_CbxListar_Contratos", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Lote_CbxListarContrato", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@ISIdent_Manzana", ident_Manzana);
@@ -1854,6 +1855,37 @@ namespace InmobiliariaWeb.Servicios
             finally
             {
                 await _connection.CloseAsync();
+            }
+        }
+        public async Task<List<ClienteCbxList>> ClienteCbxListar(int Ident_Lote)
+        {
+            var clienteCbxList = new List<ClienteCbxList>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_ClientesXLoteList", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Ident_Lote", Ident_Lote);
+                    await _connection.OpenAsync();
+
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var cliente = new ClienteCbxList();
+                        cliente.nIdent_Persona = Int32.Parse(reader["nIdent_Persona"].ToString());
+                        cliente.sNombreCompleto = reader["sNombreCompleto"].ToString();
+                        clienteCbxList.Add(cliente);
+                    }
+                    return clienteCbxList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
             }
         }
     }

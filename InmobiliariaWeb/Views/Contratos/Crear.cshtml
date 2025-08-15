@@ -412,7 +412,7 @@
     }
     
     function ObtenerManzanas(programaId, defaults) {
-        $.get(`/Contratos/GetManzanas?programaId=${programaId}`, function (data) {
+        $.get(`/Separaciones/GetManzanas?programaId=${programaId}`, function (data) {
             $("#manzana").empty();
             $("#manzana").append('<option value=""></option>');
             $.each(data, function (index, item) {
@@ -423,7 +423,7 @@
     }
 
     function ObtenerLotes(manzanaId, defaults) {
-        $.get(`/Contratos/GetLotes?manzanaId=${manzanaId}`, function (data) {
+        $.get(`/Separaciones/GetLotes?manzanaId=${manzanaId}`, function (data) {
             $("#lote").empty();
             $("#lote").append('<option value=""></option>');
             $.each(data, function (index, item) {

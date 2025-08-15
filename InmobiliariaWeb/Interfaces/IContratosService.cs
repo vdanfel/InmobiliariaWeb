@@ -1,6 +1,7 @@
 ﻿using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Contratos;
 using InmobiliariaWeb.Result;
+using InmobiliariaWeb.Result.Caja;
 using InmobiliariaWeb.Result.Contratos;
 using InmobiliariaWeb.Result.Separaciones;
 using InmobiliariaWeb.Utilities;
@@ -59,5 +60,6 @@ namespace InmobiliariaWeb.Interfaces
         Task<decimal> MorasMasivo_Total(int Ident_Kardex);
         Task<ReciboBE> ImprimirRecibo(int Ident_021_TipoIngresos, int Ident_Origen, int Ident_ContratosPersonas);
         Task MoraMasivoPago(MorasMasivoPagoDTO morasMasivoPagoDTO, LoginResult loginResult);
+        Task<List<ClienteCbxList>> ClienteCbxListar(int Ident_Lote);
     }
 }

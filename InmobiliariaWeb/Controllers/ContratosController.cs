@@ -87,6 +87,13 @@ namespace InmobiliariaWeb.Controllers
         }
         [HttpGet]
         [Authorize]
+        public async Task<IActionResult> GetClientes(int clienteId)
+        { 
+            var clientes = await _contratosService.ClienteCbxListar(clienteId);
+            return Json(clientes);  
+        }
+        [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetLoteDetalle(int ident_Lote)
         {
             var lotes = await _contratosService.LoteDetalle(ident_Lote);

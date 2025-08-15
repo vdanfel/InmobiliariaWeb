@@ -54,45 +54,37 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-8">
                         <div class="form-floating">
-                            <select class="form-select">
-                                <option>--Seleccione--</option>
-                                <option>Programa 1</option>
-                                <option>Programa 2</option>
-                                <option>Programa 3</option>
-                                <option>Programa 4</option>
+                            <select class="form-select" id="programas" asp-for="@Model.Ident_Programa" onchange="cargarManzanas()">
+                                <option value="0"></option>
+                                @foreach (var programas in Model.ProgramasCbxLists)
+                                {
+                                    <option value="@programas.Ident_Programa">@programas.Nombre_Programa</option>
+                                }
                             </select>
                             <label>Programa:</label>
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-3 col-lg-2">
                         <div class="form-floating">
-                            <select class="form-select">
-                                <option>--Seleccione--</option>
-                                <option>A</option>
-                                <option>B</option>
-                                <option>C</option>
+                            <select class="form-select" id="manzana" asp-for="@Model.Ident_Manzana" onchange="cargarLotes()">
+                                <option value="0"></option>
                             </select>
                             <label>Manzana</label>
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-3 col-lg-2">
                         <div class="form-floating">
-                            <select class="form-select">
-                                <option>--Seleccione--</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                            <select class="form-select" id="lote" asp-for="@Model.Ident_Lote" onchange="cargarClientes()">
+                                <option value="0"></option>
                             </select>
+
                             <label>Lote</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <select class="form-select">
-                                <option>--Seleccione--</option>
-                                <option>Persona 1</option>
-                                <option>Persona 2</option>
+                            <select class="form-select" id="cliente" asp-for="@Model.Ident_Persona">
+                                <option value="0"></option>
                             </select>
                             <label>Cliente:</label>
                         </div>
@@ -145,7 +137,7 @@
                     @foreach (var ingresos in Model.lIngresosTabla)
                     {
                         <tr>
-                            <td>@ingresos.nIdent_Ingresos</td>
+                            <td hidden>@ingresos.nIdent_Ingresos</td>
                             <td>@ingresos.sPrograma</td>
                             <td>@ingresos.sManzana</td>
                             <td>@ingresos.nLote</td>
@@ -155,7 +147,7 @@
                             <td>@ingresos.nImporte</td>
                             <td>@ingresos.sTipoPago</td>
                             <td>@ingresos.sNumeroOperacion</td>
-                            <td>@ingresos.dFechaPago</td>
+                            <td>@ingresos.dFechaPago.ToString("dd/MM/yyyy")</td>
                             <td>Ver</td>
                         </tr>
                     }
@@ -165,3 +157,81 @@
     </div>
     
 </form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    function cargarManzanas() {
+        var programaSelect = document.getElementById("programas");
+        var selectedPrograma = programaSelect.value;
+        var manzanaSelect = document.getElementById("manzana");
+        var loteSelect = document.getElementById("lote");
+        var clienteSelect = document.getElementById("cliente");
+
+        // Limpiar opciones previas
+        manzanaSelect.innerHTML = "<option value='0'></option>";
+        loteSelect.innerHTML = "<option value='0'></option>";
+        clienteSelect.innerHTML = "<option value='0'></option>";
+        if (selectedPrograma && selectedPrograma !== "0") {
+            fetch(`@Url.Action("GetManzanas", "Contratos")?programaId=${selectedPrograma}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(manzana => {
+                        var option = document.createElement("option");
+                        option.value = manzana.ident_Manzana;
+                        option.text = manzana.letra;
+                        manzanaSelect.add(option);
+                    });
+                })
+                .catch(error => console.error("Error al obtener las manzanas:", error));
+        }
+    }
+    function cargarLotes() {
+        var manzanaSelect = document.getElementById("manzana");
+        var selectedManzana = manzanaSelect.value;
+        var loteSelect = document.getElementById("lote");
+        var clienteSelect = document.getElementById("cliente");
+
+        // Limpiar opciones previas
+        loteSelect.innerHTML = "<option value='0'></option>";
+        clienteSelect.innerHTML = "<option value='0'></option>";
+
+        if (selectedManzana && selectedManzana !== "0") {
+            fetch(`@Url.Action("GetLotes", "Contratos")?manzanaId=${selectedManzana}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(lote => {
+                        var option = document.createElement("option");
+                        option.value = lote.ident_Lote;
+                        option.text = lote.correlativo;
+                        loteSelect.add(option);
+                    });
+                })
+                .catch(error => console.error("Error al obtener los lotes:", error));
+        }
+    }
+    function cargarClientes() {
+        var loteSelect = document.getElementById("lote");
+        var selectedLote = loteSelect.value;
+        var clienteSelect = document.getElementById("cliente");
+
+        // Limpiar opciones previas
+        clienteSelect.innerHTML = "<option value='0'></option>";
+
+        if (selectedLote && selectedLote !== "0") {
+            fetch(`@Url.Action("GetClientes", "Contratos")?clienteId=${selectedLote}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(cliente => {
+                        var option = document.createElement("option");
+                        option.value = cliente.nIdent_Persona;
+                        option.text = cliente.sNombreCompleto;
+                        clienteSelect.add(option);
+                    });
+                })
+                .catch(error => console.error("Error al obtener los clientes:", error));
+        }
+    }
+
+</script>

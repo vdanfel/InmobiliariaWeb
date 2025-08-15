@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-12 col-xxl-9 col-lg-9 col-md-9 col-sm-12">
                         <div class="form-floating">
-                            <select class="form-select" id="programas" asp-for="@Model.Ident_Programa">
+                            <select class="form-select" id="programas" asp-for="@Model.Ident_Programa" onchange="cargarManzanas()">
                                 <option value="0"></option>
                                 @foreach (var programas in Model.ProgramasCbxLists)
                                 {
@@ -148,40 +148,12 @@
     document.addEventListener("DOMContentLoaded", function () {
         generatePagination(@Model.NumeroPaginas, @Model.PaginaActual, @Model.GrupoActual, @Model.NumeroGrupos);
 
-        var programaSelect = document.getElementById("programas");
-
-        // Agregar un evento de cambio al elemento de selección del programa
-        programaSelect.addEventListener("change", function () {
-            // Obtener el valor seleccionado (identificador del programa)
-            var selectedPrograma = programaSelect.value;
-
-            // Obtener la referencia al elemento de selección de manzana
-            var manzanaSelect = document.getElementById("manzana");
-
-            // Limpiar las opciones existentes en el elemento de selección de manzana
-            manzanaSelect.innerHTML = "<option></option>";
-
-            // Verificar si se ha seleccionado un programa (evitar enviar una solicitud innecesaria)
-            if (selectedPrograma) {
-                fetch(`/Contratos/GetManzanas?programaId=${selectedPrograma}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Agregar las opciones de manzana al elemento de selección
-                        data.forEach(manzana => {
-                            var option = document.createElement("option");
-                            option.value = manzana.ident_Manzana;
-                            option.text = manzana.letra;
-                            manzanaSelect.add(option);
-                        });
-                    })
-                    .catch(error => console.error("Error al obtener las manzanas:", error));
-            }
-        });
         const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         tooltipTriggerList.forEach(function (tooltipTriggerEl) {
             new bootstrap.Tooltip(tooltipTriggerEl);
         });
     });
+
     //para el paginador
     function generatePagination(numerpPaginas, paginActual, grupoActual, numeroGrupos) {
         const paginator = document.getElementById("paginator");
@@ -251,4 +223,28 @@
         document.getElementById("paginaActual").value = 1;
         document.getElementById("filtrarForm").submit();
     });
+
+    function cargarManzanas() {
+        var programaSelect = document.getElementById("programas");
+        var selectedPrograma = programaSelect.value;
+        var manzanaSelect = document.getElementById("manzana");
+
+        // Limpiar opciones previas
+        manzanaSelect.innerHTML = "<option value='0'></option>";
+
+        if (selectedPrograma && selectedPrograma !== "0") {
+            fetch(`@Url.Action("GetManzanas", "Contratos")?programaId=${selectedPrograma}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(manzana => {
+                        var option = document.createElement("option");
+                        option.value = manzana.ident_Manzana;
+                        option.text = manzana.letra;
+                        manzanaSelect.add(option);
+                    });
+                })
+                .catch(error => console.error("Error al obtener las manzanas:", error));
+        }
+    }
+
 </script>

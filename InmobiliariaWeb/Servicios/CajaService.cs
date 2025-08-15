@@ -414,6 +414,10 @@ namespace InmobiliariaWeb.Servicios
             {
                 throw ex;
             }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
         }
     }
 }
