@@ -383,7 +383,7 @@ namespace InmobiliariaWeb.Servicios
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@dFechaDesde", ingresosIndexFilterDTO.dFechaDesde);
                     command.Parameters.AddWithValue("@dFechaHasta", ingresosIndexFilterDTO.dFechaHasta);
-                    command.Parameters.AddWithValue("@nTipoIngreso", ingresosIndexFilterDTO.nTipoIngreso);
+                    command.Parameters.AddWithValue("@nIdent_021_TipoIngresos", ingresosIndexFilterDTO.nIdent_021_TipoIngresos);
                     command.Parameters.AddWithValue("@nIdent_Programa", ingresosIndexFilterDTO.nIdent_Programa);
                     command.Parameters.AddWithValue("@nIdent_Manzana", ingresosIndexFilterDTO.nIdent_Manzana);
                     command.Parameters.AddWithValue("@nIdent_Lote", ingresosIndexFilterDTO.nIdent_Lote);
@@ -405,6 +405,7 @@ namespace InmobiliariaWeb.Servicios
                         ingresos.sTipoPago = reader["sTipoPago"].ToString();
                         ingresos.sNumeroOperacion = reader["sNumeroOperacion"].ToString();
                         ingresos.dFechaPago = DateTime.Parse(reader["dFechaPago"].ToString());
+                        ingresos.nIdent_002_TipoMoneda = Int32.Parse(reader["nIdent_002_TipoMoneda"].ToString());
                         ingresosIndexTablaDTO.Add(ingresos);
                     }
                     return ingresosIndexTablaDTO;
@@ -419,5 +420,6 @@ namespace InmobiliariaWeb.Servicios
                 await _connection.CloseAsync();
             }
         }
+
     }
 }

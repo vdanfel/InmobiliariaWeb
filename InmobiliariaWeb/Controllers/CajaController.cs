@@ -11,10 +11,12 @@ namespace InmobiliariaWeb.Controllers
     {
         private readonly ICajaService _cajaService;
         private readonly IContratosService _contratosService;
-        public CajaController(ICajaService cajaService, IContratosService contratosService)
+        private readonly ITablasService _tablasService;
+        public CajaController(ICajaService cajaService, IContratosService contratosService, ITablasService tablasService)
         {
             _cajaService = cajaService;
             _contratosService = contratosService;
+            _tablasService = tablasService;
         }
         [HttpGet]
         [Authorize]
@@ -24,19 +26,26 @@ namespace InmobiliariaWeb.Controllers
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
                 var ingresosIndexFilterDTO = new IngresosIndexFilterDTO {
-                    dFechaDesde = DateTime.Parse("2025/06/01".ToString()),
+                    dFechaDesde = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
                     dFechaHasta = DateTime.Now
                 };
-                var ingresosIndexTablaDTO = await _cajaService.IngresosIndex(ingresosIndexFilterDTO);/*para el filtro de tipos de ingresos*/
+
+                var ingresosIndexTablaDTO = await _cajaService.IngresosIndex(ingresosIndexFilterDTO);/*para llenar los datos de la caja con los filtros*/
 
                 var ingresosIndexViewModel = new IngresosIndexViewModel { 
                     dFechaDesde = ingresosIndexFilterDTO.dFechaDesde,
                     dFechaHasta = ingresosIndexFilterDTO.dFechaHasta,
-                    lIngresosTabla = ingresosIndexTablaDTO
+                    lIngresosTabla = ingresosIndexTablaDTO,
+                    nTotalSoles = ingresosIndexTablaDTO
+                .Where(x => x.nIdent_002_TipoMoneda == 24)
+                .Sum(x => x.nImporte),
+                    nTotalDolares = ingresosIndexTablaDTO
+                .Where(x => x.nIdent_002_TipoMoneda == 23)
+                .Sum(x => x.nImporte)
                 };
 
                 ingresosIndexViewModel.ProgramasCbxLists = await _contratosService.ProgramaCbxListar();/*para el filtro de programas*/
-
+                ingresosIndexViewModel.lTipoIngreso = await _tablasService.ListarTipoIngreso();
                 return View(ingresosIndexViewModel);
             }
             else
@@ -51,6 +60,30 @@ namespace InmobiliariaWeb.Controllers
             if (HttpContext.Session.GetString("Usuario") != null)
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+
+                IngresosIndexFilterDTO ingresosIndexFilterDTO = new IngresosIndexFilterDTO
+                {
+                    dFechaDesde = ingresosIndexViewModel.dFechaDesde,
+                    dFechaHasta = ingresosIndexViewModel.dFechaHasta,
+                    nIdent_021_TipoIngresos = ingresosIndexViewModel.nIdent_021_TipoIngresos,
+                    nIdent_Programa = ingresosIndexViewModel.Ident_Programa,
+                    nIdent_Manzana = ingresosIndexViewModel.Ident_Manzana,
+                    nIdent_Lote = ingresosIndexViewModel.Ident_Lote,
+                    nIdent_Persona = ingresosIndexViewModel.Ident_Persona
+                };
+
+                var ingresosIndexTablaDTO = await _cajaService.IngresosIndex(ingresosIndexFilterDTO);
+                ingresosIndexViewModel.lIngresosTabla = ingresosIndexTablaDTO;
+                ingresosIndexViewModel.nTotalSoles = ingresosIndexTablaDTO
+                    .Where(x => x.nIdent_002_TipoMoneda == 24)
+                    .Sum(x => x.nImporte);
+                ingresosIndexViewModel.nTotalDolares = ingresosIndexTablaDTO
+                    .Where(x => x.nIdent_002_TipoMoneda == 23)
+                    .Sum(x => x.nImporte);
+
+                ingresosIndexViewModel.ProgramasCbxLists = await _contratosService.ProgramaCbxListar();
+                ingresosIndexViewModel.lTipoIngreso = await _tablasService.ListarTipoIngreso();
+
                 return View(ingresosIndexViewModel);
             }
             else
@@ -58,6 +91,13 @@ namespace InmobiliariaWeb.Controllers
                 return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
             }
         }
+        [HttpGet]
+        [Authorize]
+        public IActionResult IngresoNuevo()
+        {
+            return View();
+        }
+
         [HttpGet]
         [Authorize]
         public IActionResult EgresosIndex()

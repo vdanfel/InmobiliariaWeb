@@ -1,4 +1,5 @@
-﻿using InmobiliariaWeb.Result.Separaciones;
+﻿using InmobiliariaWeb.Models.Tablas;
+using InmobiliariaWeb.Result.Separaciones;
 
 namespace InmobiliariaWeb.Models.Ingresos
 {
@@ -12,5 +13,9 @@ namespace InmobiliariaWeb.Models.Ingresos
         public int Ident_Manzana { get; set; }
         public int Ident_Lote { get; set; }
         public int Ident_Persona { get; set; }
+        public List<TipoIngreso>lTipoIngreso { get; set; }
+        public int nIdent_021_TipoIngresos { get; set; }
+        public decimal nTotalSoles { get; set; }
+        public decimal nTotalDolares { get; set; }
     }
 }

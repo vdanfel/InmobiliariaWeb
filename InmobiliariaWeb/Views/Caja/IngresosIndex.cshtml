@@ -11,7 +11,7 @@
                         <h1>Ingresos</h1>
                     </div>
                     <div class="col-auto">
-                        <a class="btn btn-outline-primary">
+                        <a class="btn btn-outline-primary" asp-action="IngresoNuevo" asp-controller="Caja">
                             Nuevo
                         </a>
                     </div>
@@ -39,15 +39,12 @@
 
                     <div class="col-12">
                         <div class="form-floating">
-                            <select class="form-select">
-                                <option>--Seleccione--</option>
-                                <option>Separacion</option>
-                                <option>Cuota Inicial</option>
-                                <option>Cuotas</option>
-                                <option>Moras</option>
-                                <option>Moras Masivas</option>
-                                <option>Servicios</option>
-                                <option>Administrativos</option>
+                            <select class="form-select" id="tipoIngresos" asp-for="@Model.nIdent_021_TipoIngresos">
+                                <option value="0"></option>
+                                @foreach (var tipoIngreso in Model.lTipoIngreso)
+                                {
+                                    <option value="@tipoIngreso.nIdent_021_TipoIngreso">@tipoIngreso.sDescripcion</option>
+                                }
                             </select>
                             <label>Tipo de Ingreso:</label>
                         </div>
@@ -90,12 +87,12 @@
                         </div>
                     </div>
                     <div class="col-auto me-auto">
-                        <a class="btn btn-outline-secondary">
+                        <button class="btn btn-outline-secondary" type="submit">
                             Filtrar
-                        </a>
-                        <a class="btn btn-outline-primary">
+                        </button>
+                        @*<a class="btn btn-outline-primary">
                             Exportar
-                        </a>
+                        </a>*@
                     </div>
                 </div>
             </div>
@@ -104,13 +101,13 @@
 
             <div class="col-auto">
                 <div class="form-floating">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" value="@Model.nTotalSoles" readonly />
                     <label>Total S/.</label>
                 </div>
             </div>
             <div class="col-auto">
                 <div class="form-floating">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" value="@Model.nTotalDolares" readonly />
                     <label>Total $</label>
                 </div>
             </div>

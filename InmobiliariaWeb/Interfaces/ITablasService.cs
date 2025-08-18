@@ -23,5 +23,6 @@ namespace InmobiliariaWeb.Interfaces
         Task<List<Banco>> ListarBancos();
         Task<List<TipoCuentaBanco>> ListarTipoCuentaBanco();
         Task<List<TipoMoneda>> ListarTipoMoneda();
+        Task<List<TipoIngreso>> ListarTipoIngreso();
     }
 }

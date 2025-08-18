@@ -13,5 +13,6 @@
         public string sTipoPago { get; set; }
         public string? sNumeroOperacion { get; set; }
         public DateTime dFechaPago { get; set; }
+        public int? nIdent_002_TipoMoneda { get; set; }
     }
 }
