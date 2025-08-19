@@ -93,9 +93,32 @@ namespace InmobiliariaWeb.Controllers
         }
         [HttpGet]
         [Authorize]
-        public IActionResult IngresoNuevo()
+        public async Task<IActionResult> IngresoNuevo()
         {
-            return View();
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+
+                IngresosViewModel ingresosViewModel = new IngresosViewModel();
+                ingresosViewModel.lProgramasCbxLists = await _contratosService.ProgramaCbxListar();
+                var tipoIngresosLista = await _tablasService.ListarTipoIngreso();
+
+                ingresosViewModel.lTipoIngreso = tipoIngresosLista
+                    .Where(x => x.nIdent_021_TipoIngreso != 135
+                             && x.nIdent_021_TipoIngreso != 136
+                             && x.nIdent_021_TipoIngreso != 137)
+                    .ToList();
+                ingresosViewModel.lBancos = await _tablasService.ListarBancos();
+                ingresosViewModel.lTipoPagos = await _tablasService.ListarTipoPago();
+                ingresosViewModel.lTipoMonedas = await _tablasService.ListarTipoMoneda();
+                ingresosViewModel.dFechaIngreso = DateTime.Now;
+                return View(ingresosViewModel);
+            }
+            else
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            
         }
 
         [HttpGet]

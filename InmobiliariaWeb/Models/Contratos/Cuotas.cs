@@ -39,6 +39,5 @@ namespace InmobiliariaWeb.Models.Contratos
         public decimal SaldoAPagar { get; set; }
         public decimal ImporteCuotasSoles { get; set; }
         public decimal ImporteCuotasDolares { get; set; }
-
     }
 }

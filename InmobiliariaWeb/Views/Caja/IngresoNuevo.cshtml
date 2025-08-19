@@ -1,75 +1,102 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model InmobiliariaWeb.Models.Ingresos.IngresosViewModel
 @{
 }
-<form>
+<form method="post" asp-action="IngresoNuevo" asp-controller="Caja">
     <div class="container">
         <div class="row g-2">
             <div class="col-12 col-sm-12 col-md-9 col-lg-9">
                 <div class="form-floating">
-                    <select class="form-select">
+                    <select class="form-select" id="tipoIngresos" asp-for="@Model.nIdent_021_TipoIngresos">
+                        <option value="0"></option>
+                        @foreach (var tipoIngreso in Model.lTipoIngreso)
+                        {
+                            <option value="@tipoIngreso.nIdent_021_TipoIngreso">@tipoIngreso.sDescripcion</option>
+                        }
                     </select>
-                    <label>Tipo Ingreso</label>
+                    <label>Tipo de Ingreso:</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="form-floating">
-                    <input class="form-control" type="date"/>
+                    <input class="form-control" type="date" asp-for="@Model.dFechaIngreso"/>
                     <label>Fecha Ingreso</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-8">
                 <div class="form-floating">
-                    <select class="form-select">
+                    <select class="form-select" id="programas" asp-for="@Model.nIdent_Programa" onchange="cargarManzanas()">
+                        <option value="0"></option>
+                        @foreach (var programas in Model.lProgramasCbxLists)
+                        {
+                            <option value="@programas.Ident_Programa">@programas.Nombre_Programa</option>
+                        }
                     </select>
-                    <label>Programa</label>
+                    <label>Programa:</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-3 col-lg-2">
                 <div class="form-floating">
-                    <select class="form-select">
+                    <select class="form-select" id="manzana" asp-for="@Model.nIdent_Manzana" onchange="cargarLotes()">
+                        <option value="0"></option>
                     </select>
                     <label>Manzana</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-3 col-lg-2">
                 <div class="form-floating">
-                    <select class="form-select">
+                    <select class="form-select" id="lote" asp-for="@Model.nIdent_Lote">
+                        <option value="0"></option>
                     </select>
                     <label>Lote</label>
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-floating">
-                    <textarea class="form-control"></textarea>
-                    <label>Observacion:</label>
+                    <textarea class="form-control" asp-for="sObservacion" style="height: 6rem"></textarea>
+                    <label asp-for="sObservacion">Observación:</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <select class="form-select">
+                    <select id="lTipoPago" class="form-select" asp-for="@Model.nIdent_018_TipoPago" onchange="validarTipoPago()">
+                        <option></option>
+                        @foreach (var tipoPago in Model.lTipoPagos)
+                        {
+                            <option value="@tipoPago.Ident_018_TipoPago">@tipoPago.Descripcion</option>
+                        }
                     </select>
                     <label>Tipo Pago</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <select class="form-select">
+                    <select id="lBanco" class="form-select" asp-for="@Model.nIdent_019_Banco" onchange="ObtenerCuentasBancarias()">
+                        <option></option>
+                        @foreach (var banco in Model.lBancos)
+                        {
+                            <option value="@banco.Ident_019_Banco">@banco.Abreviatura</option>
+                        }
                     </select>
                     <label>Banco</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <select class="form-select">
+                    <select id="lCuentasBancarias" class="form-select" asp-for="@Model.nIdent_CuentasBancarias">
+                        <option>--SELECCIONE--</option>
+
                     </select>
-                    <label>Numero Cuenta</label>
+                    <label>N° Cuenta</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <select class="form-select">
+                    <select id="lTipoMoneda" class="form-select" asp-for="@Model.nIdent_002_TipoMoneda" onchange="ValidarTipoCambio()">
+                        <option></option>
+                        @foreach (var moneda in Model.lTipoMonedas)
+                        {
+                            <option value="@moneda.Ident_002_TipoMoneda">@moneda.Abreviatura</option>
+                        }
                     </select>
                     <label>Moneda</label>
                 </div>
@@ -88,7 +115,7 @@
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <input class="form-control" />
+                    <input class="form-control" id="sNumeroOperacion" asp-for="sNumeroOperacion"/>
                     <label>Numero Operacion</label>
                 </div>
             </div>
@@ -96,3 +123,77 @@
         
     </div>
 </form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    function cargarManzanas() {
+        var programaSelect = document.getElementById("programas");
+        var selectedPrograma = programaSelect.value;
+        var manzanaSelect = document.getElementById("manzana");
+        var loteSelect = document.getElementById("lote");
+
+        // Limpiar opciones previas
+        manzanaSelect.innerHTML = "<option value='0'></option>";
+        loteSelect.innerHTML = "<option value='0'></option>";
+        if (selectedPrograma && selectedPrograma !== "0") {
+            fetch(`@Url.Action("GetManzanas", "Contratos")?programaId=${selectedPrograma}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(manzana => {
+                        var option = document.createElement("option");
+                        option.value = manzana.ident_Manzana;
+                        option.text = manzana.letra;
+                        manzanaSelect.add(option);
+                    });
+                })
+                .catch(error => console.error("Error al obtener las manzanas:", error));
+        }
+    }
+    function cargarLotes() {
+        var manzanaSelect = document.getElementById("manzana");
+        var selectedManzana = manzanaSelect.value;
+        var loteSelect = document.getElementById("lote");
+
+        // Limpiar opciones previas
+        loteSelect.innerHTML = "<option value='0'></option>";
+
+        if (selectedManzana && selectedManzana !== "0") {
+            fetch(`@Url.Action("GetLotes", "Contratos")?manzanaId=${selectedManzana}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(lote => {
+                        var option = document.createElement("option");
+                        option.value = lote.ident_Lote;
+                        option.text = lote.correlativo;
+                        loteSelect.add(option);
+                    });
+                })
+                .catch(error => console.error("Error al obtener los lotes:", error));
+        }
+    }
+    function validarTipoPago() {
+        let tipoPago = document.getElementById("lTipoPago").value;
+        let banco = document.getElementById("lBanco");
+        let cuentas = document.getElementById("lCuentasBancarias");
+        let numeroOperacion = document.getElementById("sNumeroOperacion");
+
+        if (tipoPago == "115") {
+            // Deshabilitar
+            banco.value = "";
+            banco.disabled = true;
+
+            cuentas.value = "";
+            cuentas.disabled = true;
+
+            numeroOperacion.value = "";
+            numeroOperacion.disabled = true;
+        } else {
+            // Habilitar
+            banco.disabled = false;
+            cuentas.disabled = false;
+            numeroOperacion.disabled = false;
+        }
+    }
+</script>
