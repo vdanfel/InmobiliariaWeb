@@ -64,6 +64,7 @@ namespace InmobiliariaWeb.Servicios
                     command.Parameters.AddWithValue("@Ident_002_TipoMoneda", ingresosModel.Ident_002_TipoMoneda);
                     command.Parameters.AddWithValue("@Observacion", ingresosModel.Observacion ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Ident_015_EstadoPago", ingresosModel.Ident_015_EstadoPago);
+                    command.Parameters.AddWithValue("@Ident_Persona", ingresosModel.Ident_Persona);
                     command.Parameters.AddWithValue("@Usuario", loginResult.IdentUsuario);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado

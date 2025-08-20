@@ -2,12 +2,33 @@
 @{
 }
 <form method="post" asp-action="IngresoNuevo" asp-controller="Caja">
+    <input type="hidden" asp-for="nIdent_Persona"/>
     <div class="container">
         <div class="row g-2">
+            <div class="col-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Nombre o Documento" aria-label="Recipient's username" aria-describedby="BuscarPersona" id="inputBusqueda">
+                    <button class="btn btn-outline-secondary" type="button" id="BuscarPersona">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 col-md-8 col-lg-9">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="sNombre" readonly required/>
+                    <label>Nombre:</label>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="sDocumento" readonly required/>
+                    <label>Documento:</label>
+                </div>
+            </div>
             <div class="col-12 col-sm-12 col-md-9 col-lg-9">
                 <div class="form-floating">
-                    <select class="form-select" id="tipoIngresos" asp-for="@Model.nIdent_021_TipoIngresos">
-                        <option value="0"></option>
+                    <select class="form-select" id="tipoIngresos" asp-for="@Model.nIdent_021_TipoIngresos" required>
+                        <option></option>
                         @foreach (var tipoIngreso in Model.lTipoIngreso)
                         {
                             <option value="@tipoIngreso.nIdent_021_TipoIngreso">@tipoIngreso.sDescripcion</option>
@@ -18,14 +39,14 @@
             </div>
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="form-floating">
-                    <input class="form-control" type="date" asp-for="@Model.dFechaIngreso"/>
+                    <input class="form-control" type="date" asp-for="@Model.dFechaIngreso" required />
                     <label>Fecha Ingreso</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-8">
                 <div class="form-floating">
                     <select class="form-select" id="programas" asp-for="@Model.nIdent_Programa" onchange="cargarManzanas()">
-                        <option value="0"></option>
+                        <option></option>
                         @foreach (var programas in Model.lProgramasCbxLists)
                         {
                             <option value="@programas.Ident_Programa">@programas.Nombre_Programa</option>
@@ -37,7 +58,7 @@
             <div class="col-12 col-sm-12 col-md-3 col-lg-2">
                 <div class="form-floating">
                     <select class="form-select" id="manzana" asp-for="@Model.nIdent_Manzana" onchange="cargarLotes()">
-                        <option value="0"></option>
+                        <option></option>
                     </select>
                     <label>Manzana</label>
                 </div>
@@ -45,7 +66,7 @@
             <div class="col-12 col-sm-12 col-md-3 col-lg-2">
                 <div class="form-floating">
                     <select class="form-select" id="lote" asp-for="@Model.nIdent_Lote">
-                        <option value="0"></option>
+                        <option></option>
                     </select>
                     <label>Lote</label>
                 </div>
@@ -58,7 +79,7 @@
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <select id="lTipoPago" class="form-select" asp-for="@Model.nIdent_018_TipoPago" onchange="validarTipoPago()">
+                    <select id="lTipoPago" class="form-select" asp-for="@Model.nIdent_018_TipoPago" onchange="validarTipoPago()" required>
                         <option></option>
                         @foreach (var tipoPago in Model.lTipoPagos)
                         {
@@ -70,7 +91,7 @@
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <select id="lBanco" class="form-select" asp-for="@Model.nIdent_019_Banco" onchange="ObtenerCuentasBancarias()">
+                    <select id="lBanco" class="form-select" asp-for="@Model.nIdent_019_Banco" onchange="cargarCuentasBancarias()">
                         <option></option>
                         @foreach (var banco in Model.lBancos)
                         {
@@ -83,15 +104,14 @@
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
                     <select id="lCuentasBancarias" class="form-select" asp-for="@Model.nIdent_CuentasBancarias">
-                        <option>--SELECCIONE--</option>
-
+                        <option></option>
                     </select>
                     <label>N° Cuenta</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <select id="lTipoMoneda" class="form-select" asp-for="@Model.nIdent_002_TipoMoneda" onchange="ValidarTipoCambio()">
+                    <select id="lTipoMoneda" class="form-select" asp-for="@Model.nIdent_002_TipoMoneda" onchange="ValidarTipoCambio()" required>
                         <option></option>
                         @foreach (var moneda in Model.lTipoMonedas)
                         {
@@ -103,21 +123,24 @@
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <input class="form-control"/>
+                    <input class="form-control" asp-for="@Model.nTipoCambio"/>
                     <label>Tipo Cambio</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <input class="form-control" />
-                    <label>Importe</label>
+                    <input class="form-control" id="sNumeroOperacion" asp-for="sNumeroOperacion" />
+                    <label>Numero Operacion</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <input class="form-control" id="sNumeroOperacion" asp-for="sNumeroOperacion"/>
-                    <label>Numero Operacion</label>
+                    <input class="form-control" asp-for="@Model.nImporte" required />
+                    <label>Importe</label>
                 </div>
+            </div>
+            <div class="col-12 col-md-auto ms-auto">
+                <button type="submit" class="btn btn-outline-primary">Agregar</button>
             </div>
         </div>
         
@@ -195,5 +218,161 @@
             cuentas.disabled = false;
             numeroOperacion.disabled = false;
         }
+    }
+    function cargarCuentasBancarias() {
+        var bancoSelect = document.getElementById("lBanco"); // suponiendo que seleccionas el banco
+        var selectedBanco = bancoSelect.value;
+        var cuentasSelect = document.getElementById("lCuentasBancarias");
+        var monedaSelect = document.getElementById("lTipoMoneda");
+
+        // Limpiar opciones previas
+        cuentasSelect.innerHTML = "<option value='0'></option>";
+        monedaSelect.innerHTML = "<option value='0'></option>";
+        if (selectedBanco && selectedBanco !== "0") {
+            fetch(`@Url.Action("GetCuentasBancarias", "Caja")?Ident_019_banco=${selectedBanco}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(cuenta => {
+                        var option = document.createElement("option");
+                        option.value = cuenta.ident_CuentasBancarias;
+                        option.text = cuenta.detalleCuenta;
+                        option.setAttribute("data-moneda", cuenta.ident_002_TipoMoneda); // guardamos la moneda
+                        cuentasSelect.add(option);
+                    });
+                })
+                .catch(error => console.error("Error al obtener cuentas:", error));
+        }
+    }
+
+    // Evento para cuando seleccionen la cuenta bancaria
+    document.getElementById("lCuentasBancarias").addEventListener("change", function () {
+        var selectedOption = this.options[this.selectedIndex];
+        var tipoMoneda = selectedOption.getAttribute("data-moneda");
+
+        if (tipoMoneda) {
+            document.getElementById("lTipoMoneda").value = tipoMoneda;
+        } else {
+            document.getElementById("lTipoMoneda").value = "";
+        }
+    });
+    document.getElementById("lTipoMoneda").addEventListener("change", function () {
+        const valor = parseInt(this.value);
+        const txtTipoCambio = document.getElementById("txtTipoCambio");
+
+        if (valor === 23) {
+            txtTipoCambio.value = 1;
+        }
+        else if (valor === 24) {
+            let tipoCambio = prompt("Ingrese el tipo de cambio (debe ser mayor a 1):");
+
+            if (tipoCambio === null) {
+                // Si cancela el prompt
+                this.value = ""; // resetea el select
+                return;
+            }
+
+            tipoCambio = parseFloat(tipoCambio);
+
+            if (isNaN(tipoCambio) || tipoCambio <= 1) {
+                alert("El tipo de cambio debe ser un número mayor a 1.");
+                this.value = ""; // resetea el select
+                txtTipoCambio.value = "";
+            } else {
+                txtTipoCambio.value = tipoCambio;
+            }
+        }
+        else {
+            txtTipoCambio.value = ""; // Limpia si selecciona otro valor
+        }
+    });
+
+    /*para el buscador de persona*/ 
+    $("#BuscarPersona").click(function () {
+        var valorBusqueda = $("#inputBusqueda").val();
+        console.log(valorBusqueda);
+        $.ajax({
+            url: '/Programa/BuscarPersonas',
+            type: 'GET',
+            data: { buscar: valorBusqueda },
+            success: function (data) {
+                console.log(data);
+                $("#inputBusqueda").val("");
+                if (data.length === 1) {
+                    $("#sNombre").val(data[0].nombreCompleto);
+                    $("#sDocumento").val(data[0].documento);
+                    $("#nIdentPersona").val(data[0].ident_Persona);
+                } else if (data.length > 1) {
+                    mostrarResultados(data);
+                } else {
+                    $("#sNombre").val("");
+                    $("#sDocumento").val("");
+                    $("#nIdentPersona").val("0");
+                }
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    });
+    function mostrarResultados(resultados) {
+        // Remover el modal existente, si hay uno
+        $("#resultadosModal").remove();
+        // Crea el modal
+        var modalHTML = "<div class='modal fade' id='resultadosModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>";
+        modalHTML += "<div class='modal-dialog' role='document'>";
+        modalHTML += "<div class='modal-content'>";
+        modalHTML += "<div class='modal-header'>";
+        modalHTML += "<h5 class='modal-title' id='exampleModalLabel'>Resultados de la Búsqueda</h5>";
+        modalHTML += "<button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        modalHTML += "</div>";
+        modalHTML += "<div class='modal-body'>";
+
+        var tablaResultados = "<table class='table table-hover'>";
+        tablaResultados += "<thead><tr><th>N°</th><th hidden>IDENT_PERSONA</th><th hidden>TIPO_DOCUMENTO</th><th hidden>DOCUMENTO</th><th>Apellidos y Nombres</th></tr></thead><tbody>";
+
+        for (var i = 0; i < resultados.length; i++) {
+            tablaResultados += "<tr>";
+            tablaResultados += "<td>" + (i + 1) + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].ident_Persona + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].tipoDocumento + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].documento + "</td>";
+            tablaResultados += "<td>" + resultados[i].nombreCompleto + "</td>";
+            tablaResultados += "</tr>";
+        }
+
+        tablaResultados += "</tbody></table>";
+
+        modalHTML += tablaResultados;
+        modalHTML += "</div>";
+        modalHTML += "<div class='modal-footer'>";
+        modalHTML += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
+        modalHTML += "</div></div></div></div>";
+
+        // Agrega el modal al final del cuerpo del documento
+        $("body").append(modalHTML);
+
+        // Muestra el modal
+        $("#resultadosModal").modal("show");
+
+        // Agrega un evento clic a las filas de la tabla en el modal
+        $("#resultadosModal").on("dblclick", "table tbody tr", function () {
+            var identPersona = $(this).find('td:eq(1)').text();
+            var documento = $(this).find('td:eq(3)').text();
+            var nombreCompleto = $(this).find('td:eq(4)').text();
+
+            $("#nIdentPersona").val(identPersona);
+            $("#sDocumento").val(documento);
+            $("#sNombre").val(nombreCompleto);
+
+            cerrarModal();
+        });
+    }
+
+    function cerrarModal() {
+        // Oculta y elimina el modal del DOM
+        $("#resultadosModal").modal("hide");
+        $("#resultadosModal").on("hidden.bs.modal", function () {
+            $(this).remove();
+        });
     }
 </script>

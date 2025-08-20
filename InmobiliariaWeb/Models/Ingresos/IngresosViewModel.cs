@@ -5,6 +5,7 @@ namespace InmobiliariaWeb.Models.Ingresos
 {
     public class IngresosViewModel
     {
+        public int nIdent_Ingresos { get; set; }
         public List<ProgramasCbxList> lProgramasCbxLists { get; set; }
         public int nIdent_Programa { get; set; }
         public int nIdent_Manzana { get; set; }
@@ -22,5 +23,7 @@ namespace InmobiliariaWeb.Models.Ingresos
         public string sObservacion { get; set; }
         public int nIdent_CuentasBancarias { get; set; }
         public string sNumeroOperacion { get; set; }
+        public decimal nTipoCambio { get; set; }
+        public decimal nImporte { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models;
+using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Ingresos;
 using InmobiliariaWeb.Servicios;
 using Microsoft.AspNetCore.Authorization;
@@ -120,7 +121,53 @@ namespace InmobiliariaWeb.Controllers
             }
             
         }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> IngresoNuevo(IngresosViewModel ingresosViewModel)
+        {
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
 
+                IngresosModel ingresosModel = new IngresosModel { 
+                    FechaPago = ingresosViewModel.dFechaIngreso,
+                    Ident_002_TipoMoneda = ingresosViewModel.nIdent_002_TipoMoneda,
+                    ImporteTotal = ingresosViewModel.nImporte,
+                    Ident_021_TipoIngresos = ingresosViewModel.nIdent_021_TipoIngresos,
+                    Ident_Persona = ingresosViewModel.nIdent_Persona,
+                    Observacion = ingresosViewModel.sObservacion,
+                };
+                if (ingresosViewModel.nIdent_021_TipoIngresos != 139)
+                {
+                    ingresosModel.Ident_Origen = ingresosViewModel.nIdent_Lote;
+                }
+                ingresosViewModel.nIdent_Ingresos = await _cajaService.Ingresos_Insert(ingresosModel, loginResult);
+
+                IngresosDetalleModel ingresosDetalleModel = new IngresosDetalleModel { 
+                    Ident_Ingresos = ingresosViewModel.nIdent_Ingresos,
+                    TipoCambio = ingresosViewModel.nTipoCambio,
+                    Ident_018_TipoPago = ingresosViewModel.nIdent_018_TipoPago,
+                    Ident_CuentasBancarias = ingresosViewModel.nIdent_CuentasBancarias,
+                    Ident_002_TipoMoneda = ingresosViewModel.nIdent_002_TipoMoneda,
+                    Importe = ingresosViewModel.nImporte,
+                    NumeroOperacion = ingresosViewModel.sNumeroOperacion,
+                    Fecha = ingresosViewModel.dFechaIngreso,
+                };
+                ingresosDetalleModel.Ident_IngresosDetalle = await _cajaService.IngresosDetalle_Insert(ingresosDetalleModel, loginResult);
+                return RedirectToAction("IngresoVer","Caja");
+
+            }
+            else
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+        }
+        [HttpGet]
+        [Authorize]
+        public IActionResult IngresoVer()
+        {
+            return View();
+        }
         [HttpGet]
         [Authorize]
         public IActionResult EgresosIndex()

@@ -13,5 +13,6 @@
         public int Ident_002_TipoMoneda { get; set; }
         public int Ident_015_EstadoPago { get; set; }
         public string Observacion { get; set; }
+        public int Ident_Persona { get; set; }
     }
 }
