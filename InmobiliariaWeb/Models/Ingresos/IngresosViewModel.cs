@@ -1,4 +1,5 @@
 ﻿using InmobiliariaWeb.Models.Tablas;
+using InmobiliariaWeb.Result.Contratos;
 using InmobiliariaWeb.Result.Separaciones;
 
 namespace InmobiliariaWeb.Models.Ingresos
@@ -25,5 +26,8 @@ namespace InmobiliariaWeb.Models.Ingresos
         public string sNumeroOperacion { get; set; }
         public decimal nTipoCambio { get; set; }
         public decimal nImporte { get; set; }
+        public string sNombreCompleto { get; set; }
+        public string sDocumento{ get; set; }
+        public List<IngresosDetallesList> lIngresosDetallesList { get; set; }
     }
 }

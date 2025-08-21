@@ -17,5 +17,6 @@ namespace InmobiliariaWeb.Interfaces
         Task<decimal> IngresosDetalle_ImporteTotal(int Ident_Ingresos);
         Task Ingresos_ValidarImportes(int Ident_IngresosDetalle, int Ident_021_TipoIngresos);
         Task<List<IngresosIndexTablaDTO>> IngresosIndex(IngresosIndexFilterDTO ingresosIndexFilterDTO);
+        Task<IngresosViewModel> IngresosSelect(int nIdent_Ingresos);
     }
 }

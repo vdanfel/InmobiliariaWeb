@@ -421,6 +421,42 @@ namespace InmobiliariaWeb.Servicios
                 await _connection.CloseAsync();
             }
         }
-
+        public async Task<IngresosViewModel> IngresosSelect(int nIdent_Ingresos)
+        {
+            IngresosViewModel ingresosViewModel = new IngresosViewModel();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_IngresosSelect", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_Ingresos", nIdent_Ingresos);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        ingresosViewModel.nIdent_Ingresos = Int32.Parse(reader["nIdent_Ingresos"].ToString());
+                        ingresosViewModel.nIdent_Persona = Int32.Parse(reader["nIdent_Persona"].ToString());
+                        ingresosViewModel.sNombreCompleto = reader["sNombreCompleto"].ToString();
+                        ingresosViewModel.sDocumento = reader["sDocumento"].ToString();
+                        ingresosViewModel.nIdent_021_TipoIngresos = Int32.Parse(reader["nIdent_021_TipoIngresos"].ToString());
+                        ingresosViewModel.dFechaIngreso = DateTime.Parse(reader["dFechaIngreso"].ToString());
+                        ingresosViewModel.nIdent_Programa = Int32.Parse(reader["nIdent_Programa"].ToString());
+                        ingresosViewModel.nIdent_Manzana = Int32.Parse(reader["nIdent_Manzana"].ToString());
+                        ingresosViewModel.nIdent_Lote = Int32.Parse(reader["nIdent_Lote"].ToString());
+                        ingresosViewModel.sObservacion = reader["sObservacion"].ToString();
+                    }
+                    return ingresosViewModel;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
     }
 }

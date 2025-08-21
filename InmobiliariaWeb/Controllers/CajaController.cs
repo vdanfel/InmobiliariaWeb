@@ -136,6 +136,10 @@ namespace InmobiliariaWeb.Controllers
                     Ident_021_TipoIngresos = ingresosViewModel.nIdent_021_TipoIngresos,
                     Ident_Persona = ingresosViewModel.nIdent_Persona,
                     Observacion = ingresosViewModel.sObservacion,
+                    Ident_Programa = ingresosViewModel.nIdent_Programa,
+                    Ident_Manzana = ingresosViewModel.nIdent_Manzana,
+                    Ident_Lote = ingresosViewModel.nIdent_Lote,
+                    Ident_015_EstadoPago = 110
                 };
                 if (ingresosViewModel.nIdent_021_TipoIngresos != 139)
                 {
@@ -154,7 +158,7 @@ namespace InmobiliariaWeb.Controllers
                     Fecha = ingresosViewModel.dFechaIngreso,
                 };
                 ingresosDetalleModel.Ident_IngresosDetalle = await _cajaService.IngresosDetalle_Insert(ingresosDetalleModel, loginResult);
-                return RedirectToAction("IngresoVer","Caja");
+                return RedirectToAction("IngresoVer","Caja", new { nIdent_Ingresos = ingresosViewModel.nIdent_Ingresos });
 
             }
             else
@@ -164,9 +168,35 @@ namespace InmobiliariaWeb.Controllers
         }
         [HttpGet]
         [Authorize]
-        public IActionResult IngresoVer()
+        public async Task<IActionResult> IngresoVer(int nIdent_Ingresos, string sMensaje)
         {
-            return View();
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+                IngresosViewModel ingresosViewModel = new IngresosViewModel();
+                ingresosViewModel = await _cajaService.IngresosSelect(nIdent_Ingresos);
+                ingresosViewModel.lProgramasCbxLists = await _contratosService.ProgramaCbxListar();
+                var tipoIngresosLista = await _tablasService.ListarTipoIngreso();
+
+                ingresosViewModel.lTipoIngreso = tipoIngresosLista
+                    .Where(x => x.nIdent_021_TipoIngreso != 135
+                             && x.nIdent_021_TipoIngreso != 136
+                             && x.nIdent_021_TipoIngreso != 137)
+                    .ToList();
+                ingresosViewModel.lBancos = await _tablasService.ListarBancos();
+                ingresosViewModel.lTipoPagos = await _tablasService.ListarTipoPago();
+                ingresosViewModel.lTipoMonedas = await _tablasService.ListarTipoMoneda();
+                ingresosViewModel.lIngresosDetallesList = await _cajaService.IngresosDetalle_List(nIdent_Ingresos);
+                /*
+                 cuotas.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(Ident_Ingresos);
+                 */
+
+                return View(ingresosViewModel);
+            }
+            else
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
         }
         [HttpGet]
         [Authorize]
