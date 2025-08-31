@@ -7,7 +7,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAGArD7BL3okm4czKmT91wZgAAAAACAAAAAAAQZgAAAAEAACAAAABEbm1bQuDLAo/04saxqfjFNb+wger3L/kect1XEpf3oAAAAAAOgAAAAAIAACAAAABnEoBn/zIB18T0yIN6ZMYqwtvCTV6HyCFZva2Fg/WMByAAAACTrSNsBq0p08DuT3kBiObQ7FJP8I801e7P59NEOLJ8bUAAAAA7IWdlu+59dejNo43Go0jIezs2jw2jefNcVH76pkXFdZv3QSrOODwU+8170FAXnlRx/DC1N2C1JSnPdqfulb+l</EncryptedPassword>
     <_PublishTargetUrl>ftp://155.254.246.21/www.inmobi.somee.com</_PublishTargetUrl>
-    <History>True|2025-08-20T04:51:05.3569866Z;True|2025-08-18T22:43:35.5760590-05:00;True|2025-08-18T00:06:18.0164805-05:00;</History>
+    <History>True|2025-08-28T15:19:14.5958485Z;True|2025-08-21T23:55:05.1038818-05:00;True|2025-08-19T23:51:05.3569866-05:00;True|2025-08-18T22:43:35.5760590-05:00;True|2025-08-18T00:06:18.0164805-05:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -66,16 +66,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/29/2023 09:59:10</publishTime>
     </File>
     <File Include="InmobiliariaWeb.deps.json">
-      <publishTime>08/19/2025 23:45:21</publishTime>
+      <publishTime>08/28/2025 10:13:20</publishTime>
     </File>
     <File Include="InmobiliariaWeb.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/28/2025 10:13:19</publishTime>
     </File>
     <File Include="InmobiliariaWeb.exe">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/28/2025 10:13:19</publishTime>
     </File>
     <File Include="InmobiliariaWeb.pdb">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/28/2025 10:13:19</publishTime>
     </File>
     <File Include="InmobiliariaWeb.runtimeconfig.json">
       <publishTime>04/08/2025 21:47:10</publishTime>
@@ -249,7 +249,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/22/2021 18:49:44</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>08/19/2025 23:45:21</publishTime>
+      <publishTime>08/28/2025 10:13:22</publishTime>
     </File>
     <File Include="wwwroot/css/EstiloImpresion.css">
       <publishTime>03/19/2025 00:15:48</publishTime>

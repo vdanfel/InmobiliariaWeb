@@ -144,7 +144,11 @@
                             <td>@ingresos.sTipoPago</td>
                             <td>@ingresos.sNumeroOperacion</td>
                             <td>@ingresos.dFechaPago.ToString("dd/MM/yyyy")</td>
-                            <td>Ver</td>
+                            <td>
+                                <a class="btn btn-outline-info" asp-action="IngresoVer" asp-controller="Caja" asp-route-nIdent_Ingresos =" @ingresos.nIdent_Ingresos">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>

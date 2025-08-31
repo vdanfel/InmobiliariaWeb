@@ -398,7 +398,7 @@ namespace InmobiliariaWeb.Servicios
                         ingresos.nIdent_Ingresos = Int32.Parse(reader["nIdent_Ingresos"].ToString());
                         ingresos.sPrograma = reader["sPrograma"].ToString();
                         ingresos.sManzana = reader["sManzana"].ToString();
-                        ingresos.nLote = Int32.Parse(reader["nLote"].ToString());
+                        ingresos.nLote = reader["nLote"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["nLote"]);
                         ingresos.sNombreCliente = reader["sNombreCliente"].ToString();
                         ingresos.sTipoIngreso = reader["sTipoIngreso"].ToString();
                         ingresos.sMoneda = reader["sMoneda"].ToString();
