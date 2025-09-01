@@ -8,6 +8,7 @@
     <input hidden type="text" asp-for="@Model.Ident_Cuotas" />
     <input hidden type="text" asp-for="@Model.Ident_Kardex" />
     <input hidden type="text" asp-for="@Model.Ident_Contratos" />
+    <input hidden type="text" asp-for="@Model.Ident_Ingresos" />
     <div class="container">
         <div class="card">
             <div class="card-header fw-bold">
@@ -513,7 +514,7 @@
     // También, se puede llamar a la validación cuando se cambie el valor del saldo para comprobar si ya está dentro del límite
     document.getElementById("saldo").addEventListener("input", validarImporte);
 
-    function abrirModalPropietarios(identContrato, identMora) {
+    function abrirModalPropietarios(identContrato, identCuota) {
         // Llamada al controlador para obtener la lista
         $.ajax({
             url: '/Contratos/ObtenerPropietarios',
@@ -525,16 +526,16 @@
 
                 data.forEach(p => {
                     tbody.append(`
-                                <tr>
-                                    <td>${p.numeroDocumento}</td>
-                                    <td>${p.nombre_Completo}</td>
-                                    <td>
-                                            <button class="btn btn-success btn-sm" onclick="imprimirRecibo(${identMora}, ${p.ident_ContratosPersonas})">
-                                            Seleccionar
-                                        </button>
-                                    </td>
-                                </tr>
-                            `);
+                            <tr>
+                                <td>${p.numeroDocumento}</td>
+                                <td>${p.nombre_Completo}</td>
+                                <td>
+                                    <button class="btn btn-success btn-sm" onclick="imprimirRecibo(${p.ident_Persona})">
+                                        Seleccionar
+                                    </button>
+                                </td>
+                            </tr>
+                        `);
                 });
 
                 // Mostrar el modal
@@ -545,7 +546,11 @@
             }
         });
     }
-    function imprimirRecibo(identMora, identContratosPersonas) {
-        window.location.href = `/Contratos/ImprimirRecibo?Ident_021_TipoIngresos=136&Ident_Origen=${identMora}&Ident_ContratosPersonas=${identContratosPersonas}`;
+        function imprimirRecibo(identPersona) {
+        // Obtener el valor de ingreso desde el input hidden
+        let identIngreso = $('#Ident_Ingresos').val();
+
+        // Redirigir con los nuevos parámetros
+        window.location.href = `/Contratos/ImprimirRecibo?nIdent_Ingreso=${identIngreso}&nIdent_Persona=${identPersona}`;
     }
 </script>

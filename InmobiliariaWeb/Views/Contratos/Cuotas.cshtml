@@ -6,6 +6,7 @@
     <input hidden type="text" asp-for="@Model.Ident_Cuotas"/>
     <input hidden type="text" asp-for="@Model.Ident_Kardex" />
     <input hidden type="text" asp-for="@Model.Ident_Contratos" />
+    <input hidden type="text" asp-for="@Model.Ident_Ingresos" />
     <div class="container">
         <div class="card">
             <div class="card-header fw-bold">
@@ -442,7 +443,7 @@
                                 <td>${p.numeroDocumento}</td>
                                 <td>${p.nombre_Completo}</td>
                                 <td>
-                                    <button class="btn btn-success btn-sm" onclick="imprimirRecibo(${identCuota}, ${p.ident_ContratosPersonas})">
+                                    <button class="btn btn-success btn-sm" onclick="imprimirRecibo(${p.ident_Persona})">
                                         Seleccionar
                                     </button>
                                 </td>
@@ -458,7 +459,12 @@
             }
         });
     }
-    function imprimirRecibo(identCuota, identContratosPersonas) {
-        window.location.href = `/Contratos/ImprimirRecibo?Ident_021_TipoIngresos=135&Ident_Origen=${identCuota}&Ident_ContratosPersonas=${identContratosPersonas}`;
+        function imprimirRecibo(identPersona) {
+        // Obtener el valor de ingreso desde el input hidden
+        let identIngreso = $('#Ident_Ingresos').val();
+
+        // Redirigir con los nuevos parámetros
+        window.location.href = `/Contratos/ImprimirRecibo?nIdent_Ingreso=${identIngreso}&nIdent_Persona=${identPersona}`;
     }
+
 </script>

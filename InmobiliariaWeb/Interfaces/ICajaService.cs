@@ -2,6 +2,7 @@
 using InmobiliariaWeb.Models.Ingresos;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Contratos;
+using InmobiliariaWeb.Result.Separaciones;
 
 namespace InmobiliariaWeb.Interfaces
 {
@@ -18,5 +19,8 @@ namespace InmobiliariaWeb.Interfaces
         Task Ingresos_ValidarImportes(int Ident_IngresosDetalle, int Ident_021_TipoIngresos);
         Task<List<IngresosIndexTablaDTO>> IngresosIndex(IngresosIndexFilterDTO ingresosIndexFilterDTO);
         Task<IngresosViewModel> IngresosSelect(int nIdent_Ingresos);
+        Task<List<ManzanaCbxList>> ManzanaCbxListar(int ident_Programa);
+        Task<List<LoteCbxList>> LoteCbxListar(int ident_Manzana);
+        Task IngresosActualizarTotal(int nIdent_Ingresos);
     }
 }

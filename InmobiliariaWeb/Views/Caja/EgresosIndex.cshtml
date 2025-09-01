@@ -1,6 +1,64 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model InmobiliariaWeb.Models.Egresos.EgresosIndexViewModel
 @{
 }
-ventana para el index de egresos
+<form>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-auto me-auto">
+                        <h1>Egresos</h1>
+                    </div>
+                    <div class="col-auto">
+                        <a class="btn btn-outline-primary" asp-action="EgresoNuevo" asp-controller="Caja">
+                            Nuevo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row g-lg-3 g-sm-1 g-1">
+                    <div class="col-12 col-sm-12 col-md-9 col-lg-6">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input class="form-control" type="date" asp-for="@Model.dFechaDesde" />
+                                    <label>Desde:</label>
+                                </div>
+
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input class="form-control" type="date" asp-for="@Model.dFechaHasta" />
+                                    <label>Hasta:</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" asp-for="@Model.sPersona"/>
+                            <label>Nombre / Documento</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <select class="form-select" id="tipoEgresos" asp-for="@Model.nIdent_022_TipoEgresos">
+                                <option value="0"></option>
+                                @foreach (var tipoEgreso in Model.lTipoEgreso)
+                                {
+                                    <option value="@tipoEgreso.nIdent_022_TipoEgreso">@tipoEgreso.sDescripcion</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

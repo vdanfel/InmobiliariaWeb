@@ -19,6 +19,8 @@ namespace InmobiliariaWeb.Models.Ingresos
         public List<Banco> lBancos { get; set; }
         public int nIdent_019_Banco { get; set; }
         public List<TipoMoneda> lTipoMonedas { get; set; }
+        public List<TipoMoneda> lTipoMonedasCabecera { get; set; }
+        public int nIdent_002_TipoMonedaCabecera { get; set; }
         public int nIdent_002_TipoMoneda { get; set; }
         public DateTime dFechaIngreso { get; set; }
         public string sObservacion { get; set; }

@@ -1794,7 +1794,7 @@ namespace InmobiliariaWeb.Servicios
                 await _connection.CloseAsync();
             }
         }
-        public async Task<ReciboBE> ImprimirRecibo(int Ident_021_TipoIngresos, int Ident_Origen, int Ident_ContratosPersonas)
+        public async Task<ReciboBE> ImprimirRecibo(int nIdent_Ingreso, int nIdent_Persona)
         {
             ReciboBE reciboBE = new ReciboBE();
             try 
@@ -1802,9 +1802,8 @@ namespace InmobiliariaWeb.Servicios
                 using (SqlCommand command = new SqlCommand("usp_ImprimirRecibo", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@Ident_ContratosPersonas", Ident_ContratosPersonas);
-                    command.Parameters.AddWithValue("@Ident_021_TipoIngresos", Ident_021_TipoIngresos);
-                    command.Parameters.AddWithValue("@Ident_Origen", Ident_Origen);
+                    command.Parameters.AddWithValue("@nIdent_Ingreso", nIdent_Ingreso);
+                    command.Parameters.AddWithValue("@nIdent_Persona", nIdent_Persona);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();

@@ -71,6 +71,18 @@
                     <label>Lote</label>
                 </div>
             </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <select id="lTipoMonedaCabecera" class="form-select" asp-for="@Model.nIdent_002_TipoMonedaCabecera" required>
+                        <option></option>
+                        @foreach (var moneda in Model.lTipoMonedasCabecera)
+                        {
+                            <option value="@moneda.Ident_002_TipoMoneda">@moneda.Abreviatura</option>
+                        }
+                    </select>
+                    <label>Moneda</label>
+                </div>
+            </div>
             <div class="col-12">
                 <div class="form-floating">
                     <textarea class="form-control" asp-for="sObservacion" style="height: 6rem"></textarea>
@@ -140,12 +152,35 @@
                 </div>
             </div>
             <div class="col-12 col-md-auto ms-auto">
-                <button type="submit" class="btn btn-outline-primary">Agregar</button>
+                <a class="btn btn-outline-info" asp-action="IngresosIndex" asp-controller="Caja">
+                    Regresar
+                </a>
+                @* <button type="submit" class="btn btn-outline-primary">Agregar</button> *@
+                <button type="button" class="btn btn-outline-primary" id="btnAgregar">Agregar</button>
             </div>
         </div>
         
     </div>
 </form>
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                Los datos de la cabecera se registrarán y <strong>no podrán ser modificados</strong>.
+                <br />¿Desea continuar?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmar">Sí</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
 }
@@ -186,7 +221,7 @@
         manzanaSelect.innerHTML = "<option value='0'></option>";
         loteSelect.innerHTML = "<option value='0'></option>";
         if (selectedPrograma && selectedPrograma !== "0") {
-            fetch(`@Url.Action("GetManzanas", "Contratos")?programaId=${selectedPrograma}`)
+            fetch(`@Url.Action("GetManzanas", "Caja")?programaId=${selectedPrograma}`)
                 .then(response => response.json())
                 .then(data => {
                     data.forEach(manzana => {
@@ -208,7 +243,7 @@
         loteSelect.innerHTML = "<option value='0'></option>";
 
         if (selectedManzana && selectedManzana !== "0") {
-            fetch(`@Url.Action("GetLotes", "Contratos")?manzanaId=${selectedManzana}`)
+            fetch(`@Url.Action("GetLotes", "Caja")?manzanaId=${selectedManzana}`)
                 .then(response => response.json())
                 .then(data => {
                     data.forEach(lote => {
@@ -284,16 +319,20 @@
     document.getElementById("lTipoMoneda").addEventListener("change", function () {
         const valor = parseInt(this.value);
         const nTipoCambio = document.getElementById("nTipoCambio");
+        const lTipoMonedaCabecera = document.getElementById("lTipoMonedaCabecera");
+        const valorCabecera = parseInt(lTipoMonedaCabecera.value);
 
-        if (valor === 23) {
+        if (valor === valorCabecera) {
+            // ✅ Si son iguales → tipo de cambio fijo en 1
             nTipoCambio.value = 1;
         }
-        else if (valor === 24) {
+        else {
+            // ✅ Si son distintos → pedir siempre un tipo de cambio
             let tipoCambio = prompt("Ingrese el tipo de cambio (debe ser mayor a 1):");
 
             if (tipoCambio === null) {
-                // Si cancela el prompt
-                this.value = ""; // resetea el select
+                this.value = ""; // resetea el select si cancela
+                nTipoCambio.value = "";
                 return;
             }
 
@@ -307,10 +346,9 @@
                 nTipoCambio.value = tipoCambio;
             }
         }
-        else {
-            nTipoCambio.value = ""; // Limpia si selecciona otro valor
-        }
     });
+
+
 
     /*para el buscador de persona*/ 
     $("#BuscarPersona").click(function () {
@@ -401,4 +439,13 @@
             $(this).remove();
         });
     }
+    document.getElementById("btnAgregar").addEventListener("click", function () {
+        var myModal = new bootstrap.Modal(document.getElementById("confirmModal"));
+        myModal.show();
+    });
+
+    document.getElementById("btnConfirmar").addEventListener("click", function () {
+        // Busca el formulario más cercano y lo envía
+        document.querySelector("form").submit();
+    });
 </script>

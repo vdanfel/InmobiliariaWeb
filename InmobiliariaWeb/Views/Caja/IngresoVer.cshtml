@@ -1,34 +1,31 @@
 ﻿@model InmobiliariaWeb.Models.Ingresos.IngresosViewModel
 @{
 }
-<form>
+<form method="post" asp-action="IngresoVer" asp-controller="caja">
     <input type="hidden" asp-for="@Model.nIdent_Ingresos"/>
     <input type="hidden" asp-for="@Model.nIdent_Persona"/>
+    <input type="hidden" asp-for="@Model.nIdent_021_TipoIngresos" />
+    <input type="hidden" asp-for="@Model.nIdent_Programa" />
+    <input type="hidden" asp-for="@Model.nIdent_Manzana" />
+    <input type="hidden" asp-for="@Model.nIdent_Lote" />
+    <input type="hidden" asp-for="@Model.nIdent_002_TipoMonedaCabecera" id="lTipoMonedaCabecera" />
     <div class="container">
         <div class="row g-2">
-            <div class="col-12">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nombre o Documento" aria-label="Recipient's username" aria-describedby="BuscarPersona" id="inputBusqueda">
-                    <button class="btn btn-outline-secondary" type="button" id="BuscarPersona">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </div>
             <div class="col-12 col-md-8 col-lg-9">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="sNombre" asp-for="@Model.sNombreCompleto" readonly required />
+                    <input type="text" class="form-control" id="sNombre" asp-for="@Model.sNombreCompleto" readonly />
                     <label>Nombre:</label>
                 </div>
             </div>
             <div class="col-12 col-md-4 col-lg-3">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="sDocumento" asp-for="@Model.sDocumento" readonly required />
+                    <input type="text" class="form-control" id="sDocumento" asp-for="@Model.sDocumento" readonly  />
                     <label>Documento:</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-9 col-lg-9">
                 <div class="form-floating">
-                    <select class="form-select" id="tipoIngresos" asp-for="@Model.nIdent_021_TipoIngresos" required>
+                    <select class="form-select" id="tipoIngresos" asp-for="@Model.nIdent_021_TipoIngresos" disabled>
                         <option></option>
                         @foreach (var tipoIngreso in Model.lTipoIngreso)
                         {
@@ -40,13 +37,13 @@
             </div>
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="form-floating">
-                    <input class="form-control" type="date" asp-for="@Model.dFechaIngreso" required />
+                    <input class="form-control" type="date" asp-for="@Model.dFechaIngreso" readonly />
                     <label>Fecha Ingreso</label>
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-8">
                 <div class="form-floating">
-                    <select class="form-select" id="programas" asp-for="@Model.nIdent_Programa" onchange="cargarManzanas()">
+                    <select class="form-select" id="programas" asp-for="@Model.nIdent_Programa" onchange="cargarManzanas()" disabled>
                         <option></option>
                         @foreach (var programas in Model.lProgramasCbxLists)
                         {
@@ -58,7 +55,7 @@
             </div>
             <div class="col-12 col-sm-12 col-md-3 col-lg-2">
                 <div class="form-floating">
-                    <select class="form-select" id="manzana" asp-for="@Model.nIdent_Manzana" onchange="cargarLotes()">
+                    <select class="form-select" id="manzana" asp-for="@Model.nIdent_Manzana" onchange="cargarLotes()" disabled>
                         <option></option>
                     </select>
                     <label>Manzana</label>
@@ -66,15 +63,27 @@
             </div>
             <div class="col-12 col-sm-12 col-md-3 col-lg-2">
                 <div class="form-floating">
-                    <select class="form-select" id="lote" asp-for="@Model.nIdent_Lote">
+                    <select class="form-select" id="lote" asp-for="@Model.nIdent_Lote" disabled>
                         <option></option>
                     </select>
                     <label>Lote</label>
                 </div>
             </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <select  class="form-select" asp-for="@Model.nIdent_002_TipoMonedaCabecera" disabled>
+                        <option></option>
+                        @foreach (var moneda in Model.lTipoMonedasCabecera)
+                        {
+                            <option value="@moneda.Ident_002_TipoMoneda">@moneda.Abreviatura</option>
+                        }
+                    </select>
+                    <label>Moneda</label>
+                </div>
+            </div>
             <div class="col-12">
                 <div class="form-floating">
-                    <textarea class="form-control" asp-for="sObservacion" style="height: 6rem"></textarea>
+                    <textarea class="form-control" asp-for="sObservacion" style="height: 6rem" readonly></textarea>
                     <label asp-for="sObservacion">Observación:</label>
                 </div>
             </div>
@@ -124,7 +133,7 @@
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-floating">
-                    <input class="form-control" asp-for="@Model.nTipoCambio" />
+                    <input class="form-control" asp-for="@Model.nTipoCambio" id="nTipoCambio" />
                     <label>Tipo Cambio</label>
                 </div>
             </div>
@@ -141,6 +150,12 @@
                 </div>
             </div>
             <div class="col-12 col-md-auto ms-auto">
+                <a class="btn btn-outline-info" asp-action="IngresosIndex" asp-controller="Caja">
+                    Regresar
+                </a>
+                <a class="btn btn-outline-secondary" asp-action="ImprimirRecibo" asp-controller="Caja" asp-route-nIdent_Ingreso="@Model.nIdent_Ingresos" asp-route-nIdent_Persona="@Model.nIdent_Persona">
+                    Imprimir
+                </a>
                 <button type="submit" class="btn btn-outline-primary">Agregar</button>
             </div>
         </div>
@@ -171,7 +186,6 @@
                             <td>@ingresosDetalle.NumeroCuenta</td>
                             <td>@ingresosDetalle.Moneda</td>
                             <td>@(ingresosDetalle.Fecha.HasValue ? ingresosDetalle.Fecha.Value.ToString("dd/MM/yyyy") : "")</td>
-                            <td></td>
                             <td>
                                 <a class="btn btn-outline-danger">
                                     <i class="bi-trash3"></i>
@@ -189,51 +203,6 @@
 }
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
-    //function cargarManzanas() {
-    //    var programaSelect = document.getElementById("programas");
-    //    var selectedPrograma = programaSelect.value;
-    //    var manzanaSelect = document.getElementById("manzana");
-    //    var loteSelect = document.getElementById("lote");
-
-    //    // Limpiar opciones previas
-    //    manzanaSelect.innerHTML = "<option value='0'></option>";
-    //    loteSelect.innerHTML = "<option value='0'></option>";
-    //    if (selectedPrograma && selectedPrograma !== "0") {
-    //        fetch(`@Url.Action("GetManzanas", "Contratos")?programaId=${selectedPrograma}`)
-    //            .then(response => response.json())
-    //            .then(data => {
-    //                data.forEach(manzana => {
-    //                    var option = document.createElement("option");
-    //                    option.value = manzana.ident_Manzana;
-    //                    option.text = manzana.letra;
-    //                    manzanaSelect.add(option);
-    //                });
-    //            })
-    //            .catch(error => console.error("Error al obtener las manzanas:", error));
-    //    }
-    //}
-    //function cargarLotes() {
-    //    var manzanaSelect = document.getElementById("manzana");
-    //    var selectedManzana = manzanaSelect.value;
-    //    var loteSelect = document.getElementById("lote");
-
-    //    // Limpiar opciones previas
-    //    loteSelect.innerHTML = "<option value='0'></option>";
-
-    //    if (selectedManzana && selectedManzana !== "0") {
-    //        fetch(`@Url.Action("GetLotes", "Contratos")?manzanaId=${selectedManzana}`)
-    //            .then(response => response.json())
-    //            .then(data => {
-    //                data.forEach(lote => {
-    //                    var option = document.createElement("option");
-    //                    option.value = lote.ident_Lote;
-    //                    option.text = lote.correlativo;
-    //                    loteSelect.add(option);
-    //                });
-    //            })
-    //            .catch(error => console.error("Error al obtener los lotes:", error));
-    //    }
-    //}
     document.addEventListener("DOMContentLoaded", function () {
         var selectedPrograma = "@Model.nIdent_Programa";
         var selectedManzana = "@Model.nIdent_Manzana";
@@ -353,17 +322,21 @@
     });
     document.getElementById("lTipoMoneda").addEventListener("change", function () {
         const valor = parseInt(this.value);
-        const txtTipoCambio = document.getElementById("txtTipoCambio");
+        const nTipoCambio = document.getElementById("nTipoCambio");
+        const lTipoMonedaCabecera = document.getElementById("lTipoMonedaCabecera");
+        const valorCabecera = parseInt(lTipoMonedaCabecera.value);
 
-        if (valor === 23) {
-            txtTipoCambio.value = 1;
+        if (valor === valorCabecera) {
+            // ✅ Si son iguales → tipo de cambio fijo en 1
+            nTipoCambio.value = 1;
         }
-        else if (valor === 24) {
+        else {
+            // ✅ Si son distintos → pedir siempre un tipo de cambio
             let tipoCambio = prompt("Ingrese el tipo de cambio (debe ser mayor a 1):");
 
             if (tipoCambio === null) {
-                // Si cancela el prompt
-                this.value = ""; // resetea el select
+                this.value = ""; // resetea el select si cancela
+                nTipoCambio.value = "";
                 return;
             }
 
@@ -372,13 +345,10 @@
             if (isNaN(tipoCambio) || tipoCambio <= 1) {
                 alert("El tipo de cambio debe ser un número mayor a 1.");
                 this.value = ""; // resetea el select
-                txtTipoCambio.value = "";
+                nTipoCambio.value = "";
             } else {
-                txtTipoCambio.value = tipoCambio;
+                nTipoCambio.value = tipoCambio;
             }
-        }
-        else {
-            txtTipoCambio.value = ""; // Limpia si selecciona otro valor
         }
     });
 

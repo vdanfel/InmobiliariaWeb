@@ -637,5 +637,37 @@ namespace InmobiliariaWeb.Servicios
                 _connection.Close();
             }
         }
+        public async Task<List<TipoEgreso>> ListarTipoEgreso()
+        {
+            int parametro = 22;
+            var tipoEgresoList = new List<TipoEgreso>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var tipoEgreso = new TipoEgreso();
+                        tipoEgreso.nIdent_022_TipoEgreso = Int32.Parse(reader["IDENT_PARAMETRO"].ToString());
+                        tipoEgreso.sDescripcion = reader["DESCRIPCION"].ToString();
+                        tipoEgresoList.Add(tipoEgreso);
+                    }
+                    return tipoEgresoList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
     }
 }

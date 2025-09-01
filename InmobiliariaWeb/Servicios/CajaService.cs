@@ -445,6 +445,7 @@ namespace InmobiliariaWeb.Servicios
                         ingresosViewModel.nIdent_Manzana = Int32.Parse(reader["nIdent_Manzana"].ToString());
                         ingresosViewModel.nIdent_Lote = Int32.Parse(reader["nIdent_Lote"].ToString());
                         ingresosViewModel.sObservacion = reader["sObservacion"].ToString();
+                        ingresosViewModel.nIdent_002_TipoMonedaCabecera = Int32.Parse(reader["nIdent_002_TipoMoneda"].ToString());
                     }
                     return ingresosViewModel;
                 }
@@ -452,6 +453,90 @@ namespace InmobiliariaWeb.Servicios
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
+        public async Task<List<ManzanaCbxList>> ManzanaCbxListar(int ident_Programa)
+        {
+            var manzanaCbxLists = new List<ManzanaCbxList>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_Manzana_CbxListarIngreso", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_Programa", ident_Programa);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var manzanas = new ManzanaCbxList();
+                        manzanas.Ident_Manzana = Int32.Parse(reader["IDENT_MANZANA"].ToString());
+                        manzanas.Letra = reader["LETRA"].ToString();
+                        manzanaCbxLists.Add(manzanas);
+                    }
+                    return manzanaCbxLists;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<List<LoteCbxList>> LoteCbxListar(int ident_Manzana)
+        {
+            var lotesCbxList = new List<LoteCbxList>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_Lote_CbxListarIngreso", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_Manzana", ident_Manzana);
+                    await _connection.OpenAsync();
+
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var lote = new LoteCbxList();
+                        lote.Ident_Lote = Int32.Parse(reader["IDENT_LOTE"].ToString());
+                        lote.Correlativo = Int32.Parse(reader["CORRELATIVO"].ToString());
+                        lotesCbxList.Add(lote);
+                    }
+                    return lotesCbxList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task IngresosActualizarTotal(int nIdent_Ingresos)
+        {
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_IngresosUpdateTotal", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_Ingresos", nIdent_Ingresos);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex; // Considera usar un manejo de excepciones más detallado o un logger
             }
             finally
             {

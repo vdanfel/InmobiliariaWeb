@@ -445,9 +445,9 @@ namespace InmobiliariaWeb.Controllers
                 cuotas.Bancos = await _tablasService.ListarBancos();
                 cuotas.TipoCuentaBancos = await _tablasService.ListarTipoCuentaBanco();
                 cuotas.TipoMonedas = await _tablasService.ListarTipoMoneda();
-                int Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(135, cuotas.Ident_Cuotas);
-                cuotas.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(Ident_Ingresos);
-                cuotas.ImporteTotalPagado = await _cajaService.IngresosDetalle_ImporteTotal(Ident_Ingresos);
+                cuotas.Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(135, cuotas.Ident_Cuotas);
+                cuotas.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(cuotas.Ident_Ingresos);
+                cuotas.ImporteTotalPagado = await _cajaService.IngresosDetalle_ImporteTotal(cuotas.Ident_Ingresos);
                 cuotas.SaldoAPagar = cuotas.ImporteCuota - cuotas.ImporteTotalPagado;
                 cuotas.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
                 return View(cuotas);
@@ -466,7 +466,6 @@ namespace InmobiliariaWeb.Controllers
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
                 int Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
-                int Ident_Ingresos = 0;
                 IngresosModel ingresosModel = new IngresosModel();
                 IngresosDetalleModel ingresosDetalleModel = new IngresosDetalleModel();
                 ingresosModel = await _contratosService.IngresosCabecera(Ident_Contratos);
@@ -480,19 +479,19 @@ namespace InmobiliariaWeb.Controllers
                 {
                     ingresosModel.Ident_015_EstadoPago = 110;
                 }
-                Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(135, cuotas.Ident_Cuotas);
-                if (Ident_Ingresos == 0)
+                cuotas.Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(135, cuotas.Ident_Cuotas);
+                if (cuotas.Ident_Ingresos == 0)
                 {
-                    Ident_Ingresos = await _cajaService.Ingresos_Insert(ingresosModel, loginResult);
+                    cuotas.Ident_Ingresos = await _cajaService.Ingresos_Insert(ingresosModel, loginResult);
                 }
                 else
                 {
-                    ingresosModel.Ident_Ingresos = Ident_Ingresos;
+                    ingresosModel.Ident_Ingresos = cuotas.Ident_Ingresos;
                     await _cajaService.Ingresos_Update(ingresosModel, loginResult);
                 }
-                if (Ident_Ingresos > 0)
+                if (cuotas.Ident_Ingresos > 0)
                 {
-                    ingresosDetalleModel.Ident_Ingresos = Ident_Ingresos;
+                    ingresosDetalleModel.Ident_Ingresos = cuotas.Ident_Ingresos;
                     ingresosDetalleModel.TipoCambio = cuotas.TipoCambio;
                     ingresosDetalleModel.Ident_018_TipoPago = (int)cuotas.Ident_018_TipoPago;
                     ingresosDetalleModel.Ident_CuentasBancarias = cuotas.Ident_CuentasBancarias;
@@ -560,9 +559,9 @@ namespace InmobiliariaWeb.Controllers
                 moras.TipoPagos = await _tablasService.ListarTipoPago();
                 moras.Bancos = await _tablasService.ListarBancos();
                 moras.TipoMonedas = await _tablasService.ListarTipoMoneda();
-                int Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(136, moras.Ident_Moras);
-                moras.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(Ident_Ingresos);
-                moras.ImporteTotalPagado = await _cajaService.IngresosDetalle_ImporteTotal(Ident_Ingresos);
+                moras.Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(136, moras.Ident_Moras);
+                moras.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(moras.Ident_Ingresos);
+                moras.ImporteTotalPagado = await _cajaService.IngresosDetalle_ImporteTotal(moras.Ident_Ingresos);
                 moras.SaldoAPagar = (decimal)moras.NuevoMontoMora - moras.ImporteTotalPagado;
                 if (Mensaje != null)
                 {
@@ -587,7 +586,6 @@ namespace InmobiliariaWeb.Controllers
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
                 string mensaje = "";
-                int Ident_Ingresos = 0;
                 int Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
                 if (moras.NuevoMontoMora < moras.ImporteMoras)
                 {
@@ -617,19 +615,19 @@ namespace InmobiliariaWeb.Controllers
                     {
                         ingresosModel.Ident_015_EstadoPago = 110;
                     }
-                    Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(136, moras.Ident_Moras);
-                    if (Ident_Ingresos == 0)
+                    moras.Ident_Ingresos = await _cajaService.Obtener_Ident_Ingresos(136, moras.Ident_Moras);
+                    if (moras.Ident_Ingresos == 0)
                     {
-                        Ident_Ingresos = await _cajaService.Ingresos_Insert(ingresosModel, loginResult);
+                        moras.Ident_Ingresos = await _cajaService.Ingresos_Insert(ingresosModel, loginResult);
                     }
                     else
                     {
-                        ingresosModel.Ident_Ingresos = Ident_Ingresos;
+                        ingresosModel.Ident_Ingresos = moras.Ident_Ingresos;
                         await _cajaService.Ingresos_Update(ingresosModel, loginResult);
                     }
-                    if (Ident_Ingresos>0)
+                    if (moras.Ident_Ingresos>0)
                     {
-                        ingresosDetalleModel.Ident_Ingresos = Ident_Ingresos;
+                        ingresosDetalleModel.Ident_Ingresos = moras.Ident_Ingresos;
                         ingresosDetalleModel.TipoCambio = moras.TipoCambio;
                         ingresosDetalleModel.Ident_018_TipoPago = (int)moras.Ident_018_TipoPago;
                         ingresosDetalleModel.Ident_CuentasBancarias = moras.Ident_CuentasBancarias;
@@ -1618,17 +1616,17 @@ namespace InmobiliariaWeb.Controllers
         {
             var propietarios = await _contratosService.ClientesxContrato(identContrato);
             var resultado = propietarios.Select(p => new {
-                p.Ident_ContratosPersonas,
+                p.Ident_Persona,
                 p.NumeroDocumento,
                 p.Nombre_Completo
             });
             return Json(resultado);
         }
         [HttpGet]
-        public async Task<IActionResult> ImprimirRecibo(int Ident_021_TipoIngresos, int Ident_Origen, int Ident_ContratosPersonas)
+        public async Task<IActionResult> ImprimirRecibo(int nIdent_Ingreso, int nIdent_Persona)
         {
             // 1. Obtener los datos desde el SP
-            var recibo = await _contratosService.ImprimirRecibo(Ident_021_TipoIngresos, Ident_Origen, Ident_ContratosPersonas);
+            var recibo = await _contratosService.ImprimirRecibo(nIdent_Ingreso,nIdent_Persona);
 
             if (recibo == null)
                 return NotFound("No se encontró el recibo.");

@@ -1,8 +1,8 @@
 ﻿using InmobiliariaWeb.Interfaces;
-using InmobiliariaWeb.Models;
 using InmobiliariaWeb.Models.Caja;
+using InmobiliariaWeb.Models.Egresos;
 using InmobiliariaWeb.Models.Ingresos;
-using InmobiliariaWeb.Servicios;
+using InmobiliariaWeb.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +13,13 @@ namespace InmobiliariaWeb.Controllers
         private readonly ICajaService _cajaService;
         private readonly IContratosService _contratosService;
         private readonly ITablasService _tablasService;
-        public CajaController(ICajaService cajaService, IContratosService contratosService, ITablasService tablasService)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public CajaController(ICajaService cajaService, IContratosService contratosService, ITablasService tablasService, IWebHostEnvironment webHostEnvironment)
         {
             _cajaService = cajaService;
             _contratosService = contratosService;
             _tablasService = tablasService;
+            _webHostEnvironment = webHostEnvironment;
         }
         [HttpGet]
         [Authorize]
@@ -112,6 +114,7 @@ namespace InmobiliariaWeb.Controllers
                 ingresosViewModel.lBancos = await _tablasService.ListarBancos();
                 ingresosViewModel.lTipoPagos = await _tablasService.ListarTipoPago();
                 ingresosViewModel.lTipoMonedas = await _tablasService.ListarTipoMoneda();
+                ingresosViewModel.lTipoMonedasCabecera = await _tablasService.ListarTipoMoneda();
                 ingresosViewModel.dFechaIngreso = DateTime.Now;
                 return View(ingresosViewModel);
             }
@@ -131,7 +134,7 @@ namespace InmobiliariaWeb.Controllers
 
                 IngresosModel ingresosModel = new IngresosModel { 
                     FechaPago = ingresosViewModel.dFechaIngreso,
-                    Ident_002_TipoMoneda = ingresosViewModel.nIdent_002_TipoMoneda,
+                    Ident_002_TipoMoneda = ingresosViewModel.nIdent_002_TipoMonedaCabecera,
                     ImporteTotal = ingresosViewModel.nImporte,
                     Ident_021_TipoIngresos = ingresosViewModel.nIdent_021_TipoIngresos,
                     Ident_Persona = ingresosViewModel.nIdent_Persona,
@@ -157,6 +160,30 @@ namespace InmobiliariaWeb.Controllers
                     NumeroOperacion = ingresosViewModel.sNumeroOperacion,
                     Fecha = ingresosViewModel.dFechaIngreso,
                 };
+
+                if (ingresosModel.Ident_002_TipoMoneda == 24)
+                {
+                    if (ingresosDetalleModel.Ident_002_TipoMoneda == ingresosModel.Ident_002_TipoMoneda)
+                    {
+                        ingresosDetalleModel.ImporteConTC = ingresosViewModel.nImporte;
+                    }
+                    else
+                    {
+                        ingresosDetalleModel.ImporteConTC = ingresosViewModel.nImporte * ingresosViewModel.nTipoCambio;
+                    }
+                }
+                else
+                {
+                    if (ingresosDetalleModel.Ident_002_TipoMoneda == ingresosModel.Ident_002_TipoMoneda)
+                    {
+                        ingresosDetalleModel.ImporteConTC = ingresosViewModel.nImporte;
+                    }
+                    else
+                    {
+                        ingresosDetalleModel.ImporteConTC = ingresosViewModel.nImporte / ingresosViewModel.nTipoCambio;
+                    }
+                }
+
                 ingresosDetalleModel.Ident_IngresosDetalle = await _cajaService.IngresosDetalle_Insert(ingresosDetalleModel, loginResult);
                 return RedirectToAction("IngresoVer","Caja", new { nIdent_Ingresos = ingresosViewModel.nIdent_Ingresos });
 
@@ -186,10 +213,8 @@ namespace InmobiliariaWeb.Controllers
                 ingresosViewModel.lBancos = await _tablasService.ListarBancos();
                 ingresosViewModel.lTipoPagos = await _tablasService.ListarTipoPago();
                 ingresosViewModel.lTipoMonedas = await _tablasService.ListarTipoMoneda();
+                ingresosViewModel.lTipoMonedasCabecera = await _tablasService.ListarTipoMoneda();
                 ingresosViewModel.lIngresosDetallesList = await _cajaService.IngresosDetalle_List(nIdent_Ingresos);
-                /*
-                 cuotas.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(Ident_Ingresos);
-                 */
 
                 return View(ingresosViewModel);
             }
@@ -198,11 +223,83 @@ namespace InmobiliariaWeb.Controllers
                 return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
             }
         }
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> IngresoVer(IngresosViewModel ingresosViewModel)
+        {
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+                IngresosDetalleModel ingresosDetalleModel = new IngresosDetalleModel
+                {
+                    Ident_Ingresos = ingresosViewModel.nIdent_Ingresos,
+                    TipoCambio = ingresosViewModel.nTipoCambio,
+                    Ident_018_TipoPago = ingresosViewModel.nIdent_018_TipoPago,
+                    Ident_CuentasBancarias = ingresosViewModel.nIdent_CuentasBancarias,
+                    Ident_002_TipoMoneda = ingresosViewModel.nIdent_002_TipoMoneda,
+                    Importe = ingresosViewModel.nImporte,
+                    NumeroOperacion = ingresosViewModel.sNumeroOperacion,
+                    Fecha = ingresosViewModel.dFechaIngreso,
+                };
+                ingresosDetalleModel.Ident_IngresosDetalle = await _cajaService.IngresosDetalle_Insert(ingresosDetalleModel, loginResult);
+                await _cajaService.IngresosActualizarTotal(ingresosViewModel.nIdent_Ingresos);
+                return RedirectToAction("IngresoVer", "Caja", new { nIdent_Ingresos = ingresosViewModel.nIdent_Ingresos });
+            }
+            else
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+        }
         [HttpGet]
         [Authorize]
-        public IActionResult EgresosIndex()
+        public async Task<IActionResult> EgresosIndex()
         {
-            return View();
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+
+                var egresosIndexFilterDTO = new EgresosIndexFilterDTO { 
+                    dFechaDesde = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                    dFechaHasta = DateTime.Now
+                };
+                var egresosIndexViewModel = new EgresosIndexViewModel { 
+                    dFechaDesde = egresosIndexFilterDTO.dFechaDesde,
+                    dFechaHasta = egresosIndexFilterDTO.dFechaHasta,
+                };
+
+                egresosIndexViewModel.lTipoEgreso = await _tablasService.ListarTipoEgreso();
+
+                return View(egresosIndexViewModel);
+
+            //    var ingresosIndexFilterDTO = new IngresosIndexFilterDTO
+            //    {
+            //        dFechaDesde = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+            //        dFechaHasta = DateTime.Now
+            //    };
+
+            //    var ingresosIndexTablaDTO = await _cajaService.IngresosIndex(ingresosIndexFilterDTO);/*para llenar los datos de la caja con los filtros*/
+
+            //    var ingresosIndexViewModel = new IngresosIndexViewModel
+            //    {
+            //        dFechaDesde = ingresosIndexFilterDTO.dFechaDesde,
+            //        dFechaHasta = ingresosIndexFilterDTO.dFechaHasta,
+            //        lIngresosTabla = ingresosIndexTablaDTO,
+            //        nTotalSoles = ingresosIndexTablaDTO
+            //    .Where(x => x.nIdent_002_TipoMoneda == 24)
+            //    .Sum(x => x.nImporte),
+            //        nTotalDolares = ingresosIndexTablaDTO
+            //    .Where(x => x.nIdent_002_TipoMoneda == 23)
+            //    .Sum(x => x.nImporte)
+            //    };
+
+            //    ingresosIndexViewModel.ProgramasCbxLists = await _contratosService.ProgramaCbxListar();/*para el filtro de programas*/
+            //    ingresosIndexViewModel.lTipoIngreso = await _tablasService.ListarTipoIngreso();
+            //    return View(ingresosIndexViewModel);
+            }
+            else
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
         }
         [HttpGet]
         [Authorize]
@@ -215,15 +312,33 @@ namespace InmobiliariaWeb.Controllers
         [Authorize]
         public async Task<IActionResult> GetManzanas(int programaId)
         {
-            var manzanas = await _contratosService.ManzanaCbxListar(programaId);
+            var manzanas = await _cajaService.ManzanaCbxListar(programaId);
             return Json(manzanas);
         }
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetLotes(int manzanaId)
         {
-            var lotes = await _contratosService.LoteCbxListar(manzanaId);
+            var lotes = await _cajaService.LoteCbxListar(manzanaId);
             return Json(lotes);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ImprimirRecibo(int nIdent_Ingreso, int nIdent_Persona)
+        {
+            // 1. Obtener los datos desde el SP
+            var recibo = await _contratosService.ImprimirRecibo(nIdent_Ingreso,nIdent_Persona);
+
+            if (recibo == null)
+                return NotFound("No se encontró el recibo.");
+
+            // 2. Instanciar la clase generadora y generar el archivo
+            var generador = new ReciboGenerador(_webHostEnvironment.WebRootPath);
+            byte[] documento = await generador.GenerarReciboAsync(recibo);
+
+            // 3. Retornar el archivo como descarga
+            return File(documento,
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        $"Recibo_{recibo.NumeroRecibo}.docx");
         }
     }
 }

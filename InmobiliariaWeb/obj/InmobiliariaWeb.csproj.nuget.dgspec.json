@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\InmobiliariaWeb\\InmobiliariaWeb\\InmobiliariaWeb.csproj": {}
+    "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\InmobiliariaWeb.csproj": {}
   },
   "projects": {
-    "E:\\InmobiliariaWeb\\InmobiliariaWeb\\InmobiliariaWeb.csproj": {
+    "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\InmobiliariaWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\InmobiliariaWeb\\InmobiliariaWeb\\InmobiliariaWeb.csproj",
+        "projectUniqueName": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\InmobiliariaWeb.csproj",
         "projectName": "InmobiliariaWeb",
-        "projectPath": "E:\\InmobiliariaWeb\\InmobiliariaWeb\\InmobiliariaWeb.csproj",
-        "packagesPath": "C:\\Users\\AlucarD-LAP\\.nuget\\packages\\",
-        "outputPath": "E:\\InmobiliariaWeb\\InmobiliariaWeb\\obj\\",
+        "projectPath": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\InmobiliariaWeb.csproj",
+        "packagesPath": "C:\\Users\\$hadoW\\.nuget\\packages\\",
+        "outputPath": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\AlucarD-LAP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\$hadoW\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,8 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,7 +38,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net6.0": {
@@ -94,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

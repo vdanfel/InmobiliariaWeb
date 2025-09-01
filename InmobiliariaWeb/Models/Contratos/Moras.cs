@@ -8,6 +8,7 @@ namespace InmobiliariaWeb.Models.Contratos
         public int Ident_Contratos { get; set; }
         public int Ident_Moras { get; set; }
         public int Ident_Kardex { get; set; }
+        public int Ident_Ingresos{ get; set; }
         public int Ident_Cuotas { get; set; }
         public int Correlativo { get; set; }
         public int DiasMoras { get; set; }
