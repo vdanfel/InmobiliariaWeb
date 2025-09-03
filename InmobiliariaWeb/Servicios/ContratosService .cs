@@ -1818,6 +1818,7 @@ namespace InmobiliariaWeb.Servicios
                         reciboBE.ImporteTotal = decimal.Parse(reader["ImporteTotal"].ToString());
                         reciboBE.NombreUsuario = reader["NombreUsuario"].ToString();
                         reciboBE.TipoCambio = decimal.Parse(reader["TipoCambio"].ToString());
+                        reciboBE.Moneda = reader["Moneda"].ToString();
                     }
                     return reciboBE;
                 }

@@ -34,6 +34,7 @@ namespace InmobiliariaWeb.Utilities
                     ReplacePlaceholder(body, "{NombreUsuario}", datos.NombreUsuario);
                     ReplacePlaceholder(body, "{NombrePrograma}", datos.NombrePrograma);
                     ReplacePlaceholder(body, "{TipoCambio}", datos.TipoCambio.ToString("N3"));
+                    ReplacePlaceholder(body, "{Moneda}", datos.Moneda);
 
                     wordDoc.MainDocumentPart.Document.Save();
                 }
@@ -42,6 +43,33 @@ namespace InmobiliariaWeb.Utilities
             }
         }
 
+        //private void ReplacePlaceholder(Body body, string placeholder, string value)
+        //{
+        //    var paragraphs = body.Descendants<Paragraph>();
+
+        //    foreach (var paragraph in paragraphs)
+        //    {
+        //        var texts = paragraph.Descendants<Text>().ToList();
+        //        var combinedText = string.Concat(texts.Select(t => t.Text));
+
+        //        if (combinedText.Contains(placeholder))
+        //        {
+        //            combinedText = combinedText.Replace(placeholder, value);
+
+        //            // Limpiar nodos antiguos
+        //            foreach (var t in texts)
+        //            {
+        //                t.Text = string.Empty;
+        //            }
+
+        //            // Poner el texto reemplazado en el primer nodo
+        //            if (texts.Count > 0)
+        //            {
+        //                texts[0].Text = combinedText;
+        //            }
+        //        }
+        //    }
+        //}
         private void ReplacePlaceholder(Body body, string placeholder, string value)
         {
             var paragraphs = body.Descendants<Paragraph>();
@@ -53,7 +81,8 @@ namespace InmobiliariaWeb.Utilities
 
                 if (combinedText.Contains(placeholder))
                 {
-                    combinedText = combinedText.Replace(placeholder, value);
+                    // Dividir el valor por saltos de línea
+                    var parts = value.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
 
                     // Limpiar nodos antiguos
                     foreach (var t in texts)
@@ -61,10 +90,25 @@ namespace InmobiliariaWeb.Utilities
                         t.Text = string.Empty;
                     }
 
-                    // Poner el texto reemplazado en el primer nodo
                     if (texts.Count > 0)
                     {
-                        texts[0].Text = combinedText;
+                        var firstText = texts[0];
+                        var parent = firstText.Parent;
+
+                        // Eliminar el primer Text para reconstruir desde cero
+                        firstText.Remove();
+
+                        // Reconstruir con saltos de línea
+                        foreach (var part in parts)
+                        {
+                            parent.Append(new Text(part));
+
+                            // Agregar salto de línea si no es el último
+                            if (part != parts.Last())
+                            {
+                                parent.Append(new Break());
+                            }
+                        }
                     }
                 }
             }

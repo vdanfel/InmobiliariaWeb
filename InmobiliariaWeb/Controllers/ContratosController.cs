@@ -496,9 +496,9 @@ namespace InmobiliariaWeb.Controllers
                     ingresosDetalleModel.Ident_018_TipoPago = (int)cuotas.Ident_018_TipoPago;
                     ingresosDetalleModel.Ident_CuentasBancarias = cuotas.Ident_CuentasBancarias;
                     ingresosDetalleModel.Ident_002_TipoMoneda = cuotas.Ident_002_TipoMoneda;
-                    ingresosDetalleModel.Importe = (decimal)cuotas.ImporteCuotasDolares;
                     ingresosDetalleModel.NumeroOperacion = cuotas.NumeroOperacion;
-                    ingresosDetalleModel.ImporteConTC = (decimal)cuotas.ImporteCuotaPagado;
+                    ingresosDetalleModel.ImporteConTC = (decimal)cuotas.ImporteCuotasDolares;
+                    ingresosDetalleModel.Importe =  (decimal)cuotas.ImporteCuotaPagado;
                     ingresosDetalleModel.Fecha = (DateTime)cuotas.FechaPagoRealizado;
                     int Ident_IngresosDetalle = await _cajaService.IngresosDetalle_Insert(ingresosDetalleModel, loginResult);
                     if (Ident_IngresosDetalle > 0)

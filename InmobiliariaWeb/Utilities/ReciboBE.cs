@@ -11,5 +11,6 @@
         public string NombreUsuario { get; set; }
         public string NombrePrograma { get; set; }
         public decimal TipoCambio { get; set; }
+        public string Moneda { get; set; }
     }
 }

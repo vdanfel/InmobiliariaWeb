@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InmobiliariaWeb.Controllers
 {
+    [Authorize]
     public class CajaController:Controller
     {
         private readonly ICajaService _cajaService;
@@ -22,7 +23,6 @@ namespace InmobiliariaWeb.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> IngresosIndex() 
         {
             if (HttpContext.Session.GetString("Usuario") != null)
@@ -57,7 +57,6 @@ namespace InmobiliariaWeb.Controllers
             }
         }
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> IngresosIndex(IngresosIndexViewModel ingresosIndexViewModel)
         {
             if (HttpContext.Session.GetString("Usuario") != null)
@@ -95,7 +94,6 @@ namespace InmobiliariaWeb.Controllers
             }
         }
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> IngresoNuevo()
         {
             if (HttpContext.Session.GetString("Usuario") != null)
@@ -125,7 +123,6 @@ namespace InmobiliariaWeb.Controllers
             
         }
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> IngresoNuevo(IngresosViewModel ingresosViewModel)
         {
             if (HttpContext.Session.GetString("Usuario") != null)
@@ -194,7 +191,6 @@ namespace InmobiliariaWeb.Controllers
             }
         }
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> IngresoVer(int nIdent_Ingresos, string sMensaje)
         {
             if (HttpContext.Session.GetString("Usuario") != null)
@@ -224,7 +220,6 @@ namespace InmobiliariaWeb.Controllers
             }
         }
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> IngresoVer(IngresosViewModel ingresosViewModel)
         {
             if (HttpContext.Session.GetString("Usuario") != null)
@@ -241,6 +236,28 @@ namespace InmobiliariaWeb.Controllers
                     NumeroOperacion = ingresosViewModel.sNumeroOperacion,
                     Fecha = ingresosViewModel.dFechaIngreso,
                 };
+                if (ingresosViewModel.nIdent_002_TipoMoneda == 24)
+                {
+                    if (ingresosDetalleModel.Ident_002_TipoMoneda == ingresosViewModel.nIdent_002_TipoMoneda)
+                    {
+                        ingresosDetalleModel.ImporteConTC = ingresosViewModel.nImporte;
+                    }
+                    else
+                    {
+                        ingresosDetalleModel.ImporteConTC = ingresosViewModel.nImporte * ingresosViewModel.nTipoCambio;
+                    }
+                }
+                else
+                {
+                    if (ingresosDetalleModel.Ident_002_TipoMoneda == ingresosViewModel.nIdent_002_TipoMoneda)
+                    {
+                        ingresosDetalleModel.ImporteConTC = ingresosViewModel.nImporte;
+                    }
+                    else
+                    {
+                        ingresosDetalleModel.ImporteConTC = ingresosViewModel.nImporte / ingresosViewModel.nTipoCambio;
+                    }
+                }
                 ingresosDetalleModel.Ident_IngresosDetalle = await _cajaService.IngresosDetalle_Insert(ingresosDetalleModel, loginResult);
                 await _cajaService.IngresosActualizarTotal(ingresosViewModel.nIdent_Ingresos);
                 return RedirectToAction("IngresoVer", "Caja", new { nIdent_Ingresos = ingresosViewModel.nIdent_Ingresos });
@@ -251,7 +268,6 @@ namespace InmobiliariaWeb.Controllers
             }
         }
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> EgresosIndex()
         {
             if (HttpContext.Session.GetString("Usuario") != null)
@@ -302,21 +318,18 @@ namespace InmobiliariaWeb.Controllers
             }
         }
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetCuentasBancarias(int Ident_019_banco)
         {
             var cuentasBancariasList = await _cajaService.CuentasBancariasXBanco(Ident_019_banco);
             return Json(cuentasBancariasList);
         }
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetManzanas(int programaId)
         {
             var manzanas = await _cajaService.ManzanaCbxListar(programaId);
             return Json(manzanas);
         }
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetLotes(int manzanaId)
         {
             var lotes = await _cajaService.LoteCbxListar(manzanaId);
@@ -339,6 +352,20 @@ namespace InmobiliariaWeb.Controllers
             return File(documento,
                         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                         $"Recibo_{recibo.NumeroRecibo}.docx");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Eliminar_IngresosDetalle(int Ident_IngresosDetalle)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            await _cajaService.IngresosDetalle_Delete(Ident_IngresosDetalle, loginResult);
+
+            //await _cajaService.IngresosActualizarTotal(ingresosViewModel.nIdent_Ingresos);
+            //await _cajaService.Ingresos_ValidarImportes(Ident_IngresosDetalle, 135);
+            return RedirectToAction("Cuotas", "Contratos", new { mensaje = "se eliminó el detalle" });
         }
     }
 }

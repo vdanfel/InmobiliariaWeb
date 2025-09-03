@@ -188,7 +188,7 @@
                             <td>@(ingresosDetalle.Fecha.HasValue ? ingresosDetalle.Fecha.Value.ToString("dd/MM/yyyy") : "")</td>
                             <td>
                                 <a class="btn btn-outline-danger">
-                                    <i class="bi-trash3"></i>
+                                    @ingresosDetalle.Ident_IngresosDetalle<i class="bi-trash3"></i>
                                 </a>
                             </td>
                         </tr>
