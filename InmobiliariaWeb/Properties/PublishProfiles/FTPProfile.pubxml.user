@@ -7,7 +7,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAGArD7BL3okm4czKmT91wZgAAAAACAAAAAAAQZgAAAAEAACAAAABEbm1bQuDLAo/04saxqfjFNb+wger3L/kect1XEpf3oAAAAAAOgAAAAAIAACAAAABnEoBn/zIB18T0yIN6ZMYqwtvCTV6HyCFZva2Fg/WMByAAAACTrSNsBq0p08DuT3kBiObQ7FJP8I801e7P59NEOLJ8bUAAAAA7IWdlu+59dejNo43Go0jIezs2jw2jefNcVH76pkXFdZv3QSrOODwU+8170FAXnlRx/DC1N2C1JSnPdqfulb+l</EncryptedPassword>
     <_PublishTargetUrl>ftp://155.254.246.21/www.inmobi.somee.com</_PublishTargetUrl>
-    <History>True|2025-09-03T04:34:26.9210752Z||;True|2025-09-01T00:36:21.0745911-05:00||;True|2025-08-28T10:19:14.5958485-05:00||;True|2025-08-21T23:55:05.1038818-05:00||;True|2025-08-19T23:51:05.3569866-05:00||;True|2025-08-18T22:43:35.5760590-05:00||;True|2025-08-18T00:06:18.0164805-05:00||;</History>
+    <History>True|2025-09-08T03:10:33.6290486Z||;True|2025-09-04T00:10:24.5897551-05:00||;True|2025-09-02T23:34:26.9210752-05:00||;True|2025-09-01T00:36:21.0745911-05:00||;True|2025-08-28T10:19:14.5958485-05:00||;True|2025-08-21T23:55:05.1038818-05:00||;True|2025-08-19T23:51:05.3569866-05:00||;True|2025-08-18T22:43:35.5760590-05:00||;True|2025-08-18T00:06:18.0164805-05:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -51,7 +51,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/27/2024 13:46:52</publishTime>
     </File>
     <File Include="ExcelNumberFormat.dll">
-      <publishTime>10/02/2020 03:42:28</publishTime>
+      <publishTime>02/10/2020 03:42:28</publishTime>
     </File>
     <File Include="ExtendedNumerics.BigDecimal.dll">
       <publishTime>05/08/2024 05:03:54</publishTime>
@@ -66,22 +66,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/29/2023 09:59:10</publishTime>
     </File>
     <File Include="InmobiliariaWeb.deps.json">
-      <publishTime>09/02/2025 23:28:33</publishTime>
+      <publishTime>09/07/2025 22:04:02</publishTime>
     </File>
     <File Include="InmobiliariaWeb.dll">
-      <publishTime>09/02/2025 23:28:23</publishTime>
+      <publishTime>09/07/2025 22:04:02</publishTime>
     </File>
     <File Include="InmobiliariaWeb.exe">
-      <publishTime>09/02/2025 23:28:23</publishTime>
+      <publishTime>09/07/2025 22:04:02</publishTime>
     </File>
     <File Include="InmobiliariaWeb.pdb">
-      <publishTime>09/02/2025 23:28:23</publishTime>
+      <publishTime>09/07/2025 22:04:01</publishTime>
     </File>
     <File Include="InmobiliariaWeb.runtimeconfig.json">
-      <publishTime>04/08/2025 21:47:10</publishTime>
+      <publishTime>09/07/2025 22:04:02</publishTime>
     </File>
     <File Include="InmobiliariaWeb.staticwebassets.endpoints.json">
-      <publishTime>09/02/2025 23:28:33</publishTime>
+      <publishTime>09/07/2025 22:04:13</publishTime>
     </File>
     <File Include="it/Microsoft.Data.SqlClient.resources.dll">
       <publishTime>08/27/2024 13:46:52</publishTime>
@@ -164,6 +164,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="ru/Microsoft.Data.SqlClient.resources.dll">
       <publishTime>08/27/2024 13:46:52</publishTime>
     </File>
+    <File Include="runtimes/osx/native/libSkiaSharp.dylib">
+      <publishTime>04/09/2024 11:58:02</publishTime>
+    </File>
     <File Include="runtimes/unix/lib/net6.0/Microsoft.Data.SqlClient.dll">
       <publishTime>08/27/2024 13:46:52</publishTime>
     </File>
@@ -173,11 +176,20 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll">
       <publishTime>02/20/2024 17:29:06</publishTime>
     </File>
+    <File Include="runtimes/win-arm64/native/libSkiaSharp.dll">
+      <publishTime>04/09/2024 12:25:14</publishTime>
+    </File>
     <File Include="runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll">
       <publishTime>02/20/2024 17:29:06</publishTime>
     </File>
+    <File Include="runtimes/win-x64/native/libSkiaSharp.dll">
+      <publishTime>04/09/2024 12:24:38</publishTime>
+    </File>
     <File Include="runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll">
       <publishTime>02/20/2024 17:30:22</publishTime>
+    </File>
+    <File Include="runtimes/win-x86/native/libSkiaSharp.dll">
+      <publishTime>04/09/2024 12:24:38</publishTime>
     </File>
     <File Include="runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll">
       <publishTime>02/20/2024 17:28:56</publishTime>
@@ -209,6 +221,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="SixLabors.ImageSharp.dll">
       <publishTime>07/22/2024 05:15:42</publishTime>
     </File>
+    <File Include="SkiaSharp.dll">
+      <publishTime>04/09/2024 12:24:12</publishTime>
+    </File>
     <File Include="System.ClientModel.dll">
       <publishTime>01/03/2024 12:43:00</publishTime>
     </File>
@@ -228,7 +243,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/30/2023 23:31:48</publishTime>
     </File>
     <File Include="System.IO.Packaging.dll">
-      <publishTime>09/16/2024 18:11:32</publishTime>
+      <publishTime>05/15/2018 08:29:38</publishTime>
     </File>
     <File Include="System.Memory.Data.dll">
       <publishTime>04/08/2021 11:45:54</publishTime>
@@ -252,7 +267,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/22/2021 18:49:44</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>09/02/2025 23:28:33</publishTime>
+      <publishTime>09/07/2025 22:04:13</publishTime>
     </File>
     <File Include="wwwroot/css/EstiloImpresion.css">
       <publishTime>08/31/2025 09:57:42</publishTime>
@@ -456,10 +471,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/31/2025 09:57:42</publishTime>
     </File>
     <File Include="wwwroot/Template/FormatoRecibo.docx">
-      <publishTime>09/02/2025 23:26:33</publishTime>
+      <publishTime>09/07/2025 13:55:43</publishTime>
+    </File>
+    <File Include="wwwroot/Template/FormatoReciboCuota.docx">
+      <publishTime>09/07/2025 13:21:27</publishTime>
     </File>
     <File Include="wwwroot/Template/ventas.docx">
       <publishTime>08/31/2025 09:57:42</publishTime>
+    </File>
+    <File Include="Xceed.Document.NET.dll">
+      <publishTime>03/10/2025 09:59:58</publishTime>
+    </File>
+    <File Include="Xceed.Drawing.NET.dll">
+      <publishTime>03/10/2025 09:59:56</publishTime>
+    </File>
+    <File Include="Xceed.Words.NET.dll">
+      <publishTime>03/10/2025 09:59:58</publishTime>
     </File>
     <File Include="zh-Hans/Microsoft.Data.SqlClient.resources.dll">
       <publishTime>08/27/2024 13:47:06</publishTime>

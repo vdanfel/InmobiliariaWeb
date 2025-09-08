@@ -1,4 +1,5 @@
 ﻿using InmobiliariaWeb.Models.Caja;
+using InmobiliariaWeb.Models.Egresos;
 using InmobiliariaWeb.Models.Ingresos;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Contratos;
@@ -22,5 +23,11 @@ namespace InmobiliariaWeb.Interfaces
         Task<List<ManzanaCbxList>> ManzanaCbxListar(int ident_Programa);
         Task<List<LoteCbxList>> LoteCbxListar(int ident_Manzana);
         Task IngresosActualizarTotal(int nIdent_Ingresos);
+        Task<List<EgresosIndexTablaDTO>> EgresosIndex(EgresosIndexFilterDTO egresosIndexFilterDTO);
+        Task<int> EgresosInsertar(EgresosDTO egresosDTO);
+        Task<int> EgresosDetalleInsertar(EgresosDetalleDTO egresosDetalleDTO);
+        Task<EgresosViewModel> EgresosSelect(int nIdent_Egresos);
+        Task<List<EgresosDetallesList>> EgresosDetalle_List(int nIdent_Egresos);
+        Task EgresosDetalle_Delete(EgresosDetalleDTO egresosDetalleDTO);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using InmobiliariaWeb.Models.Tablas;
-using InmobiliariaWeb.Result.Contratos;
 using InmobiliariaWeb.Result.Separaciones;
 
 namespace InmobiliariaWeb.Models.Ingresos

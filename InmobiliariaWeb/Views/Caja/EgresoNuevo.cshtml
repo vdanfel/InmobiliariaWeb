@@ -1,5 +1,231 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model InmobiliariaWeb.Models.Egresos.EgresosViewModel
 @{
 }
+<form method="post" asp-action="EgresoNuevo" asp-controller="Caja">
+    <input asp-for="@Model.nIdent_Persona" id="nIdentPersona" hidden />
+    <div class="container">
+        <div class="row g-2">
+            <div class="col-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Nombre o Documento" aria-label="Recipient's username" aria-describedby="BuscarPersona" id="inputBusqueda">
+                    <button class="btn btn-outline-secondary" type="button" id="BuscarPersona">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 col-md-8 col-lg-9">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="sNombre" readonly required />
+                    <label>Nombre:</label>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="sDocumento" readonly required />
+                    <label>Documento:</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-9 col-lg-10">
+                <div class="form-floating">
+                    <select class="form-select" id="tipoEgresos" asp-for="@Model.nIdent_022_TipoEgresos" required>
+                        <option></option>
+                        @foreach (var tipoEgreso in Model.lTipoEgreso)
+                        {
+                            <option value="@tipoEgreso.nIdent_022_TipoEgreso">@tipoEgreso.sDescripcion</option>
+                        }
+                    </select>
+                    <label>Tipo de Egreso:</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                <div class="form-floating">
+                    <input type="date" class="form-control" asp-for="@Model.dFechaEgreso"/>
+                    <label>Fecha Egreso</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-floating">
+                    <textarea class="form-control" asp-for="@Model.sObservacion" style="height: 6rem"></textarea>
+                    <label asp-for="@Model.sObservacion">Observación:</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <select id="lTipoPago" class="form-select" asp-for="@Model.nIdent_018_TipoPago" onchange="validarTipoPago()" required>
+                        <option></option>
+                        @foreach (var tipoPago in Model.lTipoPagos)
+                        {
+                            <option value="@tipoPago.Ident_018_TipoPago">@tipoPago.Descripcion</option>
+                        }
+                    </select>
+                    <label>Tipo Salida</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <select id="lTipoMoneda" class="form-select" asp-for="@Model.nIdent_002_TipoMoneda" required>
+                        <option></option>
+                        @foreach (var moneda in Model.lTipoMonedas)
+                        {
+                            <option value="@moneda.Ident_002_TipoMoneda">@moneda.Abreviatura</option>
+                        }
+                    </select>
+                    <label>Moneda</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <input class="form-control" asp-for="@Model.nImporte" required />
+                    <label>Importe</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <select id="lBanco" class="form-select" asp-for="@Model.nIdent_019_Banco">
+                        <option></option>
+                        @foreach (var banco in Model.lBancos)
+                        {
+                            <option value="@banco.Ident_019_Banco">@banco.Abreviatura</option>
+                        }
+                    </select>
+                    <label>Banco</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <input class="form-control" id="sNumeroOperacion" asp-for="sNumeroOperacion" />
+                    <label>Numero Operacion</label>
+                </div>
+            </div>
+            <div class="col-12 col-md-auto ms-auto">
+                <a class="btn btn-outline-info" asp-action="EgresosIndex" asp-controller="Caja">
+                    Regresar
+                </a>
+                @* <button type="submit" class="btn btn-outline-primary">Agregar</button> *@
+                <button type="button" class="btn btn-outline-primary" id="btnAgregar">Agregar</button>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                Los datos de la cabecera se registrarán y <strong>no podrán ser modificados</strong>.
+                <br />¿Desea continuar?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmar">Sí</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    /*para el buscador de persona*/
+    $("#BuscarPersona").click(function () {
+        var valorBusqueda = $("#inputBusqueda").val();
+        console.log(valorBusqueda);
+        $.ajax({
+            url: '/Programa/BuscarPersonas',
+            type: 'GET',
+            data: { buscar: valorBusqueda },
+            success: function (data) {
+                console.log(data);
+                $("#inputBusqueda").val("");
+                if (data.length === 1) {
+                    $("#sNombre").val(data[0].nombreCompleto);
+                    $("#sDocumento").val(data[0].documento);
+                    $("#nIdentPersona").val(data[0].ident_Persona);
+                } else if (data.length > 1) {
+                    mostrarResultados(data);
+                } else {
+                    $("#sNombre").val("");
+                    $("#sDocumento").val("");
+                    $("#nIdentPersona").val("0");
+                }
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    });
+    function mostrarResultados(resultados) {
+        // Remover el modal existente, si hay uno
+        $("#resultadosModal").remove();
+        // Crea el modal
+        var modalHTML = "<div class='modal fade' id='resultadosModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>";
+        modalHTML += "<div class='modal-dialog' role='document'>";
+        modalHTML += "<div class='modal-content'>";
+        modalHTML += "<div class='modal-header'>";
+        modalHTML += "<h5 class='modal-title' id='exampleModalLabel'>Resultados de la Búsqueda</h5>";
+        modalHTML += "<button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+        modalHTML += "</div>";
+        modalHTML += "<div class='modal-body'>";
+
+        var tablaResultados = "<table class='table table-hover'>";
+        tablaResultados += "<thead><tr><th>N°</th><th hidden>IDENT_PERSONA</th><th hidden>TIPO_DOCUMENTO</th><th hidden>DOCUMENTO</th><th>Apellidos y Nombres</th></tr></thead><tbody>";
+
+        for (var i = 0; i < resultados.length; i++) {
+            tablaResultados += "<tr>";
+            tablaResultados += "<td>" + (i + 1) + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].ident_Persona + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].tipoDocumento + "</td>";
+            tablaResultados += "<td hidden>" + resultados[i].documento + "</td>";
+            tablaResultados += "<td>" + resultados[i].nombreCompleto + "</td>";
+            tablaResultados += "</tr>";
+        }
+
+        tablaResultados += "</tbody></table>";
+
+        modalHTML += tablaResultados;
+        modalHTML += "</div>";
+        modalHTML += "<div class='modal-footer'>";
+        modalHTML += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>";
+        modalHTML += "</div></div></div></div>";
+
+        // Agrega el modal al final del cuerpo del documento
+        $("body").append(modalHTML);
+
+        // Muestra el modal
+        $("#resultadosModal").modal("show");
+
+        // Agrega un evento clic a las filas de la tabla en el modal
+        $("#resultadosModal").on("dblclick", "table tbody tr", function () {
+            var identPersona = $(this).find('td:eq(1)').text();
+            var documento = $(this).find('td:eq(3)').text();
+            var nombreCompleto = $(this).find('td:eq(4)').text();
+
+            $("#nIdentPersona").val(identPersona);
+            $("#sDocumento").val(documento);
+            $("#sNombre").val(nombreCompleto);
+
+            cerrarModal();
+        });
+    }
+
+    function cerrarModal() {
+        // Oculta y elimina el modal del DOM
+        $("#resultadosModal").modal("hide");
+        $("#resultadosModal").on("hidden.bs.modal", function () {
+            $(this).remove();
+        });
+    }
+    document.getElementById("btnAgregar").addEventListener("click", function () {
+        var myModal = new bootstrap.Modal(document.getElementById("confirmModal"));
+        myModal.show();
+    });
+
+    document.getElementById("btnConfirmar").addEventListener("click", function () {
+        // Busca el formulario más cercano y lo envía
+        document.querySelector("form").submit();
+    });
+</script>

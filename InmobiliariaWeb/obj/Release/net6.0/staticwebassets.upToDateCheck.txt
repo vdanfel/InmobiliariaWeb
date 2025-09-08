@@ -66,3 +66,4 @@ wwwroot\lib\jquery\LICENSE.txt
 wwwroot\Template\Contratos.docx
 wwwroot\Template\FormatoRecibo.docx
 wwwroot\Template\ventas.docx
+wwwroot\Template\FormatoReciboCuota.docx

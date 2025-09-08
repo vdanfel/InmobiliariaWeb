@@ -1,7 +1,7 @@
 ﻿@model InmobiliariaWeb.Models.Egresos.EgresosIndexViewModel
 @{
 }
-<form>
+<form method="post" asp-action="EgresosIndex" asp-asp-controller="Caja">
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -25,7 +25,6 @@
                                     <input class="form-control" type="date" asp-for="@Model.dFechaDesde" />
                                     <label>Desde:</label>
                                 </div>
-
                             </div>
                             <div class="col-6">
                                 <div class="form-floating">
@@ -37,7 +36,7 @@
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input class="form-control" type="text" asp-for="@Model.sPersona"/>
+                            <input class="form-control" type="text" asp-for="@Model.sBuscar"/>
                             <label>Nombre / Documento</label>
                         </div>
                     </div>
@@ -50,12 +49,72 @@
                                     <option value="@tipoEgreso.nIdent_022_TipoEgreso">@tipoEgreso.sDescripcion</option>
                                 }
                             </select>
+                            <label>Tipo Egreso</label>
                         </div>
+                    </div>
+                    <div class="col-auto me-auto">
+                        <button class="btn btn-outline-secondary" type="submit">
+                            Filtrar
+                        </button>
+                        @*<a class="btn btn-outline-primary">
+                            Exportar
+                        </a>*@
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row align-items-center mt-1 mt-lg-2 mt-md-2">
 
+            <div class="col-auto">
+                <div class="form-floating">
+                    <input type="text" class="form-control" value="@Model.nTotalSoles" readonly />
+                    <label>Total S/.</label>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-floating">
+                    <input type="text" class="form-control" value="@Model.nTotalDolares" readonly />
+                    <label>Total $</label>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive mt-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Tipo Egreso</th>
+                        <th>Encargado a</th>
+                        <th>Descripcion</th>
+                        <th>Moneda</th>
+                        <th>Importe</th>
+                        <th>Tipo Pago</th>
+                        <th>Nro Operacion</th>
+                        <th>Fecha</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var egresos in Model.lEgresosTabla)
+                    {
+                        <tr>
+                            <td>@egresos.sTipoEgresos</td>
+                            <td>@egresos.sNombreCompleto</td>
+                            <td>@egresos.sObservacion</td>
+                            <td>@egresos.sMoneda</td>
+                            <td>@egresos.nImporte</td>
+                            <td>@egresos.sTipoPago</td>
+                            <td>@egresos.sNumeroOperacion</td>
+                            <td>@egresos.dFechaEgreso.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <a class="btn btn-outline-info" asp-action="EgresoVer" asp-asp-controller="Caja" asp-route-nIdent_Egresos="@egresos.nIdent_Egresos">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </form>
 @section Scripts {

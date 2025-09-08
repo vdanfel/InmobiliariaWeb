@@ -65,4 +65,5 @@ wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
 wwwroot\Template\Contratos.docx
 wwwroot\Template\FormatoRecibo.docx
+wwwroot\Template\FormatoReciboCuota.docx
 wwwroot\Template\ventas.docx

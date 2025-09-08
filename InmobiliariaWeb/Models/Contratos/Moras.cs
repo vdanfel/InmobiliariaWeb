@@ -1,5 +1,5 @@
-﻿using InmobiliariaWeb.Models.Tablas;
-using InmobiliariaWeb.Result.Contratos;
+﻿using InmobiliariaWeb.Models.Ingresos;
+using InmobiliariaWeb.Models.Tablas;
 
 namespace InmobiliariaWeb.Models.Contratos
 {

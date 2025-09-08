@@ -60,69 +60,21 @@
           }
         }
       },
-      "ClosedXML/0.104.2": {
+      "DocX/4.0.25105.5786": {
         "type": "package",
         "dependencies": {
-          "ClosedXML.Parser": "[1.2.0, 2.0.0)",
-          "DocumentFormat.OpenXml": "[3.1.1, 4.0.0)",
-          "ExcelNumberFormat": "1.1.0",
-          "RBush": "4.0.0",
-          "SixLabors.Fonts": "1.0.0"
+          "SkiaSharp": "2.88.8",
+          "System.IO.Packaging": "4.5.0"
         },
         "compile": {
-          "lib/netstandard2.1/ClosedXML.dll": {
-            "related": ".pdb;.xml"
-          }
+          "lib/net5.0/Xceed.Document.NET.dll": {},
+          "lib/net5.0/Xceed.Drawing.NET.dll": {},
+          "lib/net5.0/Xceed.Words.NET.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.1/ClosedXML.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "ClosedXML.Parser/1.2.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.1/ClosedXML.Parser.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.1/ClosedXML.Parser.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "DocumentFormat.OpenXml/3.2.0": {
-        "type": "package",
-        "dependencies": {
-          "DocumentFormat.OpenXml.Framework": "3.2.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/DocumentFormat.OpenXml.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "DocumentFormat.OpenXml.Framework/3.2.0": {
-        "type": "package",
-        "dependencies": {
-          "System.IO.Packaging": "8.0.1"
-        },
-        "compile": {
-          "lib/net6.0/DocumentFormat.OpenXml.Framework.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/DocumentFormat.OpenXml.Framework.dll": {
-            "related": ".xml"
-          }
+          "lib/net5.0/Xceed.Document.NET.dll": {},
+          "lib/net5.0/Xceed.Drawing.NET.dll": {},
+          "lib/net5.0/Xceed.Words.NET.dll": {}
         }
       },
       "Enums.NET/4.0.1": {
@@ -135,19 +87,6 @@
         "runtime": {
           "lib/netcoreapp3.0/Enums.NET.dll": {
             "related": ".pdb;.xml"
-          }
-        }
-      },
-      "ExcelNumberFormat/1.1.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/ExcelNumberFormat.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/ExcelNumberFormat.dll": {
-            "related": ".xml"
           }
         }
       },
@@ -571,19 +510,6 @@
           }
         }
       },
-      "RBush/4.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/RBush.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/RBush.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "SharpZipLib/1.4.2": {
         "type": "package",
         "compile": {
@@ -624,6 +550,61 @@
         "runtime": {
           "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
             "related": ".xml"
+          }
+        }
+      },
+      "SkiaSharp/2.88.8": {
+        "type": "package",
+        "dependencies": {
+          "SkiaSharp.NativeAssets.Win32": "2.88.8",
+          "SkiaSharp.NativeAssets.macOS": "2.88.8"
+        },
+        "compile": {
+          "lib/net6.0/SkiaSharp.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/SkiaSharp.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "SkiaSharp.NativeAssets.macOS/2.88.8": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/_._": {}
+        },
+        "runtime": {
+          "lib/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/osx/native/libSkiaSharp.dylib": {
+            "assetType": "native",
+            "rid": "osx"
+          }
+        }
+      },
+      "SkiaSharp.NativeAssets.Win32/2.88.8": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/_._": {}
+        },
+        "runtime": {
+          "lib/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
+          },
+          "runtimes/win-x64/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/libSkiaSharp.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
           }
         }
       },
@@ -745,20 +726,15 @@
           }
         }
       },
-      "System.IO.Packaging/8.0.1": {
+      "System.IO.Packaging/4.5.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/System.IO.Packaging.dll": {
+          "ref/netstandard2.0/System.IO.Packaging.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net6.0/System.IO.Packaging.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net6.0/_._": {}
+          "lib/netstandard2.0/System.IO.Packaging.dll": {}
         }
       },
       "System.Memory/4.5.4": {
@@ -1127,86 +1103,26 @@
         "packageIcon.png"
       ]
     },
-    "ClosedXML/0.104.2": {
-      "sha512": "gOkSjQ152MhpKmw70cBkJV+FnaZAWzDwM36luRf/7FlWYnNeH++9XYdGTd0Y4KQlVPkKVxy948M5MMsnsGC4GQ==",
+    "DocX/4.0.25105.5786": {
+      "sha512": "yfzSWXFh3/sgcWyykjfvedFlwIPIbJUNbHgg9auTA2NjuvYvmY4B2AmD4lBJ4bvC2+9GmJNk6e8KeHOuSFPgNA==",
       "type": "package",
-      "path": "closedxml/0.104.2",
+      "path": "docx/4.0.25105.5786",
+      "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "closedxml.0.104.2.nupkg.sha512",
-        "closedxml.nuspec",
-        "lib/netstandard2.0/ClosedXML.dll",
-        "lib/netstandard2.0/ClosedXML.pdb",
-        "lib/netstandard2.0/ClosedXML.xml",
-        "lib/netstandard2.1/ClosedXML.dll",
-        "lib/netstandard2.1/ClosedXML.pdb",
-        "lib/netstandard2.1/ClosedXML.xml",
-        "nuget-logo.png"
-      ]
-    },
-    "ClosedXML.Parser/1.2.0": {
-      "sha512": "w+/0tsxABS3lkSH8EUlA7IGme+mq5T/Puf3DbOiTckmSuUpAUO2LK29oXYByCcWkBv6wcRHxgWlQb1lxkwI0Tw==",
-      "type": "package",
-      "path": "closedxml.parser/1.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "closedxml.parser.1.2.0.nupkg.sha512",
-        "closedxml.parser.nuspec",
-        "lib/netstandard2.0/ClosedXML.Parser.dll",
-        "lib/netstandard2.0/ClosedXML.Parser.xml",
-        "lib/netstandard2.1/ClosedXML.Parser.dll",
-        "lib/netstandard2.1/ClosedXML.Parser.xml"
-      ]
-    },
-    "DocumentFormat.OpenXml/3.2.0": {
-      "sha512": "eDBT9G0sAWUvjgE8l8E5bGCFXgxCZXIecQ8dqUnj2PyxyMR5eBmLahqRRw3Q7uSKM3cKbysaL2mEY0JJbEEOEA==",
-      "type": "package",
-      "path": "documentformat.openxml/3.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "documentformat.openxml.3.2.0.nupkg.sha512",
-        "documentformat.openxml.nuspec",
-        "icon.png",
-        "lib/net35/DocumentFormat.OpenXml.dll",
-        "lib/net35/DocumentFormat.OpenXml.xml",
-        "lib/net40/DocumentFormat.OpenXml.dll",
-        "lib/net40/DocumentFormat.OpenXml.xml",
-        "lib/net46/DocumentFormat.OpenXml.dll",
-        "lib/net46/DocumentFormat.OpenXml.xml",
-        "lib/net8.0/DocumentFormat.OpenXml.dll",
-        "lib/net8.0/DocumentFormat.OpenXml.xml",
-        "lib/netstandard2.0/DocumentFormat.OpenXml.dll",
-        "lib/netstandard2.0/DocumentFormat.OpenXml.xml"
-      ]
-    },
-    "DocumentFormat.OpenXml.Framework/3.2.0": {
-      "sha512": "e1neOKqRnSHUom4JQEorAoZ67aiJOp6+Xzsu0fc6IYfFcgQn6roo+w6i2w//N2u/5ilEfvLr35bNO9zaIN7r7g==",
-      "type": "package",
-      "path": "documentformat.openxml.framework/3.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "documentformat.openxml.framework.3.2.0.nupkg.sha512",
-        "documentformat.openxml.framework.nuspec",
-        "icon.png",
-        "lib/net35/DocumentFormat.OpenXml.Framework.dll",
-        "lib/net35/DocumentFormat.OpenXml.Framework.xml",
-        "lib/net40/DocumentFormat.OpenXml.Framework.dll",
-        "lib/net40/DocumentFormat.OpenXml.Framework.xml",
-        "lib/net46/DocumentFormat.OpenXml.Framework.dll",
-        "lib/net46/DocumentFormat.OpenXml.Framework.xml",
-        "lib/net6.0/DocumentFormat.OpenXml.Framework.dll",
-        "lib/net6.0/DocumentFormat.OpenXml.Framework.xml",
-        "lib/net8.0/DocumentFormat.OpenXml.Framework.dll",
-        "lib/net8.0/DocumentFormat.OpenXml.Framework.xml",
-        "lib/netstandard2.0/DocumentFormat.OpenXml.Framework.dll",
-        "lib/netstandard2.0/DocumentFormat.OpenXml.Framework.xml"
+        "LICENSE.txt",
+        "Xceed_Logo_Retina-400x400.png",
+        "docs/readme.md",
+        "docx.4.0.25105.5786.nupkg.sha512",
+        "docx.nuspec",
+        "lib/net40/Xceed.Document.NET.dll",
+        "lib/net40/Xceed.Drawing.NET.dll",
+        "lib/net40/Xceed.Words.NET.dll",
+        "lib/net5.0/Xceed.Document.NET.dll",
+        "lib/net5.0/Xceed.Drawing.NET.dll",
+        "lib/net5.0/Xceed.Words.NET.dll",
+        "tools/install.ps1"
       ]
     },
     "Enums.NET/4.0.1": {
@@ -1239,24 +1155,6 @@
         "lib/netstandard2.1/Enums.NET.dll",
         "lib/netstandard2.1/Enums.NET.pdb",
         "lib/netstandard2.1/Enums.NET.xml"
-      ]
-    },
-    "ExcelNumberFormat/1.1.0": {
-      "sha512": "R3BVHPs9O+RkExbZYTGT0+9HLbi8ZrNij1Yziyw6znd3J7P3uoIR07uwTLGOogtz1p6+0sna66eBoXu7tBiVQA==",
-      "type": "package",
-      "path": "excelnumberformat/1.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "excelnumberformat.1.1.0.nupkg.sha512",
-        "excelnumberformat.nuspec",
-        "icon.png",
-        "lib/net20/ExcelNumberFormat.dll",
-        "lib/net20/ExcelNumberFormat.xml",
-        "lib/netstandard1.0/ExcelNumberFormat.dll",
-        "lib/netstandard1.0/ExcelNumberFormat.xml",
-        "lib/netstandard2.0/ExcelNumberFormat.dll",
-        "lib/netstandard2.0/ExcelNumberFormat.xml"
       ]
     },
     "ExtendedNumerics.BigDecimal/2025.1001.2.129": {
@@ -1953,24 +1851,6 @@
         "pdfsharpcore.nuspec"
       ]
     },
-    "RBush/4.0.0": {
-      "sha512": "j3GeRxxLUQdc+UrZnvythdQxi3bd8ayn87VDjfGXrvfodF550n9wR6SgQvpo+YiAv3GJezsu6lK0l47rRqnbdg==",
-      "type": "package",
-      "path": "rbush/4.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net47/RBush.dll",
-        "lib/net47/RBush.xml",
-        "lib/net8.0/RBush.dll",
-        "lib/net8.0/RBush.xml",
-        "lib/netstandard2.0/RBush.dll",
-        "lib/netstandard2.0/RBush.xml",
-        "rbush.4.0.0.nupkg.sha512",
-        "rbush.nuspec",
-        "readme.md"
-      ]
-    },
     "SharpZipLib/1.4.2": {
       "sha512": "yjj+3zgz8zgXpiiC3ZdF/iyTBbz2fFvMxZFEBPUcwZjIvXOf37Ylm+K58hqMfIBt5JgU/Z2uoUS67JmTLe973A==",
       "type": "package",
@@ -2030,6 +1910,128 @@
         "sixlabors.imagesharp.128.png",
         "sixlabors.imagesharp.2.1.9.nupkg.sha512",
         "sixlabors.imagesharp.nuspec"
+      ]
+    },
+    "SkiaSharp/2.88.8": {
+      "sha512": "bRkp3uKp5ZI8gXYQT57uKwil1uobb2p8c69n7v5evlB/2JNcMAXVcw9DZAP5Ig3WSvgzGm2YSn27UVeOi05NlA==",
+      "type": "package",
+      "path": "skiasharp/2.88.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "interactive-extensions/dotnet/SkiaSharp.DotNet.Interactive.dll",
+        "lib/monoandroid1.0/SkiaSharp.dll",
+        "lib/monoandroid1.0/SkiaSharp.pdb",
+        "lib/monoandroid1.0/SkiaSharp.xml",
+        "lib/net462/SkiaSharp.dll",
+        "lib/net462/SkiaSharp.pdb",
+        "lib/net462/SkiaSharp.xml",
+        "lib/net6.0-android30.0/SkiaSharp.dll",
+        "lib/net6.0-android30.0/SkiaSharp.pdb",
+        "lib/net6.0-android30.0/SkiaSharp.xml",
+        "lib/net6.0-ios13.6/SkiaSharp.dll",
+        "lib/net6.0-ios13.6/SkiaSharp.pdb",
+        "lib/net6.0-ios13.6/SkiaSharp.xml",
+        "lib/net6.0-maccatalyst13.5/SkiaSharp.dll",
+        "lib/net6.0-maccatalyst13.5/SkiaSharp.pdb",
+        "lib/net6.0-maccatalyst13.5/SkiaSharp.xml",
+        "lib/net6.0-macos10.15/SkiaSharp.dll",
+        "lib/net6.0-macos10.15/SkiaSharp.pdb",
+        "lib/net6.0-macos10.15/SkiaSharp.xml",
+        "lib/net6.0-tizen7.0/SkiaSharp.dll",
+        "lib/net6.0-tizen7.0/SkiaSharp.pdb",
+        "lib/net6.0-tizen7.0/SkiaSharp.xml",
+        "lib/net6.0-tvos13.4/SkiaSharp.dll",
+        "lib/net6.0-tvos13.4/SkiaSharp.pdb",
+        "lib/net6.0-tvos13.4/SkiaSharp.xml",
+        "lib/net6.0/SkiaSharp.dll",
+        "lib/net6.0/SkiaSharp.pdb",
+        "lib/net6.0/SkiaSharp.xml",
+        "lib/netcoreapp3.1/SkiaSharp.dll",
+        "lib/netcoreapp3.1/SkiaSharp.pdb",
+        "lib/netcoreapp3.1/SkiaSharp.xml",
+        "lib/netstandard1.3/SkiaSharp.dll",
+        "lib/netstandard1.3/SkiaSharp.pdb",
+        "lib/netstandard1.3/SkiaSharp.xml",
+        "lib/netstandard2.0/SkiaSharp.dll",
+        "lib/netstandard2.0/SkiaSharp.pdb",
+        "lib/netstandard2.0/SkiaSharp.xml",
+        "lib/netstandard2.1/SkiaSharp.dll",
+        "lib/netstandard2.1/SkiaSharp.pdb",
+        "lib/netstandard2.1/SkiaSharp.xml",
+        "lib/tizen40/SkiaSharp.dll",
+        "lib/tizen40/SkiaSharp.pdb",
+        "lib/tizen40/SkiaSharp.xml",
+        "lib/uap10.0.10240/SkiaSharp.dll",
+        "lib/uap10.0.10240/SkiaSharp.pdb",
+        "lib/uap10.0.10240/SkiaSharp.xml",
+        "lib/uap10.0.16299/SkiaSharp.dll",
+        "lib/uap10.0.16299/SkiaSharp.pdb",
+        "lib/uap10.0.16299/SkiaSharp.xml",
+        "lib/xamarinios1.0/SkiaSharp.dll",
+        "lib/xamarinios1.0/SkiaSharp.pdb",
+        "lib/xamarinios1.0/SkiaSharp.xml",
+        "lib/xamarinmac2.0/SkiaSharp.dll",
+        "lib/xamarinmac2.0/SkiaSharp.pdb",
+        "lib/xamarinmac2.0/SkiaSharp.xml",
+        "lib/xamarintvos1.0/SkiaSharp.dll",
+        "lib/xamarintvos1.0/SkiaSharp.pdb",
+        "lib/xamarintvos1.0/SkiaSharp.xml",
+        "lib/xamarinwatchos1.0/SkiaSharp.dll",
+        "lib/xamarinwatchos1.0/SkiaSharp.pdb",
+        "lib/xamarinwatchos1.0/SkiaSharp.xml",
+        "skiasharp.2.88.8.nupkg.sha512",
+        "skiasharp.nuspec"
+      ]
+    },
+    "SkiaSharp.NativeAssets.macOS/2.88.8": {
+      "sha512": "6Kn5TSkKlfyS6azWHF3Jk2sW5C4jCE5uSshM/5AbfFrR+5n6qM5XEnz9h4VaVl7LTxBvHvMkuPb/3bpbq0vxTw==",
+      "type": "package",
+      "path": "skiasharp.nativeassets.macos/2.88.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net462/SkiaSharp.NativeAssets.macOS.targets",
+        "build/net6.0-macos10.15/SkiaSharp.NativeAssets.macOS.targets",
+        "build/xamarinmac2.0/SkiaSharp.NativeAssets.macOS.targets",
+        "buildTransitive/net462/SkiaSharp.NativeAssets.macOS.targets",
+        "buildTransitive/net6.0-macos10.15/SkiaSharp.NativeAssets.macOS.targets",
+        "buildTransitive/xamarinmac2.0/SkiaSharp.NativeAssets.macOS.targets",
+        "lib/net462/_._",
+        "lib/net6.0-macos10.15/_._",
+        "lib/net6.0/_._",
+        "lib/netcoreapp3.1/_._",
+        "lib/netstandard1.3/_._",
+        "lib/xamarinmac2.0/_._",
+        "runtimes/osx/native/libSkiaSharp.dylib",
+        "skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
+        "skiasharp.nativeassets.macos.nuspec"
+      ]
+    },
+    "SkiaSharp.NativeAssets.Win32/2.88.8": {
+      "sha512": "O9QXoWEXA+6cweR4h3BOnwMz+pO9vL9mXdjLrpDd0w1QzCgWmLQBxa1VgySDITiH7nQndrDG1h6937zm9pLj1Q==",
+      "type": "package",
+      "path": "skiasharp.nativeassets.win32/2.88.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net462/SkiaSharp.NativeAssets.Win32.targets",
+        "buildTransitive/net462/SkiaSharp.NativeAssets.Win32.targets",
+        "lib/net462/_._",
+        "lib/net6.0/_._",
+        "lib/netcoreapp3.1/_._",
+        "lib/netstandard1.3/_._",
+        "runtimes/win-arm64/native/libSkiaSharp.dll",
+        "runtimes/win-x64/native/libSkiaSharp.dll",
+        "runtimes/win-x86/native/libSkiaSharp.dll",
+        "skiasharp.nativeassets.win32.2.88.8.nupkg.sha512",
+        "skiasharp.nativeassets.win32.nuspec"
       ]
     },
     "System.ClientModel/1.0.0": {
@@ -2191,33 +2193,28 @@
         "system.identitymodel.tokens.jwt.nuspec"
       ]
     },
-    "System.IO.Packaging/8.0.1": {
-      "sha512": "KYkIOAvPexQOLDxPO2g0BVoWInnQhPpkFzRqvNrNrMhVT6kqhVr0zEb6KCHlptLFukxnZrjuMVAnxK7pOGUYrw==",
+    "System.IO.Packaging/4.5.0": {
+      "sha512": "OjtW5pGp1E7KE3ontBrzy+nSFJCM6pcbVDdo3gg4DauTfdtZKdeKvMVlADF4fSY+OfXWUp4qCvOSxIltt37LbA==",
       "type": "package",
-      "path": "system.io.packaging/8.0.1",
+      "path": "system.io.packaging/4.5.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/System.IO.Packaging.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net6.0/_._",
-        "buildTransitive/netcoreapp2.0/System.IO.Packaging.targets",
-        "lib/net462/System.IO.Packaging.dll",
-        "lib/net462/System.IO.Packaging.xml",
-        "lib/net6.0/System.IO.Packaging.dll",
-        "lib/net6.0/System.IO.Packaging.xml",
-        "lib/net7.0/System.IO.Packaging.dll",
-        "lib/net7.0/System.IO.Packaging.xml",
-        "lib/net8.0/System.IO.Packaging.dll",
-        "lib/net8.0/System.IO.Packaging.xml",
+        "lib/net46/System.IO.Packaging.dll",
+        "lib/netstandard1.3/System.IO.Packaging.dll",
         "lib/netstandard2.0/System.IO.Packaging.dll",
-        "lib/netstandard2.0/System.IO.Packaging.xml",
-        "system.io.packaging.8.0.1.nupkg.sha512",
+        "ref/net46/System.IO.Packaging.dll",
+        "ref/net46/System.IO.Packaging.xml",
+        "ref/netstandard1.3/System.IO.Packaging.dll",
+        "ref/netstandard1.3/System.IO.Packaging.xml",
+        "ref/netstandard2.0/System.IO.Packaging.dll",
+        "ref/netstandard2.0/System.IO.Packaging.xml",
+        "system.io.packaging.4.5.0.nupkg.sha512",
         "system.io.packaging.nuspec",
-        "useSharedDesignerContext.txt"
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Memory/4.5.4": {
@@ -2902,8 +2899,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "ClosedXML >= 0.104.2",
-      "DocumentFormat.OpenXml >= 3.2.0",
+      "DocX >= 4.0.25105.5786",
       "HtmlAgilityPack >= 1.11.72",
       "Microsoft.Data.SqlClient >= 5.2.2",
       "NPOI >= 2.7.2",
@@ -2961,13 +2957,9 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
-          "ClosedXML": {
+          "DocX": {
             "target": "Package",
-            "version": "[0.104.2, )"
-          },
-          "DocumentFormat.OpenXml": {
-            "target": "Package",
-            "version": "[3.2.0, )"
+            "version": "[4.0.25105.5786, )"
           },
           "HtmlAgilityPack": {
             "target": "Package",

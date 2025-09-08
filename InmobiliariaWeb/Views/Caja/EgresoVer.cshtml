@@ -1,5 +1,179 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model InmobiliariaWeb.Models.Egresos.EgresosViewModel
 @{
 }
+<form method="post" asp-action="EgresoVer" asp-controller="Caja">
+    <input asp-for="@Model.nIdent_Egresos" hidden/>
+    <input asp-for="@Model.nIdent_Persona" hidden/>
+    <input asp-for="@Model.nIdent_022_TipoEgresos" hidden/>
+    <div class="container">
+        <div class="row g-2">
+            <div class="col-12 col-md-8 col-lg-9">
+                <div class="form-floating">
+                    <input type="text" class="form-control" asp-for="@Model.sNombrePersona" readonly/>
+                    <label>Nombre:</label>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" asp-for="@Model.sDocumento" readonly/>
+                    <label>Documento:</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-9 col-lg-10">
+                <div class="form-floating">
+                    <select class="form-select" id="tipoEgresos" asp-for="@Model.nIdent_022_TipoEgresos" disabled>
+                        <option></option>
+                        @foreach (var tipoEgreso in Model.lTipoEgreso)
+                        {
+                            <option value="@tipoEgreso.nIdent_022_TipoEgreso">@tipoEgreso.sDescripcion</option>
+                        }
+                    </select>
+                    <label>Tipo de Egreso:</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                <div class="form-floating">
+                    <input type="date" class="form-control" asp-for="@Model.dFechaEgreso" readonly/>
+                    <label>Fecha Egreso</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-floating">
+                    <textarea class="form-control" asp-for="@Model.sObservacion" style="height: 6rem" readonly></textarea>
+                    <label asp-for="@Model.sObservacion">Observación:</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <select id="lTipoPago" class="form-select" asp-for="@Model.nIdent_018_TipoPago" onchange="validarTipoPago()" required>
+                        <option></option>
+                        @foreach (var tipoPago in Model.lTipoPagos)
+                        {
+                            <option value="@tipoPago.Ident_018_TipoPago">@tipoPago.Descripcion</option>
+                        }
+                    </select>
+                    <label>Tipo Salida</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <select id="lTipoMoneda" class="form-select" asp-for="@Model.nIdent_002_TipoMoneda" required>
+                        <option></option>
+                        @foreach (var moneda in Model.lTipoMonedas)
+                        {
+                            <option value="@moneda.Ident_002_TipoMoneda">@moneda.Abreviatura</option>
+                        }
+                    </select>
+                    <label>Moneda</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <input class="form-control" asp-for="@Model.nImporte" required />
+                    <label>Importe</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <select id="lBanco" class="form-select" asp-for="@Model.nIdent_019_Banco">
+                        <option></option>
+                        @foreach (var banco in Model.lBancos)
+                        {
+                            <option value="@banco.Ident_019_Banco">@banco.Abreviatura</option>
+                        }
+                    </select>
+                    <label>Banco</label>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-floating">
+                    <input class="form-control" id="sNumeroOperacion" asp-for="sNumeroOperacion" />
+                    <label>Numero Operacion</label>
+                </div>
+            </div>
+            <div class="col-12 col-md-auto ms-auto">
+                <a class="btn btn-outline-info" asp-action="EgresosIndex" asp-controller="Caja">
+                    Regresar
+                </a>
+                <button type="submit" class="btn btn-outline-primary" id="btnAgregar">Agregar</button>
+            </div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Tipo Pago</th>
+                        <th>Banco</th>
+                        <th>Numero Operacion</th>
+                        <th>Moneda</th>
+                        <th>Importe</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var egresos in Model.lEgresosDetallesList)
+                    {
+                        <tr>
+                            <td>@egresos.sTipoPago</td>
+                            <td>@egresos.sBanco</td>
+                            <td>@egresos.sNumeroOperacion</td>
+                            <td>@egresos.sMoneda</td>
+                            <td>@egresos.nImporte</td>
+                            <td>
+                                <button type="button"
+                                        class="btn btn-outline-danger btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#confirmDeleteModal"
+                                        data-id="@egresos.nIdent_EgresosDetalle">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro de eliminar el registro?
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post" asp-action="Eliminar_EgresosDetalle" asp-controller="Caja">
+                    <input type="hidden" name="nIdent_EgresosDetalle" id="deleteId" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    var deleteModal = document.getElementById('confirmDeleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // botón que abrió el modal
+        var id = button.getAttribute('data-id');
+        var input = deleteModal.querySelector('#deleteId');
+
+        // Actualiza el hidden con el id
+        input.value = id;
+
+        // Actualiza la acción del form
+        var form = deleteModal.querySelector('#deleteForm');
+        form.action = '/Caja/Eliminar_EgresosDetalle'; // Ajusta si usas Razor Pages
+    });
+</script>

@@ -1,118 +1,75 @@
-﻿using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;
+﻿using Xceed.Document.NET;
+using Xceed.Words.NET;
 
 namespace InmobiliariaWeb.Utilities
 {
     public class ReciboGenerador
     {
         private readonly string _templatePath;
-        public ReciboGenerador(string webRootPath)
+        public ReciboGenerador(string webRootPath, int nIdent_021_TipoIngresos)
         {
-            // Ruta completa a la plantilla
-            _templatePath = Path.Combine(webRootPath, "template", "FormatoRecibo.docx");
+            if (nIdent_021_TipoIngresos == 135 || nIdent_021_TipoIngresos == 136)
+            {
+                _templatePath = Path.Combine(webRootPath, "template", "FormatoReciboCuota.docx");
+            }
+            else
+            {
+                _templatePath = Path.Combine(webRootPath, "template", "FormatoRecibo.docx");
+            }
         }
         public async Task<byte[]> GenerarReciboAsync(ReciboBE datos)
         {
-            // Copiar la plantilla en memoria
-            using (MemoryStream ms = new MemoryStream())
+            using (var ms = new MemoryStream())
             {
-                using (FileStream fs = new FileStream(_templatePath, FileMode.Open, FileAccess.Read))
+                using (var doc = DocX.Load(_templatePath))
                 {
-                    await fs.CopyToAsync(ms);
+                    var replacements = new Dictionary<string, string>()
+                    {
+                        ["{NumeroRecibo}"] = datos.NumeroRecibo ?? "",
+                        ["{FechaPago}"] = datos.FechaPago.ToString("dd/MM/yyyy"),
+                        ["{NombreCompleto}"] = datos.NombreCompleto ?? "",
+                        ["{Documento}"] = datos.Documento ?? "",
+                        ["{Observacion}"] = datos.Observacion ?? "",
+                        ["{ImporteTotal}"] = datos.ImporteTotal.ToString("N2"),
+                        ["{NombreUsuario}"] = datos.NombreUsuario ?? "",
+                        ["{NombrePrograma}"] = datos.NombrePrograma ?? "",
+                        ["{Manzana}"] = datos.Manzana ?? "",
+                        ["{Lote}"] = datos.Lote ?? "",
+                        ["{TipoCambio}"] = datos.TipoCambio.ToString("N3"),
+                        ["{Moneda}"] = datos.Moneda ?? "",
+                        ["{Correlativo}"] = datos.Correlativo ?? ""
+                    };
+
+                    foreach (var kv in replacements)
+                    {
+                        Replace(doc, kv.Key, kv.Value);
+                    }
+
+                    // Guardar en stream
+                    doc.SaveAs(ms);
                 }
-
-                using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(ms, true))
-                {
-                    var body = wordDoc.MainDocumentPart.Document.Body;
-
-                    ReplacePlaceholder(body, "{NumeroRecibo}", datos.NumeroRecibo);
-                    ReplacePlaceholder(body, "{FechaPago}", datos.FechaPago.ToString("dd/MM/yyyy"));
-                    ReplacePlaceholder(body, "{NombreCompleto}", datos.NombreCompleto);
-                    ReplacePlaceholder(body, "{Documento}", datos.Documento);
-                    ReplacePlaceholder(body, "{Observacion}", datos.Observacion);
-                    ReplacePlaceholder(body, "{ImporteTotal}", datos.ImporteTotal.ToString("N2"));
-                    ReplacePlaceholder(body, "{NombreUsuario}", datos.NombreUsuario);
-                    ReplacePlaceholder(body, "{NombrePrograma}", datos.NombrePrograma);
-                    ReplacePlaceholder(body, "{TipoCambio}", datos.TipoCambio.ToString("N3"));
-                    ReplacePlaceholder(body, "{Moneda}", datos.Moneda);
-
-                    wordDoc.MainDocumentPart.Document.Save();
-                }
-
                 return ms.ToArray();
             }
         }
-
-        //private void ReplacePlaceholder(Body body, string placeholder, string value)
-        //{
-        //    var paragraphs = body.Descendants<Paragraph>();
-
-        //    foreach (var paragraph in paragraphs)
-        //    {
-        //        var texts = paragraph.Descendants<Text>().ToList();
-        //        var combinedText = string.Concat(texts.Select(t => t.Text));
-
-        //        if (combinedText.Contains(placeholder))
-        //        {
-        //            combinedText = combinedText.Replace(placeholder, value);
-
-        //            // Limpiar nodos antiguos
-        //            foreach (var t in texts)
-        //            {
-        //                t.Text = string.Empty;
-        //            }
-
-        //            // Poner el texto reemplazado en el primer nodo
-        //            if (texts.Count > 0)
-        //            {
-        //                texts[0].Text = combinedText;
-        //            }
-        //        }
-        //    }
-        //}
-        private void ReplacePlaceholder(Body body, string placeholder, string value)
+        private void Replace(DocX doc, string search, string replacement)
         {
-            var paragraphs = body.Descendants<Paragraph>();
-
-            foreach (var paragraph in paragraphs)
+            // Soporte para saltos de línea (\n o \r\n)
+            if (!string.IsNullOrEmpty(replacement) &&
+                (replacement.Contains("\n") || replacement.Contains("\r")))
             {
-                var texts = paragraph.Descendants<Text>().ToList();
-                var combinedText = string.Concat(texts.Select(t => t.Text));
-
-                if (combinedText.Contains(placeholder))
-                {
-                    // Dividir el valor por saltos de línea
-                    var parts = value.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
-
-                    // Limpiar nodos antiguos
-                    foreach (var t in texts)
-                    {
-                        t.Text = string.Empty;
-                    }
-
-                    if (texts.Count > 0)
-                    {
-                        var firstText = texts[0];
-                        var parent = firstText.Parent;
-
-                        // Eliminar el primer Text para reconstruir desde cero
-                        firstText.Remove();
-
-                        // Reconstruir con saltos de línea
-                        foreach (var part in parts)
-                        {
-                            parent.Append(new Text(part));
-
-                            // Agregar salto de línea si no es el último
-                            if (part != parts.Last())
-                            {
-                                parent.Append(new Break());
-                            }
-                        }
-                    }
-                }
+                var parts = replacement.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+                replacement = string.Join(Environment.NewLine, parts);
             }
-        }
+            var opts = new StringReplaceTextOptions
+            {
+                SearchValue = search,
+                NewValue = replacement ?? string.Empty,
+                EscapeRegEx = true,
+                RemoveEmptyParagraph = false,
+                TrackChanges = false
+            };
 
+            doc.ReplaceText(opts);
+        }
     }
 }

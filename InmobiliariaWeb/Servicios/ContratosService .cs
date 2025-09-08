@@ -1,20 +1,14 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using InmobiliariaWeb.Interfaces;
+﻿using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Contratos;
 using InmobiliariaWeb.Models.Programa;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Caja;
 using InmobiliariaWeb.Result.Contratos;
-using InmobiliariaWeb.Result.Programa;
 using InmobiliariaWeb.Result.Separaciones;
-using InmobiliariaWeb.Result.Usuario;
 using InmobiliariaWeb.Utilities;
-using InmobiliariaWeb.ViewModels.Contratos;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Runtime.CompilerServices;
 
 namespace InmobiliariaWeb.Servicios
 {
@@ -1809,6 +1803,7 @@ namespace InmobiliariaWeb.Servicios
                     SqlDataReader reader = await command.ExecuteReaderAsync();
                     while (reader.Read())
                     {
+                        reciboBE.nIdent_021_TipoIngresos = Int32.Parse(reader["nIdent_021_TipoIngresos"].ToString());
                         reciboBE.NombrePrograma = reader["NombrePrograma"].ToString();
                         reciboBE.NumeroRecibo = reader["NumeroRecibo"].ToString();
                         reciboBE.FechaPago = DateTime.Parse(reader["FechaPago"].ToString());
@@ -1819,6 +1814,9 @@ namespace InmobiliariaWeb.Servicios
                         reciboBE.NombreUsuario = reader["NombreUsuario"].ToString();
                         reciboBE.TipoCambio = decimal.Parse(reader["TipoCambio"].ToString());
                         reciboBE.Moneda = reader["Moneda"].ToString();
+                        reciboBE.Manzana = reader["Manzana"].ToString();
+                        reciboBE.Lote = reader["Lote"].ToString();
+                        reciboBE.Correlativo = reader["Correlativo"].ToString();
                     }
                     return reciboBE;
                 }

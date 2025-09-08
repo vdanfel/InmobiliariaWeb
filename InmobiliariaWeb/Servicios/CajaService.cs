@@ -1,6 +1,7 @@
 ﻿using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Contratos;
+using InmobiliariaWeb.Models.Egresos;
 using InmobiliariaWeb.Models.Ingresos;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Contratos;
@@ -219,6 +220,7 @@ namespace InmobiliariaWeb.Servicios
                 await _connection.CloseAsync();
             }
         }
+        
         public async Task<List<CuentasBancariasList>> CuentasBancariasXBanco(int Ident_019_Banco)
         {
             List<CuentasBancariasList> cuentasBancariasList = new List<CuentasBancariasList>();
@@ -529,6 +531,212 @@ namespace InmobiliariaWeb.Servicios
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@nIdent_Ingresos", nIdent_Ingresos);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex; // Considera usar un manejo de excepciones más detallado o un logger
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
+        public async Task<List<EgresosIndexTablaDTO>> EgresosIndex(EgresosIndexFilterDTO egresosIndexFilterDTO)
+        {
+            List<EgresosIndexTablaDTO> egresosIndexTablaDTO = new List<EgresosIndexTablaDTO>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_EgresosIndex", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@dFechaDesde", egresosIndexFilterDTO.dFechaDesde);
+                    command.Parameters.AddWithValue("@dFechaHasta", egresosIndexFilterDTO.dFechaHasta);
+                    command.Parameters.AddWithValue("@nIdent_022_TipoEgresos", egresosIndexFilterDTO.nIdent_022_TipoEgresos);
+                    command.Parameters.AddWithValue("@sBuscar", egresosIndexFilterDTO.sBuscar);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        EgresosIndexTablaDTO egresos = new EgresosIndexTablaDTO();
+                        egresos.nIdent_Egresos = Int32.Parse(reader["nIdent_Egresos"].ToString());
+                        egresos.nIdent_EgresosDetalle = Int32.Parse(reader["nIdent_EgresosDetalle"].ToString());
+                        egresos.sTipoEgresos = reader["sTipoEgresos"].ToString();
+                        egresos.sNombreCompleto = reader["sNombreCompleto"].ToString();
+                        egresos.sObservacion = reader["sObservacion"].ToString();
+                        egresos.nIdent_002_TipoMoneda = Int32.Parse(reader["nIdent_002_TipoMoneda"].ToString());
+                        egresos.sMoneda = reader["sMoneda"].ToString();
+                        egresos.nImporte = Decimal.Parse(reader["nImporte"].ToString());
+                        egresos.sTipoPago = reader["sTipoPago"].ToString();
+                        egresos.sNumeroOperacion = reader["sNumeroOperacion"].ToString();
+                        egresos.dFechaEgreso = DateTime.Parse(reader["dFechaEgreso"].ToString());
+                        egresosIndexTablaDTO.Add(egresos);
+                    }
+                    return egresosIndexTablaDTO;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
+        public async Task<int> EgresosInsertar(EgresosDTO egresosDTO)
+        {
+            int Ident_Egresos = 0;
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_EgresosCreate", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_022_TipoEgresos", egresosDTO.nIdent_022_TipoEgresos);
+                    command.Parameters.AddWithValue("@nIdent_Persona", egresosDTO.nIdent_Persona);
+                    command.Parameters.AddWithValue("@sObservacion", egresosDTO.sObservacion);
+                    command.Parameters.AddWithValue("@dFechaEgreso", egresosDTO.dFechaEgreso);
+                    command.Parameters.AddWithValue("@nIdent_002_TipoMoneda", egresosDTO.nIdent_002_TipoMoneda);
+                    command.Parameters.AddWithValue("@nUsuarioCreacion", egresosDTO.nUsuarioCreacion);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        Ident_Egresos = Int32.Parse(reader["nIdent_Egresos"].ToString());
+                    }
+                    return Ident_Egresos;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
+        public async Task<int> EgresosDetalleInsertar(EgresosDetalleDTO egresosDetalleDTO)
+        {
+            int Ident_EgresosDetalle = 0;
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_EgresosDetalleCreate", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_Egresos", egresosDetalleDTO.nIdent_Egresos);
+                    command.Parameters.AddWithValue("@nIdent_018_TipoPago", egresosDetalleDTO.nIdent_018_TipoPago);
+                    command.Parameters.AddWithValue("@nIdent_019_Banco", egresosDetalleDTO.nIdent_019_Banco);
+                    command.Parameters.AddWithValue("@nIdent_002_TipoMoneda", egresosDetalleDTO.nIdent_002_TipoMoneda);
+                    command.Parameters.AddWithValue("@dFecha", egresosDetalleDTO.dFecha);
+                    command.Parameters.AddWithValue("@nImporte", egresosDetalleDTO.nImporte);
+                    command.Parameters.AddWithValue("@sNumeroOperacion", egresosDetalleDTO.sNumeroOperacion);
+                    command.Parameters.AddWithValue("@nUsuarioCreacion", egresosDetalleDTO.nUsuarioCreacion);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        Ident_EgresosDetalle = Int32.Parse(reader["nIdent_EgresosDetalle"].ToString());
+                    }
+                    return Ident_EgresosDetalle;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
+        public async Task<EgresosViewModel> EgresosSelect(int nIdent_Egresos)
+        {
+            EgresosViewModel egresosViewModel = new EgresosViewModel();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_EgresosSelect", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_Egresos", nIdent_Egresos);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        egresosViewModel.nIdent_Egresos = Int32.Parse(reader["nIdent_Egresos"].ToString());
+                        egresosViewModel.nIdent_Persona = Int32.Parse(reader["nIdent_Persona"].ToString());
+                        egresosViewModel.nIdent_022_TipoEgresos = Int32.Parse(reader["nIdent_022_TipoEgresos"].ToString());
+                        egresosViewModel.sObservacion = reader["sObservacion"].ToString();
+                        egresosViewModel.dFechaEgreso = DateTime.Parse(reader["dFechaEgreso"].ToString());
+                        egresosViewModel.sNombrePersona = reader["sNombrePersona"].ToString();
+                        egresosViewModel.sDocumento = reader["sDocumento"].ToString();
+                    }
+                    return egresosViewModel;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
+        public async Task<List<EgresosDetallesList>> EgresosDetalle_List(int nIdent_Egresos)
+        {
+            List<EgresosDetallesList> egresosDetallesList = new List<EgresosDetallesList>();
+
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_EgresosDetalleList", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_Egresos", nIdent_Egresos);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        EgresosDetallesList egresosDetalles = new EgresosDetallesList();
+                        egresosDetalles.nIdent_EgresosDetalle = Int32.Parse(reader["nIdent_EgresosDetalle"].ToString());
+                        egresosDetalles.sNombrePersona = reader["sNombrePersona"].ToString();
+                        egresosDetalles.sDescripcion = reader["sDescripcion"].ToString();
+                        egresosDetalles.sMoneda = reader["sMoneda"].ToString();
+                        egresosDetalles.nImporte = Decimal.Parse(reader["nImporte"].ToString());
+                        egresosDetalles.sTipoPago = reader["sTipoPago"].ToString();
+                        egresosDetalles.sNumeroOperacion = reader["sNumeroOperacion"].ToString();
+                        egresosDetalles.sBanco = reader["sBanco"].ToString();
+                        egresosDetallesList.Add(egresosDetalles);
+                    }
+                    return egresosDetallesList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex; // Considera usar un manejo de excepciones más detallado o un logger
+            }
+            finally
+            {
+                await _connection.CloseAsync();
+            }
+        }
+        public async Task EgresosDetalle_Delete(EgresosDetalleDTO egresosDetalleDTO)
+        {
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_EgresosDetalleDelete", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_EgresosDetalle", egresosDetalleDTO.nIdent_EgresosDetalle);
+                    command.Parameters.AddWithValue("@nUsuarioModificacion", egresosDetalleDTO.nUsuarioModificacion);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();

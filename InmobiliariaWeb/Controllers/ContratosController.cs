@@ -1,9 +1,9 @@
 ﻿using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Contratos;
+using InmobiliariaWeb.Models.Ingresos;
 using InmobiliariaWeb.Models.Programa;
 using InmobiliariaWeb.Result;
-using InmobiliariaWeb.Result.Contratos;
 using InmobiliariaWeb.Servicios;
 using InmobiliariaWeb.Utilities;
 using Microsoft.AspNetCore.Authorization;
@@ -450,6 +450,7 @@ namespace InmobiliariaWeb.Controllers
                 cuotas.ImporteTotalPagado = await _cajaService.IngresosDetalle_ImporteTotal(cuotas.Ident_Ingresos);
                 cuotas.SaldoAPagar = cuotas.ImporteCuota - cuotas.ImporteTotalPagado;
                 cuotas.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                cuotas.FechaPagoRealizado = DateTime.Now;
                 return View(cuotas);
             }
             else
@@ -1632,7 +1633,7 @@ namespace InmobiliariaWeb.Controllers
                 return NotFound("No se encontró el recibo.");
 
             // 2. Instanciar la clase generadora y generar el archivo
-            var generador = new ReciboGenerador(_webHostEnvironment.WebRootPath);
+            var generador = new ReciboGenerador(_webHostEnvironment.WebRootPath, recibo.nIdent_021_TipoIngresos);
             byte[] documento = await generador.GenerarReciboAsync(recibo);
 
             // 3. Retornar el archivo como descarga
