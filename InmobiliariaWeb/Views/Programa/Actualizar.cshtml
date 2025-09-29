@@ -1,7 +1,7 @@
 ﻿@model InmobiliariaWeb.ViewModels.Programa.ActualizarViewModel
 @{
     ViewData["Tittle"] = "Actualizar Programa";
-    Layout = "_ActualizarLayout";
+    Layout = "_ProgramaLayout";
 }
 <form asp-action="Actualizar" asp-asp-controller="Programa" method="post">
     <input hidden asp-for="@Model.ProgramaModel.Ident_Programa" />

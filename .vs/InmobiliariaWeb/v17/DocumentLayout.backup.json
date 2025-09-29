@@ -3,56 +3,20 @@
   "WorkspaceRootPath": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\servicios\\cajaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\servicios\\cajaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\separaciones\\_separacioneslayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\separaciones\\_separacioneslayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\controllers\\cajacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\controllers\\cajacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\programa\\_programalayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\programa\\_programalayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\caja\\egresover.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\caja\\egresover.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\kardex\\_kardexlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\kardex\\_kardexlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\controllers\\contratoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\controllers\\contratoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\caja\\egresosindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\caja\\egresosindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\interfaces\\icajaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\interfaces\\icajaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\models\\egresos\\egresosindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\models\\egresos\\egresosindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\models\\egresos\\egresosdetalleslist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\models\\egresos\\egresosdetalleslist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\models\\egresos\\egresosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\models\\egresos\\egresosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\models\\ingresos\\ingresosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\models\\ingresos\\ingresosviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\caja\\egresonuevo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\caja\\egresonuevo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\caja\\ingresonuevo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\caja\\ingresonuevo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\models\\egresos\\egresosdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\models\\egresos\\egresosdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\contratos\\_contratoslayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\contratos\\_contratoslayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,123 +26,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EgresosIndex.cshtml",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Caja\\EgresosIndex.cshtml",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Caja\\EgresosIndex.cshtml",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Caja\\EgresosIndex.cshtml",
-              "RelativeToolTip": "InmobiliariaWeb\\Views\\Caja\\EgresosIndex.cshtml",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAAAHcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "_SeparacionesLayout.cshtml",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Separaciones\\_SeparacionesLayout.cshtml",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Separaciones\\_SeparacionesLayout.cshtml",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Separaciones\\_SeparacionesLayout.cshtml",
+              "RelativeToolTip": "InmobiliariaWeb\\Views\\Separaciones\\_SeparacionesLayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-08T01:16:45.056Z",
+              "WhenOpened": "2025-09-29T05:58:40.915Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "EgresoVer.cshtml",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Caja\\EgresoVer.cshtml",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Caja\\EgresoVer.cshtml",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Caja\\EgresoVer.cshtml",
-              "RelativeToolTip": "InmobiliariaWeb\\Views\\Caja\\EgresoVer.cshtml",
-              "ViewState": "AgIAAJYAAAAAAAAAAAAAAKsAAAAoAAAAAAAAAA==",
+              "Title": "_KardexLayout.cshtml",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Kardex\\_KardexLayout.cshtml",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Kardex\\_KardexLayout.cshtml",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Kardex\\_KardexLayout.cshtml",
+              "RelativeToolTip": "InmobiliariaWeb\\Views\\Kardex\\_KardexLayout.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-08T00:26:53.019Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "EgresosViewModel.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Egresos\\EgresosViewModel.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Models\\Egresos\\EgresosViewModel.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Egresos\\EgresosViewModel.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Models\\Egresos\\EgresosViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T19:28:46.862Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ICajaService.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Interfaces\\ICajaService.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Interfaces\\ICajaService.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Interfaces\\ICajaService.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Interfaces\\ICajaService.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAIAwwB4AAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T19:22:22.981Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CajaService.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Servicios\\CajaService.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Servicios\\CajaService.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Servicios\\CajaService.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Servicios\\CajaService.cs",
-              "ViewState": "AgIAAF4CAAAAAAAAAAApwHACAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T19:14:39.98Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "EgresosIndexViewModel.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Egresos\\EgresosIndexViewModel.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Models\\Egresos\\EgresosIndexViewModel.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Egresos\\EgresosIndexViewModel.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Models\\Egresos\\EgresosIndexViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T19:07:36.132Z",
+              "WhenOpened": "2025-09-29T05:58:23.703Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ContratosController.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Controllers\\ContratosController.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Controllers\\ContratosController.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Controllers\\ContratosController.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Controllers\\ContratosController.cs",
-              "ViewState": "AgIAAKwAAAAAAAAAAAAYwMUAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T19:03:48.479Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CajaController.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Controllers\\CajaController.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Controllers\\CajaController.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Controllers\\CajaController.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Controllers\\CajaController.cs",
-              "ViewState": "AgIAAHkBAAAAAAAAAAApwIsBAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T19:03:03.952Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "EgresosDetallesList.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Egresos\\EgresosDetallesList.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Models\\Egresos\\EgresosDetallesList.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Egresos\\EgresosDetallesList.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Models\\Egresos\\EgresosDetallesList.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-08T02:11:10.175Z",
+              "Title": "_ContratosLayout.cshtml",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Contratos\\_ContratosLayout.cshtml",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Contratos\\_ContratosLayout.cshtml",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Contratos\\_ContratosLayout.cshtml",
+              "RelativeToolTip": "InmobiliariaWeb\\Views\\Contratos\\_ContratosLayout.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAADAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-29T04:14:59.679Z",
               "EditorCaption": ""
             }
           ]
@@ -189,10 +75,10 @@
       "Orientation": 0,
       "VerticalTabListWidth": 256,
       "FloatingWindowState": {
-        "Id": "1155eb99-5e7e-40a7-9423-47692798e609",
+        "Id": "90f1d7b2-c0ab-48b5-9f4a-fcf0c97e8420",
         "Display": 1,
-        "X": 150,
-        "Y": 203,
+        "X": 161,
+        "Y": 140,
         "Width": 1594,
         "Height": 805,
         "WindowState": 0
@@ -204,54 +90,15 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "IngresosViewModel.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Ingresos\\IngresosViewModel.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Models\\Ingresos\\IngresosViewModel.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Ingresos\\IngresosViewModel.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Models\\Ingresos\\IngresosViewModel.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAA0wB8AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-04T04:19:32.373Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "EgresosDTO.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Egresos\\EgresosDTO.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Models\\Egresos\\EgresosDTO.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Egresos\\EgresosDTO.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Models\\Egresos\\EgresosDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-07T19:15:43.575Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "IngresoNuevo.cshtml",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Caja\\IngresoNuevo.cshtml",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Caja\\IngresoNuevo.cshtml",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Caja\\IngresoNuevo.cshtml",
-              "RelativeToolTip": "InmobiliariaWeb\\Views\\Caja\\IngresoNuevo.cshtml",
-              "ViewState": "AgIAAJkAAAAAAAAAAAAAAKQAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "_ProgramaLayout.cshtml",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Programa\\_ProgramaLayout.cshtml",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Programa\\_ProgramaLayout.cshtml",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Programa\\_ProgramaLayout.cshtml",
+              "RelativeToolTip": "InmobiliariaWeb\\Views\\Programa\\_ProgramaLayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-04T04:14:39.898Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "EgresoNuevo.cshtml",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Caja\\EgresoNuevo.cshtml",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Caja\\EgresoNuevo.cshtml",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Caja\\EgresoNuevo.cshtml",
-              "RelativeToolTip": "InmobiliariaWeb\\Views\\Caja\\EgresoNuevo.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-07T19:01:53.04Z",
+              "WhenOpened": "2025-09-29T05:57:36.406Z",
               "EditorCaption": ""
             }
           ]

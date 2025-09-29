@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "_Layout";
+    var activeTab = ViewData["ActiveTab"] as string;
+}
+
+<div class="container mt-4">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link @(activeTab == "Programa" ? "active" : "")"
+               asp-controller="Programa" asp-action="Actualizar" id="tabPrograma">
+                Programa
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(activeTab == "Propietario" ? "active" : "")"
+               asp-controller="Programa" asp-action="Propietario" id="tabPropietario">
+                Propietario
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(activeTab == "Manzana" ? "active" : "")"
+               asp-controller="Programa" asp-action="Manzana" id="tabManzana">
+                Manzana
+            </a>
+        </li>
+    </ul>
+
+    <!-- Contenedor con borde y efecto visual -->
+    <div class="tab-content border border-top-0 rounded-bottom shadow-sm p-4 bg-white">
+        @RenderBody()
+    </div>
+</div>
+@await RenderSectionAsync("Scripts", required: false)

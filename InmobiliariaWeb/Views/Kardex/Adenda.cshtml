@@ -1,0 +1,94 @@
+﻿@{
+    Layout = "_KardexLayout";
+}
+<form>
+    <div class="container border rounded p-3 border-top-0">
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" onclick="agregarBloque('titulo')">Agregar Título</button>
+            <button type="button" class="btn btn-secondary" onclick="agregarBloque('parrafo')">Agregar Párrafo</button>
+        </div>
+
+        <div id="editorContainer" class="mb-3">
+        </div>
+
+        <input type="hidden" id="EstructuraHtml">
+
+        <button type="submit" class="btn btn-success" onclick="guardarEstructura()">Grabar</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    let bloqueCounter = 0;
+
+    // Insertar bloque dinámico
+    function agregarBloque(tipo) {
+        bloqueCounter++;
+        let bloqueId = `bloque_${bloqueCounter}`;
+        let contenidoEditableId = `contenido_${bloqueCounter}`;
+
+        let bloque = document.createElement("div");
+        bloque.classList.add("mb-3", "p-2", "border", "rounded");
+        bloque.setAttribute("id", bloqueId);
+
+        // Botones de formato + eliminar
+        let toolbar = `
+            <div class="d-flex gap-2 mb-2">
+                <button type="button" class="btn btn-outline-dark btn-sm" onclick="aplicarEstilo('${contenidoEditableId}','bold')"><b>N</b></button>
+                <button type="button" class="btn btn-outline-dark btn-sm" onclick="aplicarEstilo('${contenidoEditableId}','italic')"><i>K</i></button>
+                <button type="button" class="btn btn-outline-dark btn-sm" onclick="aplicarEstilo('${contenidoEditableId}','underline')"><u>U</u></button>
+                <button type="button" class="btn btn-outline-danger btn-sm ms-auto" onclick="eliminarBloque('${bloqueId}')">Eliminar</button>
+            </div>
+        `;
+
+        // Área editable
+        let editable = `
+            <div contenteditable="true"
+                 class="form-control"
+                 id="${contenidoEditableId}"
+                 onpaste="handlePaste(event)">
+                 ${tipo === 'titulo' ? '<h3>Nuevo Título</h3>' : '<p>Nuevo Párrafo</p>'}
+            </div>
+        `;
+
+        bloque.innerHTML = toolbar + editable;
+
+        document.getElementById("editorContainer").appendChild(bloque);
+    }
+
+    // Eliminar bloque
+    function eliminarBloque(bloqueId) {
+        document.getElementById(bloqueId).remove();
+    }
+
+    // Aplicar formato
+    function aplicarEstilo(editorId, style) {
+        let editor = document.getElementById(editorId);
+        if (editor) {
+            editor.focus();
+            document.execCommand(style, false, null);
+        }
+    }
+
+    // Prevenir pegado con formato
+    function handlePaste(event) {
+        event.preventDefault();
+        var plainText = (event.clipboardData || window.clipboardData).getData('text');
+        document.execCommand("insertText", false, plainText);
+    }
+
+    // Guardar toda la estructura en hidden input
+    function guardarEstructura() {
+        let bloques = document.querySelectorAll("#editorContainer div[contenteditable]");
+        let htmlFinal = "";
+
+        bloques.forEach(b => {
+            htmlFinal += b.innerHTML;
+        });
+
+        document.getElementById("EstructuraHtml").value = htmlFinal;
+    }
+</script>

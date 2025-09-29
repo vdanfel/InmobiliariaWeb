@@ -72,6 +72,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXEN1b3Rhcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Contratos/Documentos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXERvY3VtZW50b3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Contratos/ImpresionFormato.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9zXEltcHJlc2lvbkZvcm1hdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -130,6 +134,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Impresiones/Contratos/VillaLasFlores.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1wcmVzaW9uZXNcQ29udHJhdG9zXFZpbGxhTGFzRmxvcmVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Kardex/Adenda.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2FyZGV4XEFkZW5kYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Kardex/Nuevo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2FyZGV4XE51ZXZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Kardex/_KardexLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2FyZGV4XF9LYXJkZXhMYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Login/Alerta.cshtml]
@@ -200,8 +216,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcUmVwb3J0ZUxvdGVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Programa/_ActualizarLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcX0FjdHVhbGl6YXJMYXlvdXQuY3NodG1s
+[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Programa/_ProgramaLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZ3JhbWFcX1Byb2dyYW1hTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Reportes/ReporteCliente.cshtml]
@@ -240,8 +256,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VwYXJhY2lvbmVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Separaciones/_ActualizarLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VwYXJhY2lvbmVzXF9BY3R1YWxpemFyTGF5b3V0LmNzaHRtbA==
+[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Separaciones/_SeparacionesLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VwYXJhY2lvbmVzXF9TZXBhcmFjaW9uZXNMYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Shared/Error.cshtml]

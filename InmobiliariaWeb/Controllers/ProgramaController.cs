@@ -219,6 +219,7 @@ namespace InmobiliariaWeb.Controllers
                 actualizarViewModel.Manzanas = await _tablasService.ListarManzanas();
                 actualizarViewModel.TipoContratos = await _tablasService.ListarTipoContrato();
                 actualizarViewModel.ProgramaModel.Ident_Programa = IdentPrograma;
+                ViewData["ActiveTab"] = "Programa";
                 return View(actualizarViewModel);
             }
             else
@@ -372,6 +373,7 @@ namespace InmobiliariaWeb.Controllers
                 {
                     viewPropietario.Mensaje = mensaje;
                 }
+                ViewData["ActiveTab"] = "Propietario";
                 return View(viewPropietario);
             }
             else
@@ -435,7 +437,7 @@ namespace InmobiliariaWeb.Controllers
                 ViewManzana viewManzana = new ViewManzana();
                 viewManzana.ManzanaList = await _programaService.ListarManzanasPrograma(IdentPrograma);
                 viewManzana.NombrePrograma = HttpContext.Session.GetString("NombrePrograma");
-
+                ViewData["ActiveTab"] = "Manzana";
                 return View(viewManzana);
             }
             else
@@ -521,6 +523,7 @@ namespace InmobiliariaWeb.Controllers
                     viewLote.Mensaje = Mensaje;
                 }
                 HttpContext.Session.SetInt32("IdentManzana", IdentManzana);
+                ViewData["ActiveTab"] = "Manzana";
                 return View(viewLote);
             }
             else
@@ -582,6 +585,7 @@ namespace InmobiliariaWeb.Controllers
                 }
                 viewLadoregular.NumeroLote = NumeroLote;
                 viewLadoregular.TipoUbicacionLotes = await _tablasService.ListarTipoUbicacionlote();
+                ViewData["ActiveTab"] = "Manzana";
                 return View(viewLadoregular);
             }
             else
@@ -662,6 +666,7 @@ namespace InmobiliariaWeb.Controllers
                     NumeroLote = (int)HttpContext.Session.GetInt32("NumeroLote");
                 }
                 viewLadoEspecial.TipoUbicacionLotes = await _tablasService.ListarTipoUbicacionlote();
+                ViewData["ActiveTab"] = "Manzana";
                 return View(viewLadoEspecial);
             }
             else

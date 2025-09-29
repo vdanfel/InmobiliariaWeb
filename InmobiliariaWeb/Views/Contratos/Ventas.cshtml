@@ -3,7 +3,7 @@
 
 }
 <form method="post" asp-controller="Contratos" asp-action="Ventas" id="formImpresion">
-    <input hidden asp-for="@Model.Ident_Contrato" id="Ident_Contrato"/>
+    <input hidden asp-for="@Model.Ident_Contratos" id="Ident_Contratos"/>
     <input hidden asp-for="@Model.Ident_FormatoVenta" id="Ident_FormatoVenta"/>
     <div class="container">
         <div class="row mt-1">
@@ -393,7 +393,7 @@
             <button type="button" class="btn btn-outline-success" onclick="mostrarModalImpresion()">
                 <i class="bi bi-printer-fill"></i>IMPRIMIR
             </button>
-            @*<a asp-action="DescargarWord" asp-route-Ident_Contratos="@Model.Ident_Contrato" class="btn btn-outline-success">
+            @*<a asp-action="DescargarWord" asp-route-Ident_Contratos="@Model.Ident_Contratos" class="btn btn-outline-success">
                 <i class="bi bi-printer-fill"></i>IMPRIMIR WORD
             </a>*@
         </div>
@@ -466,7 +466,7 @@
     function GuardarDatos() {
         var ventas = {
             Ident_FormatoVenta: document.getElementById('Ident_FormatoVenta').value,
-            Ident_Contrato: document.getElementById('Ident_Contrato').value,
+            Ident_Contratos: document.getElementById('Ident_Contratos').value,
             Titulo: document.getElementById('Titulo').value,
             ParrafoInicial: document.getElementById('ParrafoInicial_Hidden').value,
             Clausula1: document.getElementById('Clausula1_Hidden').value,

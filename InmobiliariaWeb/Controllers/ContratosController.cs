@@ -4,10 +4,8 @@ using InmobiliariaWeb.Models.Contratos;
 using InmobiliariaWeb.Models.Ingresos;
 using InmobiliariaWeb.Models.Programa;
 using InmobiliariaWeb.Result;
-using InmobiliariaWeb.Servicios;
 using InmobiliariaWeb.Utilities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
@@ -165,7 +163,7 @@ namespace InmobiliariaWeb.Controllers
                 {
                     crearViewModel.ContratosModels.Ident_Contratos = ident_Contrato;
                     crearViewModel.Mensaje = "Se registró el Contrato";
-                    HttpContext.Session.SetInt32("Ident_Contrato", ident_Contrato);
+                    HttpContext.Session.SetInt32("Ident_Contratos", ident_Contrato);
 
                 }
 
@@ -190,11 +188,11 @@ namespace InmobiliariaWeb.Controllers
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
                 if (Ident_Contratos > 0)
                 {
-                    HttpContext.Session.SetInt32("Ident_Contrato", Ident_Contratos);
+                    HttpContext.Session.SetInt32("Ident_Contratos", Ident_Contratos);
                 }
                 else
                 {
-                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 }
                 ViewModels.Contratos.ActualizarViewModel actualizarViewModel = new ViewModels.Contratos.ActualizarViewModel();
                 ProgramaModel programaModel = new ProgramaModel();
@@ -220,6 +218,7 @@ namespace InmobiliariaWeb.Controllers
                 {
                     HttpContext.Session.SetInt32("Saldo", 0);
                 }
+                ViewData["ActiveTab"] = "Programa";
                 return View(actualizarViewModel);
             }
             else
@@ -235,7 +234,7 @@ namespace InmobiliariaWeb.Controllers
             if (HttpContext.Session.GetString("Usuario") != null)
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
-                var Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                var Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 if (actualizarViewModel.ContratosModels.SaldoAPagar == 0)
                 {
                     HttpContext.Session.SetInt32("Saldo", 0);
@@ -293,11 +292,11 @@ namespace InmobiliariaWeb.Controllers
                 
                 if (Ident_Contratos > 0)
                 {
-                    HttpContext.Session.SetInt32("Ident_Contrato", Ident_Contratos);
+                    HttpContext.Session.SetInt32("Ident_Contratos", Ident_Contratos);
                 }
                 else
                 {
-                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 }
                 
                 clienteViewModel.Ident_Contratos = Ident_Contratos;
@@ -317,6 +316,7 @@ namespace InmobiliariaWeb.Controllers
                     HttpContext.Session.Remove("Ident_Kardex");
                 }
                 clienteViewModel.EstadoImpresion = HttpContext.Session.GetInt32("EstadoImpresion") == 1;
+                ViewData["ActiveTab"] = "Propietario";
                 return View(clienteViewModel);
             }
             else
@@ -340,6 +340,7 @@ namespace InmobiliariaWeb.Controllers
                 {
                     clienteViewModel.Mensaje = "debe seleccionar un cliente";
                 }
+                
                 return RedirectToAction("Cliente", "Contratos", new { Ident_Contratos = clienteViewModel.Ident_Contratos, Mensaje = clienteViewModel.Mensaje });
             }
             else
@@ -357,11 +358,11 @@ namespace InmobiliariaWeb.Controllers
                 var Mensaje = await _contratosService.ClienteEliminar(Ident_ContratosPersonas, loginResult);
                 if (Ident_Contratos > 0)
                 {
-                    HttpContext.Session.SetInt32("Ident_Contrato", Ident_Contratos);
+                    HttpContext.Session.SetInt32("Ident_Contratos", Ident_Contratos);
                 }
                 else
                 {
-                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 }
                 return RedirectToAction("Cliente", "Contratos", new { Ident_Contratos = Ident_Contratos, Mensaje = Mensaje });
             }
@@ -373,42 +374,54 @@ namespace InmobiliariaWeb.Controllers
         }
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> kardex(int Ident_Contratos)
+        public async Task<IActionResult> kardex(int Ident_Contratos, int? Ident_Kardex)
         {
             if (HttpContext.Session.GetString("Usuario") != null)
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+
+                // Manejo de contrato
                 if (Ident_Contratos > 0)
+                    HttpContext.Session.SetInt32("Ident_Contratos", Ident_Contratos);
+                else
+                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
+
+                // Si no se pasó un Ident_Kardex explícito, obtengo el actual
+                int ident_Kardex;
+                if (Ident_Kardex.HasValue && Ident_Kardex.Value > 0)
                 {
-                    HttpContext.Session.SetInt32("Ident_Contrato", Ident_Contratos);
+                    ident_Kardex = Ident_Kardex.Value;
                 }
                 else
                 {
-                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                    ident_Kardex = await _contratosService.IdentKardexXIdentContrato(Ident_Contratos);
                 }
-                var ident_Kardex = await _contratosService.IdentKardexXIdentContrato(Ident_Contratos);
+
+                // Sesión
                 if (ident_Kardex > 0)
-                {
                     HttpContext.Session.SetInt32("Ident_Kardex", ident_Kardex);
-                }
                 else
-                {
                     HttpContext.Session.Remove("Ident_Kardex");
-                }
-                KardexViewModel kardexViewModel = new KardexViewModel();
-                kardexViewModel.Ident_Kardex = ident_Kardex;
+
+                // Construcción del ViewModel
                 var cuotasListas = await _contratosService.ListarCuotas(ident_Kardex, loginResult);
-                kardexViewModel = await _contratosService.DatosKardex(ident_Kardex);
+                var kardexViewModel = await _contratosService.DatosKardex(ident_Kardex);
+
+                kardexViewModel.Ident_Kardex = ident_Kardex;
                 kardexViewModel.CuotasListas = cuotasListas;
                 kardexViewModel.Numero_Contrato = HttpContext.Session.GetString("NumeroSerie");
+
+                var kardexListas = await _contratosService.KardexList(Ident_Contratos);
+                kardexViewModel.lKardexListDTO = kardexListas;
+                ViewData["ActiveTab"] = "Kardex";
                 return View(kardexViewModel);
             }
             else
             {
                 return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
             }
-            
         }
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetDatosxSeparacion(int numeroSeparacion)
@@ -449,7 +462,7 @@ namespace InmobiliariaWeb.Controllers
                 cuotas.ingresosDetallesLists = await _cajaService.IngresosDetalle_List(cuotas.Ident_Ingresos);
                 cuotas.ImporteTotalPagado = await _cajaService.IngresosDetalle_ImporteTotal(cuotas.Ident_Ingresos);
                 cuotas.SaldoAPagar = cuotas.ImporteCuota - cuotas.ImporteTotalPagado;
-                cuotas.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                cuotas.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 cuotas.FechaPagoRealizado = DateTime.Now;
                 return View(cuotas);
             }
@@ -466,7 +479,7 @@ namespace InmobiliariaWeb.Controllers
             if (HttpContext.Session.GetString("Usuario") != null)
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
-                int Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                int Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 IngresosModel ingresosModel = new IngresosModel();
                 IngresosDetalleModel ingresosDetalleModel = new IngresosDetalleModel();
                 ingresosModel = await _contratosService.IngresosCabecera(Ident_Contratos);
@@ -570,7 +583,7 @@ namespace InmobiliariaWeb.Controllers
                 }
                 int desactivarCampos = moras.ingresosDetallesLists.Count();
                 ViewBag.DesactivarCampos = desactivarCampos;
-                moras.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                moras.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 return View(moras);
             }
             else
@@ -587,7 +600,7 @@ namespace InmobiliariaWeb.Controllers
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
                 string mensaje = "";
-                int Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                int Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 if (moras.NuevoMontoMora < moras.ImporteMoras)
                 {
                     await _contratosService.MorasActualizar(moras, loginResult);
@@ -677,7 +690,7 @@ namespace InmobiliariaWeb.Controllers
 
                 MorasMasivoViewModel morasMasivoViewModel = new MorasMasivoViewModel();
                 morasMasivoViewModel.Ident_Kardex = (int)HttpContext.Session.GetInt32("Ident_Kardex");
-                morasMasivoViewModel.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                morasMasivoViewModel.Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 morasMasivoViewModel.ImporteMorasTotal = await _contratosService.MorasMasivo_Total(morasMasivoViewModel.Ident_Kardex);
                 morasMasivoViewModel.DescuentoDirecto = 0;
                 morasMasivoViewModel.DescuentoPorcentaje = 0;
@@ -815,11 +828,11 @@ namespace InmobiliariaWeb.Controllers
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
                 if (Ident_Contratos > 0)
                 {
-                    HttpContext.Session.SetInt32("Ident_Contrato", Ident_Contratos);
+                    HttpContext.Session.SetInt32("Ident_Contratos", Ident_Contratos);
                 }
                 else
                 {
-                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 }
                 if (Mensaje != null)
                 {
@@ -831,7 +844,7 @@ namespace InmobiliariaWeb.Controllers
                     await _contratosService.FormatoVentas_Insert(Ident_Contratos,loginResult);
                 }
                 ventas = await _contratosService.FormatoVentas_List(Ident_Contratos);
-                ventas.Ident_Contrato = Ident_Contratos;
+                ventas.Ident_Contratos = Ident_Contratos;
                 return View(ventas);
             }
             else
@@ -847,7 +860,7 @@ namespace InmobiliariaWeb.Controllers
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
                 await _contratosService.FormatoVentas_Update(ventas, loginResult);
-                int Ident_Contratos = ventas.Ident_Contrato;
+                int Ident_Contratos = ventas.Ident_Contratos;
                 string ContratosFormato = $@"
                 <div class='Titulo'>{ventas.Titulo}</div>
                 <div class='Parrafo'>{ventas.ParrafoInicial}</div>
@@ -1018,15 +1031,15 @@ namespace InmobiliariaWeb.Controllers
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
                 if (Ident_Contratos > 0)
                 {
-                    HttpContext.Session.SetInt32("Ident_Contrato", Ident_Contratos);
+                    HttpContext.Session.SetInt32("Ident_Contratos", Ident_Contratos);
                 }
                 else
                 {
-                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 }
                 VentasContado ventasContado = new VentasContado();
                 ventasContado = await _contratosService.FormatoContratoVentasContado(Ident_Contratos);
-                ventasContado.Ident_Contrato = Ident_Contratos;
+                ventasContado.Ident_Contratos = Ident_Contratos;
                 return View(ventasContado);
             }
             else
@@ -1041,7 +1054,7 @@ namespace InmobiliariaWeb.Controllers
             if (HttpContext.Session.GetString("Usuario") != null)
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
-                int Ident_Contratos = ventasContado.Ident_Contrato;
+                int Ident_Contratos = ventasContado.Ident_Contratos;
                 string ContratosFormato = $@"
                 <div class='Titulo'>{ventasContado.Titulo}</div>
                 <div class='Parrafo'>{ventasContado.ParrafoInicial}</div>
@@ -1202,11 +1215,11 @@ namespace InmobiliariaWeb.Controllers
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
                 if (Ident_Contratos > 0)
                 {
-                    HttpContext.Session.SetInt32("Ident_Contrato", Ident_Contratos);
+                    HttpContext.Session.SetInt32("Ident_Contratos", Ident_Contratos);
                 }
                 else
                 {
-                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                    Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
                 }
                 if (Mensaje != null)
                 {
@@ -1218,7 +1231,7 @@ namespace InmobiliariaWeb.Controllers
                     await _contratosService.FormatoTransferencias_Insert(Ident_Contratos, loginResult);
                 }
                 transferencias = await _contratosService.FormatoTransferencias_List(Ident_Contratos);
-                transferencias.Ident_Contrato = Ident_Contratos;
+                transferencias.Ident_Contratos = Ident_Contratos;
                 return View(transferencias);
             }
             else
@@ -1235,7 +1248,7 @@ namespace InmobiliariaWeb.Controllers
             {
                 var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
                 await _contratosService.FormatoTransferencias_Update(transferencias, loginResult);
-                int Ident_Contratos = transferencias.Ident_Contrato;
+                int Ident_Contratos = transferencias.Ident_Contratos;
                 string ContratosFormato = $@"
                 <div class='Titulo'>{transferencias.Titulo}</div>
                 <div class='Parrafo'>{transferencias.ParrafoInicial}</div>
@@ -1440,11 +1453,11 @@ namespace InmobiliariaWeb.Controllers
 
             if (Ident_Contratos > 0)
             {
-                HttpContext.Session.SetInt32("Ident_Contrato", Ident_Contratos);
+                HttpContext.Session.SetInt32("Ident_Contratos", Ident_Contratos);
             }
             else
             {
-                Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contrato");
+                Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
             }
 
             string ContratosFormato = await _contratosService.ObtenerFormato(Ident_Contratos);
@@ -1640,6 +1653,12 @@ namespace InmobiliariaWeb.Controllers
             return File(documento,
                         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                         $"Recibo_{recibo.NumeroRecibo}.docx");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Documentos(int nIdent_Contrato)
+        {
+            ViewData["ActiveTab"] = "Documentos";
+            return View();
         }
     }
 }

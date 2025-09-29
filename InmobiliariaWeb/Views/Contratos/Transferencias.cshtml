@@ -2,7 +2,7 @@
 @{
 }
 <form method="post" asp-action="Transferencias" asp-controller="Contratos" id="formImpresion">
-    <input hidden asp-for="@Model.Ident_Contrato" id="Ident_Contrato"/>
+    <input hidden asp-for="@Model.Ident_Contratos" id="Ident_Contratos"/>
     <input hidden asp-for="@Model.Ident_FormatoTransferencia" id="Ident_FormatoTransferencia" />
 
     <div class="container">
@@ -376,7 +376,7 @@
     function GuardarDatos() {
         var transferencias = {
             Ident_FormatoTransferencia: document.getElementById('Ident_FormatoTransferencia').value,
-            Ident_Contrato: document.getElementById('Ident_Contrato').value,
+            Ident_Contratos: document.getElementById('Ident_Contratos').value,
             Titulo: document.getElementById('Titulo').value,
             ParrafoInicial: document.getElementById('ParrafoInicial_Hidden').value,
             Clausula1: document.getElementById('Clausula1_Hidden').value,

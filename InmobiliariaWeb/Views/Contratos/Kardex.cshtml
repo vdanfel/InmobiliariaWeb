@@ -2,148 +2,161 @@
 @{
     Layout = "_ContratosLayout";
 }
-<div class="container">
-    <div class="card">
-        <div class="card-header fw-bold">
-            <h2>@Model.Numero_Contrato - Kardex</h2>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="ImporteTotal" asp-for="@Model.ImporteTotal" readonly />
-                        <label for="ImporteTotal">Importe Total</label>
+<form asp-action="Kardex" method="get" asp-controller="Contratos">
+    <input type="hidden" name="Ident_Contratos" asp-for="Ident_Contratos" />
+    <div class="container">
+        <div class="card">
+            <div class="card-header fw-bold">
+                <h2>@Model.Numero_Contrato - Kardex</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-2">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <select class="form-select" name="Ident_Kardex" onchange="this.form.submit()">
+                                @foreach (var kardex in Model.lKardexListDTO)
+                                {
+                                    <option value="@kardex.nIdent_Kardex">
+                                        @kardex.sNumeroKardex
+                                    </option>
+                                }
+                            </select>
+                            <label>Seleccione Kardex</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="MontoPagado" asp-for="@Model.MontoPagado" readonly />
-                        <label for="MontoPagado">Importe Cancelado</label>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="ImporteTotal" asp-for="@Model.ImporteTotal" readonly />
+                            <label for="ImporteTotal">Importe Total</label>
+                        </div>
                     </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="SaldoPendiente" asp-for="@Model.SaldoPendiente" readonly />
-                        <label for="SaldoPendiente">Saldo</label>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="MontoPagado" asp-for="@Model.MontoPagado" readonly />
+                            <label for="MontoPagado">Importe Cancelado</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="SaldoPendiente" asp-for="@Model.SaldoPendiente" readonly />
+                            <label for="SaldoPendiente">Saldo</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="CantidadCuotas" asp-for="@Model.CantidadCuotas" readonly />
+                            <label for="CantidadCuotas">N° CantidadCuotas</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="CuotaActual" asp-for="@Model.CuotaActual" readonly />
+                            <label for="CuotaActual">Cuota Actual</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="ImporteCuotas" asp-for="@Model.ImporteCuotas" readonly />
+                            <label for="ImporteCuotas">
+                                @if (Model.ImporteCuotaFinal > 0)
+                                {
+                                    @($"{Model.CantidadCuotas - 1} cuotas de:")
+                                }
+                                else
+                                {
+                                    @($"{Model.CantidadCuotas} cuotas de:")
+                                }
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="ImporteCuotaFinal" asp-for="@Model.ImporteCuotaFinal" readonly />
+                            <label for="ImporteCuotaFinal">Última Cuota</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="TotalMoras" asp-for="@Model.TotalMoras" readonly />
+                            <label for="TotalMoras">Total Moras</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="MontoMorasPagado" asp-for="@Model.MontoMorasPagado" readonly />
+                            <label for="MontoMorasPagado">Moras Canceladas</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                        <div class="form-floating">
+                            <input class="form-control" type="number" id="SaldoMorasPendientes" asp-for="@Model.SaldoMorasPendientes" readonly />
+                            <label for="SaldoMorasPendientes">Saldo Moras</label>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row mt-1">
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="CantidadCuotas" asp-for="@Model.CantidadCuotas" readonly />
-                        <label for="CantidadCuotas">N° CantidadCuotas</label>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="CuotaActual" asp-for="@Model.CuotaActual" readonly />
-                        <label for="CuotaActual">Cuota Actual</label>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="ImporteCuotas" asp-for="@Model.ImporteCuotas" readonly />
-                        <label for="ImporteCuotas">
-                            @if (Model.ImporteCuotaFinal > 0)
-                            {
-                                @($"{Model.CantidadCuotas - 1} cuotas de:")
-                            }
-                            else
-                            {
-                                @($"{Model.CantidadCuotas} cuotas de:")
-                            }
-                        </label>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="ImporteCuotaFinal" asp-for="@Model.ImporteCuotaFinal" readonly />
-                        <label for="ImporteCuotaFinal">Última Cuota</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="TotalMoras" asp-for="@Model.TotalMoras" readonly />
-                        <label for="TotalMoras">Total Moras</label>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="MontoMorasPagado" asp-for="@Model.MontoMorasPagado" readonly />
-                        <label for="MontoMorasPagado">Moras Canceladas</label>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-4 col-lg-4">
-                    <div class="form-floating">
-                        <input class="form-control" type="number" id="SaldoMorasPendientes" asp-for="@Model.SaldoMorasPendientes" readonly />
-                        <label for="SaldoMorasPendientes">Saldo Moras</label>
-                    </div>
-                </div>
+            <div class="card-footer">
+                <a class="btn btn-outline-success" asp-action="MorasMasivo" asp-controller="Contratos">Mora Masiva</a>
+                <a class="btn btn-outline-warning" asp-action="Adenda" asp-controller="Kardex">Kardex Nuevo</a>
             </div>
         </div>
-        <div class="card-footer">
-            <a class="btn btn-outline-danger" asp-action="MorasMasivo" asp-controller="Contratos">Mora Masiva</a>
-        </div>
-    </div>
-    <div class="table-responsive-md mt-2">
-        <table class="table table-hover table-bordered border-light">
-            <thead class="table-dark ">
-                <tr style="text-align:center">
-                    <th>N°</th>
-                    <th>Fecha Pago</th>
-                    <th>Cuota Mes</th>
-                    <th>Pago Realizado</th>
-                    <th>Importe Pagado</th>
-                    <th>Dias Mora</th>
-                    <th>Importe Mora</th>
-                    <th>Fecha Mora</th>
-                    <th>Mora Pagada</th>
-                    <th style="text-align:center" data-bs-toggle="tooltip" title="Cuotas">
-                        <i class="bi bi-c-circle"></i>
-                    </th>
-                    <th style="text-align:center" data-bs-toggle="tooltip" title="Moras">
-                        <i class="bi bi-exclamation-circle"></i>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var cuotas in Model.CuotasListas)
-                {
-                    <tr>
-                        <td style="text-align:right">@cuotas.Correlativo</td>
-                        <td style="text-align:center">@cuotas.FechaPago.ToString("dd/MM/yyyy")</td>
-                        <td style="text-align:right">@cuotas.ImporteCuota</td>
-                        <td style="text-align:center">@(cuotas.FechaPagoRealizado.HasValue ? cuotas.FechaPagoRealizado.Value.ToString("dd/MM/yyyy") : "")</td>
-                        <td style="text-align:right">@cuotas.ImporteCuotaPagado</td>
-                        <td style="text-align:right">@cuotas.DiasMoras</td>
-                        <td style="text-align:right">@cuotas.ImporteMoras</td>
-                        <td style="text-align:center">@(cuotas.FechaMorasPagadas.HasValue ? cuotas.FechaMorasPagadas.Value.ToString("dd/MM/yyyy") : "")</td>
-                        <td style="text-align:right">@cuotas.ImporteMorasPagadas</td>
-                        <td>
-                            <a class="btn btn-outline-primary"
-                               asp-action="Cuotas"
-                               asp-controller="Contratos"
-                               asp-route-Ident_Cuota="@cuotas.Ident_Cuotas">
-                                <i class="bi bi-cash"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-danger @(cuotas.DiasMoras > 0 && cuotas.Ident_015_EstadoPago == 110 ? "" : "disabled")"
-                               asp-action="Moras"
-                               asp-controller="Contratos"
-                               asp-route-Ident_Cuotas="@cuotas.Ident_Cuotas">
-                                <i class="bi bi-cash"></i>
-                            </a>
-                        </td>
+        <div class="table-responsive-md mt-2">
+            <table class="table table-hover table-bordered border-light">
+                <thead class="table-dark ">
+                    <tr style="text-align:center">
+                        <th>N°</th>
+                        <th>Fecha Pago</th>
+                        <th>Cuota Mes</th>
+                        <th>Pago Realizado</th>
+                        <th>Importe Pagado</th>
+                        <th>Dias Mora</th>
+                        <th>Importe Mora</th>
+                        <th>Fecha Mora</th>
+                        <th>Mora Pagada</th>
+                        <th style="text-align:center" data-bs-toggle="tooltip" title="Cuotas">
+                            <i class="bi bi-c-circle"></i>
+                        </th>
+                        <th style="text-align:center" data-bs-toggle="tooltip" title="Moras">
+                            <i class="bi bi-exclamation-circle"></i>
+                        </th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var cuotas in Model.CuotasListas)
+                    {
+                        <tr>
+                            <td style="text-align:right">@cuotas.Correlativo</td>
+                            <td style="text-align:center">@cuotas.FechaPago.ToString("dd/MM/yyyy")</td>
+                            <td style="text-align:right">@cuotas.ImporteCuota</td>
+                            <td style="text-align:center">@(cuotas.FechaPagoRealizado.HasValue? cuotas.FechaPagoRealizado.Value.ToString("dd/MM/yyyy") : "")</td>
+                            <td style="text-align:right">@cuotas.ImporteCuotaPagado</td>
+                            <td style="text-align:right">@cuotas.DiasMoras</td>
+                            <td style="text-align:right">@cuotas.ImporteMoras</td>
+                            <td style="text-align:center">@(cuotas.FechaMorasPagadas.HasValue? cuotas.FechaMorasPagadas.Value.ToString("dd/MM/yyyy") : "")</td>
+                            <td style="text-align:right">@cuotas.ImporteMorasPagadas</td>
+                            <td>
+                                <a class="btn btn-outline-primary"
+                                   asp-action="Cuotas"
+                                   asp-controller="Contratos"
+                                   asp-route-Ident_Cuota="@cuotas.Ident_Cuotas">
+                                    <i class="bi bi-cash"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-danger @(cuotas.DiasMoras > 0 && cuotas.Ident_015_EstadoPago == 110 ? "" : "disabled")"
+                                   asp-action="Moras"
+                                   asp-controller="Contratos"
+                                   asp-route-Ident_Cuotas="@cuotas.Ident_Cuotas">
+                                    <i class="bi bi-cash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+</form>
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
 }

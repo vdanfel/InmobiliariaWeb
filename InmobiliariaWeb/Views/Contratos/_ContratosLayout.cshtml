@@ -1,31 +1,52 @@
 ﻿@{
     Layout = "_Layout";
     var identKardex = Context.Session.GetString("Ident_Kardex");
+    var activeTab = ViewData["ActiveTab"] as string;
 }
-<div class="container">
-    <ul class="nav nav-pills nav-fill">
-        <li class="nav-item mx-2">
-            <a class="nav-link " asp-controller="Contratos" asp-action="Actualizar" id="tabPrograma">Lotes y Costos</a>
+
+<div class="container mt-4">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link @(activeTab == "Programa" ? "active" : "")"
+               asp-controller="Contratos" asp-action="Actualizar" id="tabPrograma">
+                Lotes y Costos
+            </a>
         </li>
-        <li class="nav-item mx-2">
-            <a class="nav-link" asp-controller="Contratos" asp-action="Cliente" id="tabPropietario">Clientes</a>
+        <li class="nav-item">
+            <a class="nav-link @(activeTab == "Propietario" ? "active" : "")"
+               asp-controller="Contratos" asp-action="Cliente" id="tabPropietario">
+                Clientes
+            </a>
         </li>
         @if (!string.IsNullOrEmpty(identKardex))
         {
-            <li class="nav-item mx-2">
-                <a class="nav-link" asp-controller="Contratos" asp-action="Kardex" id="tabkardex">Kardex</a>
+            <li class="nav-item">
+                <a class="nav-link @(activeTab == "Kardex" ? "active" : "")"
+                   asp-controller="Contratos" asp-action="Kardex" id="tabKardex">
+                    Kardex
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(activeTab == "Documentos" ? "active" : "")"
+                   asp-controller="Contratos" asp-action="Documentos" id="tabDocumentos">
+                    Documentos
+                </a>
             </li>
         }
         else
         {
-            <li class="nav-item mx-2">
-                <a class="nav-link disabled" id="tabkardex" aria-disabled="true">Kardex</a> <!-- Pestaña deshabilitada -->
+            <li class="nav-item">
+                <a class="nav-link disabled" id="tabKardex" aria-disabled="true">Kardex</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" id="tabDocumentos" aria-disabled="true">Documentos</a>
             </li>
         }
     </ul>
+    <!-- Contenedor de contenido con borde -->
+    <div class="tab-content border border-top-0 rounded-bottom shadow-sm p-4 bg-white mb-2">
+        @RenderBody()
+    </div>
 </div>
-
-@RenderBody()
-
 
 @await RenderSectionAsync("Scripts", required: false)

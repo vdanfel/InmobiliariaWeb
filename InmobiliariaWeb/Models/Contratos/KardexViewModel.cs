@@ -22,5 +22,6 @@ namespace InmobiliariaWeb.Models.Contratos
 
 
         public List<CuotasLista> CuotasListas { get; set; }
+        public List<KardexListDTO> lKardexListDTO { get; set; }
     }
 }

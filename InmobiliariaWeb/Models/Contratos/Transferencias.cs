@@ -5,7 +5,7 @@ namespace InmobiliariaWeb.Models.Contratos
     public class Transferencias
     {
         public int Ident_FormatoTransferencia { get; set; }
-        public int Ident_Contrato { get; set; }
+        public int Ident_Contratos { get; set; }
         public string Titulo { get; set; }
         public string ParrafoInicial { get; set; }
         public string Clausula1 { get; set; }

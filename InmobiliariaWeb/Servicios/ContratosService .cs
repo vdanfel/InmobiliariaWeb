@@ -254,14 +254,14 @@ namespace InmobiliariaWeb.Servicios
                 _connection.Close();
             }
         }
-        public async Task ActualizarContrato(int Ident_Contrato, ViewModels.Contratos.ActualizarViewModel actualizarViewModel, LoginResult loginResult)
+        public async Task ActualizarContrato(int Ident_Contratos, ViewModels.Contratos.ActualizarViewModel actualizarViewModel, LoginResult loginResult)
         {
             try
             {
                 using (SqlCommand command = new SqlCommand("usp_Contratos_Actualizar", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_Contrato", Ident_Contrato);
+                    command.Parameters.AddWithValue("@ISIdent_Contrato", Ident_Contratos);
                     command.Parameters.AddWithValue("@ISFechaContrato", actualizarViewModel.ContratosModels.FechaContrato);
                     command.Parameters.AddWithValue("@ISTratadoEn", actualizarViewModel.ContratosModels.TratadoEn);
                     command.Parameters.AddWithValue("@ISCuotaInicial", actualizarViewModel.ContratosModels.CuotaInicial);
@@ -496,7 +496,7 @@ namespace InmobiliariaWeb.Servicios
                 _connection.Close();
             }
         }
-        public async Task<int> IdentKardexXIdentContrato(int Ident_Contrato)
+        public async Task<int> IdentKardexXIdentContrato(int Ident_Contratos)
         {
             int ident_Kardex = 0;
             try
@@ -504,7 +504,7 @@ namespace InmobiliariaWeb.Servicios
                 using (SqlCommand command = new SqlCommand("usp_Kardex_xIdent_Contrato", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_Contratos", Ident_Contrato);
+                    command.Parameters.AddWithValue("@ISIdent_Contratos", Ident_Contratos);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -1531,7 +1531,7 @@ namespace InmobiliariaWeb.Servicios
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@Ident_FormatoVenta", ventas.Ident_FormatoVenta);
-                    command.Parameters.AddWithValue("@Ident_Contratos", ventas.Ident_Contrato);
+                    command.Parameters.AddWithValue("@Ident_Contratos", ventas.Ident_Contratos);
                     command.Parameters.AddWithValue("@Titulo", ventas.Titulo);
                     command.Parameters.AddWithValue("@ParrafoInicial", ventas.ParrafoInicial);
                     command.Parameters.AddWithValue("@Clausula1", ventas.Clausula1);
@@ -1582,7 +1582,7 @@ namespace InmobiliariaWeb.Servicios
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@Ident_FormatoTransferencia", transferencias.Ident_FormatoTransferencia);
-                    command.Parameters.AddWithValue("@Ident_Contratos", transferencias.Ident_Contrato);
+                    command.Parameters.AddWithValue("@Ident_Contratos", transferencias.Ident_Contratos);
                     command.Parameters.AddWithValue("@Titulo", transferencias.Titulo);
                     command.Parameters.AddWithValue("@ParrafoInicial", transferencias.ParrafoInicial);
                     command.Parameters.AddWithValue("@Clausula1", transferencias.Clausula1);
@@ -1875,6 +1875,37 @@ namespace InmobiliariaWeb.Servicios
                         clienteCbxList.Add(cliente);
                     }
                     return clienteCbxList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<List<KardexListDTO>> KardexList(int nIdent_Contratos)
+        {
+            var kardexListaDTO = new List<KardexListDTO>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_KardexList", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_Contratos", nIdent_Contratos);
+                    await _connection.OpenAsync();
+
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var kardex = new KardexListDTO();
+                        kardex.nIdent_Kardex = Int32.Parse(reader["nIdent_Kardex"].ToString());
+                        kardex.sNumeroKardex = reader["sNumeroKardex"].ToString();
+                        kardexListaDTO.Add(kardex);
+                    }
+                    return kardexListaDTO;
                 }
             }
             catch (Exception ex)

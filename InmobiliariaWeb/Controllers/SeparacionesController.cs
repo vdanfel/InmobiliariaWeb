@@ -356,6 +356,7 @@ namespace InmobiliariaWeb.Controllers
                 }
                 HttpContext.Session.SetInt32("Ident_010_TipoLote", actualizarViewModel.ident_010_TipoLote);
                 HttpContext.Session.SetString("Numero_Separacion", actualizarViewModel.Numero_Separacion);
+                ViewData["ActiveTab"] = "Programa";
                 return View(actualizarViewModel);
             }
             else
@@ -412,6 +413,7 @@ namespace InmobiliariaWeb.Controllers
                 clienteViewModel.Clientes = await _separacionesService.ClientexSeparacion(clienteViewModel);
                 clienteViewModel.Numero_Separacion = HttpContext.Session.GetString("Numero_Separacion");
                 ViewBag.Ident_010_TipoLote = HttpContext.Session.GetInt32("Ident_010_TipoLote");
+                ViewData["ActiveTab"] = "Cliente";
                 return View(clienteViewModel);
             }
             else

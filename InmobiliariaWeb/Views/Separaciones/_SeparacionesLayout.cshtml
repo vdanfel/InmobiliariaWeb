@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "_Layout";
+    var activeTab = ViewData["ActiveTab"] as string;
+}
+
+<div class="container mt-4">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link @(activeTab == "Programa" ? "active" : "")"
+               asp-controller="Separaciones" asp-action="Actualizar" id="tabPrograma">
+                Lotes y Costos
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(activeTab == "Cliente" ? "active" : "")"
+               asp-controller="Separaciones" asp-action="Cliente" id="tabCliente">
+                Clientes
+            </a>
+        </li>
+        <li class="nav-item">
+            <!-- Espacio reservado si en el futuro quieres otro tab -->
+        </li>
+    </ul>
+    <!-- Contenedor estilizado -->
+    <div class="tab-content border border-top-0 rounded-bottom shadow-sm p-4 bg-white">
+        @RenderBody()
+    </div>
+</div>
+
+@await RenderSectionAsync("Scripts", required: false)

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InmobiliariaWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b9b226d208fbe59b959ac584df365bfb5b4a4e6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d06d77d161f19c4705dcc0bd1a42978f7b1a7833")]
 [assembly: System.Reflection.AssemblyProductAttribute("InmobiliariaWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InmobiliariaWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
