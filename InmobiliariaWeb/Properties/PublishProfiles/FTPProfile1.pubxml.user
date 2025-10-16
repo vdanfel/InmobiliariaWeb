@@ -5,7 +5,7 @@
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAK0UgkBydJ0S7nCIIO1Ex2AAAAAACAAAAAAAQZgAAAAEAACAAAADN4qna1p+1R95KeDpaCTlgwcxO8vN3acSS5f8Rf6KDKgAAAAAOgAAAAAIAACAAAAC2YNBbWqmE4L5sRQLu6ooz9jssbsC4yDviI2xp5A5wJiAAAADXgoyVhsMD6OvX2EfMeFj5UFK5Dc3ggm1EsyIJYt//9EAAAABYGuch+myAqiUkjhbTdjCtSXCCL+Tpq9iuXJzaE4w/GOvR60xeAMACbGrABUpYEsO/VYNdWe4bpNDBh6tkJUKw</EncryptedPassword>
     <_PublishTargetUrl>ftp://155.254.246.16/www.inmobiliariataipe.somee.com</_PublishTargetUrl>
-    <History>True|2025-09-29T04:49:52.7525641Z||;</History>
+    <History>True|2025-10-16T04:46:20.1210071Z||;True|2025-10-15T23:10:57.7626434-05:00||;True|2025-10-09T23:39:27.7592994-05:00||;True|2025-10-06T19:14:50.9933242-05:00||;True|2025-10-02T23:22:08.1936246-05:00||;True|2025-10-01T00:51:58.7058622-05:00||;True|2025-09-28T23:49:52.7525641-05:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -49,22 +49,22 @@
       <publishTime>01/29/2023 09:59:10</publishTime>
     </File>
     <File Include="InmobiliariaWeb.deps.json">
-      <publishTime>09/28/2025 23:42:56</publishTime>
+      <publishTime>10/15/2025 23:40:33</publishTime>
     </File>
     <File Include="InmobiliariaWeb.dll">
-      <publishTime>09/28/2025 23:42:56</publishTime>
+      <publishTime>10/15/2025 23:40:23</publishTime>
     </File>
     <File Include="InmobiliariaWeb.exe">
-      <publishTime>09/28/2025 23:42:56</publishTime>
+      <publishTime>10/15/2025 23:40:23</publishTime>
     </File>
     <File Include="InmobiliariaWeb.pdb">
-      <publishTime>09/28/2025 23:42:56</publishTime>
+      <publishTime>10/15/2025 23:40:23</publishTime>
     </File>
     <File Include="InmobiliariaWeb.runtimeconfig.json">
       <publishTime>09/07/2025 22:04:02</publishTime>
     </File>
     <File Include="InmobiliariaWeb.staticwebassets.endpoints.json">
-      <publishTime>09/28/2025 23:43:07</publishTime>
+      <publishTime>10/15/2025 23:40:33</publishTime>
     </File>
     <File Include="it/Microsoft.Data.SqlClient.resources.dll">
       <publishTime>08/27/2024 13:46:52</publishTime>
@@ -97,7 +97,7 @@
       <publishTime>11/30/2023 23:56:56</publishTime>
     </File>
     <File Include="Microsoft.IdentityModel.JsonWebTokens.dll">
-      <publishTime>11/30/2023 23:34:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.IdentityModel.Logging.dll">
       <publishTime>11/30/2023 23:35:22</publishTime>
@@ -247,13 +247,19 @@
       <publishTime>10/22/2021 18:49:44</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>09/28/2025 23:43:07</publishTime>
+      <publishTime>10/15/2025 23:40:33</publishTime>
+    </File>
+    <File Include="wwwroot/Archivos/Contratos/1615/3fba44f9-4eef-4ead-90b3-05137d1a231f.pdf">
+      <publishTime>10/15/2025 21:56:38</publishTime>
+    </File>
+    <File Include="wwwroot/Archivos/Contratos/1615/4b0fe2a5-5ba9-498e-aa29-eeb229a81e26.pdf">
+      <publishTime>10/15/2025 23:39:14</publishTime>
     </File>
     <File Include="wwwroot/css/EstiloImpresion.css">
       <publishTime>08/31/2025 09:57:42</publishTime>
     </File>
     <File Include="wwwroot/css/site.css">
-      <publishTime>09/28/2025 23:38:10</publishTime>
+      <publishTime>09/29/2025 00:56:21</publishTime>
     </File>
     <File Include="wwwroot/favicon.ico">
       <publishTime>08/31/2025 09:57:42</publishTime>

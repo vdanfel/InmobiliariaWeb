@@ -1,8 +1,144 @@
-﻿@{
+﻿@model InmobiliariaWeb.Models.Kardex.KardexNuevoDTO
+@{
     Layout = "_KardexLayout";
 }
-<form>
-    <div class="container border rounded p-3 border-top-0">
-        aqui los datos para el crear el nuevo kardex
+<form asp-action="Nuevo" asp-controller="Kardex" method="post">
+    <input type="hidden" asp-for="@Model.nIdent_Contratos"/>
+    <div class="container">
+        <div class="row g-2">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-8">
+                <div class="form-floating">
+                    <input type="text" class="form-control" asp-for=@Model.sNombrePrograma readonly/>
+                    <label>Programa</label>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+                <div class="form-floating">
+                    <input type="text" class="form-control" asp-for=@Model.sManzana readonly/>
+                    <label>Manzana</label>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nLote readonly/>
+                    <label>Lote</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nSaldoPendiente readonly/>
+                    <label>Saldo</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nSaldoMorasPendientes readonly/>
+                    <label>Moras</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nTotalDeuda id="nTotalDeuda" readonly/>
+                    <label>Saldo Total</label>
+                </div>
+            </div>
+            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nIncremento id="nIncremento" oninput="calcularNuevoImporte()"/>
+                    <label>Incremento</label>
+                </div>
+            </div>
+            <div class="col-8 col-sm-8 col-md-9 col-lg-10">
+                <div class="form-floating">
+                    <input type="text" class="form-control" asp-for=@Model.sIncremento />
+                    <label>Detalle</label>
+                </div>
+            </div>
+            <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nDescuento id="nDescuento" oninput="calcularNuevoImporte()"/>
+                    <label>Descuento</label>
+                </div>
+            </div>
+            <div class="col-8 col-sm-8 col-md-9 col-lg-10">
+                <div class="form-floating">
+                    <input type="text" class="form-control" asp-for=@Model.sDescuento />
+                    <label>Detalle</label>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nImporteNuevo id="nImporteNuevo" readonly/>
+                    <label>Nuevo Importe</label>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nCuotas id="nCuotas" oninput="cantidadCuotas()" />
+                    <label>Cuotas</label>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nImporteMensual id="nImporteMensual" />
+                    <label>Importe Mensual</label>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nImporteFinal id="nImporteFinal"/>
+                    <label>Importe Final</label>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-floating">
+                    <input type="date" class="form-control" asp-for=@Model.dFechaInicio />
+                    <label>Fecha Inicio</label>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
+                <div class="form-floating">
+                    <input type="number" class="form-control" asp-for=@Model.nDiaPago />
+                    <label>Dia de Pago</label>
+                </div>
+            </div>
+        </div>
+        <div class="mt-lg-2 mt-md-1 mt-sm-1 mt-1">
+            <button type="submit" class="btn btn-outline-success">
+                Registrar
+            </button>
+            <a class="btn btn-outline-warning" asp-action="Kardex" asp-controller="Contratos">Regresar</a>
+        </div>
     </div>
 </form>
+
+<script>
+    function calcularNuevoImporte() {
+        // Obtener valores
+        let saldoTotal = parseFloat(document.getElementById("nTotalDeuda").value) || 0;
+        let incremento = parseFloat(document.getElementById("nIncremento").value) || 0;
+        let descuento = parseFloat(document.getElementById("nDescuento").value) || 0;
+        // Fórmula: Saldo Total + Incremento - Descuento
+        let nuevoImporte = saldoTotal + incremento - descuento;
+        // Actualizar el campo
+        document.getElementById("nImporteNuevo").value = nuevoImporte.toFixed(2);
+    }
+    function cantidadCuotas() {
+        const nImporteNuevo = parseFloat(document.getElementById('nImporteNuevo')?.value) || 0;
+        const nCuotas = parseFloat(document.getElementById('nCuotas')?.value) || 0;
+
+        if (isNaN(nCuotas) || nCuotas <= 0) {
+            document.getElementById('nImporteMensual').value = '';
+            document.getElementById('nImporteFinal').value = '';
+        } else {
+            const nImporteMensual = Math.floor(nImporteNuevo / nCuotas);
+            const nImporteFinal = (nImporteNuevo % nCuotas) > 0
+                ? nImporteNuevo - (nImporteMensual * (nCuotas - 1))
+                : nImporteMensual;
+
+            document.getElementById('nImporteMensual').value = nImporteMensual.toFixed(2);
+            document.getElementById('nImporteFinal').value = nImporteFinal.toFixed(2);
+        }
+    }
+
+</script>

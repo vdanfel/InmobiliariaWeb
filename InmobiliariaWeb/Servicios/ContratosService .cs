@@ -2,6 +2,7 @@
 using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Contratos;
 using InmobiliariaWeb.Models.Programa;
+using InmobiliariaWeb.Models.Tablas;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Caja;
 using InmobiliariaWeb.Result.Contratos;
@@ -850,6 +851,7 @@ namespace InmobiliariaWeb.Servicios
                         kardex.TotalMoras = Decimal.Parse(reader["TotalMoras"].ToString());
                         kardex.MontoMorasPagado = Decimal.Parse(reader["MontoMorasPagado"].ToString());
                         kardex.SaldoMorasPendientes = Decimal.Parse(reader["SaldoMorasPendientes"].ToString());
+                        kardex.Ident_004_Estado = Int32.Parse(reader["Ident_004_Estado"].ToString());
                     }
                     return kardex;
                 }
@@ -1084,28 +1086,28 @@ namespace InmobiliariaWeb.Servicios
             }
             return mensaje;
         }
-        public async Task<string> RegistrarFormatoImpreso(int Ident_Contratos, string ContratosFormato, LoginResult loginResult)
+        public async Task<string> RegistrarFormatoImpreso(ContratosImpresionesDTO contratosImpresionesDTO)
         {
             string mensaje = "";
+            int resultadoSP = 0;
             try
             {
                 using (SqlCommand command = new SqlCommand("usp_ContratosImpresiones_Insert", _connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@Ident_Contratos", Ident_Contratos);
-                    command.Parameters.AddWithValue("@ContratosFormato", ContratosFormato);
-                    command.Parameters.AddWithValue("@Usuario", loginResult.IdentUsuario);
-
-                    SqlParameter returnValue = new SqlParameter();
-                    returnValue.Direction = ParameterDirection.ReturnValue;
-                    command.Parameters.Add(returnValue);
+                    command.Parameters.AddWithValue("@nIdent_024_TablaOrigen", contratosImpresionesDTO.nIdent_024_TablaOrigen);
+                    command.Parameters.AddWithValue("@nIdent_TablaOrigen", contratosImpresionesDTO.nIdent_TablaOrigen);
+                    command.Parameters.AddWithValue("@sContratosFormato", contratosImpresionesDTO.sContratosFormato);
+                    command.Parameters.AddWithValue("@nUsuarioCreacion", contratosImpresionesDTO.nUsuarioCreacion);
 
                     await _connection.OpenAsync();
-                    await command.ExecuteNonQueryAsync();
-
-                    int resultadoSP = (int)returnValue.Value;
-
-                    if (resultadoSP == 0)
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        resultadoSP = Int32.Parse(reader["Ident_ContratosImpresiones"].ToString());
+                    }
+                    if (resultadoSP >= 1)
                     {
                         mensaje = "";
                     }
@@ -1113,17 +1115,17 @@ namespace InmobiliariaWeb.Servicios
                     {
                         mensaje = "No se pudo ingresar los datos, comuniquese con sistemas.";
                     }
+                    return mensaje;
                 }
             }
             catch (Exception ex)
             {
-                mensaje = $"Ocurrió un error al intentar ingresar los datos, comuniquese con sistemas: {ex.Message}";
+                throw ex;
             }
             finally
             {
                 _connection.Close();
             }
-            return mensaje;
         }
         public async Task<string> ObtenerFormato(int Ident_Contratos)
         {

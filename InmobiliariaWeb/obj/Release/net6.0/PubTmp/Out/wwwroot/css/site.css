@@ -289,9 +289,6 @@ body {
 /* ===== ESTILOS PARA NAVBAR MODERNA ===== */
 
 .navbar-custom {
-    position: sticky;
-    top: 0;
-    z-index: 1030;
     background: linear-gradient(135deg, #495057 0%, #343a40 100%);
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     padding: 0.8rem 0;

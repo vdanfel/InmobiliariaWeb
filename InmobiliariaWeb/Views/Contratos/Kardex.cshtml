@@ -4,6 +4,7 @@
 }
 <form asp-action="Kardex" method="get" asp-controller="Contratos">
     <input type="hidden" name="Ident_Contratos" asp-for="Ident_Contratos" />
+    @* <input type="hidden" name="Ident_Kardex" asp-for="Ident_Kardex" /> *@
     <div class="container">
         <div class="card">
             <div class="card-header fw-bold">
@@ -13,12 +14,21 @@
                 <div class="row g-2">
                     <div class="col-12">
                         <div class="form-floating">
-                            <select class="form-select" name="Ident_Kardex" onchange="this.form.submit()">
+                            <select class="form-select" id="selectKardex" name="Ident_Kardex" onchange="submitKardexForm()">
                                 @foreach (var kardex in Model.lKardexListDTO)
                                 {
-                                    <option value="@kardex.nIdent_Kardex">
-                                        @kardex.sNumeroKardex
-                                    </option>
+                                    @if (kardex.nIdent_Kardex == Model.Ident_Kardex)
+                                    {
+                                        <option value="@kardex.nIdent_Kardex" selected>
+                                            @kardex.sNumeroKardex
+                                        </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@kardex.nIdent_Kardex">
+                                            @kardex.sNumeroKardex
+                                        </option>
+                                    }
                                 }
                             </select>
                             <label>Seleccione Kardex</label>
@@ -96,8 +106,12 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a class="btn btn-outline-success" asp-action="MorasMasivo" asp-controller="Contratos">Mora Masiva</a>
-                <a class="btn btn-outline-warning" asp-action="Adenda" asp-controller="Kardex">Kardex Nuevo</a>
+                <a class="btn btn-outline-success @(Model.Ident_004_Estado == 43 ? "disabled" : "")"
+                   asp-action="MorasMasivo"
+                   asp-controller="Contratos">Mora Masiva</a>
+                <a class="btn btn-outline-warning @(Model.Ident_004_Estado == 43 ? "disabled" : "")"
+                   asp-action="Adenda"
+                   asp-controller="Kardex">Kardex Nuevo</a>
             </div>
         </div>
         <div class="table-responsive-md mt-2">
@@ -135,7 +149,7 @@
                             <td style="text-align:center">@(cuotas.FechaMorasPagadas.HasValue? cuotas.FechaMorasPagadas.Value.ToString("dd/MM/yyyy") : "")</td>
                             <td style="text-align:right">@cuotas.ImporteMorasPagadas</td>
                             <td>
-                                <a class="btn btn-outline-primary"
+                                <a class="btn btn-outline-primary @(Model.Ident_004_Estado == 43 ? "disabled" : "")"
                                    asp-action="Cuotas"
                                    asp-controller="Contratos"
                                    asp-route-Ident_Cuota="@cuotas.Ident_Cuotas">
@@ -143,7 +157,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a class="btn btn-outline-danger @(cuotas.DiasMoras > 0 && cuotas.Ident_015_EstadoPago == 110 ? "" : "disabled")"
+                                <a class="btn btn-outline-danger @(Model.Ident_004_Estado == 43 || cuotas.DiasMoras <= 0 || cuotas.Ident_015_EstadoPago != 110 ? "disabled" : "")"
                                    asp-action="Moras"
                                    asp-controller="Contratos"
                                    asp-route-Ident_Cuotas="@cuotas.Ident_Cuotas">
@@ -163,9 +177,17 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        // Inicializar tooltips
         const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         tooltipTriggerList.forEach(function (tooltipTriggerEl) {
             new bootstrap.Tooltip(tooltipTriggerEl);
         });
     });
+
+    function submitKardexForm() {
+        const form = document.querySelector('form');
+        const selectedValue = document.getElementById('selectKardex').value;
+        console.log('Kardex seleccionado:', selectedValue); // Para debug
+        form.submit();
+    }
 </script>

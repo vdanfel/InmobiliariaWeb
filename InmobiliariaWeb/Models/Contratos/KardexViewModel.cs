@@ -19,7 +19,7 @@ namespace InmobiliariaWeb.Models.Contratos
         public decimal SaldoMorasPendientes { get; set; }
 
         public string Numero_Contrato { get; set; }
-
+        public int Ident_004_Estado { get; set; }
 
         public List<CuotasLista> CuotasListas { get; set; }
         public List<KardexListDTO> lKardexListDTO { get; set; }

@@ -24,6 +24,9 @@ builder.Services.AddScoped<IContratosService, ContratosService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<ISeparacionesService, SeparacionesService>();
 builder.Services.AddScoped<INotificacionesService, NotificacionesService>();
+builder.Services.AddScoped<IKardexService, KardexService>();
+builder.Services.AddScoped<IAdendasService, AdendasService>();
+builder.Services.AddScoped<IRutaService, RutaService>();
 
 builder.Services.AddScoped<SqlConnection>(c =>
 {

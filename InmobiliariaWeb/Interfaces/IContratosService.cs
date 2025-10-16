@@ -1,11 +1,11 @@
 ﻿using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Contratos;
+using InmobiliariaWeb.Models.Tablas;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Caja;
 using InmobiliariaWeb.Result.Contratos;
 using InmobiliariaWeb.Result.Separaciones;
 using InmobiliariaWeb.Utilities;
-using InmobiliariaWeb.ViewModels.Contratos;
 
 namespace InmobiliariaWeb.Interfaces
 {
@@ -37,7 +37,7 @@ namespace InmobiliariaWeb.Interfaces
         Task<Cuotas> CuotasxIdentCuotas(int Ident_Cuotas);
         Task<string> CuotasActualizar(Cuotas cuotas, LoginResult loginResult);
         Task<string> MorasActualizar(Moras moras, LoginResult loginResult);
-        Task<string> RegistrarFormatoImpreso(int Ident_Contratos, string ContratosFormato, LoginResult loginResult);
+        Task<string> RegistrarFormatoImpreso(ContratosImpresionesDTO contratosImpresionesDTO);
         Task<string> ObtenerFormato(int Ident_Contratos);
         Task<List<Involucrados>> ObtenerInvolucrados(int Ident_Contratos);
         Task RecalculoMoras(int Ident_Kardex);

@@ -1,8 +1,10 @@
 ﻿using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Contratos;
+using InmobiliariaWeb.Models.Documentos;
 using InmobiliariaWeb.Models.Ingresos;
 using InmobiliariaWeb.Models.Programa;
+using InmobiliariaWeb.Models.Tablas;
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Utilities;
 using Microsoft.AspNetCore.Authorization;
@@ -17,15 +19,18 @@ namespace InmobiliariaWeb.Controllers
         private readonly ITablasService _tablasService;
         private readonly ICajaService _cajaService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IRutaService _rutaService;
 
         //_webHostEnvironment
 
-        public ContratosController(IContratosService contratosService,ITablasService tablasService, ICajaService cajaService, IWebHostEnvironment webHostEnvironment)
+        public ContratosController(IContratosService contratosService, ITablasService tablasService, ICajaService cajaService, 
+            IWebHostEnvironment webHostEnvironment, IRutaService rutaService)
         {
             _contratosService = contratosService;
             _tablasService = tablasService;
             _cajaService = cajaService;
             _webHostEnvironment = webHostEnvironment;
+            _rutaService = rutaService;
         }
         [HttpGet]
         [Authorize]
@@ -1007,7 +1012,15 @@ namespace InmobiliariaWeb.Controllers
                 // Cerrar la tabla
                 ContratosFormato += "</table>";
                 
-                string mensaje = await _contratosService.RegistrarFormatoImpreso(Ident_Contratos, ContratosFormato, loginResult);
+                ContratosImpresionesDTO contratosImpresionesDTO = new ContratosImpresionesDTO
+                {
+                    nIdent_024_TablaOrigen = 1147,
+                    nIdent_TablaOrigen = Ident_Contratos,
+                    sContratosFormato = ContratosFormato,
+                    nUsuarioCreacion = loginResult.IdentUsuario,
+                };
+
+                string mensaje = await _contratosService.RegistrarFormatoImpreso(contratosImpresionesDTO);
                 
                 if (string.IsNullOrEmpty(mensaje))
                 {
@@ -1190,8 +1203,16 @@ namespace InmobiliariaWeb.Controllers
                 ContratosFormato += "</table>";
                 /**/
 
-                
-                string mensaje = await _contratosService.RegistrarFormatoImpreso(Ident_Contratos, ContratosFormato, loginResult);
+
+                ContratosImpresionesDTO contratosImpresionesDTO = new ContratosImpresionesDTO
+                {
+                    nIdent_024_TablaOrigen = 1147,
+                    nIdent_TablaOrigen = Ident_Contratos,
+                    sContratosFormato = ContratosFormato,
+                    nUsuarioCreacion = loginResult.IdentUsuario,
+                };
+
+                string mensaje = await _contratosService.RegistrarFormatoImpreso(contratosImpresionesDTO);
 
                 if (string.IsNullOrEmpty(mensaje))
                 {
@@ -1389,7 +1410,16 @@ namespace InmobiliariaWeb.Controllers
 
                 // Cerrar la tabla
                 ContratosFormato += "</table>";
-                string mensaje = await _contratosService.RegistrarFormatoImpreso(Ident_Contratos, ContratosFormato, loginResult);
+
+                ContratosImpresionesDTO contratosImpresionesDTO = new ContratosImpresionesDTO
+                {
+                    nIdent_024_TablaOrigen = 1147,
+                    nIdent_TablaOrigen = Ident_Contratos,
+                    sContratosFormato = ContratosFormato,
+                    nUsuarioCreacion = loginResult.IdentUsuario,
+                };
+
+                string mensaje = await _contratosService.RegistrarFormatoImpreso(contratosImpresionesDTO);
 
                 if (string.IsNullOrEmpty(mensaje))
                 {
@@ -1655,10 +1685,256 @@ namespace InmobiliariaWeb.Controllers
                         $"Recibo_{recibo.NumeroRecibo}.docx");
         }
         [HttpGet]
-        public async Task<IActionResult> Documentos(int nIdent_Contrato)
+        public async Task<IActionResult> Documentos()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+
+            var documentosView = new DocumentosViewDTO();
+            var nIdent_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
+            documentosView.lFormatos = await _rutaService.FormatosList(nIdent_Contratos);
+            var rutaArchivoRequestDTO = new RutaArchivoRequestDTO
+            {
+                nIdent_024_TablaOrigen = 1147,
+                nIdent_TablaOrigen = nIdent_Contratos,
+            };
+            documentosView.lRutaArchivo = await _rutaService.RutaArchivoList(rutaArchivoRequestDTO);
+            documentosView.sNumero_Contrato = HttpContext.Session.GetString("NumeroSerie");
             ViewData["ActiveTab"] = "Documentos";
-            return View();
+            return View(documentosView);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Documentos(DocumentosViewDTO documentosViewDTO)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            var nIdent_Contratos = HttpContext.Session.GetInt32("Ident_Contratos") ?? 0;
+
+            if (documentosViewDTO.fArchivoSubir == null || documentosViewDTO.fArchivoSubir.Length == 0)
+            {
+                TempData["Error"] = "Debe seleccionar un archivo PDF para subir.";
+                return RedirectToAction("Documentos", "Contratos");
+            }
+            var archivo = documentosViewDTO.fArchivoSubir;
+
+            // Validar extensión PDF
+            var extension = Path.GetExtension(archivo.FileName).ToLower();
+            if (extension != ".pdf")
+            {
+                TempData["Error"] = "Solo se permiten archivos PDF.";
+                return RedirectToAction("Documentos", "Contratos");
+            }
+            // Crear ruta base del contrato (por ejemplo: /Archivos/Contratos/1147/)
+            var carpetaBase = Path.Combine("wwwroot", "Archivos", "Contratos", nIdent_Contratos.ToString());
+            if (!Directory.Exists(carpetaBase))
+            {
+                Directory.CreateDirectory(carpetaBase);
+            }
+
+            // Nombre con el que se guardará el archivo (GUID para evitar duplicados)
+            var nombreGuardado = $"{Guid.NewGuid()}{extension}";
+            var rutaCompleta = Path.Combine(carpetaBase, nombreGuardado);
+
+            // Guardar el archivo físicamente
+            using (var stream = new FileStream(rutaCompleta, FileMode.Create))
+            {
+                await archivo.CopyToAsync(stream);
+            }
+
+            // Calcular tamaño (en KB)
+            decimal tamanioKb = Math.Round((decimal)archivo.Length / 1024, 2);
+
+            // Crear DTO para insertar en BD
+            var rutaArchivoDTO = new RutaArchivoDTO
+            {
+                nIdent_024_TablaOrigen = 1147, // Contratos
+                nIdent_TablaOrigen = nIdent_Contratos,
+                sNombreArchivo = Path.GetFileNameWithoutExtension(archivo.FileName),
+                sNombreGuardado = nombreGuardado,
+                sExtension = extension,
+                nTamanio = tamanioKb,
+                sRutaArchivo = $"/Archivos/Contratos/{nIdent_Contratos}/{nombreGuardado}",
+                bActivo = true,
+                UsuarioCreacion = loginResult.IdentUsuario
+            };
+
+            // Aquí llamas a tu servicio o SP para registrar la ruta
+            var resultado = await _rutaService.RutaArchivoCreate(rutaArchivoDTO);
+
+            TempData["Success"] = resultado > 0
+                ? "Archivo subido correctamente."
+                : "No se pudo registrar el archivo en la base de datos.";
+
+            return RedirectToAction("Documentos", "Contratos");
+        }
+        public async Task<IActionResult> FormatoDownload(int nIdent_formato, string sTipoDocumento, string sNombreFormato)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            var nIdent_Contratos = HttpContext.Session.GetInt32("Ident_Contratos") ?? 0;
+
+            FormatoSelectDTO formatoSelectDTO = new FormatoSelectDTO { 
+                nIdent_Formato = nIdent_formato,
+                sTipoDocumento = sTipoDocumento,
+            };
+            string sFormatoDocumento = await _rutaService.FormatoDownload(formatoSelectDTO);
+
+            if (string.IsNullOrEmpty(sFormatoDocumento))
+            {
+                return RedirectToAction("Cliente", "Contratos",
+                    new { Ident_Contratos = nIdent_Contratos, Mensaje = "No existe registro de este contrato" });
+            }
+
+            string fileName = "documento" + nIdent_Contratos + ".doc";
+            string wordContent = $@"
+            <html xmlns:o='urn:schemas-microsoft-com:office:office' 
+                  xmlns:w='urn:schemas-microsoft-com:office:word'
+                  xmlns='http://www.w3.org/TR/REC-html40'>
+            <head>
+                <meta charset='utf-8'/>
+                <title>Exportar a Word</title>
+                <xml>
+                    <w:WordDocument>
+                        <w:View>Print</w:View>
+                        <w:Zoom>100</w:Zoom>
+                        <w:DoNotOptimizeForBrowser/>
+                    </w:WordDocument>
+                </xml>
+                <style>
+                    body{{
+                        margin-left:-10px
+                        margin-right:-10px
+                    }}
+                    p {{
+                        margin-bottom:5px;
+                        font-size: 16px;
+                        text-align: justify;
+                        font-family: 'Arial Narrow';
+                        line-height: 13px;
+                    }}
+
+                    .Titulo {{
+                        font-weight: bold;
+                        font-size: 21px;
+                        text-align: center;
+                        font-family: 'Arial Narrow';
+                        margin-bottom:15px;
+                    }}
+
+                    .Parrafo {{
+                        font-size: 16px;
+                        text-align: justify;
+                        font-family: 'Arial Narrow';
+                        margin-top:10px;
+                        margin-left:-10px
+                        margin-right:-10px
+                    }}
+
+                    .espacio {{
+                        margin: 20px 0;
+                    }}
+
+                    .datos {{
+                        text-align: center;
+                        font-size: 12px;
+                        font-weight: bold;
+                        font-family: 'Arial Narrow';
+                    }}
+
+                    .tabla-involucrados {{
+                        width: 100%;
+                        border-collapse: collapse;
+                        border-spacing: 0;
+                    }}
+
+                    .tabla-involucrados td {{
+                        border: none;
+                        padding: 0;
+                        font-family: 'Arial Narrow';
+                    }}
+
+                    b, strong {{
+                        font-family: 'Arial Narrow';
+                    }}
+
+                    sup {{
+                        font-family: 'Arial Narrow';
+                        font-size: 0.8em;
+                    }}
+                </style>
+            </head>
+            <body>
+                {sFormatoDocumento}
+            </body>
+            </html>";
+
+            byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(wordContent);
+
+            return File(byteArray, "application/msword", fileName);
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> RutaArchivoDownload(string rutaArchivo)
+        {
+            if (string.IsNullOrEmpty(rutaArchivo))
+            {
+                return BadRequest("Ruta de archivo no especificada.");
+            }
+
+            // Convertimos la ruta web en ruta física real
+            var rutaFisica = Path.Combine(_webHostEnvironment.WebRootPath, rutaArchivo.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
+
+            if (!System.IO.File.Exists(rutaFisica))
+            {
+                return NotFound($"El archivo no fue encontrado en la ruta: {rutaFisica}");
+            }
+
+            var nombreArchivo = Path.GetFileName(rutaFisica);
+            var fileBytes = await System.IO.File.ReadAllBytesAsync(rutaFisica);
+
+            // Retornar el archivo como descarga
+            return File(fileBytes, "application/octet-stream", nombreArchivo);
+        }
+        [HttpGet]
+        public async Task<IActionResult> RutaArchivoDelete(int nIdent_RutaArchivo, string sRutaArchivo)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+
+            // Convertir ruta relativa a ruta física
+            var rutaFisica = Path.Combine(_webHostEnvironment.WebRootPath,
+                sRutaArchivo.TrimStart('/').Replace("/", Path.DirectorySeparatorChar.ToString()));
+
+            // Eliminar el archivo físicamente si existe
+            if (System.IO.File.Exists(rutaFisica))
+            {
+                System.IO.File.Delete(rutaFisica);
+            }
+
+            // Cambiar estado en base de datos
+            RutaArchivoDTO rutaArchivoDTO = new RutaArchivoDTO
+            {
+                nIdent_RutaArchivo = nIdent_RutaArchivo,
+                UsuarioModificacion = loginResult.IdentUsuario
+            };
+
+            var res = await _rutaService.RutaArchivoDelete(rutaArchivoDTO);
+
+            return RedirectToAction("Documentos", "Contratos");
         }
     }
 }

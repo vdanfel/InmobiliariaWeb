@@ -1,4 +1,101 @@
-﻿@{
+﻿@model InmobiliariaWeb.Models.Documentos.DocumentosViewDTO
+@{
     Layout = "_ContratosLayout";
 }
-aqui se cargaran los documentos
+<form asp-action="Documentos" asp-controller="Contratos" method="post" enctype="multipart/form-data">
+    <div class="container">
+        <div class="card">
+            <div class="card-header fw-bold">
+                <h2>@Model.sNumero_Contrato - Documentos</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <h4>Formato de documentos del sistema</h4>
+                </div>
+                <div class="table-responsive-md">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tipo Documento</th>
+                                <th>Fecha Documento</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var formatos in Model.lFormatos)
+                            {
+                                <tr>
+                                    <td>@formatos.sTipoDocumento</td>
+                                    <td>@formatos.dFechaCreacion</td>
+                                    <td>
+                                        <a asp-controller="Contratos"
+                                           asp-action="FormatoDownload"
+                                           asp-route-nIdent_formato="@formatos.nIdent_Formato"
+                                           asp-route-sTipoDocumento="@formatos.sTipoDocumento"
+                                           asp-route-sNombreFormato="@formatos.sNombreFormato"
+                                           class="btn btn-outline-warning"
+                                           title="Descargar formato">
+                                           <i class="bi bi-printer-fill"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row g-2">
+                    <div class="col-12">
+                        <input class="form-control" type="file" id="fArchivoSubir" asp-for="@Model.fArchivoSubir" accept=".pdf">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-outline-success">
+                            Subir <i class="bi bi-upload"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive-md">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Extension</th>
+                        <th>Peso</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rutas in Model.lRutaArchivo)
+                    {
+                        <tr>
+                            <td>@rutas.sNombreArchivo</td>
+                            <td>@rutas.sExtension</td>
+                            <td>@rutas.nTamanio Kb</td>
+                            <td style="width:3rem">
+                                <a asp-controller="Contratos"
+                                   asp-action="RutaArchivoDownload"
+                                   asp-route-rutaArchivo="@rutas.sRutaArchivo"
+                                   class="btn btn-outline-primary"
+                                   title="Descargar archivo">
+                                   <i class="bi bi-download"></i>
+                                </a>
+                            </td>
+                            <td style="width:3rem">
+                                <a asp-action="RutaArchivoDelete"
+                                   asp-route-nIdent_RutaArchivo="@rutas.nIdent_RutaArchivo"
+                                   asp-route-sRutaArchivo="@(rutas.sRutaArchivo ?? string.Empty)"
+                                   class="btn btn-outline-danger"
+                                   onclick="return confirm('¿Seguro que deseas eliminar este archivo?')">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>

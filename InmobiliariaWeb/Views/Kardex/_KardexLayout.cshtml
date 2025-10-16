@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "_Layout";
-    var identKardex = Context.Session.GetString("Ident_Kardex");
+    var identAdendas = Context.Session.GetInt32("nIdent_Adendas");
     var activeTab = ViewData["ActiveTab"] as string;
 }
 <div class="container">
@@ -12,7 +12,7 @@
             </a>
         </li>
 
-        @if (!string.IsNullOrEmpty(identKardex))
+        @if (identAdendas.HasValue && identAdendas.Value > 0)
         {
             <li class="nav-item mx-2">
                 <a class="nav-link @(activeTab == "Nuevo" ? "active" : "")"
