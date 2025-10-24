@@ -1,0 +1,197 @@
+﻿@model InmobiliariaWeb.Models.CartaNotarial.CartaNotarial1ViewDTO
+@{
+}
+<form>
+    <input type="hidden" id="nIdent_Contratos" asp-for="@Model.nIdent_Contratos" />
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Nueva Carta Notarial 15 dias</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-1">
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-10">
+                        <div class="form-floating">
+                            <select class="form-select" id="programas" required onchange="ObtenerManzanas(this.value)">
+                                <option value="">Seleccione un programa</option>
+                                @foreach (var programas in Model.lPrograma)
+                                {
+                                    <option value="@programas.Ident_Programa">@programas.Nombre_Programa</option>
+                                }
+                            </select>
+                            <label>Seleccione Programa</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                        <div class="form-floating">
+                            <select class="form-select" id="manzana" required onchange="ObtenerLotes(this.value)">
+                                <option value="">Seleccione una manzana</option>
+                            </select>
+                            <label>Manzana</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                        <div class="form-floating">
+                            <select class="form-select" id="lote" required onchange="ObtenerContratoPorLote(this.value)">
+                                <option value="">Seleccione un lote</option>
+                            </select>
+                            <label>Lote</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="sNumeroContrato" asp-for="@Model.sNumeroContrato" readonly />
+                            <label>Numero Contrato</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-1">
+                    <div class="card-body">
+                        Clientes
+                        <table class="table table-hover  mt-1" id="clientesTable">
+                            <thead class="table-dark">
+                                <tr>
+                                    <td></td>
+                                    <td>Apellidos y Nombres</td>
+                                    <td>Documento</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="3" class="text-center">Seleccione un lote</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let programaDefault = '@Model.nIdent_Programa';
+        let manzanaDefault = '@Model.nIdent_Manzana';
+        let loteDefault = '@Model.nIdent_Lote';
+
+        if (programaDefault) {
+            ObtenerManzanas(programaDefault, manzanaDefault);
+            if (manzanaDefault) {
+                ObtenerLotes(manzanaDefault, loteDefault);
+            }
+        }
+    });
+
+        function ObtenerManzanas(programaId, defaults = "") {
+        if (!programaId) {
+            $("#manzana").empty().append('<option value="">Seleccione una manzana</option>');
+            $("#lote").empty().append('<option value="">Seleccione un lote</option>');
+            return;
+        }
+
+        $.get(`/CartaNotarial/GetManzanas?programaId=${programaId}`, function (data) {
+            $("#manzana").empty();
+            $("#manzana").append('<option value="">Seleccione una manzana</option>');
+            $.each(data, function (index, item) {
+                $("#manzana").append('<option value="' + item.ident_Manzana + '">' + item.letra + '</option>');
+            });
+            $("#manzana").val(defaults);
+
+            // Limpieza adicional por seguridad:
+            $("#lote").empty().append('<option value="">Seleccione un lote</option>');
+            $("#nIdent_Contratos").val('');
+            $("#sNumeroContrato").val('');
+
+        });
+    }
+
+    function ObtenerLotes(manzanaId, defaults = "") {
+        if (!manzanaId) {
+            $("#lote").empty().append('<option value="">Seleccione un lote</option>');
+            return;
+        }
+
+        $.get(`/CartaNotarial/GetLotes?manzanaId=${manzanaId}`, function (data) {
+            $("#lote").empty();
+            $("#lote").append('<option value="">Seleccione un lote</option>');
+            $.each(data, function (index, item) {
+                $("#lote").append('<option value="' + item.ident_Lote + '">' + item.correlativo + '</option>');
+            });
+            $("#lote").val(defaults);
+        });
+        $("#nIdent_Contratos").val('');
+        $("#sNumeroContrato").val('');
+
+    }
+    //     function ObtenerContratoPorLote(loteId) {
+    //     if (!loteId) {
+    //         // Si no hay lote seleccionado, limpiamos los campos
+    //         $("#nIdent_Contratos").val('');
+    //         $("#sNumeroContrato").val('');
+    //         return;
+    //     }
+
+    //     $.get(`/CartaNotarial/GetContratoPorLote?loteId=${loteId}`, function (data) {
+    //         if (data) {
+    //             $("#nIdent_Contratos").val(data.nIdent_Contratos);
+    //             $("#sNumeroContrato").val(data.sNumeroContrato);
+    //         } else {
+    //             $("#nIdent_Contratos").val('');
+    //             $("#sNumeroContrato").val('');
+    //         }
+    //     }).fail(function () {
+    //         $("#nIdent_Contratos").val('');
+    //         $("#sNumeroContrato").val('');
+    //     });
+    // }
+    function ObtenerContratoPorLote(loteId) {
+        if (!loteId) {
+            // Si no hay lote seleccionado, limpiamos los campos
+            $("#nIdent_Contratos").val('');
+            $("#sNumeroContrato").val('');
+            $("#clientesTable tbody").empty();
+            return;
+        }
+
+        $.get(`/CartaNotarial/GetContratoPorLote?loteId=${loteId}`, function (data) {
+            if (data) {
+                // 1️⃣ Llenar los datos del contrato
+                $("#nIdent_Contratos").val(data.nIdent_Contratos);
+                $("#sNumeroContrato").val(data.sNumeroContrato);
+
+                // 2️⃣ Luego llamar a los clientes del contrato
+                $.get(`/CartaNotarial/GetClientesPorContrato?contratoId=${data.nIdent_Contratos}`, function (clientes) {
+                    const tbody = $("#clientesTable tbody");
+                    tbody.empty();
+
+                    if (clientes.length === 0) {
+                        tbody.append('<tr><td colspan="3" class="text-center">No hay clientes asociados</td></tr>');
+                    } else {
+                        $.each(clientes, function (i, cliente) {
+                            tbody.append(`
+                                <tr>
+                                    <td><input type="checkbox" class="form-check-input cliente-check" value="${cliente.nIdent_Persona}" /></td>
+                                    <td>${cliente.sNombreCompleto}</td>
+                                    <td>${cliente.sNumeroDocumento ?? ''}</td>
+                                </tr>
+                            `);
+                        });
+                    }
+                });
+            } else {
+                // Si no hay contrato, limpiar todo
+                $("#nIdent_Contratos").val('');
+                $("#sNumeroContrato").val('');
+                $("#clientesTable tbody").empty();
+            }
+        }).fail(function () {
+            $("#nIdent_Contratos").val('');
+            $("#sNumeroContrato").val('');
+            $("#clientesTable tbody").empty();
+        });
+    }
+
+
+</script>

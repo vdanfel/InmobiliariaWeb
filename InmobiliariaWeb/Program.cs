@@ -27,6 +27,7 @@ builder.Services.AddScoped<INotificacionesService, NotificacionesService>();
 builder.Services.AddScoped<IKardexService, KardexService>();
 builder.Services.AddScoped<IAdendasService, AdendasService>();
 builder.Services.AddScoped<IRutaService, RutaService>();
+builder.Services.AddScoped<ICartaNotarialService, CartaNotarialService>();
 
 builder.Services.AddScoped<SqlConnection>(c =>
 {

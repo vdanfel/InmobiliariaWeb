@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\CartaNotarial\" />
     <Folder Include="Views\Impresiones\Pagos\" />
     <Folder Include="Views\Impresiones\Separaciones\" />
     <Folder Include="wwwroot\icon\" />

@@ -3,36 +3,40 @@
   "WorkspaceRootPath": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\controllers\\cartanotarialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\controllers\\cartanotarialcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\servicios\\cartanotarialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\servicios\\cartanotarialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\cartanotarial\\cartanotarial1crear.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\cartanotarial\\cartanotarial1crear.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\models\\cartanotarial\\clienteslistcbxdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\models\\cartanotarial\\clienteslistcbxdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\interfaces\\icartanotarialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\interfaces\\icartanotarialservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\contratos\\crear.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\contratos\\crear.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\controllers\\contratoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\controllers\\contratoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\servicios\\rutaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\servicios\\rutaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\models\\cartanotarial\\cartanotarial1viewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\models\\cartanotarial\\cartanotarial1viewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\contratos\\documentos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\contratos\\documentos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\models\\tablas\\rutaarchivodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\models\\tablas\\rutaarchivodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\interfaces\\irutaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\interfaces\\irutaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\models\\documentos\\formatoselectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\models\\documentos\\formatoselectdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\servicios\\contratosservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\servicios\\contratosservice .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\views\\contratos\\kardex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\views\\contratos\\kardex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|e:\\inmobiliariataipe\\inmobiliariaweb\\inmobiliariaweb\\models\\cartanotarial\\cartanotarial2viewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{81D5316C-4880-4C50-98D9-B22009793DE3}|InmobiliariaWeb\\InmobiliariaWeb.csproj|solutionrelative:inmobiliariaweb\\models\\cartanotarial\\cartanotarial2viewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,110 +46,144 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IRutaService.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Interfaces\\IRutaService.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Interfaces\\IRutaService.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Interfaces\\IRutaService.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Interfaces\\IRutaService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAABBAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "CartaNotarial1ViewDTO.cs",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\CartaNotarial\\CartaNotarial1ViewDTO.cs",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Models\\CartaNotarial\\CartaNotarial1ViewDTO.cs",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\CartaNotarial\\CartaNotarial1ViewDTO.cs",
+              "RelativeToolTip": "InmobiliariaWeb\\Models\\CartaNotarial\\CartaNotarial1ViewDTO.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwBAAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T03:14:11.887Z",
+              "WhenOpened": "2025-10-24T03:17:43.366Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FormatoSelectDTO.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Documentos\\FormatoSelectDTO.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Models\\Documentos\\FormatoSelectDTO.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Documentos\\FormatoSelectDTO.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Models\\Documentos\\FormatoSelectDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "ICartaNotarialService.cs",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Interfaces\\ICartaNotarialService.cs",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Interfaces\\ICartaNotarialService.cs",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Interfaces\\ICartaNotarialService.cs",
+              "RelativeToolTip": "InmobiliariaWeb\\Interfaces\\ICartaNotarialService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T03:12:14.99Z",
+              "WhenOpened": "2025-10-20T04:20:06.507Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "RutaService.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Servicios\\RutaService.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Servicios\\RutaService.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Servicios\\RutaService.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Servicios\\RutaService.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAApwGMAAAAUAAAAAAAAAA==",
+              "Title": "CartaNotarialService.cs",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Servicios\\CartaNotarialService.cs",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Servicios\\CartaNotarialService.cs",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Servicios\\CartaNotarialService.cs",
+              "RelativeToolTip": "InmobiliariaWeb\\Servicios\\CartaNotarialService.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAQwG4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T02:56:45.484Z",
+              "WhenOpened": "2025-10-20T04:19:52.467Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Documentos.cshtml",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Contratos\\Documentos.cshtml",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Contratos\\Documentos.cshtml",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Contratos\\Documentos.cshtml",
-              "RelativeToolTip": "InmobiliariaWeb\\Views\\Contratos\\Documentos.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAACYAAAAsAAAAAAAAAA==",
+              "Title": "CartaNotarial1Crear.cshtml",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\CartaNotarial\\CartaNotarial1Crear.cshtml",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\CartaNotarial\\CartaNotarial1Crear.cshtml",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\CartaNotarial\\CartaNotarial1Crear.cshtml",
+              "RelativeToolTip": "InmobiliariaWeb\\Views\\CartaNotarial\\CartaNotarial1Crear.cshtml",
+              "ViewState": "AgIAACcAAAAAAAAAAAAUwDUAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-16T02:49:04.823Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Kardex.cshtml",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Contratos\\Kardex.cshtml",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Contratos\\Kardex.cshtml",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Contratos\\Kardex.cshtml",
-              "RelativeToolTip": "InmobiliariaWeb\\Views\\Contratos\\Kardex.cshtml",
-              "ViewState": "AgIAAHsAAAAAAAAAAAAAAA8AAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-15T20:54:31.468Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RutaArchivoDTO.cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Tablas\\RutaArchivoDTO.cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Models\\Tablas\\RutaArchivoDTO.cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\Tablas\\RutaArchivoDTO.cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Models\\Tablas\\RutaArchivoDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T02:58:33.088Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ContratosService .cs",
-              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Servicios\\ContratosService .cs",
-              "RelativeDocumentMoniker": "InmobiliariaWeb\\Servicios\\ContratosService .cs",
-              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Servicios\\ContratosService .cs",
-              "RelativeToolTip": "InmobiliariaWeb\\Servicios\\ContratosService .cs",
-              "ViewState": "AgIAAO0BAAAAAAAAAADwv/8BAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T21:30:25.324Z",
+              "WhenOpened": "2025-10-20T03:42:47.397Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CartaNotarialController.cs",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Controllers\\CartaNotarialController.cs",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Controllers\\CartaNotarialController.cs",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Controllers\\CartaNotarialController.cs",
+              "RelativeToolTip": "InmobiliariaWeb\\Controllers\\CartaNotarialController.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAwwDcAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-20T03:21:09.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClientesListCbxDTO.cs",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\CartaNotarial\\ClientesListCbxDTO.cs",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Models\\CartaNotarial\\ClientesListCbxDTO.cs",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\CartaNotarial\\ClientesListCbxDTO.cs",
+              "RelativeToolTip": "InmobiliariaWeb\\Models\\CartaNotarial\\ClientesListCbxDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T03:20:47.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CartaNotarial2ViewDTO.cs",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\CartaNotarial\\CartaNotarial2ViewDTO.cs",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Models\\CartaNotarial\\CartaNotarial2ViewDTO.cs",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Models\\CartaNotarial\\CartaNotarial2ViewDTO.cs",
+              "RelativeToolTip": "InmobiliariaWeb\\Models\\CartaNotarial\\CartaNotarial2ViewDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T03:18:01.512Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "62abf06f-690f-400b-ad2f-f529ed5289ed",
+        "Display": 1,
+        "X": 145,
+        "Y": 126,
+        "Width": 1594,
+        "Height": 805,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Crear.cshtml",
+              "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Contratos\\Crear.cshtml",
+              "RelativeDocumentMoniker": "InmobiliariaWeb\\Views\\Contratos\\Crear.cshtml",
+              "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Views\\Contratos\\Crear.cshtml",
+              "RelativeToolTip": "InmobiliariaWeb\\Views\\Contratos\\Crear.cshtml",
+              "ViewState": "AgIAAAUBAAAAAAAAAAAAABcBAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-20T04:09:12.833Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "ContratosController.cs",
               "DocumentMoniker": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Controllers\\ContratosController.cs",
               "RelativeDocumentMoniker": "InmobiliariaWeb\\Controllers\\ContratosController.cs",
               "ToolTip": "E:\\InmobiliariaTaipe\\InmobiliariaWeb\\InmobiliariaWeb\\Controllers\\ContratosController.cs",
               "RelativeToolTip": "InmobiliariaWeb\\Controllers\\ContratosController.cs",
-              "ViewState": "AgIAAGMHAAAAAAAAAAApwHUHAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAwwFAAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T21:37:58.549Z",
+              "WhenOpened": "2025-10-20T03:46:52.026Z",
               "EditorCaption": ""
             }
           ]
