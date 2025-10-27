@@ -1,3 +1,7 @@
+wwwroot\Archivos\Contratos\1615\7266d3f5-9d8a-4435-8319-f6671de789a9.pdf
+wwwroot\Archivos\Contratos\1615\c33247b3-d7ab-48bf-acc0-b2dcae57c512.pdf
+wwwroot\Archivos\Contratos\1615\e0681628-65d1-4bcf-9139-a1cbfc8e7b8e.pdf
+wwwroot\Archivos\Contratos\1615\f1a78c33-b303-4dfe-a531-74b0b16d22b8.pdf
 wwwroot\css\EstiloImpresion.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
@@ -64,6 +68,6 @@ wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
 wwwroot\Template\Contratos.docx
-wwwroot\Template\ventas.docx
-wwwroot\Template\FormatoReciboCuota.docx
 wwwroot\Template\FormatoRecibo.docx
+wwwroot\Template\FormatoReciboCuota.docx
+wwwroot\Template\ventas.docx

@@ -1,4 +1,5 @@
 ﻿using InmobiliariaWeb.Models.Documentos;
+using InmobiliariaWeb.Models.Opciones;
 using InmobiliariaWeb.Models.Tablas;
 
 namespace InmobiliariaWeb.Interfaces
@@ -10,5 +11,6 @@ namespace InmobiliariaWeb.Interfaces
         Task<List<FormatosResponseDTO>> FormatosList(int nIdent_Contratos);
         Task<string> FormatoDownload(FormatoSelectDTO formatoSelectDTO);
         Task<int> RutaArchivoDelete(RutaArchivoDTO rutaArchivoDTO);
+        Task<IEnumerable<TipoArchivoOpcionDTO>> TipoArchivoOpcionListar();
     }
 }

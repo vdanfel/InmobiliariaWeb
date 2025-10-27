@@ -46,7 +46,19 @@
                 </div>
                 <div class="row g-2">
                     <div class="col-12">
-                        <input class="form-control" type="file" id="fArchivoSubir" asp-for="@Model.fArchivoSubir" accept=".pdf">
+                        <input class="form-control" type="file" id="fArchivoSubir" asp-for="@Model.fArchivoSubir" accept=".pdf" required>
+                    </div>
+                    <div class="col-6">
+                       <div class="form-floating">
+                            <select class="form-select" asp-for="@Model.nIdent_025_TipoArchivo" required>
+                                <option></option>
+                                @foreach (var tipoArchivo in Model.lTipoArchivo)
+                                {
+                                    <option value="@tipoArchivo.nIdent_025_TipoArchivo">@tipoArchivo.sDescripcion</option>
+                                }
+                            </select>
+                            <label>Tipo Archivo</label>
+                       </div>
                     </div>
                     <div class="col">
                         <button type="submit" class="btn btn-outline-success">
@@ -63,6 +75,7 @@
                         <th>Nombre</th>
                         <th>Extension</th>
                         <th>Peso</th>
+                        <th>Tipo Documento</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -74,6 +87,7 @@
                             <td>@rutas.sNombreArchivo</td>
                             <td>@rutas.sExtension</td>
                             <td>@rutas.nTamanio Kb</td>
+                            <td>@rutas.sTipoArchivo</td>
                             <td style="width:3rem">
                                 <a asp-controller="Contratos"
                                    asp-action="RutaArchivoDownload"

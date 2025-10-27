@@ -23,5 +23,6 @@ namespace InmobiliariaWeb.Models.CartaNotarial
         public string? sObservacion { get; set; }
         public int nIdent_UsuarioCreacion { get; set; }
         public int nIdent_UsuarioModificacion { get; set; }
+        public decimal nCuotasPendientes { get; set; }
     }
 }

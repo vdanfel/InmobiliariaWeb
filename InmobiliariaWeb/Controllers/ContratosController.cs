@@ -1490,7 +1490,7 @@ namespace InmobiliariaWeb.Controllers
                 Ident_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
             }
 
-            string ContratosFormato = await _contratosService.ObtenerFormato(Ident_Contratos);
+            string ContratosFormato = await _contratosService.ObtenerFormatoContrato(Ident_Contratos);
 
             if (string.IsNullOrEmpty(ContratosFormato))
             {
@@ -1703,6 +1703,7 @@ namespace InmobiliariaWeb.Controllers
             };
             documentosView.lRutaArchivo = await _rutaService.RutaArchivoList(rutaArchivoRequestDTO);
             documentosView.sNumero_Contrato = HttpContext.Session.GetString("NumeroSerie");
+            documentosView.lTipoArchivo = (await _rutaService.TipoArchivoOpcionListar()).ToList();
             ViewData["ActiveTab"] = "Documentos";
             return View(documentosView);
         }
@@ -1760,6 +1761,7 @@ namespace InmobiliariaWeb.Controllers
                 sExtension = extension,
                 nTamanio = tamanioKb,
                 sRutaArchivo = $"/Archivos/Contratos/{nIdent_Contratos}/{nombreGuardado}",
+                nIdent_025_TipoArchivo = documentosViewDTO.nIdent_025_TipoArchivo,
                 bActivo = true,
                 UsuarioCreacion = loginResult.IdentUsuario
             };

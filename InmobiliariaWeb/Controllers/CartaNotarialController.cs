@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace InmobiliariaWeb.Controllers
 {
     [Authorize]
-    public class CartaNotarialController:Controller
+    public class CartaNotarialController : Controller
     {
         private readonly IContratosService _contratosService;
         private readonly ICartaNotarialService _cartaNotarialService;
@@ -16,7 +16,7 @@ namespace InmobiliariaWeb.Controllers
             _cartaNotarialService = cartaNotarialService;
         }
         [HttpGet]
-        public IActionResult Index() 
+        public IActionResult Index()
         {
             if (HttpContext.Session.GetString("Usuario") == null)
             {
@@ -26,19 +26,7 @@ namespace InmobiliariaWeb.Controllers
             var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
             return View();
         }
-        [HttpGet]
-        public async Task<IActionResult> CartaNotarial1Crear()
-        {
-            if (HttpContext.Session.GetString("Usuario") == null)
-            {
-                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
-            }
-            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
-            CartaNotarial1ViewDTO cartaNotarial1ViewDTO = new CartaNotarial1ViewDTO();
-            cartaNotarial1ViewDTO.lPrograma = await _contratosService.ProgramaCbxListar();
 
-            return View(cartaNotarial1ViewDTO);
-        }
         [HttpGet]
         public async Task<IActionResult> GetManzanas(int programaId)
         {
@@ -65,6 +53,54 @@ namespace InmobiliariaWeb.Controllers
         {
             var clientes = await _cartaNotarialService.ListarClientesPorContrato(contratoId);
             return Json(clientes);
+        }
+        [HttpGet]
+        public async Task<IActionResult> CartaNotarial1Crear()
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            CartaNotarial1ViewDTO cartaNotarial1ViewDTO = new CartaNotarial1ViewDTO();
+            cartaNotarial1ViewDTO.lPrograma = await _contratosService.ProgramaCbxListar();
+            cartaNotarial1ViewDTO.dFechaCartaNotarial = DateTime.Now;
+            return View(cartaNotarial1ViewDTO);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CartaNotarial1Crear(CartaNotarial1ViewDTO cartaNotarial1ViewDTO)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+
+
+
+            return RedirectToAction("CartaNotarial1Ver", "CartaNotarial");
+        }
+        [HttpGet]
+        public async Task<IActionResult> CartaNotarial1Ver()
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            ViewData["ActiveTab"] = "CartaNotarial1Ver";
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> CartaNotarial1Formato()
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            ViewData["ActiveTab"] = "CartaNotarial1Formato";
+            return View();
         }
     }
 }

@@ -39,6 +39,7 @@ namespace InmobiliariaWeb.Interfaces
         Task<string> MorasActualizar(Moras moras, LoginResult loginResult);
         Task<string> RegistrarFormatoImpreso(ContratosImpresionesDTO contratosImpresionesDTO);
         Task<string> ObtenerFormato(int Ident_Contratos);
+        Task<string> ObtenerFormatoContrato(int Ident_Contratos);
         Task<List<Involucrados>> ObtenerInvolucrados(int Ident_Contratos);
         Task RecalculoMoras(int Ident_Kardex);
         Task<int> MoraExiste(int Ident_Cuotas);

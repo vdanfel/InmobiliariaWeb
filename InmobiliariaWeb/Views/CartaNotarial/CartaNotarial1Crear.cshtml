@@ -44,22 +44,38 @@
                             <label>Numero Contrato</label>
                         </div>
                     </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="nCuotasPendientes" asp-for="@Model.nCuotasPendientes" readonly />
+                            <label>Cuotas Pendientes</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="card mt-1">
-                    <div class="card-body">
-                        Clientes
-                        <table class="table table-hover  mt-1" id="clientesTable">
+                <div class="group-box mt-3">
+                    <span class="group-box-title">Clientes</span>
+                    <div class="group-box-content">
+                        <table class="table table-hover align-middle mb-0" id="clientesTable">
                             <thead class="table-dark">
                                 <tr>
-                                    <td></td>
-                                    <td>Apellidos y Nombres</td>
-                                    <td>Documento</td>
+                                    <th style="width: 50px;"></th>
+                                    <th>Apellidos y Nombres</th>
+                                    <th>Documento</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td colspan="3" class="text-center">Seleccione un lote</td></tr>
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted py-3">Seleccione un lote</td>
+                                </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div class="row g-1 mt-1">
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" asp-for="dFechaCartaNotarial"/>
+                            <label>Fecha Carta Notarial</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,7 +119,8 @@
             $("#lote").empty().append('<option value="">Seleccione un lote</option>');
             $("#nIdent_Contratos").val('');
             $("#sNumeroContrato").val('');
-
+            $("#nCuotasPendientes").val('');
+            $("#clientesTable tbody").empty();
         });
     }
 
@@ -123,29 +140,9 @@
         });
         $("#nIdent_Contratos").val('');
         $("#sNumeroContrato").val('');
-
+        $("#nCuotasPendientes").val('');
+        $("#clientesTable tbody").empty();
     }
-    //     function ObtenerContratoPorLote(loteId) {
-    //     if (!loteId) {
-    //         // Si no hay lote seleccionado, limpiamos los campos
-    //         $("#nIdent_Contratos").val('');
-    //         $("#sNumeroContrato").val('');
-    //         return;
-    //     }
-
-    //     $.get(`/CartaNotarial/GetContratoPorLote?loteId=${loteId}`, function (data) {
-    //         if (data) {
-    //             $("#nIdent_Contratos").val(data.nIdent_Contratos);
-    //             $("#sNumeroContrato").val(data.sNumeroContrato);
-    //         } else {
-    //             $("#nIdent_Contratos").val('');
-    //             $("#sNumeroContrato").val('');
-    //         }
-    //     }).fail(function () {
-    //         $("#nIdent_Contratos").val('');
-    //         $("#sNumeroContrato").val('');
-    //     });
-    // }
     function ObtenerContratoPorLote(loteId) {
         if (!loteId) {
             // Si no hay lote seleccionado, limpiamos los campos
@@ -160,6 +157,7 @@
                 // 1️⃣ Llenar los datos del contrato
                 $("#nIdent_Contratos").val(data.nIdent_Contratos);
                 $("#sNumeroContrato").val(data.sNumeroContrato);
+                $("#nCuotasPendientes").val(data.nCuotasPendientes);
 
                 // 2️⃣ Luego llamar a los clientes del contrato
                 $.get(`/CartaNotarial/GetClientesPorContrato?contratoId=${data.nIdent_Contratos}`, function (clientes) {
@@ -184,14 +182,14 @@
                 // Si no hay contrato, limpiar todo
                 $("#nIdent_Contratos").val('');
                 $("#sNumeroContrato").val('');
+                $("#nCuotasPendientes").val('');
                 $("#clientesTable tbody").empty();
             }
         }).fail(function () {
             $("#nIdent_Contratos").val('');
             $("#sNumeroContrato").val('');
+            $("#nCuotasPendientes").val('');
             $("#clientesTable tbody").empty();
         });
     }
-
-
 </script>

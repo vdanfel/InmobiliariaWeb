@@ -1,5 +1,6 @@
 ﻿using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models.Documentos;
+using InmobiliariaWeb.Models.Opciones;
 using InmobiliariaWeb.Models.Tablas;
 using Microsoft.Data.SqlClient;
 
@@ -27,6 +28,7 @@ namespace InmobiliariaWeb.Servicios
                     command.Parameters.AddWithValue("@sExtension", rutaArchivoDTO.sExtension);
                     command.Parameters.AddWithValue("@nTamanio", rutaArchivoDTO.nTamanio);
                     command.Parameters.AddWithValue("@sRutaArchivo", rutaArchivoDTO.sRutaArchivo);
+                    command.Parameters.AddWithValue("@nIdent_025_TipoArchivo", rutaArchivoDTO.nIdent_025_TipoArchivo);
                     command.Parameters.AddWithValue("@UsuarioCreacion", rutaArchivoDTO.UsuarioCreacion);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
@@ -70,6 +72,7 @@ namespace InmobiliariaWeb.Servicios
                         archivo.sExtension = reader["sExtension"].ToString();
                         archivo.nTamanio = Decimal.Parse(reader["nTamanio"].ToString());
                         archivo.sRutaArchivo = reader["sRutaArchivo"].ToString();
+                        archivo.sTipoArchivo = reader["sTipoArchivo"].ToString();
                         archivos.Add(archivo);
                     }
                     return archivos;
@@ -164,6 +167,38 @@ namespace InmobiliariaWeb.Servicios
                         res = Int32.Parse(reader["res"].ToString());
                     }
                     return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<IEnumerable<TipoArchivoOpcionDTO>> TipoArchivoOpcionListar()
+        {
+            var tiposArchivo = new List<TipoArchivoOpcionDTO>();
+            try
+            {
+                using (SqlCommand command = new SqlCommand("sp_Parametros", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", 25);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        var tipoArchivo = new TipoArchivoOpcionDTO();
+                        tipoArchivo.nIdent_025_TipoArchivo = Int32.Parse(reader["IDENT_PARAMETRO"].ToString());
+                        tipoArchivo.sDescripcion = reader["DESCRIPCION"].ToString();
+                        tipoArchivo.sAbreviatura = reader["ABREVIATURA"].ToString();
+                        tiposArchivo.Add(tipoArchivo);
+                    }
+                    return tiposArchivo;
                 }
             }
             catch (Exception ex)

@@ -10,8 +10,11 @@
         public string? sExtension { get; set; }
         public decimal? nTamanio { get; set; }
         public string? sRutaArchivo { get; set; }
+        public int? nIdent_025_TipoArchivo { get; set; }
         public bool? bActivo { get; set; }
         public int? UsuarioCreacion { get; set; }
         public int? UsuarioModificacion { get; set; }
+        /**/
+        public string sTipoArchivo { get; set; }
     }
 }

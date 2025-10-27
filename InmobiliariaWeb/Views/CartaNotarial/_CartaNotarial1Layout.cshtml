@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "_Layout";
+    var nIdent_CartaNotarial = Context.Session.GetInt32("nIdent_CartaNotarial");
+    var activeTab = ViewData["ActiveTab"] as string;
+}
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="nav-item mx-2">
+            <a class="nav-link @(activeTab == "CartaNotarial1Ver" ? "active" : "")"
+               asp-controller="CartaNotarial" asp-action="CartaNotarial1Ver" id="tabCartaNotarial1Ver">
+               Ver
+            </a>
+        </li>
+        <li class="nav-item mx-2">
+            <a class="nav-link @(activeTab == "CartaNotarial1Formato" ? "active" : "")"
+               asp-controller="CartaNotarial" asp-action="CartaNotarial1Formato" id="tabCartaNotarial1Formato">
+                Formato
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content border border-top-0 rounded-bottom shadow-sm p-4 bg-white">
+        @RenderBody()
+    </div>
+</div>
+@await RenderSectionAsync("Scripts", required: false)

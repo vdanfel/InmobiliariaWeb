@@ -93,7 +93,8 @@ namespace InmobiliariaWeb.Servicios
                         contrato = new ContratosDTO
                         {
                             nIdent_Contratos = Convert.ToInt32(reader["nIdent_Contratos"]),
-                            sNumeroContrato = reader["sNumeroContrato"].ToString()
+                            sNumeroContrato = reader["sNumeroContrato"].ToString(),
+                            nCuotasPendientes = reader["nCuotasPendientes"].ToString()
                         };
                     }
 
@@ -132,6 +133,36 @@ namespace InmobiliariaWeb.Servicios
                     }
 
                     return clientes;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<int> CartaNotarialCreate(CartaNotarialDTO cartaNotarialDTO)
+        { 
+            var nIdent_CartaNotarial = 0;
+            try 
+            {
+                using (SqlCommand command = new SqlCommand("usp_CartaNotarialCreate", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_Contratos", cartaNotarialDTO.nIdent_Contratos);
+                    command.Parameters.AddWithValue("@dFechaCartaNotarial", cartaNotarialDTO.dFechaCartaNotarial);
+                    command.Parameters.AddWithValue("@nIdent_UsuarioCreacion", cartaNotarialDTO.nIdent_UsuarioCreacion);
+                    await _connection.OpenAsync();
+
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        nIdent_CartaNotarial = Int32.Parse(reader["nIdent_CartaNotarial"].ToString());
+                    }
+                    return nIdent_CartaNotarial;
                 }
             }
             catch (Exception ex)

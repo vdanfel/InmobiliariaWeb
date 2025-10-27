@@ -27,5 +27,6 @@
         public int? nUsuarioModificacion { get; set; }
         /*-----*/
         public string? sNumeroContrato { get; set; }
+        public string? nCuotasPendientes { get; set; }
     }
 }

@@ -1127,6 +1127,34 @@ namespace InmobiliariaWeb.Servicios
                 _connection.Close();
             }
         }
+        public async Task<string> ObtenerFormatoContrato(int Ident_Contratos)
+        {
+            string mensaje = "";
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_DescargarFormatoContrato", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Ident_Contratos", Ident_Contratos);
+                    await _connection.OpenAsync();
+                    // Ejecuta el procedimiento almacenado y obtén el resultado
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        mensaje = reader["ContratosFormato"].ToString();
+                    }
+                    return mensaje;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
         public async Task<string> ObtenerFormato(int Ident_Contratos)
         {
             string mensaje = "";
