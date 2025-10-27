@@ -11,5 +11,10 @@ namespace InmobiliariaWeb.Interfaces
         Task<ContratosDTO> ObtenerContratoPorLote(int nIdent_Lote);
         Task<List<ClientesListCbxDTO>> ListarClientesPorContrato(int nIdent_Contrato);
         Task<int> CartaNotarialCreate(CartaNotarialDTO cartaNotarialDTO);
+        Task<int> CartaNotarialUpdate(CartaNotarialDTO cartaNotarialDTO);
+        Task<int> CartaNotarialDetalleCreate(CartaNotarialDetalleDTO cartaNotarialDetalleDTO);
+        Task<int> CartaNotarialDetalleUpdate(CartaNotarialDetalleDTO cartaNotarialDetalleDTO);
+        Task<int> CartaNotarialPersonaCreate(CartaNotarialPersonaDTO cartaNotarialPersonaDTO);
+        Task<int> CartaNotarialPersonaDelete(int nIdent_CartaNotarial, int nIdent_UsuarioModificacion);
     }
 }

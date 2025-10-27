@@ -1,5 +1,6 @@
 ﻿using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models.CartaNotarial;
+using InmobiliariaWeb.Models.Tablas;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -68,7 +69,7 @@ namespace InmobiliariaWeb.Controllers
             return View(cartaNotarial1ViewDTO);
         }
         [HttpPost]
-        public async Task<IActionResult> CartaNotarial1Crear(CartaNotarial1ViewDTO cartaNotarial1ViewDTO)
+        public async Task<IActionResult> CartaNotarial1Crear(CartaNotarial1ViewDTO cartaNotarial1ViewDTO, int[] PersonasSeleccionadas)
         {
             if (HttpContext.Session.GetString("Usuario") == null)
             {
@@ -76,7 +77,38 @@ namespace InmobiliariaWeb.Controllers
             }
             var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
 
+            cartaNotarial1ViewDTO.nIdent_UsuarioCreacion = loginResult.IdentUsuario;
 
+            CartaNotarialDTO cartaNotarialDTO = new CartaNotarialDTO
+            {
+                nIdent_Contratos = cartaNotarial1ViewDTO.nIdent_Contratos,
+                dFechaCartaNotarial = cartaNotarial1ViewDTO.dFechaCartaNotarial,
+                nIdent_UsuarioCreacion = cartaNotarial1ViewDTO.nIdent_UsuarioCreacion
+            };
+
+            cartaNotarial1ViewDTO.nIdent_CartaNotarial = await _cartaNotarialService.CartaNotarialCreate(cartaNotarialDTO);
+
+            CartaNotarialDetalleDTO cartaNotarialDetalleDTO = new CartaNotarialDetalleDTO
+            {
+                nIdent_CartaNotarial = cartaNotarial1ViewDTO.nIdent_CartaNotarial,
+                nIdent_026_EstadoCartaNotarial = 1152,
+                sObservacion = cartaNotarial1ViewDTO.sObservacion,
+                nIdent_UsuarioCreacion = cartaNotarial1ViewDTO.nIdent_UsuarioCreacion
+            };
+
+            cartaNotarialDetalleDTO.nIdent_CartaNotarialDetalle = await _cartaNotarialService.CartaNotarialDetalleCreate(cartaNotarialDetalleDTO);
+
+            foreach (var personaId in PersonasSeleccionadas)
+            {
+                var cartaNotarialPersona = new CartaNotarialPersonaDTO
+                {
+                    nIdent_CartaNotarial = cartaNotarial1ViewDTO.nIdent_CartaNotarial,
+                    nIdent_Persona = personaId,
+                    nIdent_UsuarioCreacion = cartaNotarial1ViewDTO.nIdent_UsuarioCreacion
+                };
+
+                cartaNotarialPersona.nIdent_CartaNotarialPersona = await _cartaNotarialService.CartaNotarialPersonaCreate(cartaNotarialPersona);
+            }
 
             return RedirectToAction("CartaNotarial1Ver", "CartaNotarial");
         }

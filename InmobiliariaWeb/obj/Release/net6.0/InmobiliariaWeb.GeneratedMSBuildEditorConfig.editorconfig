@@ -52,8 +52,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydGFOb3RhcmlhbFxDYXJ0YU5vdGFyaWFsMUNyZWFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/CartaNotarial/CartaNotarial1Formato.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydGFOb3RhcmlhbFxDYXJ0YU5vdGFyaWFsMUZvcm1hdG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/CartaNotarial/CartaNotarial1Ver.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydGFOb3RhcmlhbFxDYXJ0YU5vdGFyaWFsMVZlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/CartaNotarial/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydGFOb3RhcmlhbFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/CartaNotarial/_CartaNotarial1Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydGFOb3RhcmlhbFxfQ2FydGFOb3RhcmlhbDFMYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/InmobiliariaTaipe/InmobiliariaWeb/InmobiliariaWeb/Views/Contratos/Actualizar.cshtml]

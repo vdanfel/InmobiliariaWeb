@@ -1,7 +1,7 @@
 ﻿@model InmobiliariaWeb.Models.CartaNotarial.CartaNotarial1ViewDTO
 @{
 }
-<form>
+<form asp-action="CartaNotarial1Crear" method="post">
     <input type="hidden" id="nIdent_Contratos" asp-for="@Model.nIdent_Contratos" />
     <div class="container">
         <div class="card">
@@ -77,6 +77,9 @@
                             <label>Fecha Carta Notarial</label>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <button class="btn btn-outline-primary" type="submit">Registrar</button>
                 </div>
             </div>
         </div>
@@ -168,13 +171,18 @@
                         tbody.append('<tr><td colspan="3" class="text-center">No hay clientes asociados</td></tr>');
                     } else {
                         $.each(clientes, function (i, cliente) {
-                            tbody.append(`
-                                <tr>
-                                    <td><input type="checkbox" class="form-check-input cliente-check" value="${cliente.nIdent_Persona}" /></td>
-                                    <td>${cliente.sNombreCompleto}</td>
-                                    <td>${cliente.sNumeroDocumento ?? ''}</td>
-                                </tr>
-                            `);
+                                tbody.append(`
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox"
+                                                   class="form-check-input cliente-check"
+                                                   name="PersonasSeleccionadas"
+                                                   value="${cliente.nIdent_Persona}" />
+                                        </td>
+                                        <td>${cliente.sNombreCompleto}</td>
+                                        <td>${cliente.sNumeroDocumento ?? ''}</td>
+                                    </tr>
+                                `);
                         });
                     }
                 });

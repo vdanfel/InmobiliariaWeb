@@ -7,7 +7,7 @@ using System.Data;
 
 namespace InmobiliariaWeb.Servicios
 {
-    public class CartaNotarialService: ICartaNotarialService
+    public class CartaNotarialService : ICartaNotarialService
     {
         private readonly SqlConnection _connection;
         public CartaNotarialService(SqlConnection connection)
@@ -145,9 +145,9 @@ namespace InmobiliariaWeb.Servicios
             }
         }
         public async Task<int> CartaNotarialCreate(CartaNotarialDTO cartaNotarialDTO)
-        { 
+        {
             var nIdent_CartaNotarial = 0;
-            try 
+            try
             {
                 using (SqlCommand command = new SqlCommand("usp_CartaNotarialCreate", _connection))
                 {
@@ -163,6 +163,155 @@ namespace InmobiliariaWeb.Servicios
                         nIdent_CartaNotarial = Int32.Parse(reader["nIdent_CartaNotarial"].ToString());
                     }
                     return nIdent_CartaNotarial;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<int> CartaNotarialUpdate(CartaNotarialDTO cartaNotarialDTO)
+        {
+            var result = 0;
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_CartaNotarialUpdate", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_CartaNotarial", cartaNotarialDTO.nIdent_CartaNotarial);
+                    command.Parameters.AddWithValue("@dFechaCartaNotarial", cartaNotarialDTO.dFechaCartaNotarial);
+                    command.Parameters.AddWithValue("@nIdent_UsuarioModificacion", cartaNotarialDTO.nIdent_UsuarioModificacion);
+                    await _connection.OpenAsync();
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        result = Int32.Parse(reader["res"].ToString());
+                    }
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<int> CartaNotarialDetalleCreate(CartaNotarialDetalleDTO cartaNotarialDetalleDTO)
+        {
+            var nIdent_CartaNotarialDetalle = 0;
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_CartaNotarialDetalleCreate", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_CartaNotarial", cartaNotarialDetalleDTO.nIdent_CartaNotarial);
+                    command.Parameters.AddWithValue("@nIdent_026_EstadoCartaNotarial", cartaNotarialDetalleDTO.nIdent_026_EstadoCartaNotarial);
+                    command.Parameters.AddWithValue("@sObservacion",
+                    string.IsNullOrEmpty(cartaNotarialDetalleDTO.sObservacion)
+                        ? DBNull.Value
+                        : (object)cartaNotarialDetalleDTO.sObservacion);
+                    command.Parameters.AddWithValue("@nIdent_UsuarioCreacion", cartaNotarialDetalleDTO.nIdent_UsuarioCreacion);
+                    await _connection.OpenAsync();
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        nIdent_CartaNotarialDetalle = Int32.Parse(reader["nIdent_CartaNotarialDetalle"].ToString());
+                    }
+                    return nIdent_CartaNotarialDetalle;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<int> CartaNotarialDetalleUpdate(CartaNotarialDetalleDTO cartaNotarialDetalleDTO)
+        {
+            var result = 0;
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_CartaNotarialDetalleUpdate", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_CartaNotarialDetalle", cartaNotarialDetalleDTO.nIdent_CartaNotarialDetalle);
+                    command.Parameters.AddWithValue("@sObservacion", cartaNotarialDetalleDTO.sObservacion);
+                    command.Parameters.AddWithValue("@bActivo", cartaNotarialDetalleDTO.bActivo);
+                    command.Parameters.AddWithValue("@nIdent_UsuarioModificacion", cartaNotarialDetalleDTO.nIdent_UsuarioModificacion);
+                    await _connection.OpenAsync();
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        result = Int32.Parse(reader["res"].ToString());
+                    }
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<int> CartaNotarialPersonaCreate(CartaNotarialPersonaDTO cartaNotarialPersonaDTO)
+        {
+            var nIdent_CartaNotarialPersona = 0;
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_CartaNotarialPersonaCreate", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_CartaNotarial", cartaNotarialPersonaDTO.nIdent_CartaNotarial);
+                    command.Parameters.AddWithValue("@nIdent_Persona", cartaNotarialPersonaDTO.nIdent_Persona);
+                    command.Parameters.AddWithValue("@nIdent_UsuarioCreacion", cartaNotarialPersonaDTO.nIdent_UsuarioCreacion);
+                    await _connection.OpenAsync();
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        nIdent_CartaNotarialPersona = Int32.Parse(reader["nIdent_CartaNotarialPersona"].ToString());
+                    }
+                    return nIdent_CartaNotarialPersona;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public async Task<int> CartaNotarialPersonaDelete(int nIdent_CartaNotarial, int nIdent_UsuarioModificacion)
+        {
+            var result = 0;
+            try
+            {
+                using (SqlCommand command = new SqlCommand("usp_CartaNotarialPersonaDelete", _connection))
+                {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@nIdent_CartaNotarial", nIdent_CartaNotarial);
+                    command.Parameters.AddWithValue("@nIdent_UsuarioModificacion", nIdent_UsuarioModificacion);
+                    await _connection.OpenAsync();
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        result = Int32.Parse(reader["res"].ToString());
+                    }
+                    return result;
                 }
             }
             catch (Exception ex)
