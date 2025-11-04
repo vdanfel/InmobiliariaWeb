@@ -16,5 +16,6 @@ namespace InmobiliariaWeb.Interfaces
         Task<int> CartaNotarialDetalleUpdate(CartaNotarialDetalleDTO cartaNotarialDetalleDTO);
         Task<int> CartaNotarialPersonaCreate(CartaNotarialPersonaDTO cartaNotarialPersonaDTO);
         Task<int> CartaNotarialPersonaDelete(int nIdent_CartaNotarial, int nIdent_UsuarioModificacion);
+        Task<CartaNotarialDTO> CartaNotarialSelect(int nIdent_CartaNotarial);
     }
 }

@@ -8,6 +8,10 @@ namespace InmobiliariaWeb.Models.CartaNotarial
         public int? nIdent_Contratos {  get; set; }
         public string? sNumeroCartaNotarial { get; set; }
         public int? nIdent_Programa { get; set; }
+        public int? nIdent_027_TipoCartaNotarial { get; set; }
+        public int? nIdent_026_EstadoCartaNotarial { get; set; }
+        public string? sSerie { get; set; }
+        public int? nCorrelativo { get; set; }
         public List<ProgramasCbxList> lPrograma { get; set; } = new List<ProgramasCbxList>();
         public int? nIdent_Manzana{ get; set; }
         public List<ManzanaCbxList>lManzana { get; set; } = new List<ManzanaCbxList>();

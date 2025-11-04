@@ -26,7 +26,7 @@
                             {
                                 <tr>
                                     <td>@formatos.sTipoDocumento</td>
-                                    <td>@formatos.dFechaCreacion</td>
+                                    <td>@formatos.dFechaCreacion.ToString("dd/MM/yyyy")</td>
                                     <td>
                                         <a asp-controller="Contratos"
                                            asp-action="FormatoDownload"

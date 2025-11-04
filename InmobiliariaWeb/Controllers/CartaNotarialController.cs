@@ -83,6 +83,8 @@ namespace InmobiliariaWeb.Controllers
             {
                 nIdent_Contratos = cartaNotarial1ViewDTO.nIdent_Contratos,
                 dFechaCartaNotarial = cartaNotarial1ViewDTO.dFechaCartaNotarial,
+                nIdent_027_TipoCartaNotarial = 1159,
+                nIdent_CartaNotarialOrigen = null,
                 nIdent_UsuarioCreacion = cartaNotarial1ViewDTO.nIdent_UsuarioCreacion
             };
 
@@ -104,24 +106,35 @@ namespace InmobiliariaWeb.Controllers
                 {
                     nIdent_CartaNotarial = cartaNotarial1ViewDTO.nIdent_CartaNotarial,
                     nIdent_Persona = personaId,
-                    nIdent_UsuarioCreacion = cartaNotarial1ViewDTO.nIdent_UsuarioCreacion
+                    nIdent_UsuarioCreacion = cartaNotarial1ViewDTO.nIdent_UsuarioCreacion,
                 };
 
                 cartaNotarialPersona.nIdent_CartaNotarialPersona = await _cartaNotarialService.CartaNotarialPersonaCreate(cartaNotarialPersona);
             }
 
-            return RedirectToAction("CartaNotarial1Ver", "CartaNotarial");
+            return RedirectToAction("CartaNotarial1Ver", "CartaNotarial", new { nIdent_CartaNotarial = cartaNotarialDTO.nIdent_CartaNotarial });
         }
         [HttpGet]
-        public async Task<IActionResult> CartaNotarial1Ver()
+        public async Task<IActionResult> CartaNotarial1Ver(int nIdent_CartaNotarial)
         {
             if (HttpContext.Session.GetString("Usuario") == null)
             {
                 return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
             }
             var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            CartaNotarial1ViewDTO cartaNotarial1ViewDTO = new CartaNotarial1ViewDTO();
+            var cartaNotarialDTO = await _cartaNotarialService.CartaNotarialSelect(nIdent_CartaNotarial);
+            cartaNotarial1ViewDTO.nIdent_CartaNotarial = cartaNotarialDTO.nIdent_CartaNotarial;
+            cartaNotarial1ViewDTO.nIdent_Contratos = cartaNotarialDTO.nIdent_Contratos;
+            cartaNotarial1ViewDTO.nIdent_027_TipoCartaNotarial = cartaNotarialDTO.nIdent_027_TipoCartaNotarial;
+            cartaNotarial1ViewDTO.nIdent_026_EstadoCartaNotarial = cartaNotarialDTO.nIdent_026_EstadoCartaNotarial;
+            cartaNotarial1ViewDTO.sSerie = cartaNotarialDTO.sSerie;
+            cartaNotarial1ViewDTO.nCorrelativo = cartaNotarialDTO.nCorrelativo;
+            cartaNotarial1ViewDTO.dFechaCartaNotarial = cartaNotarialDTO.dFechaCartaNotarial;
+            cartaNotarial1ViewDTO.sNombreNotaria = cartaNotarialDTO.sNombreNotaria;
+
             ViewData["ActiveTab"] = "CartaNotarial1Ver";
-            return View();
+            return View(cartaNotarial1ViewDTO);
         }
         [HttpGet]
         public async Task<IActionResult> CartaNotarial1Formato()
@@ -134,5 +147,6 @@ namespace InmobiliariaWeb.Controllers
             ViewData["ActiveTab"] = "CartaNotarial1Formato";
             return View();
         }
+
     }
 }

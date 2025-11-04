@@ -74,31 +74,31 @@
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                 <div class="form-floating">
-                    <input type="number" class="form-control" asp-for=@Model.nCuotas id="nCuotas" oninput="cantidadCuotas()" />
+                    <input type="number" class="form-control" asp-for=@Model.nCuotas id="nCuotas" oninput="cantidadCuotas()" required/>
                     <label>Cuotas</label>
                 </div>
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                 <div class="form-floating">
-                    <input type="number" class="form-control" asp-for=@Model.nImporteMensual id="nImporteMensual" />
+                    <input type="number" class="form-control" asp-for=@Model.nImporteMensual id="nImporteMensual" required/>
                     <label>Importe Mensual</label>
                 </div>
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                 <div class="form-floating">
-                    <input type="number" class="form-control" asp-for=@Model.nImporteFinal id="nImporteFinal"/>
+                    <input type="number" class="form-control" asp-for=@Model.nImporteFinal id="nImporteFinal" required/>
                     <label>Importe Final</label>
                 </div>
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                 <div class="form-floating">
-                    <input type="date" class="form-control" asp-for=@Model.dFechaInicio />
+                    <input type="date" class="form-control" asp-for=@Model.dFechaInicio required/>
                     <label>Fecha Inicio</label>
                 </div>
             </div>
             <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                 <div class="form-floating">
-                    <input type="number" class="form-control" asp-for=@Model.nDiaPago />
+                    <input type="number" class="form-control" asp-for=@Model.nDiaPago required/>
                     <label>Dia de Pago</label>
                 </div>
             </div>
@@ -111,6 +111,26 @@
         </div>
     </div>
 </form>
+<!-- Modal de advertencia reutilizable -->
+<div class="modal fade" id="modalAdvertencia" tabindex="-1" aria-labelledby="modalAdvertenciaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-warning">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title" id="modalAdvertenciaLabel">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i> Advertencia
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body" id="modalAdvertenciaMensaje">
+                <!-- Aquí se cambiará el mensaje dinámicamente -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     function calcularNuevoImporte() {
@@ -140,5 +160,49 @@
             document.getElementById('nImporteFinal').value = nImporteFinal.toFixed(2);
         }
     }
+    function recalcularImporteFinal() {
+        const importeNuevo = parseFloat(document.getElementById("nImporteNuevo").value) || 0;
+        const cuotas = parseInt(document.getElementById("nCuotas").value) || 0;
+        const importeMensual = parseFloat(document.getElementById("nImporteMensual").value) || 0;
 
+        if (importeNuevo > 0 && cuotas > 0) {
+            const importeFinal = importeNuevo - (importeMensual * (cuotas - 1));
+
+            if (importeFinal < 0) {
+                mostrarModalAdvertencia("El importe mensual ingresado es demasiado alto. Verifique los valores.");
+                cantidadCuotas(); // restablece los valores originales
+                return;
+            }
+
+            document.getElementById("nImporteFinal").value = importeFinal.toFixed(2);
+        }
+    }
+
+    function mostrarModalAdvertencia(mensaje) {
+        const modalMensaje = document.getElementById("modalAdvertenciaMensaje");
+        modalMensaje.textContent = mensaje;
+
+        const modal = new bootstrap.Modal(document.getElementById('modalAdvertencia'));
+        modal.show();
+    }
+
+    function validarDiaPago() {
+        const input = document.querySelector("[id$='nDiaPago']");
+        const valor = parseInt(input.value) || 0;
+
+        if (valor < 1 || valor > 31) {
+            mostrarModalAdvertencia("El día de pago debe estar entre 1 y 31.");
+            input.value = "";
+            input.focus();
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("nImporteMensual").addEventListener("input", recalcularImporteFinal);
+
+        const inputDiaPago = document.querySelector("[id$='nDiaPago']");
+        if (inputDiaPago) {
+            inputDiaPago.addEventListener("change", validarDiaPago);
+        }
+    });
 </script>
