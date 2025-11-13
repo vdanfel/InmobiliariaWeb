@@ -1,5 +1,4 @@
 ﻿using InmobiliariaWeb.Interfaces;
-using InmobiliariaWeb.Models.Programa;
 using InmobiliariaWeb.Result;
 using Microsoft.Data.SqlClient;
 

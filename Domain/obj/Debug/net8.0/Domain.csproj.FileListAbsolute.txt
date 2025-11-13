@@ -1,0 +1,12 @@
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\bin\Debug\net8.0\Domain.deps.json
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\bin\Debug\net8.0\Domain.dll
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\bin\Debug\net8.0\Domain.pdb
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\obj\Debug\net8.0\Domain.sourcelink.json
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\obj\Debug\net8.0\Domain.dll
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\obj\Debug\net8.0\refint\Domain.dll
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\obj\Debug\net8.0\Domain.pdb
+E:\InmobiliariaTaipe\InmobiliariaWeb\Domain\obj\Debug\net8.0\ref\Domain.dll

@@ -110,8 +110,14 @@
                    asp-action="MorasMasivo"
                    asp-controller="Contratos">Mora Masiva</a>
                 <a class="btn btn-outline-warning @(Model.Ident_004_Estado == 43 ? "disabled" : "")"
-                   asp-action="Adenda"
+                   asp-action="NuevoKardex"
                    asp-controller="Kardex">Kardex Nuevo</a>
+                <a class="btn btn-outline-dark @(Model.Ident_004_Estado == 43 ? "disabled" : "")"
+                   asp-action="Reprogramacion"
+                   asp-controller="Kardex">Reprogramacion</a>
+                <a class="btn btn-outline-secondary @(Model.Ident_004_Estado == 43 ? "disabled" : "")"
+                   asp-action="Reprogramacion"
+                   asp-controller="Kardex">Constancia de Cancelacion</a>
             </div>
         </div>
         <div class="table-responsive-md mt-2">

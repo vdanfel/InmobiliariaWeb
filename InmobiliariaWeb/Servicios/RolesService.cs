@@ -20,10 +20,10 @@ namespace InmobiliariaWeb.Servicios
             var rolesList = new List<RolesList>();
             try 
             {
-                using (SqlCommand command = new SqlCommand("SP_ListarRolesUsuario", _connection))
+                using (SqlCommand command = new SqlCommand("usp_ListarRolesUsuario", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_005_TipoUsuario", Ident_005_TipoUsuario);
+                    command.Parameters.AddWithValue("@nIdent_005_TipoUsuario", Ident_005_TipoUsuario);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -52,10 +52,10 @@ namespace InmobiliariaWeb.Servicios
             
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_TipoUsuarioCrear", _connection))
+                using (SqlCommand command = new SqlCommand("usp_TipoUsuarioCrear", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISNombreRol", rolesIndexViewModel.NombreRol);
+                    command.Parameters.AddWithValue("@sNombreRol", rolesIndexViewModel.NombreRol);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();

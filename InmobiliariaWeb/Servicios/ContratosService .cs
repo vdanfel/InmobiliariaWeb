@@ -27,14 +27,15 @@ namespace InmobiliariaWeb.Servicios
             var contratos = new List<ContratosList>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_CONTRATOS_BANDEJA", _connection))
+                using (SqlCommand command = new SqlCommand("usp_ContratosBandeja", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISCorrelativo", indexViewModel.Correlativo);
-                    command.Parameters.AddWithValue("@ISIdent_Programa", indexViewModel.Ident_Programa);
-                    command.Parameters.AddWithValue("@ISIdent_Manzana", indexViewModel.Ident_Manzana);
-                    command.Parameters.AddWithValue("@ISCliente", indexViewModel.Cliente ?? "");
-                    command.Parameters.AddWithValue("@ISPaginaActual", indexViewModel.PaginaActual);
+                    command.Parameters.AddWithValue("@nCorrelativo", indexViewModel.Correlativo);
+                    command.Parameters.AddWithValue("@nIdent_Programa", indexViewModel.Ident_Programa);
+                    command.Parameters.AddWithValue("@nIdent_Manzana", indexViewModel.Ident_Manzana);
+                    command.Parameters.AddWithValue("@nIdent_Lote", indexViewModel.nIdent_Lote);
+                    command.Parameters.AddWithValue("@sCliente", indexViewModel.Cliente ?? "");
+                    command.Parameters.AddWithValue("@nPaginaActual", indexViewModel.PaginaActual);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -298,7 +299,7 @@ namespace InmobiliariaWeb.Servicios
                 using (SqlCommand command = new SqlCommand("usp_Contrato_x_Separacion", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISCorrelativo", numeroSeparacion);
+                    command.Parameters.AddWithValue("@nCorrelativo", numeroSeparacion);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -1774,9 +1775,9 @@ namespace InmobiliariaWeb.Servicios
                     SqlDataReader reader = await command.ExecuteReaderAsync();
                     while (reader.Read())
                     {
-                        ingresosModel.Ident_Programa = Int32.Parse(reader["Ident_Programa"].ToString());
-                        ingresosModel.Ident_Manzana = Int32.Parse(reader["Ident_Manzana"].ToString());
-                        ingresosModel.Ident_Lote = Int32.Parse(reader["Ident_Lote"].ToString());
+                        ingresosModel.Ident_Programa = Int32.Parse(reader["nIdent_Programa"].ToString());
+                        ingresosModel.Ident_Manzana = Int32.Parse(reader["nIdent_Manzana"].ToString());
+                        ingresosModel.Ident_Lote = Int32.Parse(reader["nIdent_Lote"].ToString());
                     }
                     return ingresosModel;
                 }

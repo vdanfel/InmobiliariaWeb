@@ -264,10 +264,10 @@ namespace InmobiliariaWeb.Servicios
             var manzanaList = new List<ManzanaList>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Manzana_Listar", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Manzana_Listar", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_Programa", ident_Programa);
+                    command.Parameters.AddWithValue("@nIdent_Programa", ident_Programa);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -770,11 +770,11 @@ namespace InmobiliariaWeb.Servicios
             var reporteProgramasEstadoList = new List<ReporteProgramasEstado>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_REPORTE_LOTES_XTIPO", _connection))
+                using (SqlCommand command = new SqlCommand("usp_REPORTE_LOTES_XTIPO", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIDENT_PROGRAMA", Ident_Programa);
-                    command.Parameters.AddWithValue("@ISTIPO_REPORTE", TipoReporte);
+                    command.Parameters.AddWithValue("@nIdent_Programa", Ident_Programa);
+                    command.Parameters.AddWithValue("@nTipoReporte", TipoReporte);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -806,24 +806,24 @@ namespace InmobiliariaWeb.Servicios
             var promanlotList = new ProManLotList();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_DATOSPROMANLOTE", _connection))
+                using (SqlCommand command = new SqlCommand("usp_DatosLote", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIDENT_PROGRAMA", Ident_Programa);
-                    command.Parameters.AddWithValue("@ISIDENT_MANZANA", Ident_Manzana);
-                    command.Parameters.AddWithValue("@ISIDENT_LOTE", Ident_Lote);
+                    command.Parameters.AddWithValue("@nIdent_Programa", Ident_Programa);
+                    command.Parameters.AddWithValue("@nIdent_Manzana", Ident_Manzana);
+                    command.Parameters.AddWithValue("@nIdent_Lote", Ident_Lote);
 
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
                     while (reader.Read())
                     {
-                        promanlotList.Ident_Programa = Int32.Parse(reader["IDENT_PROGRAMA"].ToString());
-                        promanlotList.Ident_Manzana = Int32.Parse(reader["IDENT_MANZANA"].ToString());
-                        promanlotList.Ident_Lote = Int32.Parse(reader["IDENT_LOTE"].ToString());
-                        promanlotList.Nombre_Programa = reader["NOMBRE_PROGRAMA"].ToString();
-                        promanlotList.Letra_Manzana = reader["LETRA_MANZANA"].ToString();
-                        promanlotList.Lote = Int32.Parse(reader["LOTE"].ToString());
+                        promanlotList.Ident_Programa = Int32.Parse(reader["nIdent_Programa"].ToString());
+                        promanlotList.Nombre_Programa = reader["sNombrePrograma"].ToString();
+                        promanlotList.Ident_Manzana = Int32.Parse(reader["nIdent_Manzana"].ToString());
+                        promanlotList.Letra_Manzana = reader["sManzana"].ToString();
+                        promanlotList.Ident_Lote = Int32.Parse(reader["nIdent_Lote"].ToString());
+                        promanlotList.Lote = Int32.Parse(reader["sLote"].ToString());
                     }
                     return promanlotList;
                 }

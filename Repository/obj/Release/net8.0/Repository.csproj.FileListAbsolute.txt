@@ -1,0 +1,16 @@
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\bin\Release\net8.0\Repository.deps.json
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\bin\Release\net8.0\Repository.dll
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\bin\Release\net8.0\Repository.pdb
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\bin\Release\net8.0\Domain.dll
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\bin\Release\net8.0\Domain.pdb
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\Repository.csproj.AssemblyReference.cache
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\Repository.GeneratedMSBuildEditorConfig.editorconfig
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\Repository.AssemblyInfoInputs.cache
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\Repository.AssemblyInfo.cs
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\Repository.csproj.CoreCompileInputs.cache
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\Repository.sourcelink.json
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\Repository.csproj.Up2Date
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\Repository.dll
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\refint\Repository.dll
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\Repository.pdb
+E:\InmobiliariaTaipe\InmobiliariaWeb\Repository\obj\Release\net8.0\ref\Repository.dll

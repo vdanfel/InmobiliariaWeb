@@ -1,4 +1,8 @@
-﻿using InmobiliariaWeb.Interfaces;
+﻿using BusinessLogic.Cuota;
+using BusinessLogic.Interface.Cuota;
+using BusinessLogic.Interface.Lote;
+using BusinessLogic.Interface.Manzana;
+using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models.Caja;
 using InmobiliariaWeb.Models.Contratos;
 using InmobiliariaWeb.Models.Documentos;
@@ -10,6 +14,7 @@ using InmobiliariaWeb.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Runtime.CompilerServices;
 
 namespace InmobiliariaWeb.Controllers
 {
@@ -20,17 +25,23 @@ namespace InmobiliariaWeb.Controllers
         private readonly ICajaService _cajaService;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IRutaService _rutaService;
+        private readonly ICuotaBL _cuotaBL;
+        private readonly IManzanaBL _manzanaBL;
+        private readonly ILoteBL _loteBL;
 
         //_webHostEnvironment
 
-        public ContratosController(IContratosService contratosService, ITablasService tablasService, ICajaService cajaService, 
-            IWebHostEnvironment webHostEnvironment, IRutaService rutaService)
+        public ContratosController(IContratosService contratosService, ITablasService tablasService, ICajaService cajaService,
+            IWebHostEnvironment webHostEnvironment, IRutaService rutaService, ICuotaBL cuotaBL, IManzanaBL manzanaBL, ILoteBL loteBL)
         {
             _contratosService = contratosService;
             _tablasService = tablasService;
             _cajaService = cajaService;
             _webHostEnvironment = webHostEnvironment;
             _rutaService = rutaService;
+            _cuotaBL = cuotaBL;
+            _manzanaBL = manzanaBL;
+            _loteBL = loteBL;
         }
         [HttpGet]
         [Authorize]
@@ -76,16 +87,30 @@ namespace InmobiliariaWeb.Controllers
         }
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> GetManzanas(int programaId)
+        public async Task<IActionResult> ManzanasConContrato(int programaId)
         {
-            var manzanas = await _contratosService.ManzanaCbxListar(programaId);
+            var manzanas = await _manzanaBL.ManzanaConContratoOpciones(programaId);
             return Json(manzanas);
         }
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> GetLotes(int manzanaId)
+        public async Task<IActionResult> ManzanaLibre(int programaId)
         {
-            var lotes = await _contratosService.LoteCbxListar(manzanaId);
+            var manzanas = await _manzanaBL.ManzanaLibreOpciones(programaId);
+            return Json(manzanas);
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> LoteConContrato(int manzanaId)
+        {
+            var lotes = await _loteBL.LoteConContratoOpciones(manzanaId);
+            return Json(lotes);
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> LoteLibre(int manzanaId)
+        {
+            var lotes = await _loteBL.LoteLibreOpciones(manzanaId);
             return Json(lotes);
         }
         [HttpGet]
@@ -542,7 +567,7 @@ namespace InmobiliariaWeb.Controllers
                         await _contratosService.RecalculoMoras(cuotas.Ident_Kardex);
                     }
                 }
-                
+                await _cuotaBL.CuotasCompletas(cuotas.Ident_Kardex);
                 return RedirectToAction("Cuotas", "Contratos", new { Ident_Cuota = cuotas.Ident_Cuotas,Mensaje = mensaje });
             }
             else
@@ -675,7 +700,7 @@ namespace InmobiliariaWeb.Controllers
                         }
                     }
                 }
-               
+                await _cuotaBL.CuotasCompletas(moras.Ident_Kardex);
                 return RedirectToAction("Moras", "Contratos", new { Ident_Cuotas = moras.Ident_Cuotas, Mensaje = mensaje });
             }
             else

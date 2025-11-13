@@ -183,10 +183,10 @@ namespace InmobiliariaWeb.Servicios
             var tiposArchivo = new List<TipoArchivoOpcionDTO>();
             try
             {
-                using (SqlCommand command = new SqlCommand("sp_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", 25);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", 25);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();

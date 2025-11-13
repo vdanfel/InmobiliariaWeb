@@ -1,0 +1,171 @@
+﻿@model Domain.Tablas.AdendasDTO
+@{
+    Layout = "_NuevoKardexLayout";
+}
+<form asp-action="NuevoKardex" asp-controller="Kardex" method="post">
+    <input type="hidden" asp-for="@Model.nIdent_Contratos" />
+    <div class="container">
+        <div class="mb-3">
+            <button type="button" class="btn btn-outline-primary" onclick="agregarBloque('titulo')">Agregar Título</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="agregarBloque('parrafo')">Agregar Párrafo</button>
+        </div>
+
+        <div id="editorContainer" class="mb-3">
+        </div>
+
+        <input type="hidden" id="EstructuraHtml" asp-for="@Model.sTextoAdenda">
+
+        <button type="submit" class="btn btn-outline-success" onclick="guardarEstructura()">Grabar</button>
+        <a class="btn btn-outline-warning" asp-action="Kardex" asp-controller="Contratos">Regresar</a>
+        <a class="btn btn-outline-dark" asp-action="DescargarWord" asp-controller="Kardex">Imprimir</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<style>
+    .Titulo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+    }
+
+    .Parrafo {
+        margin-bottom: 1rem;
+        text-align: justify;
+    }
+</style>
+<script>
+    let bloqueCounter = 0;
+
+    // --- Inicializar editor si hay texto guardado ---
+    document.addEventListener("DOMContentLoaded", function () {
+        let contenidoGuardado = `@Html.Raw(Model.sTextoAdenda ?? "")`;
+
+        if (contenidoGuardado.trim() !== "") {
+            // Convertir el string en DOM temporal
+            let tempDiv = document.createElement("div");
+            tempDiv.innerHTML = contenidoGuardado;
+
+            // Recorrer los hijos (divs con clase Titulo o Parrafo)
+            tempDiv.childNodes.forEach(node => {
+                if (node.nodeType === 1) { // Solo elementos
+                    if (node.classList && node.classList.contains("Titulo")) {
+                        agregarBloqueDesdeDB("titulo", node.innerHTML);
+                    } else if (node.classList && node.classList.contains("Parrafo")) {
+                        agregarBloqueDesdeDB("parrafo", node.innerHTML);
+                    }
+                }
+            });
+        }
+    });
+
+    // Función para reconstruir un bloque ya guardado
+    function agregarBloqueDesdeDB(tipo, contenidoInterno) {
+        bloqueCounter++;
+        let bloqueId = `bloque_${bloqueCounter}`;
+        let contenidoEditableId = `contenido_${bloqueCounter}`;
+
+        let bloque = document.createElement("div");
+        bloque.classList.add("mb-3", "p-2", "border", "rounded");
+        bloque.setAttribute("id", bloqueId);
+
+        let toolbar = `
+            <div class="d-flex gap-2 mb-2">
+                <button type="button" class="btn btn-outline-dark btn-sm" onclick="aplicarEstilo('${contenidoEditableId}','bold')"><b>N</b></button>
+                <button type="button" class="btn btn-outline-dark btn-sm" onclick="aplicarEstilo('${contenidoEditableId}','italic')"><i>K</i></button>
+                <button type="button" class="btn btn-outline-dark btn-sm" onclick="aplicarEstilo('${contenidoEditableId}','underline')"><u>U</u></button>
+                <button type="button" class="btn btn-outline-danger btn-sm ms-auto" onclick="eliminarBloque('${bloqueId}')">Eliminar</button>
+            </div>
+        `;
+
+        let claseEditable = tipo === 'titulo' ? 'Titulo' : 'Parrafo';
+
+        let editable = `
+            <div contenteditable="true"
+                 class="form-control ${claseEditable}"
+                 id="${contenidoEditableId}"
+                 onpaste="handlePaste(event)">
+                 ${contenidoInterno}
+            </div>
+        `;
+
+        bloque.innerHTML = toolbar + editable;
+        document.getElementById("editorContainer").appendChild(bloque);
+    }
+
+    // Insertar bloque dinámico
+    function agregarBloque(tipo) {
+        bloqueCounter++;
+        let bloqueId = `bloque_${bloqueCounter}`;
+        let contenidoEditableId = `contenido_${bloqueCounter}`;
+
+        let bloque = document.createElement("div");
+        bloque.classList.add("mb-3", "p-2", "border", "rounded");
+        bloque.setAttribute("id", bloqueId);
+
+        // Botones de formato + eliminar
+        let toolbar = `
+            <div class="d-flex gap-2 mb-2">
+                <button type="button" class="btn btn-outline-dark btn-sm" onclick="aplicarEstilo('${contenidoEditableId}','bold')"><b>N</b></button>
+                <button type="button" class="btn btn-outline-dark btn-sm" onclick="aplicarEstilo('${contenidoEditableId}','italic')"><i>K</i></button>
+                <button type="button" class="btn btn-outline-dark btn-sm" onclick="aplicarEstilo('${contenidoEditableId}','underline')"><u>U</u></button>
+                <button type="button" class="btn btn-outline-danger btn-sm ms-auto" onclick="eliminarBloque('${bloqueId}')">Eliminar</button>
+            </div>
+        `;
+
+        let claseEditable = tipo === 'titulo' ? 'Titulo' : 'Parrafo';
+        let textoInicial = tipo === 'titulo' ? 'Nuevo Título' : 'Nuevo Párrafo';
+
+        // Área editable
+        let editable = `
+            <div contenteditable="true"
+                 class="form-control ${claseEditable}"
+                 id="${contenidoEditableId}"
+                 onpaste="handlePaste(event)">
+                 ${textoInicial}
+            </div>
+        `;
+
+        bloque.innerHTML = toolbar + editable;
+
+        document.getElementById("editorContainer").appendChild(bloque);
+    }
+
+    // Eliminar bloque
+    function eliminarBloque(bloqueId) {
+        document.getElementById(bloqueId).remove();
+    }
+
+    // Aplicar formato
+    function aplicarEstilo(editorId, style) {
+        let editor = document.getElementById(editorId);
+        if (editor) {
+            editor.focus();
+            document.execCommand(style, false, null);
+        }
+    }
+
+    // Prevenir pegado con formato
+    function handlePaste(event) {
+        event.preventDefault();
+        var plainText = (event.clipboardData || window.clipboardData).getData('text');
+        document.execCommand("insertText", false, plainText);
+    }
+
+    // Guardar toda la estructura en hidden input
+    function guardarEstructura() {
+        let bloques = document.querySelectorAll("#editorContainer div[contenteditable]");
+        let htmlFinal = "";
+
+        bloques.forEach(b => {
+            // Determinar si es Titulo o Parrafo
+            let clase = b.classList.contains('Titulo') ? 'Titulo' : 'Parrafo';
+            htmlFinal += `<div class="${clase}">${b.innerHTML}</div>`;
+        });
+
+        document.getElementById("EstructuraHtml").value = htmlFinal;
+    }
+</script>

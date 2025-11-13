@@ -93,14 +93,14 @@ namespace InmobiliariaWeb.Servicios
             var separaciones = new List<SeparacionesList>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_SEPARACIONES_BANDEJA", _connection))
+                using (SqlCommand command = new SqlCommand("usp_SEPARACIONES_BANDEJA", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISCorrelativo", indexViewModel.Correlativo);
-                    command.Parameters.AddWithValue("@ISIdent_Programa", indexViewModel.Ident_Programa);
-                    command.Parameters.AddWithValue("@ISIdent_Manzana", indexViewModel.Ident_Manzana);
-                    command.Parameters.AddWithValue("@ISCliente", indexViewModel.Cliente ?? "");
-                    command.Parameters.AddWithValue("@ISPaginaActual", indexViewModel.PaginaActual);
+                    command.Parameters.AddWithValue("@nCorrelativo", indexViewModel.Correlativo);
+                    command.Parameters.AddWithValue("@nIdent_Programa", indexViewModel.Ident_Programa);
+                    command.Parameters.AddWithValue("@nIdent_Manzana", indexViewModel.Ident_Manzana);
+                    command.Parameters.AddWithValue("@sCliente", indexViewModel.Cliente ?? "");
+                    command.Parameters.AddWithValue("@nPaginaActual", indexViewModel.PaginaActual);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -176,7 +176,7 @@ namespace InmobiliariaWeb.Servicios
             var manzanaCbxLists = new List<ManzanaCbxList>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Manzana_CbxListar", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Manzana_CbxListar", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@ISIdent_Programa", ident_Programa);

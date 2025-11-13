@@ -2,7 +2,6 @@
 using InmobiliariaWeb.Result;
 using InmobiliariaWeb.Result.Programa;
 using InmobiliariaWeb.ViewModels.Programa;
-using System.Threading.Tasks;
 
 namespace InmobiliariaWeb.Interfaces
 {

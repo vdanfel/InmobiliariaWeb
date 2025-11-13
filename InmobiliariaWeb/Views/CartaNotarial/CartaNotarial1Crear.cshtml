@@ -1,4 +1,4 @@
-﻿@model InmobiliariaWeb.Models.CartaNotarial.CartaNotarial1ViewDTO
+﻿@model Domain.CartaNotarial.CartaNotarial1ViewDTO
 @{
 }
 <form asp-action="CartaNotarial1Crear" method="post">
@@ -12,11 +12,11 @@
                 <div class="row g-1">
                     <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-10">
                         <div class="form-floating">
-                            <select class="form-select" id="programas" required onchange="ObtenerManzanas(this.value)">
-                                <option value="">Seleccione un programa</option>
+                            <select class="form-select" id="lProgramas" asp-for="@Model.nIdent_Programa" required>
+                                <option value="0"></option>
                                 @foreach (var programas in Model.lPrograma)
                                 {
-                                    <option value="@programas.Ident_Programa">@programas.Nombre_Programa</option>
+                                    <option value="@programas.nIdent_Programa">@programas.sNombrePrograma</option>
                                 }
                             </select>
                             <label>Seleccione Programa</label>
@@ -24,18 +24,18 @@
                     </div>
                     <div class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-1">
                         <div class="form-floating">
-                            <select class="form-select" id="manzana" required onchange="ObtenerLotes(this.value)">
-                                <option value="">Seleccione una manzana</option>
+                            <select class="form-select" id="lManzanas" asp-for="@Model.nIdent_Manzana">
+                                <option value="0"></option>
                             </select>
-                            <label>Manzana</label>
+                            <label for="lManzanas">Mz</label>
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-1">
                         <div class="form-floating">
-                            <select class="form-select" id="lote" required onchange="ObtenerContratoPorLote(this.value)">
-                                <option value="">Seleccione un lote</option>
+                            <select class="form-select" id="lLotes" asp-for="@Model.nIdent_Lote">
+                                <option value="0"></option>
                             </select>
-                            <label>Lote</label>
+                            <label for="lLotes">Lt</label>
                         </div>
                     </div>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
@@ -101,25 +101,52 @@
                 ObtenerLotes(manzanaDefault, loteDefault);
             }
         }
+        // 🔹 Cuando cambie el select de programa
+        const programaSelect = document.getElementById("lProgramas");
+        programaSelect.addEventListener("change", function () {
+            const programaId = this.value;
+
+            if (programaId && programaId !== "0") {
+                ObtenerManzanas(programaId, '');
+            } else {
+                $("#lManzanas").empty().append('<option value="0"></option>');
+                $("#lLotes").empty().append('<option value="0"></option>');
+            }
+        });
+
+        // 🔹 Cuando cambie el select de manzana
+        const manzanaSelect = document.getElementById("lManzanas");
+        manzanaSelect.addEventListener("change", function () {
+            const manzanaId = this.value;
+
+            if (manzanaId && manzanaId !== "0") {
+                ObtenerLotes(manzanaId, '');
+            } else {
+                $("#lLotes").empty().append('<option value="0"></option>');
+            }
+        });
+        // 🔹 Cuando cambie el select de lote
+        const loteSelect = document.getElementById("lLotes");
+        loteSelect.addEventListener("change",function(){
+            const loteId = this.value;
+
+            if (loteId && loteId !== "0"){
+                ObtenerContratoPorLote(loteId);
+            }
+        });
+
     });
-
-        function ObtenerManzanas(programaId, defaults = "") {
-        if (!programaId) {
-            $("#manzana").empty().append('<option value="">Seleccione una manzana</option>');
-            $("#lote").empty().append('<option value="">Seleccione un lote</option>');
-            return;
-        }
-
-        $.get(`/CartaNotarial/GetManzanas?programaId=${programaId}`, function (data) {
-            $("#manzana").empty();
-            $("#manzana").append('<option value="">Seleccione una manzana</option>');
+    function ObtenerManzanas(programaId, defaults) {
+        $.get(`/CartaNotarial/ManzanasConContrato?programaId=${programaId}`, function (data) {
+            $("#lManzanas").empty();
+            $("#lManzanas").append('<option value=""></option>');
             $.each(data, function (index, item) {
-                $("#manzana").append('<option value="' + item.ident_Manzana + '">' + item.letra + '</option>');
+                $("#lManzanas").append('<option value="' + item.nIdent_Manzana + '">' + item.sManzana + '</option>');
             });
-            $("#manzana").val(defaults);
+            $("#lManzanas").val(defaults);
 
             // Limpieza adicional por seguridad:
-            $("#lote").empty().append('<option value="">Seleccione un lote</option>');
+            $("#lote").empty().append('<option value=""></option>');
             $("#nIdent_Contratos").val('');
             $("#sNumeroContrato").val('');
             $("#nCuotasPendientes").val('');
@@ -127,24 +154,20 @@
         });
     }
 
-    function ObtenerLotes(manzanaId, defaults = "") {
-        if (!manzanaId) {
-            $("#lote").empty().append('<option value="">Seleccione un lote</option>');
-            return;
-        }
-
-        $.get(`/CartaNotarial/GetLotes?manzanaId=${manzanaId}`, function (data) {
-            $("#lote").empty();
-            $("#lote").append('<option value="">Seleccione un lote</option>');
+        function ObtenerLotes(manzanaId, defaults) {
+        $.get(`/CartaNotarial/LoteConContrato?manzanaId=${manzanaId}`, function (data) {
+            $("#lLotes").empty();
+            $("#lLotes").append('<option value=""></option>');
             $.each(data, function (index, item) {
-                $("#lote").append('<option value="' + item.ident_Lote + '">' + item.correlativo + '</option>');
+                $("#lLotes").append('<option value="' + item.nIdent_Lote + '">' + item.sLote + '</option>');
             });
-            $("#lote").val(defaults);
+            $("#lLotes").val(defaults);
+
+            $("#nIdent_Contratos").val('');
+            $("#sNumeroContrato").val('');
+            $("#nCuotasPendientes").val('');
+            $("#clientesTable tbody").empty();
         });
-        $("#nIdent_Contratos").val('');
-        $("#sNumeroContrato").val('');
-        $("#nCuotasPendientes").val('');
-        $("#clientesTable tbody").empty();
     }
     function ObtenerContratoPorLote(loteId) {
         if (!loteId) {

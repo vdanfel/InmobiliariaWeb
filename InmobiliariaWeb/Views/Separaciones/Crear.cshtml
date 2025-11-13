@@ -274,7 +274,7 @@
 
             // Verificar si se ha seleccionado un programa (evitar enviar una solicitud innecesaria)
             if (selectedPrograma) {
-                fetch(`/Separaciones/GetManzanas?programaId=${selectedPrograma}`)
+                fetch(`/Separaciones/ManzanaConSeparacion?programaId=${selectedPrograma}`)
                     .then(response => response.json())
                     .then(data => {
                         // Agregar las opciones de manzana al elemento de selección

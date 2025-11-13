@@ -1,5 +1,5 @@
-﻿using InmobiliariaWeb.Interfaces;
-using InmobiliariaWeb.Models.CartaNotarial;
+﻿using Domain.CartaNotarial;
+using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models.Tablas;
 using InmobiliariaWeb.Result.Separaciones;
 using Microsoft.Data.SqlClient;
@@ -127,7 +127,9 @@ namespace InmobiliariaWeb.Servicios
                         var cliente = new ClientesListCbxDTO
                         {
                             nIdent_Persona = Convert.ToInt32(reader["nIdent_Persona"]),
-                            sNombreCompleto = reader["sNombreCompleto"].ToString()
+                            sNombreCompleto = reader["sNombreCompleto"].ToString(),
+                            sDocumento = reader["sDocumento"].ToString(),
+                            sTipoDocumento = reader["sTipoDocumento"].ToString()
                         };
                         clientes.Add(cliente);
                     }
@@ -325,43 +327,43 @@ namespace InmobiliariaWeb.Servicios
                 _connection.Close();
             }
         }
-        public async Task<CartaNotarialDTO> CartaNotarialSelect(int nIdent_CartaNotarial)
-        {
-            CartaNotarialDTO cartaNotarialDTO = null;
-            try
-            {
-                using (SqlCommand command = new SqlCommand("usp_CartaNotarialSelect", _connection))
-                {
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@nIdent_CartaNotarial", nIdent_CartaNotarial);
-                    await _connection.OpenAsync();
-                    SqlDataReader reader = await command.ExecuteReaderAsync();
-                    if (await reader.ReadAsync())
-                    {
-                        cartaNotarialDTO = new CartaNotarialDTO
-                        {
-                            nIdent_CartaNotarial = Convert.ToInt32(reader["nIdent_CartaNotarial"]),
-                            nIdent_Contratos = Convert.ToInt32(reader["nIdent_Contratos"]),
-                            nIdent_027_TipoCartaNotarial = Convert.ToInt32(reader["nIdent_027_TipoCartaNotarial"]),
-                            nIdent_026_EstadoCartaNotarial = Convert.ToInt32(reader["nIdent_026_EstadoCartaNotarial"]),
-                            sSerie = reader["sSerie"].ToString(),
-                            nCorrelativo = Convert.ToInt32(reader["nCorrelativo"]),
-                            dFechaCartaNotarial = Convert.ToDateTime(reader["dFechaCartaNotarial"]),
-                            sNombreNotaria = reader["sNombreNotaria"].ToString(),
-                            nIdent_CartaNotarialOrigen = reader["nIdent_CartaNotarialOrigen"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["nIdent_CartaNotarialOrigen"]),
-                        };
-                    }
-                    return cartaNotarialDTO;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                _connection.Close();
-            }
-        }
+        //public async Task<CartaNotarialDTO> CartaNotarialSelect(int nIdent_CartaNotarial)
+        //{
+        //    CartaNotarialDTO cartaNotarialDTO = null;
+        //    try
+        //    {
+        //        using (SqlCommand command = new SqlCommand("usp_CartaNotarialSelect", _connection))
+        //        {
+        //            command.CommandType = System.Data.CommandType.StoredProcedure;
+        //            command.Parameters.AddWithValue("@nIdent_CartaNotarial", nIdent_CartaNotarial);
+        //            await _connection.OpenAsync();
+        //            SqlDataReader reader = await command.ExecuteReaderAsync();
+        //            if (await reader.ReadAsync())
+        //            {
+        //                cartaNotarialDTO = new CartaNotarialDTO
+        //                {
+        //                    nIdent_CartaNotarial = Convert.ToInt32(reader["nIdent_CartaNotarial"]),
+        //                    nIdent_Contratos = Convert.ToInt32(reader["nIdent_Contratos"]),
+        //                    nIdent_027_TipoCartaNotarial = Convert.ToInt32(reader["nIdent_027_TipoCartaNotarial"]),
+        //                    nIdent_026_EstadoCartaNotarial = Convert.ToInt32(reader["nIdent_026_EstadoCartaNotarial"]),
+        //                    sSerie = reader["sSerie"].ToString(),
+        //                    nCorrelativo = Convert.ToInt32(reader["nCorrelativo"]),
+        //                    dFechaCartaNotarial = Convert.ToDateTime(reader["dFechaCartaNotarial"]),
+        //                    sNombreNotaria = reader["sNombreNotaria"].ToString(),
+        //                    nIdent_CartaNotarialOrigen = reader["nIdent_CartaNotarialOrigen"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["nIdent_CartaNotarialOrigen"]),
+        //                };
+        //            }
+        //            return cartaNotarialDTO;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        _connection.Close();
+        //    }
+        //}
     }
 }

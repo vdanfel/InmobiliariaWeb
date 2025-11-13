@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "_Layout";
+    var identAdendas = Context.Session.GetInt32("nIdent_Adendas");
+    var activeTab = ViewData["ActiveTab"] as string;
+}
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="nav-item mx-2">
+            <a class="nav-link @(activeTab == "NuevoKardex" ? "active" : "")"
+               asp-controller="Kardex" asp-action="NuevoKardex" id="tabNuevoKardex">
+                Nuevo Kardex
+            </a>
+        </li>
+
+        @if (identAdendas.HasValue && identAdendas.Value > 0)
+        {
+            <li class="nav-item mx-2">
+                <a class="nav-link @(activeTab == "ValoresNuevoKardex" ? "active" : "")"
+                   asp-controller="Kardex" asp-action="ValoresNuevoKardex" id="tabValoresNuevoKardex">
+                    Valores Nuevo Kardex
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item mx-2">
+                <a class="nav-link disabled"
+                   aria-disabled="true" id="tabValoresNuevoKardex">
+                    Nuevo Kardex
+                </a>
+            </li>
+        }
+    </ul>
+    <div class="tab-content border border-top-0 rounded-bottom shadow-sm p-4 bg-white">
+        @RenderBody()
+    </div>
+</div>
+@await RenderSectionAsync("Scripts", required: false)

@@ -1,9 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Domain.CartaNotarial.CartaNotarialViewDTO
 @{
 }
-<form>
+<form method="post" asp-controller="CartaNotarial" asp-action="Index">
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -19,17 +17,138 @@
                 </div>
             </div>
             <div class="card-body">
-
+                <div class="row g-2">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-8">
+                        <div class="form-floating">
+                            <select class="form-select" id="lProgramas" asp-for="@Model.nIdent_Programa">
+                                <option value="0"></option>
+                                @foreach (var programas in Model.lProgramas)
+                                {
+                                    <option value="@programas.nIdent_Programa">@programas.sNombrePrograma</option>
+                                }
+                            </select>
+                            <label for="lProgramas">Seleccione Programa</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+                        <div class="form-floating">
+                            <select class="form-select" id="lManzanas" asp-for="@Model.nIdent_Manzana">
+                                <option value="0"></option>
+                            </select>
+                            <label for="lManzanas">Mz</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+                        <div class="form-floating">
+                            <select class="form-select" id="lLotes" asp-for="@Model.nIdent_Lote">
+                                <option value="0"></option>
+                            </select>
+                            <label for="lLotes">Lt</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" id="cliente" placeholder="" asp-for="@Model.sBuscar" />
+                            <label for="cliente">Cliente:</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-info">
+                    Filtrar
+                </button>
             </div>
         </div>
-        <div class="table-responsive-md">
-            <table class="table table-hover table-dark">
-                <thead>
+        <div class="table-responsive-md mt-1">
+            <table class="table table-hover">
+                <thead class="table-dark">
                     <tr>
-                        <td></td>
+                        <th>Carta Notarial</th>
+                        <th>Programa</th>
+                        <th>Mz</th>
+                        <th>Lt</th>
+                        <th>Contrato</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th></th>
                     </tr>
                 </thead>
+                <tbody>
+                    @foreach (var cartasNotariales in Model.lCartaNotarialList)
+                    {
+                        <tr>
+                            <td>@cartasNotariales.sNumeroCartaNotarial</td>
+                            <td>@cartasNotariales.sNombrePrograma</td>
+                            <td>@cartasNotariales.sManzana</td>
+                            <td>@cartasNotariales.sLote</td>
+                            <td>@cartasNotariales.sNumeroContrato</td>
+                            <td>@cartasNotariales.sNombreCliente</td>
+                            <td>@(cartasNotariales.dFechaCartaNotarial?.ToString("dd/MM/yyyy") ?? "")</td>
+                            <td>
+                                <a class="btn btn-outline-secondary" asp-controller="CartaNotarial" asp-action="CartaNotarial1Ver" asp-route-nIdent_CartaNotarial="@cartasNotariales.nIdent_CartaNotarial">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>
 </form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // 🔹 Cuando cambie el select de programa
+        const programaSelect = document.getElementById("lProgramas");
+        programaSelect.addEventListener("change", function () {
+            const programaId = this.value;
+
+            if (programaId && programaId !== "0") {
+                ObtenerManzanas(programaId, '');
+            } else {
+                $("#lManzanas").empty().append('<option value="0"></option>');
+                $("#lLotes").empty().append('<option value="0"></option>');
+            }
+        });
+
+        // 🔹 Cuando cambie el select de manzana
+        const manzanaSelect = document.getElementById("lManzanas");
+        manzanaSelect.addEventListener("change", function () {
+            const manzanaId = this.value;
+
+            if (manzanaId && manzanaId !== "0") {
+                ObtenerLotes(manzanaId, '');
+            } else {
+                $("#lLotes").empty().append('<option value="0"></option>');
+            }
+        });
+    }); 
+
+    function ObtenerManzanas(programaId, defaults) {
+        $.get(`/CartaNotarial/ManzanasConCartaNotarial?programaId=${programaId}`, function (data) {
+            $("#lManzanas").empty();
+            $("#lManzanas").append('<option value=""></option>');
+            $.each(data, function (index, item) {
+                $("#lManzanas").append('<option value="' + item.nIdent_Manzana + '">' + item.sManzana + '</option>');
+            });
+            $("#lManzanas").val(defaults);
+        });
+    }
+
+    function ObtenerLotes(manzanaId, defaults) {
+        $.get(`/CartaNotarial/LoteConCartaNotarial?manzanaId=${manzanaId}`, function (data) {
+            $("#lLotes").empty();
+            $("#lLotes").append('<option value=""></option>');
+            $.each(data, function (index, item) {
+                $("#lLotes").append('<option value="' + item.nIdent_Lote + '">' + item.sLote + '</option>');
+            });
+            $("#lLotes").val(defaults);
+        });
+    }
+</script>

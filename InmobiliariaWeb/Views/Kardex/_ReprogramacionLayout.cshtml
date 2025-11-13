@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "_Layout";
+    var identAdendas = Context.Session.GetInt32("Ident_Kardex");
+    var activeTab = ViewData["ActiveTab"] as string;
+}
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="nav-item mx-2">
+            <a class="nav-link @(activeTab == "Reprogramacion" ? "active" : "")"
+               asp-controller="Kardex" asp-action="Reprogramacion" id="tabReprogramacion">
+                Reprogramacion
+            </a>
+        </li>
+
+        @if (identAdendas.HasValue && identAdendas.Value > 0)
+        {
+            <li class="nav-item mx-2">
+                <a class="nav-link @(activeTab == "ValoresReprogramacion" ? "active" : "")"
+                   asp-controller="Kardex" asp-action="ValoresReprogramacion" id="tabValoresReprogramacion">
+                    Nueva Reprogramacion
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item mx-2">
+                <a class="nav-link disabled"
+                   aria-disabled="true" id="tabKardex">
+                    Nuevo Reprogramacion
+                </a>
+            </li>
+        }
+    </ul>
+    <div class="tab-content border border-top-0 rounded-bottom shadow-sm p-4 bg-white">
+        @RenderBody()
+    </div>
+</div>
+@await RenderSectionAsync("Scripts", required: false)

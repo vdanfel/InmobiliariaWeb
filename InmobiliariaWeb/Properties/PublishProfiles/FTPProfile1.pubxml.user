@@ -5,7 +5,7 @@
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAK0UgkBydJ0S7nCIIO1Ex2AAAAAACAAAAAAAQZgAAAAEAACAAAADN4qna1p+1R95KeDpaCTlgwcxO8vN3acSS5f8Rf6KDKgAAAAAOgAAAAAIAACAAAAC2YNBbWqmE4L5sRQLu6ooz9jssbsC4yDviI2xp5A5wJiAAAADXgoyVhsMD6OvX2EfMeFj5UFK5Dc3ggm1EsyIJYt//9EAAAABYGuch+myAqiUkjhbTdjCtSXCCL+Tpq9iuXJzaE4w/GOvR60xeAMACbGrABUpYEsO/VYNdWe4bpNDBh6tkJUKw</EncryptedPassword>
     <_PublishTargetUrl>ftp://155.254.246.16/www.inmobiliariataipe.somee.com</_PublishTargetUrl>
-    <History>True|2025-11-04T04:05:20.0193391Z||;True|2025-10-27T00:43:01.3866032-05:00||;True|2025-10-24T00:19:39.5191244-05:00||;True|2025-10-15T23:46:20.1210071-05:00||;True|2025-10-15T23:10:57.7626434-05:00||;True|2025-10-09T23:39:27.7592994-05:00||;True|2025-10-06T19:14:50.9933242-05:00||;True|2025-10-02T23:22:08.1936246-05:00||;True|2025-10-01T00:51:58.7058622-05:00||;True|2025-09-28T23:49:52.7525641-05:00||;</History>
+    <History>True|2025-11-13T06:01:18.6135839Z||;True|2025-11-11T23:56:22.7881459-05:00||;True|2025-11-10T23:58:50.2407707-05:00||;False|2025-11-10T23:53:29.1035425-05:00||;True|2025-11-10T13:22:37.8764557-05:00||;True|2025-11-10T00:31:54.5455596-05:00||;True|2025-11-09T16:59:09.6220794-05:00||;True|2025-11-09T14:21:44.7527379-05:00||;True|2025-11-09T01:27:57.7720739-05:00||;False|2025-11-09T01:22:53.9548705-05:00||;True|2025-11-03T23:05:20.0193391-05:00||;True|2025-10-27T00:43:01.3866032-05:00||;True|2025-10-24T00:19:39.5191244-05:00||;True|2025-10-15T23:46:20.1210071-05:00||;True|2025-10-15T23:10:57.7626434-05:00||;True|2025-10-09T23:39:27.7592994-05:00||;True|2025-10-06T19:14:50.9933242-05:00||;True|2025-10-02T23:22:08.1936246-05:00||;True|2025-10-01T00:51:58.7058622-05:00||;True|2025-09-28T23:49:52.7525641-05:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -19,16 +19,31 @@
       <publishTime>02/26/2024 10:24:40</publishTime>
     </File>
     <File Include="Azure.Identity.dll">
-      <publishTime>10/06/2024 11:43:48</publishTime>
+      <publishTime>06/10/2024 11:43:48</publishTime>
     </File>
     <File Include="BouncyCastle.Cryptography.dll">
-      <publishTime>07/05/2024 11:05:58</publishTime>
+      <publishTime>05/07/2024 11:05:58</publishTime>
+    </File>
+    <File Include="BusinessLogic.dll">
+      <publishTime>11/13/2025 00:57:05</publishTime>
+    </File>
+    <File Include="BusinessLogic.pdb">
+      <publishTime>11/13/2025 00:57:05</publishTime>
+    </File>
+    <File Include="Dapper.dll">
+      <publishTime>02/06/2025 07:16:30</publishTime>
     </File>
     <File Include="de/Microsoft.Data.SqlClient.resources.dll">
-      <publishTime>08/27/2024 13:47:06</publishTime>
+      <publishTime>08/27/2024 13:46:52</publishTime>
     </File>
     <File Include="de/PdfSharpCore.resources.dll">
       <publishTime>01/16/2024 19:32:26</publishTime>
+    </File>
+    <File Include="Domain.dll">
+      <publishTime>11/13/2025 00:57:04</publishTime>
+    </File>
+    <File Include="Domain.pdb">
+      <publishTime>11/13/2025 00:57:04</publishTime>
     </File>
     <File Include="Enums.NET.dll">
       <publishTime>11/18/2022 17:40:50</publishTime>
@@ -37,10 +52,10 @@
       <publishTime>08/27/2024 13:46:52</publishTime>
     </File>
     <File Include="ExtendedNumerics.BigDecimal.dll">
-      <publishTime>08/05/2024 05:03:54</publishTime>
+      <publishTime>05/08/2024 05:03:54</publishTime>
     </File>
     <File Include="fr/Microsoft.Data.SqlClient.resources.dll">
-      <publishTime>08/27/2024 13:46:52</publishTime>
+      <publishTime>08/27/2024 13:46:50</publishTime>
     </File>
     <File Include="HtmlAgilityPack.dll">
       <publishTime>12/29/2024 14:01:40</publishTime>
@@ -49,43 +64,43 @@
       <publishTime>01/29/2023 09:59:10</publishTime>
     </File>
     <File Include="InmobiliariaWeb.deps.json">
-      <publishTime>11/03/2025 23:00:59</publishTime>
+      <publishTime>11/11/2025 23:52:18</publishTime>
     </File>
     <File Include="InmobiliariaWeb.dll">
-      <publishTime>11/03/2025 23:00:51</publishTime>
+      <publishTime>11/11/2025 23:52:09</publishTime>
     </File>
     <File Include="InmobiliariaWeb.exe">
-      <publishTime>11/03/2025 23:00:51</publishTime>
+      <publishTime>11/11/2025 23:52:09</publishTime>
     </File>
     <File Include="InmobiliariaWeb.pdb">
-      <publishTime>11/03/2025 23:00:51</publishTime>
+      <publishTime>11/11/2025 23:52:09</publishTime>
     </File>
     <File Include="InmobiliariaWeb.runtimeconfig.json">
-      <publishTime>07/09/2025 22:04:02</publishTime>
+      <publishTime>11/09/2025 01:23:33</publishTime>
     </File>
     <File Include="InmobiliariaWeb.staticwebassets.endpoints.json">
-      <publishTime>10/27/2025 00:37:08</publishTime>
+      <publishTime>11/09/2025 01:23:45</publishTime>
     </File>
     <File Include="it/Microsoft.Data.SqlClient.resources.dll">
-      <publishTime>08/27/2024 13:46:52</publishTime>
+      <publishTime>08/27/2024 13:47:06</publishTime>
     </File>
     <File Include="ja/Microsoft.Data.SqlClient.resources.dll">
-      <publishTime>08/27/2024 13:46:52</publishTime>
+      <publishTime>08/27/2024 13:47:06</publishTime>
     </File>
     <File Include="ko/Microsoft.Data.SqlClient.resources.dll">
-      <publishTime>08/27/2024 13:46:52</publishTime>
+      <publishTime>08/27/2024 13:47:06</publishTime>
     </File>
     <File Include="libman.json">
       <publishTime>08/31/2025 09:57:42</publishTime>
     </File>
     <File Include="MathNet.Numerics.dll">
-      <publishTime>03/04/2022 09:02:08</publishTime>
+      <publishTime>04/03/2022 09:02:08</publishTime>
     </File>
     <File Include="Microsoft.Bcl.AsyncInterfaces.dll">
       <publishTime>04/14/2020 17:39:12</publishTime>
     </File>
     <File Include="Microsoft.Data.SqlClient.dll">
-      <publishTime>08/27/2024 13:47:06</publishTime>
+      <publishTime>08/27/2024 13:46:52</publishTime>
     </File>
     <File Include="Microsoft.Identity.Client.dll">
       <publishTime>06/06/2024 17:09:28</publishTime>
@@ -112,7 +127,7 @@
       <publishTime>11/30/2023 23:41:50</publishTime>
     </File>
     <File Include="Microsoft.IO.RecyclableMemoryStream.dll">
-      <publishTime>11/12/2023 16:53:28</publishTime>
+      <publishTime>12/11/2023 16:53:28</publishTime>
     </File>
     <File Include="Microsoft.SqlServer.Server.dll">
       <publishTime>01/27/2022 12:19:08</publishTime>
@@ -121,19 +136,19 @@
       <publishTime>10/22/2021 18:40:24</publishTime>
     </File>
     <File Include="Newtonsoft.Json.dll">
-      <publishTime>08/03/2023 02:09:54</publishTime>
+      <publishTime>03/08/2023 02:09:54</publishTime>
     </File>
     <File Include="NPOI.Core.dll">
-      <publishTime>08/11/2024 18:00:54</publishTime>
+      <publishTime>11/08/2024 18:00:54</publishTime>
     </File>
     <File Include="NPOI.OOXML.dll">
-      <publishTime>08/11/2024 18:01:32</publishTime>
+      <publishTime>11/08/2024 18:01:32</publishTime>
     </File>
     <File Include="NPOI.OpenXml4Net.dll">
-      <publishTime>08/11/2024 18:01:20</publishTime>
+      <publishTime>11/08/2024 18:01:20</publishTime>
     </File>
     <File Include="NPOI.OpenXmlFormats.dll">
-      <publishTime>08/11/2024 18:01:28</publishTime>
+      <publishTime>11/08/2024 18:01:28</publishTime>
     </File>
     <File Include="PdfSharpCore.dll">
       <publishTime>01/16/2024 19:32:26</publishTime>
@@ -141,11 +156,17 @@
     <File Include="pt-BR/Microsoft.Data.SqlClient.resources.dll">
       <publishTime>08/27/2024 13:46:52</publishTime>
     </File>
+    <File Include="Repository.dll">
+      <publishTime>11/13/2025 00:57:05</publishTime>
+    </File>
+    <File Include="Repository.pdb">
+      <publishTime>11/13/2025 00:57:05</publishTime>
+    </File>
     <File Include="ru/Microsoft.Data.SqlClient.resources.dll">
       <publishTime>08/27/2024 13:46:52</publishTime>
     </File>
     <File Include="runtimes/osx/native/libSkiaSharp.dylib">
-      <publishTime>09/04/2024 11:58:02</publishTime>
+      <publishTime>04/09/2024 11:58:02</publishTime>
     </File>
     <File Include="runtimes/unix/lib/net6.0/Microsoft.Data.SqlClient.dll">
       <publishTime>08/27/2024 13:46:52</publishTime>
@@ -153,23 +174,26 @@
     <File Include="runtimes/unix/lib/net6.0/System.Drawing.Common.dll">
       <publishTime>10/22/2021 18:51:42</publishTime>
     </File>
+    <File Include="runtimes/unix/lib/net8.0/Microsoft.Data.SqlClient.dll">
+      <publishTime>08/27/2024 13:46:52</publishTime>
+    </File>
     <File Include="runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll">
       <publishTime>02/20/2024 17:29:06</publishTime>
     </File>
     <File Include="runtimes/win-arm64/native/libSkiaSharp.dll">
-      <publishTime>09/04/2024 12:25:14</publishTime>
+      <publishTime>04/09/2024 12:25:14</publishTime>
     </File>
     <File Include="runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll">
       <publishTime>02/20/2024 17:29:06</publishTime>
     </File>
     <File Include="runtimes/win-x64/native/libSkiaSharp.dll">
-      <publishTime>09/04/2024 12:24:38</publishTime>
+      <publishTime>04/09/2024 12:24:38</publishTime>
     </File>
     <File Include="runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll">
       <publishTime>02/20/2024 17:30:22</publishTime>
     </File>
     <File Include="runtimes/win-x86/native/libSkiaSharp.dll">
-      <publishTime>09/04/2024 12:24:38</publishTime>
+      <publishTime>04/09/2024 12:24:38</publishTime>
     </File>
     <File Include="runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll">
       <publishTime>02/20/2024 17:28:56</publishTime>
@@ -195,6 +219,15 @@
     <File Include="runtimes/win/lib/net6.0/System.Windows.Extensions.dll">
       <publishTime>10/22/2021 18:49:58</publishTime>
     </File>
+    <File Include="runtimes/win/lib/net8.0/Microsoft.Data.SqlClient.dll">
+      <publishTime>08/27/2024 13:46:52</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/net8.0/System.Runtime.Caching.dll">
+      <publishTime>10/31/2023 10:00:12</publishTime>
+    </File>
+    <File Include="runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.dll">
+      <publishTime>09/16/2024 18:10:56</publishTime>
+    </File>
     <File Include="SixLabors.Fonts.dll">
       <publishTime>09/15/2023 05:31:38</publishTime>
     </File>
@@ -202,13 +235,13 @@
       <publishTime>07/22/2024 05:15:42</publishTime>
     </File>
     <File Include="SkiaSharp.dll">
-      <publishTime>09/04/2024 12:24:12</publishTime>
+      <publishTime>04/09/2024 12:24:12</publishTime>
     </File>
     <File Include="System.ClientModel.dll">
-      <publishTime>03/01/2024 12:43:00</publishTime>
+      <publishTime>01/03/2024 12:43:00</publishTime>
     </File>
     <File Include="System.Configuration.ConfigurationManager.dll">
-      <publishTime>08/19/2022 14:58:02</publishTime>
+      <publishTime>10/31/2023 09:59:08</publishTime>
     </File>
     <File Include="System.Diagnostics.DiagnosticSource.dll">
       <publishTime>02/15/2023 19:32:04</publishTime>
@@ -226,19 +259,19 @@
       <publishTime>05/15/2018 08:29:38</publishTime>
     </File>
     <File Include="System.Memory.Data.dll">
-      <publishTime>08/04/2021 11:45:54</publishTime>
+      <publishTime>04/08/2021 11:45:54</publishTime>
     </File>
     <File Include="System.Runtime.Caching.dll">
-      <publishTime>10/22/2021 18:52:02</publishTime>
+      <publishTime>10/31/2023 10:05:46</publishTime>
     </File>
     <File Include="System.Security.Cryptography.Pkcs.dll">
-      <publishTime>09/16/2024 18:14:16</publishTime>
+      <publishTime>09/16/2024 18:09:56</publishTime>
     </File>
     <File Include="System.Security.Cryptography.ProtectedData.dll">
-      <publishTime>10/22/2021 18:51:04</publishTime>
+      <publishTime>10/31/2023 09:59:04</publishTime>
     </File>
     <File Include="System.Security.Cryptography.Xml.dll">
-      <publishTime>09/16/2024 18:15:52</publishTime>
+      <publishTime>09/16/2024 18:09:58</publishTime>
     </File>
     <File Include="System.Security.Permissions.dll">
       <publishTime>10/22/2021 18:49:50</publishTime>
@@ -247,7 +280,7 @@
       <publishTime>10/22/2021 18:49:44</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>11/03/2025 23:00:59</publishTime>
+      <publishTime>11/11/2025 23:52:19</publishTime>
     </File>
     <File Include="wwwroot/Archivos/Contratos/1615/3fba44f9-4eef-4ead-90b3-05137d1a231f.pdf">
       <publishTime>10/15/2025 21:56:38</publishTime>
@@ -289,7 +322,7 @@
       <publishTime>08/31/2025 09:57:42</publishTime>
     </File>
     <File Include="wwwroot/InmobiliariaWeb.styles.css">
-      <publishTime>08/31/2025 09:57:42</publishTime>
+      <publishTime>11/09/2025 01:23:33</publishTime>
     </File>
     <File Include="wwwroot/js/site.js">
       <publishTime>08/31/2025 09:57:42</publishTime>
@@ -469,25 +502,25 @@
       <publishTime>08/31/2025 09:57:42</publishTime>
     </File>
     <File Include="wwwroot/Template/FormatoRecibo.docx">
-      <publishTime>07/09/2025 13:55:43</publishTime>
+      <publishTime>09/07/2025 13:55:43</publishTime>
     </File>
     <File Include="wwwroot/Template/FormatoReciboCuota.docx">
-      <publishTime>07/09/2025 13:21:27</publishTime>
+      <publishTime>09/07/2025 13:21:27</publishTime>
     </File>
     <File Include="wwwroot/Template/ventas.docx">
       <publishTime>08/31/2025 09:57:42</publishTime>
     </File>
     <File Include="Xceed.Document.NET.dll">
-      <publishTime>10/03/2025 09:59:58</publishTime>
+      <publishTime>03/10/2025 09:59:58</publishTime>
     </File>
     <File Include="Xceed.Drawing.NET.dll">
-      <publishTime>10/03/2025 09:59:56</publishTime>
+      <publishTime>03/10/2025 09:59:56</publishTime>
     </File>
     <File Include="Xceed.Words.NET.dll">
-      <publishTime>10/03/2025 09:59:58</publishTime>
+      <publishTime>03/10/2025 09:59:58</publishTime>
     </File>
     <File Include="zh-Hans/Microsoft.Data.SqlClient.resources.dll">
-      <publishTime>08/27/2024 13:47:06</publishTime>
+      <publishTime>08/27/2024 13:46:52</publishTime>
     </File>
     <File Include="zh-Hant/Microsoft.Data.SqlClient.resources.dll">
       <publishTime>08/27/2024 13:46:52</publishTime>

@@ -1,4 +1,82 @@
-﻿@{
+﻿@model Domain.CartaNotarial.CartaNotarial1ViewDTO
+@{
     Layout = "_CartaNotarial1Layout";
 }
-aqui se muestra la carta notarial creada
+<form>
+    <input type="hidden" id="nIdent_Contratos" asp-for="@Model.nIdent_Contratos" />
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Carta Notarial N</h2>
+            </div>
+            <div class="card-body">
+                <div class="row g-1">
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-10">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" asp-for="@Model.sNombrePrograma" readonly/>
+                            <label>Seleccione Programa</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" asp-for="@Model.sManzana" readonly />
+                            <label for="lManzanas">Mz</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-2 col-lg-2 col-xl-1">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" asp-for="@Model.sLote" readonly />
+                            <label for="lLotes">Lt</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="sNumeroContrato" asp-for="@Model.sNumeroContrato" readonly />
+                            <label>Numero Contrato</label>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="nCuotasPendientes" asp-for="@Model.nCuotasPendientes" readonly />
+                            <label>Cuotas Pendientes</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-box mt-3">
+                    <span class="group-box-title">Clientes</span>
+                    <div class="group-box-content">
+                        <table class="table table-hover align-middle mb-0" id="clientesTable">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 50px;"></th>
+                                    <th>Apellidos y Nombres</th>
+                                    <th>Tipo Documento</th>
+                                    <th>Documento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var clientes in Model.lClientes)
+                                {
+                                    <tr>
+                                        <td class="text-center"> <input type="checkbox" class="form-check-input cliente-checkbox" data-persona="@clientes.nIdent_Persona" @(clientes.bActivo ? "checked" : "") /> </td>
+                                        <td>@clientes.sNombreCompleto</td>
+                                        <td>@clientes.sTipoDocumento</td>
+                                        <td>@clientes.sDocumento</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row g-1 mt-1">
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" asp-for="dFechaCartaNotarial" />
+                            <label>Fecha Carta Notarial</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

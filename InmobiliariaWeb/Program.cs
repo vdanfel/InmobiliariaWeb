@@ -1,8 +1,40 @@
+using BusinessLogic.Adenda;
+using BusinessLogic.CartaNotarial;
+using BusinessLogic.Cuota;
+using BusinessLogic.Interface.Adenda;
+using BusinessLogic.Interface.CartaNotarial;
+using BusinessLogic.Interface.Cuota;
+using BusinessLogic.Interface.Kardex;
+using BusinessLogic.Interface.Lote;
+using BusinessLogic.Interface.Manzana;
+using BusinessLogic.Interface.Programa;
+using BusinessLogic.Interface.Separaciones;
+using BusinessLogic.Kardex;
+using BusinessLogic.Lote;
+using BusinessLogic.Manzana;
+using BusinessLogic.Programa;
+using BusinessLogic.Separaciones;
 using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models;
 using InmobiliariaWeb.Servicios;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Data.SqlClient;
+using Repository.Adenda;
+using Repository.CartaNotarial;
+using Repository.Cuota;
+using Repository.Interface.Adenda;
+using Repository.Interface.CartaNotarial;
+using Repository.Interface.Cuota;
+using Repository.Interface.Kardex;
+using Repository.Interface.Lote;
+using Repository.Interface.Manzana;
+using Repository.Interface.Programa;
+using Repository.Interface.Separaciones;
+using Repository.Kardex;
+using Repository.Lote;
+using Repository.Manzana;
+using Repository.Programa;
+using Repository.Separaciones;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,9 +57,24 @@ builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<ISeparacionesService, SeparacionesService>();
 builder.Services.AddScoped<INotificacionesService, NotificacionesService>();
 builder.Services.AddScoped<IKardexService, KardexService>();
-builder.Services.AddScoped<IAdendasService, AdendasService>();
 builder.Services.AddScoped<IRutaService, RutaService>();
 builder.Services.AddScoped<ICartaNotarialService, CartaNotarialService>();
+builder.Services.AddScoped<ICuotaRepository, CuotaRepository>();
+builder.Services.AddScoped<ICuotaBL, CuotaBL>();
+builder.Services.AddScoped<ICartaNotarialRepository, CartaNotarialRepository>();
+builder.Services.AddScoped<ICartaNotarialBL, CartaNotarialBL>();
+builder.Services.AddScoped<IManzanaRepository, ManzanaRepository>();
+builder.Services.AddScoped<IManzanaBL, ManzanaBL>();
+builder.Services.AddScoped<ILoteRepository, LoteRepository>();
+builder.Services.AddScoped<ILoteBL, LoteBL>();
+builder.Services.AddScoped<IAdendaRepository, AdendaRepository>();
+builder.Services.AddScoped<IAdendaBL, AdendaBL>();
+builder.Services.AddScoped<IProgramaRepository, ProgramaRepository>();
+builder.Services.AddScoped<IProgramaBL, ProgramaBL>();
+builder.Services.AddScoped<ISeparacionesRepository, SeparacionesRepository>();
+builder.Services.AddScoped<ISeparacionesBL, SeparacionesBL>();
+builder.Services.AddScoped<IKardexRepository, KardexRepository>();
+builder.Services.AddScoped<IKardexBL, KardexBL>();
 
 builder.Services.AddScoped<SqlConnection>(c =>
 {

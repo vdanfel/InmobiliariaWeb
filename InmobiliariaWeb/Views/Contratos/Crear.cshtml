@@ -412,22 +412,23 @@
     }
     
     function ObtenerManzanas(programaId, defaults) {
-        $.get(`/Separaciones/GetManzanas?programaId=${programaId}`, function (data) {
+        $.get(`/Contratos/ManzanaLibre?programaId=${programaId}`, function (data) {
             $("#manzana").empty();
             $("#manzana").append('<option value=""></option>');
             $.each(data, function (index, item) {
-                $("#manzana").append('<option value="' + item.ident_Manzana + '">' + item.letra + '</option>');
+                $("#manzana").append('<option value="' + item.nIdent_Manzana + '">' + item.sManzana + '</option>');
             });
             $("#manzana").val(defaults);
         });
     }
 
+
     function ObtenerLotes(manzanaId, defaults) {
-        $.get(`/Separaciones/GetLotes?manzanaId=${manzanaId}`, function (data) {
+        $.get(`/Contratos/LoteLibre?manzanaId=${manzanaId}`, function (data) {
             $("#lote").empty();
             $("#lote").append('<option value=""></option>');
             $.each(data, function (index, item) {
-                $("#lote").append('<option value="' + item.ident_Lote + '">' + item.correlativo + '</option>');
+                $("#lote").append('<option value="' + item.nIdent_Lote + '">' + item.sLote + '</option>');
             });
             $("#lote").val(defaults);
         });

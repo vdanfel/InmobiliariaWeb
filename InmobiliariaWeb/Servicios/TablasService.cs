@@ -21,10 +21,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoDocumentoList = new List<TipoDocumento>();
             try 
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -55,10 +55,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoMonedaList = new List<TipoMoneda>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -88,10 +88,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoRolList = new List<TipoRol>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -121,10 +121,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoEstadoCivilList = new List<TipoEstadoCivil>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -154,10 +154,10 @@ namespace InmobiliariaWeb.Servicios
             var manzanaList = new List<Manzanas>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -187,10 +187,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoLoteList = new List<TipoLote>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -221,10 +221,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoPropietarioList = new List<TipoPropietario>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -255,10 +255,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoUbicacionLotesList = new List<TipoUbicacionLote>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -383,10 +383,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoSexoList = new List<TipoSexo>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -417,10 +417,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoContratos = new List<TipoContrato>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -449,10 +449,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoLados = new List<TipoLado>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -513,10 +513,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoPagoList = new List<TipoPago>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -546,10 +546,10 @@ namespace InmobiliariaWeb.Servicios
             var bancoList = new List<Banco>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -579,10 +579,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoCuentaBancoList = new List<TipoCuentaBanco>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -611,10 +611,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoIngresoList = new List<TipoIngreso>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();
@@ -643,10 +643,10 @@ namespace InmobiliariaWeb.Servicios
             var tipoEgresoList = new List<TipoEgreso>();
             try
             {
-                using (SqlCommand command = new SqlCommand("SP_Parametros", _connection))
+                using (SqlCommand command = new SqlCommand("usp_Parametros", _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@ISIdent_ParametroTipo", parametro);
+                    command.Parameters.AddWithValue("@nIdent_ParametrosTipo", parametro);
                     await _connection.OpenAsync();
                     // Ejecuta el procedimiento almacenado y obtén el resultado
                     SqlDataReader reader = await command.ExecuteReaderAsync();

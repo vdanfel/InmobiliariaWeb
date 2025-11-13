@@ -1,4 +1,4 @@
-﻿using InmobiliariaWeb.Models.CartaNotarial;
+﻿using Domain.CartaNotarial;
 using InmobiliariaWeb.Models.Tablas;
 using InmobiliariaWeb.Result.Separaciones;
 
@@ -16,6 +16,6 @@ namespace InmobiliariaWeb.Interfaces
         Task<int> CartaNotarialDetalleUpdate(CartaNotarialDetalleDTO cartaNotarialDetalleDTO);
         Task<int> CartaNotarialPersonaCreate(CartaNotarialPersonaDTO cartaNotarialPersonaDTO);
         Task<int> CartaNotarialPersonaDelete(int nIdent_CartaNotarial, int nIdent_UsuarioModificacion);
-        Task<CartaNotarialDTO> CartaNotarialSelect(int nIdent_CartaNotarial);
+        //Task<CartaNotarialDTO> CartaNotarialSelect(int nIdent_CartaNotarial);
     }
 }

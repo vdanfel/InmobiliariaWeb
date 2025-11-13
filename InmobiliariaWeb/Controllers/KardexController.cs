@@ -1,6 +1,10 @@
-﻿using InmobiliariaWeb.Interfaces;
+﻿using BusinessLogic.Interface.Adenda;
+using BusinessLogic.Interface.Kardex;
+using Domain.Adendas;
+using Domain.Tablas;
+using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models.Kardex;
-using InmobiliariaWeb.Models.Tablas;
+using InmobiliariaWeb.Servicios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,16 +14,18 @@ namespace InmobiliariaWeb.Controllers
     public class KardexController:Controller
     {
         private readonly IKardexService _kardexService;
-        private readonly IAdendasService _adendasService;
+        private readonly IAdendaBL _adendaBL;
         private readonly IContratosService _contratosService;
-        public KardexController(IKardexService kardexService, IAdendasService adendasService, IContratosService contratosService)
+        private readonly IKardexBL _kardexBL;
+        public KardexController(IKardexService kardexService, IAdendaBL adendaBL, IContratosService contratosService, IKardexBL kardexBL)
         {
             _kardexService = kardexService;
-            _adendasService = adendasService;
+            _adendaBL = adendaBL;
             _contratosService = contratosService;
+            _kardexBL = kardexBL;
         }
         [HttpGet]
-        public async Task<IActionResult> Adenda(int nIdent_Contratos, string mensaje = null)
+        public async Task<IActionResult> NuevoKardex(int nIdent_Contratos, string mensaje = null)
         {
             if (HttpContext.Session.GetString("Usuario") == null)
             {
@@ -35,8 +41,13 @@ namespace InmobiliariaWeb.Controllers
             {
                 nIdent_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
             }
+            AdendasDTO adendasDTO = new AdendasDTO
+            {
+                nIdent_Contratos = nIdent_Contratos,
+                nIdent_028_TipoAdenda = 1161
+            };
 
-            var adendaPendiente = await _adendasService.ObtenerAdendaPendiente(nIdent_Contratos);
+            var adendaPendiente = await _adendaBL.ObtenerAdendaPendiente(adendasDTO);
             if (adendaPendiente != null)
             {
                 // Guardar en sesión el Id de la Adenda
@@ -45,6 +56,7 @@ namespace InmobiliariaWeb.Controllers
                 var model = new AdendasDTO
                 {
                     nIdent_Adendas = adendaPendiente.nIdent_Adendas,
+                    nIdent_028_TipoAdenda = 1161,
                     nIdent_Contratos = nIdent_Contratos,
                     sTextoAdenda = adendaPendiente.sTextoAdenda,
                     nIdent_023_EstadoAdenda = adendaPendiente.nIdent_023_EstadoAdenda
@@ -58,7 +70,7 @@ namespace InmobiliariaWeb.Controllers
                 {
                     ViewData["Mensaje"] = "Ya existe una adenda pendiente. Puede continuar editándola.";
                 }
-                ViewData["ActiveTab"] = "Adenda";
+                ViewData["ActiveTab"] = "NuevoKardex";
                 return View(model);
             }
 
@@ -77,14 +89,14 @@ namespace InmobiliariaWeb.Controllers
                     ViewData["Mensaje"] = mensaje;
                 }
 
-                ViewData["ActiveTab"] = "Adenda";
+                ViewData["ActiveTab"] = "NuevoKardex";
 
                 return View(nuevaAdenda);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Adenda(AdendasDTO adendasDTO)
+        public async Task<IActionResult> NuevoKardex(AdendasDTO adendasDTO)
         {
             if (HttpContext.Session.GetString("Usuario") == null)
             {
@@ -94,23 +106,23 @@ namespace InmobiliariaWeb.Controllers
             var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
             adendasDTO.nUsuarioCreacion = loginResult.IdentUsuario;
             adendasDTO.nUsuarioModificacion = loginResult.IdentUsuario;
-
+            adendasDTO.nIdent_028_TipoAdenda = 1161;
             if (adendasDTO.nIdent_Adendas < 1)
             {
                 // Insertar adenda
-                adendasDTO.nIdent_Adendas = await _adendasService.AdendasCreate(adendasDTO);
+                adendasDTO.nIdent_Adendas = await _adendaBL.AdendasCreate(adendasDTO);
             }
             else
             {
                 //Actualizar adenda
-                var res = await _adendasService.AdendasUpdate(adendasDTO);
+                var res = await _adendaBL.AdendasUpdate(adendasDTO);
             }
             // Redirigir al GET con mensaje
-            return RedirectToAction("Adenda", new { nIdent_Contratos = adendasDTO.nIdent_Contratos, mensaje = "Adenda creada correctamente." });
+            return RedirectToAction("NuevoKardex", new { nIdent_Contratos = adendasDTO.nIdent_Contratos, mensaje = "Adenda creada correctamente." });
         }
 
         [HttpGet]
-        public async Task<IActionResult> Nuevo(int nIdent_Contratos)
+        public async Task<IActionResult> ValoresNuevoKardex(int nIdent_Contratos)
         {
             if (HttpContext.Session.GetString("Usuario") == null)
             {
@@ -128,11 +140,11 @@ namespace InmobiliariaWeb.Controllers
             KardexNuevoDTO kardexNuevoDTO = await _kardexService.DatosAdenda(nIdent_Contratos);
             kardexNuevoDTO.nImporteNuevo = kardexNuevoDTO.nTotalDeuda;
             kardexNuevoDTO.dFechaInicio = DateTime.Now;
-            ViewData["ActiveTab"] = "Nuevo";
+            ViewData["ActiveTab"] = "ValoresNuevoKardex";
             return View(kardexNuevoDTO);
         }
         [HttpPost]
-        public async Task<IActionResult> Nuevo(KardexNuevoDTO kardexNuevoDTO)
+        public async Task<IActionResult> ValoresNuevoKardex(KardexNuevoDTO kardexNuevoDTO)
         {
             if (HttpContext.Session.GetString("Usuario") == null)
             {
@@ -172,7 +184,7 @@ namespace InmobiliariaWeb.Controllers
                 nIdent_Adendas = (int)HttpContext.Session.GetInt32("nIdent_Adendas");
             }
 
-            var adendasDTO= await _adendasService.AdendasSelect(nIdent_Adendas);
+            var adendasDTO= await _adendaBL.AdendasSelect(nIdent_Adendas);
 
             if (adendasDTO == null)
             {
@@ -267,5 +279,171 @@ namespace InmobiliariaWeb.Controllers
 
             return File(byteArray, "application/msword", fileName);
         }
+        [HttpGet]
+        public async Task<IActionResult> Reprogramacion(int nIdent_Kardex, string mensaje = null)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            
+            if (nIdent_Kardex > 0)
+            {
+                HttpContext.Session.SetInt32("Ident_Kardex", nIdent_Kardex);
+            }
+            else
+            {
+                nIdent_Kardex = Int32.Parse(HttpContext.Session.GetInt32("Ident_Kardex").ToString());
+            }
+
+            var nIdent_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
+
+            AdendasDTO adendasDTO = new AdendasDTO
+            {
+                nIdent_Contratos = nIdent_Contratos,
+                nIdent_028_TipoAdenda = 1162
+            };
+            var adendaPendiente = await _adendaBL.ObtenerAdendaPendiente(adendasDTO);
+
+            if (adendaPendiente != null)
+            {
+                // Guardar en sesión el Id de la Adenda
+                HttpContext.Session.SetInt32("nIdent_Adendas", adendaPendiente.nIdent_Adendas);
+
+                var model = new AdendasDTO
+                {
+                    nIdent_Adendas = adendaPendiente.nIdent_Adendas,
+                    nIdent_028_TipoAdenda = 1162,
+                    nIdent_Contratos = nIdent_Contratos,
+                    sTextoAdenda = adendaPendiente.sTextoAdenda,
+                    nIdent_023_EstadoAdenda = adendaPendiente.nIdent_023_EstadoAdenda
+                };
+
+                if (!string.IsNullOrEmpty(mensaje))
+                {
+                    ViewData["Mensaje"] = mensaje;
+                }
+                else
+                {
+                    ViewData["Mensaje"] = "Ya existe una adenda pendiente. Puede continuar editándola.";
+                }
+                ViewData["ActiveTab"] = "Reprogramacion";
+                return View(model);
+            }
+
+            else
+            {
+                // Si aún no hay adenda pendiente, limpiar variable en sesión
+                HttpContext.Session.Remove("nIdent_Adendas");
+                var nuevaAdenda = new AdendasDTO
+                {
+                    nIdent_Contratos = nIdent_Contratos,
+                    sTextoAdenda = "",
+                };
+
+                if (!string.IsNullOrEmpty(mensaje))
+                {
+                    ViewData["Mensaje"] = mensaje;
+                }
+
+                ViewData["ActiveTab"] = "Reprogramacion";
+
+                return View(nuevaAdenda);
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Reprogramacion(AdendasDTO adendasDTO)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+
+            adendasDTO.nUsuarioCreacion = loginResult.IdentUsuario;
+            adendasDTO.nUsuarioModificacion = loginResult.IdentUsuario;
+            adendasDTO.nIdent_028_TipoAdenda = 1162;
+            if (adendasDTO.nIdent_Adendas < 1)
+            {
+                // Insertar adenda
+                adendasDTO.nIdent_Adendas = await _adendaBL.AdendasCreate(adendasDTO);
+            }
+            else
+            {
+                //Actualizar adenda
+                var res = await _adendaBL.AdendasUpdate(adendasDTO);
+            }
+            // Redirigir al GET con mensaje
+            return RedirectToAction("Reprogramacion", new { nIdent_Contratos = adendasDTO.nIdent_Contratos, mensaje = "Adenda creada correctamente." });
+        }
+        [HttpGet]
+        public async Task<IActionResult> ValoresReprogramacion(int nIdent_Kardex)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            
+            if (nIdent_Kardex > 0)
+            {
+                HttpContext.Session.SetInt32("Ident_Kardex", nIdent_Kardex);
+            }
+            else
+            {
+                nIdent_Kardex = Int32.Parse(HttpContext.Session.GetInt32("Ident_Kardex").ToString());
+            }
+
+            var nIdent_Contratos = (int)HttpContext.Session.GetInt32("Ident_Contratos");
+
+            var kardexViewModel = await _contratosService.DatosKardex(nIdent_Kardex);
+
+            ValoresReprogramacionDTO valoresReprogramacionDTO = new ValoresReprogramacionDTO
+            {
+                nIdent_Kardex = nIdent_Kardex,
+                dNuevaFechaInicio = DateTime.Now,
+                nCuotaActual = kardexViewModel.CuotaActual,
+            };
+
+            ViewData["ActiveTab"] = "ValoresReprogramacion";
+            return View(valoresReprogramacionDTO);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ValoresReprogramacion(ValoresReprogramacionDTO valoresReprogramacionDTO)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction("Alerta", "Login", new { Mensaje = "Su sesión expiró, vuelva a iniciar sesión" });
+            }
+            var loginResult = DatosLogin.DatosUsuarioLogin(HttpContext);
+            
+            valoresReprogramacionDTO.nUsuarioModificacion = loginResult.IdentUsuario;
+
+            var res = await _kardexBL.KardexReprogramacion(valoresReprogramacionDTO);
+
+            return RedirectToAction("Kardex", "Contratos");
+        }
+        /*
+        
+        {
+            
+
+            kardexNuevoDTO.nIdent_Adendas = (int)HttpContext.Session.GetInt32("nIdent_Adendas");
+            
+
+            int nIdent_Kardex = await _kardexService.KardexNuevoInsert(kardexNuevoDTO);
+
+            if (nIdent_Kardex > 0)
+            {
+                HttpContext.Session.SetInt32("Ident_Kardex", nIdent_Kardex);
+            }
+            else
+            {
+                HttpContext.Session.Remove("Ident_Kardex");
+            }
+            
+        }
+         */
     }
 }

@@ -18,5 +18,6 @@ namespace InmobiliariaWeb.Models.Contratos
         public int NumeroPaginas { get; set; }
         public int NumeroGrupos { get; set; }
         public List<ContratosList>ContratosLists { get; set; }
+        public int nIdent_Lote { get; set; }
     }
 }

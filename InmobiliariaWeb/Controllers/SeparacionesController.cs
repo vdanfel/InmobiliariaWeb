@@ -1,4 +1,5 @@
-﻿using InmobiliariaWeb.Interfaces;
+﻿using BusinessLogic.Interface.Manzana;
+using InmobiliariaWeb.Interfaces;
 using InmobiliariaWeb.Models;
 using InmobiliariaWeb.Models.Separaciones;
 using InmobiliariaWeb.Result;
@@ -17,11 +18,13 @@ namespace InmobiliariaWeb.Controllers
         private readonly ISeparacionesService _separacionesService;
         private readonly ITablasService _tablasService;
         private readonly ICajaService _cajaService;
-        public SeparacionesController(ISeparacionesService separacionesService, ITablasService tablasService, ICajaService cajaService)
+        private readonly IManzanaBL _manzanaBL;
+        public SeparacionesController(ISeparacionesService separacionesService, ITablasService tablasService, ICajaService cajaService, IManzanaBL manzanaBL)
         {
             _separacionesService = separacionesService;
             _tablasService = tablasService;
-            _cajaService = cajaService; 
+            _cajaService = cajaService;
+            _manzanaBL = manzanaBL;
         }
         [Authorize]
         public async Task<IActionResult> Imprimir(int ident_Separacion, int ident_010_TipoLote)
@@ -317,6 +320,20 @@ namespace InmobiliariaWeb.Controllers
         public async Task<IActionResult> GetManzanas(int programaId)
         {
             var manzanas = await _separacionesService.ManzanaCbxListar(programaId);
+            return Json(manzanas);
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ManzanaConSeparacion(int programaId)
+        {
+            var manzanas = await _manzanaBL.ManzanaConSeparacionesOpciones(programaId);
+            return Json(manzanas);
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ManzanaLibre(int programaId)
+        {
+            var manzanas = await _manzanaBL.ManzanaLibreOpciones(programaId);
             return Json(manzanas);
         }
         [HttpGet]
