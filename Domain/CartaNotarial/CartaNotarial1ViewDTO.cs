@@ -33,5 +33,6 @@ namespace Domain.CartaNotarial
         public int nIdent_UsuarioCreacion { get; set; }
         public int nIdent_UsuarioModificacion { get; set; }
         public decimal nCuotasPendientes { get; set; }
+        public List<ItemCartaNotarialDetalleListDTO> lCartaNotarialDetalle { get; set; } = new List<ItemCartaNotarialDetalleListDTO>();
     }
 }

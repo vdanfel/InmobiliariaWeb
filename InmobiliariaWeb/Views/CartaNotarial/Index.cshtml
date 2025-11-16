@@ -72,12 +72,16 @@
                         <th>Cliente</th>
                         <th>Fecha</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var cartasNotariales in Model.lCartaNotarialList)
                     {
-                        <tr>
+                        var collapseId = $"detalle_{cartasNotariales.nIdent_CartaNotarial}";
+                        var collapseSelector = $"detalle-{cartasNotariales.nIdent_CartaNotarial}";
+                        <tr ondblclick="toggleDetalle('@collapseSelector'); cargarDetalle(@cartasNotariales.nIdent_CartaNotarial)"
+                            style="cursor:pointer;">
                             <td>@cartasNotariales.sNumeroCartaNotarial</td>
                             <td>@cartasNotariales.sNombrePrograma</td>
                             <td>@cartasNotariales.sManzana</td>
@@ -86,13 +90,44 @@
                             <td>@cartasNotariales.sNombreCliente</td>
                             <td>@(cartasNotariales.dFechaCartaNotarial?.ToString("dd/MM/yyyy") ?? "")</td>
                             <td>
-                                <a class="btn btn-outline-secondary" asp-controller="CartaNotarial" asp-action="CartaNotarial1Ver" asp-route-nIdent_CartaNotarial="@cartasNotariales.nIdent_CartaNotarial">
+                                <a class="btn btn-outline-secondary"
+                                    asp-controller="CartaNotarial"
+                                    asp-action="@(cartasNotariales.nIdent_027_TipoCartaNotarial == 1159 ? "CartaNotarial1Ver" : "CartaNotarial2Ver")"
+                                    asp-route-nIdent_CartaNotarial="@cartasNotariales.nIdent_CartaNotarial">
                                     <i class="bi bi-eye"></i>
                                 </a>
+                            </td>
+                            <td>
+                                @if (cartasNotariales.nIdent_027_TipoCartaNotarial == 1159
+                                                            && (cartasNotariales.nIdent_026_EstadoCartaNotarial == 1155
+                                                            || cartasNotariales.nIdent_026_EstadoCartaNotarial == 1158))
+                                {
+                                    <a class="btn btn-outline-primary">
+                                        <i class="bi bi-file-text"></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-outline-secondary disabled">
+                                        <i class="bi bi-file-text"></i>
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                        <!-- FILA DE DETALLE -->
+                        <tr class="collapse" id="@collapseSelector">
+                            <td colspan="8">
+                                <div class="p-3 border rounded bg-light">
+                                    <strong>Detalles de esta carta notarial</strong>
+                                    <div id="contenedor-detalle-@cartasNotariales.nIdent_CartaNotarial">
+                                        Cargando...
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     }
                 </tbody>
+
             </table>
         </div>
     </div>
@@ -150,5 +185,72 @@
             });
             $("#lLotes").val(defaults);
         });
+    }
+        function toggleDetalle(id) {
+
+        // 1. Cerrar otros collapse distintos al que se está abriendo
+        document.querySelectorAll("tr.collapse.show").forEach(function (row) {
+            if (row.id !== id) {
+                bootstrap.Collapse.getOrCreateInstance(row).hide();
+            }
+        });
+
+        // 2. Abrir/cerrar el seleccionado
+        const target = document.getElementById(id);
+        const bs = bootstrap.Collapse.getOrCreateInstance(target);
+
+        if (target.classList.contains("show")) {
+            bs.hide(); // Si está abierto → cerrar
+        } else {
+            bs.show(); // Si está cerrado → abrir
+        }
+    }
+    function cargarDetalle(id) {
+        $.ajax({
+            url: '/CartaNotarial/GetCartaNotarialDetalle',
+            type: 'GET',
+            data: { nIdent_CartaNotarial: id },
+            success: function (data) {
+
+                let html = `
+                    <table class="table table-sm table-bordered mt-2">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Observacion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                if (data.length === 0) {
+                    html += `<tr><td colspan="4" class="text-center">No hay detalles disponibles</td></tr>`;
+                } else {
+                    data.forEach(item => {
+                        html += `
+                            <tr>
+                                <td>${item.sEstadoDescripcion ?? ""}</td>
+                                <td>${item.dFechaCreacion ? formatDate(item.dFechaCreacion) : ""}</td>
+                                <td>${item.sObservacion ?? ""}</td>
+                            </tr>`;
+                    });
+                }
+
+                html += `</tbody></table>`;
+
+                $("#contenedor-detalle-" + id).html(html);
+            },
+            error: function () {
+                $("#contenedor-detalle-" + id)
+                    .html("<div class='text-danger'>Error al cargar detalle.</div>");
+            }
+        });
+    }
+
+    // Función para formatear fechas (yyyy-MM-dd → dd/MM/yyyy)
+    function formatDate(dateStr) {
+        const fecha = new Date(dateStr);
+        return fecha.toLocaleDateString('es-PE');
     }
 </script>

@@ -1,4 +1,4 @@
-﻿namespace InmobiliariaWeb.Models.Tablas
+﻿namespace Domain.Tablas
 {
     public class CartaNotarialPersonaDTO
     {

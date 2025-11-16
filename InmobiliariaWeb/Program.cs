@@ -58,7 +58,6 @@ builder.Services.AddScoped<ISeparacionesService, SeparacionesService>();
 builder.Services.AddScoped<INotificacionesService, NotificacionesService>();
 builder.Services.AddScoped<IKardexService, KardexService>();
 builder.Services.AddScoped<IRutaService, RutaService>();
-builder.Services.AddScoped<ICartaNotarialService, CartaNotarialService>();
 builder.Services.AddScoped<ICuotaRepository, CuotaRepository>();
 builder.Services.AddScoped<ICuotaBL, CuotaBL>();
 builder.Services.AddScoped<ICartaNotarialRepository, CartaNotarialRepository>();

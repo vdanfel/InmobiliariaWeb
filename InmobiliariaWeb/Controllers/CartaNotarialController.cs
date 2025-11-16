@@ -3,8 +3,8 @@ using BusinessLogic.Interface.Lote;
 using BusinessLogic.Interface.Manzana;
 using BusinessLogic.Interface.Programa;
 using Domain.CartaNotarial;
+using Domain.Tablas;
 using InmobiliariaWeb.Interfaces;
-using InmobiliariaWeb.Models.Tablas;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,16 +13,12 @@ namespace InmobiliariaWeb.Controllers
     [Authorize]
     public class CartaNotarialController : Controller
     {
-        private readonly IContratosService _contratosService;
-        private readonly ICartaNotarialService _cartaNotarialService;
         private readonly ICartaNotarialBL _cartaNotarialBL;
         private readonly IManzanaBL _manzanaBL;
         private readonly ILoteBL _loteBL;
         private readonly IProgramaBL _programaBL;
-        public CartaNotarialController(IContratosService contratosService, ICartaNotarialService cartaNotarialService, ICartaNotarialBL cartaNotarialBL, IManzanaBL manzanaBL, ILoteBL loteBL, IProgramaBL programaBL)
+        public CartaNotarialController(IContratosService contratosService, ICartaNotarialBL cartaNotarialBL, IManzanaBL manzanaBL, ILoteBL loteBL, IProgramaBL programaBL)
         {
-            _contratosService = contratosService;
-            _cartaNotarialService = cartaNotarialService;
             _cartaNotarialBL = cartaNotarialBL;
             _manzanaBL = manzanaBL;
             _loteBL = loteBL;
@@ -91,7 +87,7 @@ namespace InmobiliariaWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> GetContratoPorLote(int loteId)
         {
-            var contrato = await _cartaNotarialService.ObtenerContratoPorLote(loteId);
+            var contrato = await _cartaNotarialBL.ObtenerContratoPorLote(loteId);
             if (contrato == null)
                 return NotFound("No se encontró un contrato asociado al lote seleccionado.");
 
@@ -100,7 +96,7 @@ namespace InmobiliariaWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> GetClientesPorContrato(int contratoId)
         {
-            var clientes = await _cartaNotarialService.ListarClientesPorContrato(contratoId);
+            var clientes = await _cartaNotarialBL.ListarClientesPorContrato(contratoId);
             return Json(clientes);
         }
         [HttpGet]
@@ -136,7 +132,7 @@ namespace InmobiliariaWeb.Controllers
                 nIdent_UsuarioCreacion = cartaNotarial1ViewDTO.nIdent_UsuarioCreacion
             };
 
-            cartaNotarial1ViewDTO.nIdent_CartaNotarial = await _cartaNotarialService.CartaNotarialCreate(cartaNotarialDTO);
+            cartaNotarial1ViewDTO.nIdent_CartaNotarial = await _cartaNotarialBL.CartaNotarialCreate(cartaNotarialDTO);
 
             CartaNotarialDetalleDTO cartaNotarialDetalleDTO = new CartaNotarialDetalleDTO
             {
@@ -146,7 +142,7 @@ namespace InmobiliariaWeb.Controllers
                 nIdent_UsuarioCreacion = cartaNotarial1ViewDTO.nIdent_UsuarioCreacion
             };
 
-            cartaNotarialDetalleDTO.nIdent_CartaNotarialDetalle = await _cartaNotarialService.CartaNotarialDetalleCreate(cartaNotarialDetalleDTO);
+            cartaNotarialDetalleDTO.nIdent_CartaNotarialDetalle = await _cartaNotarialBL.CartaNotarialDetalleCreate(cartaNotarialDetalleDTO);
 
             foreach (var personaId in PersonasSeleccionadas)
             {
@@ -157,7 +153,7 @@ namespace InmobiliariaWeb.Controllers
                     nIdent_UsuarioCreacion = cartaNotarial1ViewDTO.nIdent_UsuarioCreacion,
                 };
 
-                cartaNotarialPersona.nIdent_CartaNotarialPersona = await _cartaNotarialService.CartaNotarialPersonaCreate(cartaNotarialPersona);
+                cartaNotarialPersona.nIdent_CartaNotarialPersona = await _cartaNotarialBL.CartaNotarialPersonaCreate(cartaNotarialPersona);
             }
 
             HttpContext.Session.SetInt32("nIdent_CartaNotarial", cartaNotarial1ViewDTO.nIdent_CartaNotarial ?? 0);
@@ -184,6 +180,7 @@ namespace InmobiliariaWeb.Controllers
 
             var cartaNotarial1ViewDTO = await _cartaNotarialBL.CartaNotarialSelect(nIdent_CartaNotarial);
             cartaNotarial1ViewDTO.lClientes = (await _cartaNotarialBL.CartaNotarialPersonaList(nIdent_CartaNotarial)).ToList();
+            cartaNotarial1ViewDTO.lCartaNotarialDetalle = (await _cartaNotarialBL.CartaNotarialDetalleList(nIdent_CartaNotarial)).ToList();
             ViewData["ActiveTab"] = "CartaNotarial1Ver";
             return View(cartaNotarial1ViewDTO);
         }
@@ -206,6 +203,24 @@ namespace InmobiliariaWeb.Controllers
             ViewData["ActiveTab"] = "CartaNotarial1Formato";
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetCartaNotarialDetalle(int nIdent_CartaNotarial)
+        {
+            try
+            {
+                var lista = await _cartaNotarialBL.CartaNotarialDetalleList(nIdent_CartaNotarial);
 
+                // Filtrar solo los que tienen detalle
+                var filtrados = lista
+                    .Where(x => x.nIdent_CartaNotarialDetalle != null)
+                    .ToList();
+
+                return Json(filtrados);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Error al obtener detalles.", error = ex.Message });
+            }
+        }
     }
 }

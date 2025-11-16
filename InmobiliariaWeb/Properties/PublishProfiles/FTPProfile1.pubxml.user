@@ -5,7 +5,7 @@
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAK0UgkBydJ0S7nCIIO1Ex2AAAAAACAAAAAAAQZgAAAAEAACAAAADN4qna1p+1R95KeDpaCTlgwcxO8vN3acSS5f8Rf6KDKgAAAAAOgAAAAAIAACAAAAC2YNBbWqmE4L5sRQLu6ooz9jssbsC4yDviI2xp5A5wJiAAAADXgoyVhsMD6OvX2EfMeFj5UFK5Dc3ggm1EsyIJYt//9EAAAABYGuch+myAqiUkjhbTdjCtSXCCL+Tpq9iuXJzaE4w/GOvR60xeAMACbGrABUpYEsO/VYNdWe4bpNDBh6tkJUKw</EncryptedPassword>
     <_PublishTargetUrl>ftp://155.254.246.16/www.inmobiliariataipe.somee.com</_PublishTargetUrl>
-    <History>True|2025-11-13T06:01:18.6135839Z||;True|2025-11-11T23:56:22.7881459-05:00||;True|2025-11-10T23:58:50.2407707-05:00||;False|2025-11-10T23:53:29.1035425-05:00||;True|2025-11-10T13:22:37.8764557-05:00||;True|2025-11-10T00:31:54.5455596-05:00||;True|2025-11-09T16:59:09.6220794-05:00||;True|2025-11-09T14:21:44.7527379-05:00||;True|2025-11-09T01:27:57.7720739-05:00||;False|2025-11-09T01:22:53.9548705-05:00||;True|2025-11-03T23:05:20.0193391-05:00||;True|2025-10-27T00:43:01.3866032-05:00||;True|2025-10-24T00:19:39.5191244-05:00||;True|2025-10-15T23:46:20.1210071-05:00||;True|2025-10-15T23:10:57.7626434-05:00||;True|2025-10-09T23:39:27.7592994-05:00||;True|2025-10-06T19:14:50.9933242-05:00||;True|2025-10-02T23:22:08.1936246-05:00||;True|2025-10-01T00:51:58.7058622-05:00||;True|2025-09-28T23:49:52.7525641-05:00||;</History>
+    <History>True|2025-11-16T05:43:40.8794166Z||;True|2025-11-13T22:00:51.2044110-05:00||;True|2025-11-13T01:01:18.6135839-05:00||;True|2025-11-11T23:56:22.7881459-05:00||;True|2025-11-10T23:58:50.2407707-05:00||;False|2025-11-10T23:53:29.1035425-05:00||;True|2025-11-10T13:22:37.8764557-05:00||;True|2025-11-10T00:31:54.5455596-05:00||;True|2025-11-09T16:59:09.6220794-05:00||;True|2025-11-09T14:21:44.7527379-05:00||;True|2025-11-09T01:27:57.7720739-05:00||;False|2025-11-09T01:22:53.9548705-05:00||;True|2025-11-03T23:05:20.0193391-05:00||;True|2025-10-27T00:43:01.3866032-05:00||;True|2025-10-24T00:19:39.5191244-05:00||;True|2025-10-15T23:46:20.1210071-05:00||;True|2025-10-15T23:10:57.7626434-05:00||;True|2025-10-09T23:39:27.7592994-05:00||;True|2025-10-06T19:14:50.9933242-05:00||;True|2025-10-02T23:22:08.1936246-05:00||;True|2025-10-01T00:51:58.7058622-05:00||;True|2025-09-28T23:49:52.7525641-05:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -25,10 +25,10 @@
       <publishTime>05/07/2024 11:05:58</publishTime>
     </File>
     <File Include="BusinessLogic.dll">
-      <publishTime>11/13/2025 00:57:05</publishTime>
+      <publishTime>11/16/2025 00:36:53</publishTime>
     </File>
     <File Include="BusinessLogic.pdb">
-      <publishTime>11/13/2025 00:57:05</publishTime>
+      <publishTime>11/16/2025 00:36:53</publishTime>
     </File>
     <File Include="Dapper.dll">
       <publishTime>02/06/2025 07:16:30</publishTime>
@@ -40,10 +40,10 @@
       <publishTime>01/16/2024 19:32:26</publishTime>
     </File>
     <File Include="Domain.dll">
-      <publishTime>11/13/2025 00:57:04</publishTime>
+      <publishTime>11/16/2025 00:36:52</publishTime>
     </File>
     <File Include="Domain.pdb">
-      <publishTime>11/13/2025 00:57:04</publishTime>
+      <publishTime>11/16/2025 00:36:52</publishTime>
     </File>
     <File Include="Enums.NET.dll">
       <publishTime>11/18/2022 17:40:50</publishTime>
@@ -64,16 +64,16 @@
       <publishTime>01/29/2023 09:59:10</publishTime>
     </File>
     <File Include="InmobiliariaWeb.deps.json">
-      <publishTime>11/11/2025 23:52:18</publishTime>
+      <publishTime>11/16/2025 00:39:32</publishTime>
     </File>
     <File Include="InmobiliariaWeb.dll">
-      <publishTime>11/11/2025 23:52:09</publishTime>
+      <publishTime>11/16/2025 00:36:57</publishTime>
     </File>
     <File Include="InmobiliariaWeb.exe">
-      <publishTime>11/11/2025 23:52:09</publishTime>
+      <publishTime>11/16/2025 00:36:57</publishTime>
     </File>
     <File Include="InmobiliariaWeb.pdb">
-      <publishTime>11/11/2025 23:52:09</publishTime>
+      <publishTime>11/16/2025 00:36:57</publishTime>
     </File>
     <File Include="InmobiliariaWeb.runtimeconfig.json">
       <publishTime>11/09/2025 01:23:33</publishTime>
@@ -157,10 +157,10 @@
       <publishTime>08/27/2024 13:46:52</publishTime>
     </File>
     <File Include="Repository.dll">
-      <publishTime>11/13/2025 00:57:05</publishTime>
+      <publishTime>11/16/2025 00:36:53</publishTime>
     </File>
     <File Include="Repository.pdb">
-      <publishTime>11/13/2025 00:57:05</publishTime>
+      <publishTime>11/16/2025 00:36:53</publishTime>
     </File>
     <File Include="ru/Microsoft.Data.SqlClient.resources.dll">
       <publishTime>08/27/2024 13:46:52</publishTime>
@@ -280,7 +280,7 @@
       <publishTime>10/22/2021 18:49:44</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>11/11/2025 23:52:19</publishTime>
+      <publishTime>11/16/2025 00:39:33</publishTime>
     </File>
     <File Include="wwwroot/Archivos/Contratos/1615/3fba44f9-4eef-4ead-90b3-05137d1a231f.pdf">
       <publishTime>10/15/2025 21:56:38</publishTime>
